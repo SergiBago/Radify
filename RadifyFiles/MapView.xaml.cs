@@ -1094,12 +1094,23 @@ namespace PGTAWPF
         }
 
 
+        /// <summary>
+        /// When we change the time, if we want to load more than 50,000 old markers, 
+        /// the program will notify us that we have exceeded the limit and will propose
+        /// an alternative time that allows us not to exceed the limit. With this function
+        /// we will know if the user wants to accept the new alternative time or not.
+        /// </summary>
         bool markerwarningresult;
         public void getMarkerresult(bool a)
         {
             this.markerwarningresult = a;
         }
 
+        /// <summary>
+        /// From a time in int format returns a time in format 00:00:00
+        /// </summary>
+        /// <param name="t">int number of seconds</param>
+        /// <returns>Time in format 00:00:00</returns>
         private string GetHour(int t)
         {
             int day = Convert.ToInt32(Math.Truncate(Convert.ToDouble(t / 86400)));
@@ -1123,6 +1134,9 @@ namespace PGTAWPF
             return (timestr);
         }
 
+        /// <summary>
+        /// Retunrs the time of a marker in format 00:00:00
+        /// </summary>
         private string ShowMarkerHour(CustomActualGmapMarker marker)
         {
             int timemarker = marker.Time;
@@ -1135,6 +1149,9 @@ namespace PGTAWPF
             return (Convert.ToString(hour).PadLeft(2, '0') + ":" + Convert.ToString(min).PadLeft(2, '0') + ":" + Convert.ToString(sec).PadLeft(2, '0'));
         }
 
+        /// <summary>
+        /// Gets the list of the old positions of a selected actual marker
+        /// </summary>
         private void GetListFlight(CustomActualGmapMarker mark0)
         {
             if (mark0 != null)
@@ -1186,7 +1203,9 @@ namespace PGTAWPF
             }
         }
 
-
+        /// <summary>
+        /// Gets the list of the old positions of a selected old marker
+        /// </summary>
         private void GetListFlight(CustomOldGmapMarker mark0)
         {
             if (mark0 != null)
@@ -1225,12 +1244,15 @@ namespace PGTAWPF
        
         }
 
-
+        /// <summary>
+        /// Shows all markers on map
+        /// </summary>
         private void ShowMarkersOnMap()
         {
             try
             {
-                gMapControl1.Markers.Clear();
+                gMapControl1.Markers.Clear(); //Clears all previous markers
+
                 if (ShowFlightHistory.IsChecked == true && ShowOld.IsChecked == true)
                 {
                     if (mark.DetectionMode == "SMR" && CheckBoxshowsmr.IsChecked == false) { foreach (CustomOldGmapMarker marker in ListFlight) { gMapControl1.Markers.Add(marker); }; }
