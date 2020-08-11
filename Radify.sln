@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Radify", "RadifyFiles\Radify.csproj", "{3D02C495-9EC7-456F-9417-B975F53E029D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D02C495-9EC7-456F-9417-B975F53E029D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D02C495-9EC7-456F-9417-B975F53E029D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D02C495-9EC7-456F-9417-B975F53E029D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D02C495-9EC7-456F-9417-B975F53E029D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE7D3026-06AE-42EF-997A-E48D7ADE994E}
+	EndGlobalSection
+EndGlobal

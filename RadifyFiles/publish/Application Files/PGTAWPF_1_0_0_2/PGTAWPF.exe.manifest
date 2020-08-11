@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="PGTAWPF.exe" version="1.0.0.2" publicKeyToken="c4ed0a85ea427c4f" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="PGTAWPF" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="PGTAWPF.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          Opciones del manifiesto de Control de cuentas de usuario
+          Si quiere cambiar el nivel de Control de cuentas de usuario de Windows, reemplace el
+          nodo requestedExecutionLevel por alguno de los siguientes.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         Si desea usar la virtualización de archivos y del Registro para la
+         compatibilidad con versiones anteriores, elimine el nodo requestedExecutionLevel.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FontAwesome.WPF.dll" size="209408">
+      <assemblyIdentity name="FontAwesome.WPF" version="4.7.0.37774" publicKeyToken="0758B07A11A4F466" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>Y9UNvglLvOXXv4rwjA2RnPpeBXygWueydwSoR3yLNI8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GMap.NET.Core.dll" size="2458112">
+      <assemblyIdentity name="GMap.NET.Core" version="1.7.0.0" publicKeyToken="B85B9027B614AFEF" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>69DtnEkHULNTkG3tfuLZzPRxLlbl/1Kul4wr/FW75u4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GMap.NET.WindowsPresentation.dll" size="61440">
+      <assemblyIdentity name="GMap.NET.WindowsPresentation" version="1.7.0.0" publicKeyToken="B85B9027B614AFEF" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>c3GwuAX1C/9CuD/wEC0AmvXYjdXqiKdwbQ/eUzHOWks=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PGTAWPF.exe" size="625624">
+      <assemblyIdentity name="PGTAWPF" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>36pPq4zUtdz01oBLvGddftpaIc2NApoFEolDZweIyV4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="System.Data.SQLite.dll" size="1326080">
+      <assemblyIdentity name="System.Data.SQLite" version="1.0.98.0" publicKeyToken="DB937BC2D44FF139" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>WbnZWuQuNVJfxj+TFo/jBECUY+4HCjzyGkJ6KDNWS4A=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="Help Color.png" size="4504">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>jKIlJ2j4kDq895rcutzCA2pM9DU/aZRQbKb8Z20LOUg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="PGTAWPF.exe.config" size="189">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>R+Wg8QGvQVHX8T0ta/qbhH1bXkqY0fRnS3wBV3J0bN8=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=PORTATILSERGI\Sergi" issuerKeyHash="45e89b06fdd91e4defa70adc70a828c36ab2b9a3" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>pi9hcK6H8CnYaHsLnNHhqBTtrPtPF7tFUTrZLnFZNhQ=</DigestValue></Reference></SignedInfo><SignatureValue>KCySfX/q+DOmnuTNvUo1e6YWdpWN9jlJiYUEQo9T3eY2/M8d6jLo4DS1JKCrwMOqBxV19bHKl34To6HdojpECIbzxSA/1UBrmS2YP/yKboWGw/ep3f/5YI6TUJRqTAqXwphwovCYquzbaKjXnSHcrfORI7p2epKmmiGN345ypgo=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>1GZfoxzo+LTSr0DJrZPmL2NQHMXHqcgASLfNsRPs7E+5916XDpfjwpjUn25iiKl7qU+ixtYdik2/DBSkUl7VhIw9oIuCkiwJUQDQ5R0rR4YKJpCsupxr99EbHA3cq4VFic2R2mIexmi7/k33v/W/xmLyJS2bxbG539YyqK6ag5E=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="143659712ed93a5145bb174ffbaced14a8e1d19c0b7b68d829f087ae70612fa6" Description="" Url=""><as:assemblyIdentity name="PGTAWPF.exe" version="1.0.0.2" publicKeyToken="c4ed0a85ea427c4f" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=PORTATILSERGI\Sergi</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>XT34BIDVXRPCzSMspc8P6Xt5lRY6Hfa70bFMGn37HmU=</DigestValue></Reference></SignedInfo><SignatureValue>JXCeJkjOzvMNOjjwJ6OEXO+snAglYWukHBJSRP7m51bvi1UEuVOrIP6RmP+UIEdcBwuLcHfynyQbDOJSVUibLSguKbgEkNDvMteFnCalgirTIeMzdk7DtfyPDV5nL2yceGAQGaO4lx4mX2X8+DZ7BSVxDtsVTxj6oyaDHU6ULKw=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>1GZfoxzo+LTSr0DJrZPmL2NQHMXHqcgASLfNsRPs7E+5916XDpfjwpjUn25iiKl7qU+ixtYdik2/DBSkUl7VhIw9oIuCkiwJUQDQ5R0rR4YKJpCsupxr99EbHA3cq4VFic2R2mIexmi7/k33v/W/xmLyJS2bxbG539YyqK6ag5E=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB5TCCAU6gAwIBAgIQTSu9ZlodBblNwZbzgNziQDANBgkqhkiG9w0BAQsFADAxMS8wLQYDVQQDHiYAUABPAFIAVABBAFQASQBMAFMARQBSAEcASQBcAFMAZQByAGcAaTAeFw0yMDA1MTQwMTMxMzJaFw0yMTA1MTQwNzMxMzJaMDExLzAtBgNVBAMeJgBQAE8AUgBUAEEAVABJAEwAUwBFAFIARwBJAFwAUwBlAHIAZwBpMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDUZl+jHOj4tNKvQMmtk+YvY1AcxcepyABIt82xE+zsT7n3XpcOl+PCmNSfbmKIqXupT6LG1h2KTb8MFKRSXtWEjD2gi4KSLAlRANDlHStHhgomkKy6nGv30RscDdyrhUWJzZHaYh7GaLv+Tfe/9b/GYvIlLZvFsbnf1jKorpqDkQIDAQABMA0GCSqGSIb3DQEBCwUAA4GBABrZbAbg4rcTRZrTvYqXGe4pFqB/awkBr1d5oTY+xxSFQXrGoYIs01igibJyEE3w6fBCA++ioIrIfsAdX5U2Yz5lNzl11gcVhbXaf6B8rHBfywLRR1SBbB/Qzgq0yH/X2GHn+e+JOKJPiXVVBNiSPzs5V7jQnfAyE33MfPq6Rzx4</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

@@ -1,0 +1,41 @@
+﻿<Window x:Class="PGTA_WPF.OldMarkersExceed"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PGTA_WPF"
+        mc:Ignorable="d"
+        Title="OldMarkersExceed"  Height="180" Width="350" ResizeMode="NoResize" WindowStyle="None" Background="#FF464646" Loaded="FormLoad">
+    <Grid >
+        <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="5"/>
+            </Grid.RowDefinitions>
+        <Border x:Name="TopBar" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0" Background="#FF282828" MouseLeftButtonDown="MouseLeftButtonDown" />
+        <Image Source="images/Error - copia - copia - copia.png" Grid.Column="1" Width="30" Margin="-60,0,0,0" Grid.Row="0" Grid.ColumnSpan="2" Height="30"/>
+        <Image Source="images/Close - copia.png" Grid.Column="3" Grid.Row="0" Height="20" Cursor="Hand" Margin="-20,0,5,0"  MouseLeftButtonUp="Close_click"/>
+        <TextBlock Text="Error"  Margin="30,0,0,0" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFBE0000" FontFamily="Microsoft Sans Serif" FontSize="24"/>
+        <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#FF464646"/>
+        <TextBlock Text="You entered a too big record. The selected history exceeds the limit of 50,000 bookmarks administered for the program. In order to not exceed this limit, we can load from XXX. Anyway, we remind you that the limit only applies to the complete history of all flights, and does not affect the single flight history, which is always complete. Do you want to calculate the history from XXX?" x:Name="Label" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10,5" Foreground="#FFB0BEA9" FontFamily="Microsoft Sans Serif"/>
+        <Button Grid.Column="1" Grid.Row="2" Width="90" Height="25" HorizontalContentAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="Black" Cursor="Hand" Click="Calculate_Click">
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="images/RepetedFileOk.png" Height="20"/>
+                <TextBlock Text="Calculate" Foreground="#FFB0BEA9" VerticalAlignment="Center" Margin="5,0,0,0" />
+            </StackPanel>
+        </Button>
+        <Button Grid.Column="2" Grid.Row="2" Width="90" Height="25" HorizontalContentAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="Black" Cursor="Hand" Click="Cancel_Click">
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="images/RepetedFileCancel.png" Height="16"/>
+                <TextBlock Text="Cancel" Foreground="#FFB0BEA9" VerticalAlignment="Center" Margin="5,0,0,0"/>
+            </StackPanel>
+        </Button>
+    </Grid>
+</Window>

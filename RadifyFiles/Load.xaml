@@ -1,0 +1,44 @@
+﻿<Page x:Class="PGTAWPF.Load"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PGTAWPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1033"
+      Title="Load">
+
+    <Grid Loaded="Load_Load" Background="#FF464646" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="60"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" x:Name="LabelRow"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="TitleLab" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="9" Foreground="#FFB3BEA9" FontFamily="Microsoft Sans Serif" TextAlignment="Center" TextWrapping="Wrap" FontSize="48" Margin="0,15" Text="Therere are no loaded files, plesase load one to start"/>
+        <TextBlock x:Name="FilesList" Text="Holaa" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="9" Foreground="#FFB0BEA9" TextAlignment="Center" FontFamily="Microsoft Sans Serif" FontSize="24"/>
+        <Image Source="Upload File.png" Visibility="Visible" x:Name="LoadSecond" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="4" Height="150" MouseLeftButtonUp="Load_Click"   />
+        <!--<TextBlock Text="Loading" x:Name="LoadingLabel" Margin="0,40,0,0" Grid.Column="6" Grid.Row="4" HorizontalAlignment="Center" Foreground="#FFB0BEA9" FontFamily="Microsoft Sans Serif" FontSize="36" FontStyle="Italic"/>-->
+        <Image Source="Loading.png" x:Name="LoadFirst" Grid.Column="6" Grid.Row="4"  Visibility="Visible" MouseLeftButtonUp="Load_Click" Margin="0,0,0,0" Height="100" />
+        <Image Source="Delete.png" x:Name="DeleteIcon" Grid.Column="8" Grid.Row="4" Height="180" Margin="0,0,0,10" Visibility="Visible" MouseLeftButtonUp="Delete_Click" />
+        <Image Source="Error - copia.png" x:Name="ErrorIcon" Grid.Column="3" Grid.Row="5" Height="40" Margin="0,0,0,0" Visibility="Visible" />
+        <TextBlock  x:Name="ErrorLabel" Grid.Row="5" Grid.Column="4" TextAlignment="Center" Grid.ColumnSpan="5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0" Text="Error loading the file. Please, try another one." Foreground="#FFC00000" FontFamily="Microsoft Sans Serif" FontSize="22" />
+    </Grid>
+</Page>

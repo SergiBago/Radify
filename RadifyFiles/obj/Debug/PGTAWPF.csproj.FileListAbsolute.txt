@@ -1,0 +1,376 @@
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.csprojAssemblyReference.cache
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\MainWindow.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\App.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\MainWindow.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.csproj.GenerateResource.cache
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.csproj.CoreCompileInputs.cache
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Intro.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Intro.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\View.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\View.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\GMap.NET.Core.dll
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\GMap.NET.WindowsPresentation.dll
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\System.Data.SQLite.dll
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.csproj.CopyComplete
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\FontAwesome.WPF.dll
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\FontAwesome.WPF.xml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\MapView.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\MapView.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\NoMessages.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\NoMessages.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\ExportKML.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\ExportKML.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\RepetedFileDialog.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\SelectDay.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\RepetedFileDialog.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\SelectDay.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\LoadFiles.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\LoadFiles.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\HelpForm.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\HelpForm.baml
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\PGTAWPF.exe.config
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\PGTAWPF.exe.manifest
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\PGTAWPF.application
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\PGTAWPF.exe
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\PGTAWPF.pdb
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\FontAwesome.WPF.dll
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\GMap.NET.Core.dll
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\GMap.NET.WindowsPresentation.dll
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\System.Data.SQLite.dll
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\FontAwesome.WPF.xml
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.csprojAssemblyReference.cache
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\HelpForm.g.cs
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\LoadFiles.g.cs
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\RepetedFileDialog.g.cs
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\ExportKML.g.cs
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\Intro.g.cs
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\MainWindow.g.cs
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\MapView.g.cs
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\NoMessages.g.cs
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\SelectDay.g.cs
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\View.g.cs
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\App.g.cs
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF_Content.g.cs
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF_MarkupCompile.cache
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF_MarkupCompile.lref
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\HelpForm.baml
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\LoadFiles.baml
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\RepetedFileDialog.baml
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\ExportKML.baml
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\Intro.baml
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\MainWindow.baml
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\MapView.baml
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\NoMessages.baml
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\SelectDay.baml
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\View.baml
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.g.resources
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.Properties.Resources.resources
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.csproj.GenerateResource.cache
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.csproj.CoreCompileInputs.cache
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.exe.manifest
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.application
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.csproj.CopyComplete
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.exe
+C:\Users\sergi\Downloads\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.pdb
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\PGTAWPF.exe.config
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\PGTAWPF.exe.manifest
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\PGTAWPF.application
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\PGTAWPF.exe
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\PGTAWPF.pdb
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\FontAwesome.WPF.dll
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\GMap.NET.Core.dll
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\GMap.NET.WindowsPresentation.dll
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\System.Data.SQLite.dll
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\FontAwesome.WPF.xml
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.csprojAssemblyReference.cache
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\HelpForm.g.cs
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\LoadFiles.g.cs
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\RepetedFileDialog.g.cs
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\ExportKML.g.cs
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\Intro.g.cs
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\MainWindow.g.cs
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\MapView.g.cs
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\NoMessages.g.cs
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\SelectDay.g.cs
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\View.g.cs
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\App.g.cs
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF_Content.g.cs
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF_MarkupCompile.cache
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF_MarkupCompile.lref
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\HelpForm.baml
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\LoadFiles.baml
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\RepetedFileDialog.baml
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\ExportKML.baml
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\Intro.baml
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\MainWindow.baml
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\MapView.baml
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\NoMessages.baml
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\SelectDay.baml
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\View.baml
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.g.resources
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.Properties.Resources.resources
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.csproj.GenerateResource.cache
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.csproj.CoreCompileInputs.cache
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.exe.manifest
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.application
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.csproj.CopyComplete
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.exe
+C:\Users\Sergi\Downloads\PGTAWPF (1)\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.pdb
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\FontAwesome.WPF.dll
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\GMap.NET.Core.dll
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\GMap.NET.WindowsPresentation.dll
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\System.Data.SQLite.dll
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\FontAwesome.WPF.xml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.csprojAssemblyReference.cache
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\HelpForm.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\LoadFiles.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\RepetedFileDialog.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\ExportKML.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\Intro.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\MainWindow.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\MapView.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\NoMessages.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\SelectDay.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\View.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\App.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\HelpForm.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\LoadFiles.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\RepetedFileDialog.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\ExportKML.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\Intro.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\MainWindow.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\MapView.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\NoMessages.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\SelectDay.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\View.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.csproj.GenerateResource.cache
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.csproj.CoreCompileInputs.cache
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTAWPF.csproj.CopyComplete
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\SelectAirport.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\SelectAirport.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\PGTA_WPF.exe.config
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\PGTA_WPF.exe.manifest
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\PGTA_WPF.application
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\PGTA_WPF.exe
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\bin\Debug\PGTA_WPF.pdb
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTA_WPF_Content.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTA_WPF_MarkupCompile.cache
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTA_WPF_MarkupCompile.lref
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTA_WPF.g.resources
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTA_WPF.Properties.Resources.resources
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTA_WPF.exe.manifest
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTA_WPF.application
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTA_WPF.exe
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\PGTA_WPF.pdb
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\LoadHelp.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\ViewHelp.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\LoadHelp.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\PGTAWPF\obj\Debug\ViewHelp.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\LoadHelp.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\ViewHelp.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\LoadHelp.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\ViewHelp.baml
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\MapHelp.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\MapHelp.baml
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTAWPF.csprojAssemblyReference.cache
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\HelpForm.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\LoadFiles.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\LoadHelp.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\MapHelp.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\RepetedFileDialog.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\ExportKML.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\Intro.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\MainWindow.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\MapView.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\NoMessages.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\SelectAirport.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\SelectDay.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\View.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\ViewHelp.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\App.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTA_WPF_Content.g.cs
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTA_WPF_MarkupCompile.cache
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTA_WPF_MarkupCompile.lref
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTA_WPF.exe
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTA_WPF.pdb
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\bin\Debug\PGTA_WPF.exe.config
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\bin\Debug\PGTA_WPF.exe.manifest
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\bin\Debug\PGTA_WPF.application
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\bin\Debug\PGTA_WPF.exe
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\bin\Debug\PGTA_WPF.pdb
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\bin\Debug\FontAwesome.WPF.dll
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\bin\Debug\GMap.NET.Core.dll
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\bin\Debug\GMap.NET.WindowsPresentation.dll
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\bin\Debug\System.Data.SQLite.dll
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\bin\Debug\FontAwesome.WPF.xml
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\HelpForm.baml
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\LoadFiles.baml
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\LoadHelp.baml
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\MapHelp.baml
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\RepetedFileDialog.baml
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\ExportKML.baml
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\Intro.baml
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\MainWindow.baml
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\MapView.baml
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\NoMessages.baml
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\SelectAirport.baml
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\SelectDay.baml
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\View.baml
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\ViewHelp.baml
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTA_WPF.g.resources
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTA_WPF.Properties.Resources.resources
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTAWPF.csproj.GenerateResource.cache
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTAWPF.csproj.CoreCompileInputs.cache
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTA_WPF.exe.manifest
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTA_WPF.application
+C:\Users\Sergi\Desktop\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTAWPF.csproj.CopyComplete
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\bin\Debug\PGTA_WPF.exe.config
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\bin\Debug\PGTA_WPF.exe.manifest
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\bin\Debug\PGTA_WPF.application
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\bin\Debug\PGTA_WPF.exe
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\bin\Debug\PGTA_WPF.pdb
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\bin\Debug\FontAwesome.WPF.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\bin\Debug\GMap.NET.Core.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\bin\Debug\GMap.NET.WindowsPresentation.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\bin\Debug\System.Data.SQLite.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\bin\Debug\FontAwesome.WPF.xml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTAWPF.csprojAssemblyReference.cache
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\HelpForm.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\LoadFiles.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\LoadHelp.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\MapHelp.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\RepetedFileDialog.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\ExportKML.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\Intro.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\MainWindow.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\MapView.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\NoMessages.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\SelectAirport.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\SelectDay.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\View.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\ViewHelp.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\App.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTA_WPF_Content.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTA_WPF_MarkupCompile.cache
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTA_WPF_MarkupCompile.lref
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\HelpForm.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\LoadFiles.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\LoadHelp.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\MapHelp.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\RepetedFileDialog.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\ExportKML.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\Intro.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\MainWindow.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\MapView.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\NoMessages.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\SelectAirport.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\SelectDay.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\View.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\ViewHelp.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTA_WPF.g.resources
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTA_WPF.Properties.Resources.resources
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTAWPF.csproj.GenerateResource.cache
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTAWPF.csproj.CoreCompileInputs.cache
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTA_WPF.exe.manifest
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTA_WPF.application
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTAWPF.csproj.CopyComplete
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTA_WPF.exe
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\PGTA_WPF.pdb
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\DeleteLine.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\DeleteLine.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\OldMarkersExceed.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\OldMarkersExceed.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\Selectcat.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia\PGTAWPF\obj\Debug\Selectcat.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\bin\Debug\PGTA_WPF.exe.config
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\bin\Debug\PGTA_WPF.exe.manifest
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\bin\Debug\PGTA_WPF.application
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\bin\Debug\PGTA_WPF.exe
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\bin\Debug\PGTA_WPF.pdb
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\bin\Debug\FontAwesome.WPF.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\bin\Debug\GMap.NET.Core.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\bin\Debug\GMap.NET.WindowsPresentation.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\bin\Debug\System.Data.SQLite.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\bin\Debug\FontAwesome.WPF.xml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\PGTAWPF.csprojAssemblyReference.cache
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\DeleteLine.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\HelpForm.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\LoadFiles.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\LoadHelp.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\MapHelp.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\OldMarkersExceed.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\RepetedFileDialog.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\ExportKML.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\Intro.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\MainWindow.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\MapView.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\NoMessages.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\SelectAirport.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\Selectcat.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\SelectDay.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\View.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\ViewHelp.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\App.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\PGTA_WPF_Content.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\PGTA_WPF_MarkupCompile.cache
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\PGTA_WPF_MarkupCompile.lref
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\DeleteLine.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\HelpForm.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\LoadFiles.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\LoadHelp.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\MapHelp.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\OldMarkersExceed.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\RepetedFileDialog.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\ExportKML.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\Intro.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\MainWindow.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\MapView.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\NoMessages.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\SelectAirport.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\Selectcat.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\SelectDay.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\View.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\ViewHelp.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\PGTA_WPF.g.resources
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\PGTA_WPF.Properties.Resources.resources
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\PGTAWPF.csproj.GenerateResource.cache
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\PGTAWPF.csproj.CoreCompileInputs.cache
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\PGTA_WPF.exe.manifest
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\PGTA_WPF.application
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\PGTAWPF.csproj.CopyComplete
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\PGTA_WPF.exe
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\obj\Debug\PGTA_WPF.pdb
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\bin\Debug\EntityFramework.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\bin\Debug\EntityFramework.xml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\bin\Debug\System.Data.SQLite.xml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF - còpia - copia\PGTAWPF\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\EntityFramework.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\EntityFramework.xml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\System.Data.SQLite.xml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\OldMarkersExceed.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Selectcat.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\OldMarkersExceed.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Selectcat.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\Radify.exe.config
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\Radify.exe.manifest
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\Radify.application
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\Radify.exe
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\Radify.pdb
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify_Content.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify_MarkupCompile.cache
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify_MarkupCompile.lref
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify.g.resources
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify.Properties.Resources.resources
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify.exe.manifest
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify.application
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify.exe
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify.pdb

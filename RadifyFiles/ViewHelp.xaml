@@ -1,0 +1,68 @@
+﻿<Page x:Class="PGTA_WPF.ViewHelp"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PGTA_WPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="860"
+      Title="ViewHelp">
+
+    <Grid Background="#FF464646" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="30"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Below there is a replica of the list view controls. Click on each of them and an explanation of their detailed function will appear. Shall we start?" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="20" Margin="0,15" TextWrapping="Wrap" TextAlignment="Center" Foreground="#FFD69E6B" FontFamily="Microsoft Sans Serif" FontSize="17"/>
+        <Border Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="20" Grid.RowSpan="7" Background="Black"/>
+        <Border Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="18" Grid.RowSpan="5" Background="#FF464646"/>
+        <TextBlock Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" Text="Selected Message:  " Foreground="#FFD69E6B" FontFamily="Microsoft YaHei" FontSize="16" VerticalAlignment="Center" FontStyle="Italic" MouseLeftButtonUp="SelectedMessageClick" Cursor="Hand"/>
+        <TextBlock Grid.Row="4" Grid.Column="3"  Grid.RowSpan="2" Text="Target ID:" Foreground="#FFD69E6B" FontFamily="Microsoft YaHei" FontSize="16" VerticalAlignment="Center" FontStyle="Italic" MouseLeftButtonUp="TargetIDClick" Cursor="Hand"/>
+        <TextBlock x:Name="SelectedNumber" Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="2" Text="2020" Foreground="#FFD69E6B" FontFamily="Microsoft YaHei" FontSize="16" VerticalAlignment="Center" MouseLeftButtonUp="SelectedMessageClick" Cursor="Hand"/>
+        <TextBlock x:Name="SelectedID" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="2" Text="FIN7RT" Foreground="#FFD69E6B" FontFamily="Microsoft YaHei" FontSize="16" VerticalAlignment="Center" Margin="-20,0,0,0 " MouseLeftButtonUp="TargetIDClick" Cursor="Hand"/>
+        <Image Grid.Row="3" Grid.Column="7" Grid.RowSpan="2" Source="images/Show On Map help.png" MouseLeftButtonUp="ShowOnMapClick" Cursor="Hand"/>
+        <Image Grid.Row="3" Grid.Column="9" Grid.RowSpan="2" Source="images/Esport CSV Help.png" MouseLeftButtonUp="ExportCSVClick" Cursor="Hand"/>
+        <TextBlock Grid.Row="5" Grid.Column="7" Text="Show on Map" Foreground="#FFD69E6B" FontFamily="Microsoft Sans Serif" MouseLeftButtonUp="ShowOnMapClick" Cursor="Hand"/>
+        <TextBlock Grid.Row="5" Grid.Column="9" Text="Export CSV" FontFamily="Microsoft Sans Serif" Foreground="#FFD69E6B" MouseLeftButtonUp="ExportCSVClick" Cursor="Hand"/>
+        <Image Grid.Column="12" Grid.Row="3" Grid.RowSpan="2" Source="images/Info List Help.png" MouseLeftButtonUp="HelpClick" Cursor="Hand"/>
+        <TextBox Grid.Column="14" Grid.Row="3" Grid.RowSpan="2" x:Name="SearchBox"  VerticalAlignment="Center" VerticalContentAlignment="Center" Text="Ex:VLG22PPY" MouseLeftButtonUp="SearchClick"  Height="30" Background="#FF646464" BorderBrush="#FF1E1E1E" Margin="0,5,0,0"  Foreground="#FF969696" FontFamily="Microsoft Sans Serif" FontSize="22" Cursor="Hand" IsEnabled="True" IsReadOnly="True" MouseDoubleClick="SearchClick" />
+        <Image Grid.Column="16" Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="2" Source="images/List Search Help.png" Margin="0,6,0,0" MouseLeftButtonUp="SearchClick" OpacityMask="#FF8F4545" Cursor="Hand"/>
+        <Image Source="images/FotoTabla.PNG" Grid.Column="2" Grid.Row="6" Grid.ColumnSpan="18" Stretch="UniformToFill" Cursor="Hand" MouseLeftButtonUp="TableClick"/>
+        <TextBlock x:Name="ExplanationLabel" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="20" Text="Click anywhere to start!" TextWrapping="Wrap" TextAlignment="Center" Foreground="#FFD69E6B" FontFamily="Microsoft Sans Serif" FontSize="15"/>
+    </Grid>
+</Page>

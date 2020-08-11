@@ -1,0 +1,418 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3D02C495-9EC7-456F-9417-B975F53E029D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Radify</RootNamespace>
+    <AssemblyName>Radify</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>C:\Users\sergi\Desktop\Radify\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>91</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>232866C3C8F456D775D1DDE5FBE1BEA1B3899307</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>PGTAWPF_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ICON.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>PGTAWPF.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="GMap.NET.Core, Version=1.7.0.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
+      <HintPath>..\packages\GMap.Net.WPF.1.0.0.1\lib\GMap.NET.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GMap.NET.WindowsPresentation, Version=1.7.0.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
+      <HintPath>..\packages\GMap.Net.WPF.1.0.0.1\lib\GMap.NET.WindowsPresentation.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.112.1, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.112.2\lib\net40\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.112.1, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.112.2\lib\net40\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.112.1, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.112.2\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="HelpForm.xaml.cs">
+      <DependentUpon>HelpForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Libraries\Airport.cs" />
+    <Compile Include="Libraries\CAT10.cs" />
+    <Compile Include="Libraries\CAT21vs21.cs" />
+    <Compile Include="Libraries\CAT21vs23.cs" />
+    <Compile Include="Libraries\CATALL.cs" />
+    <Compile Include="Libraries\CustomGmapMarkers.cs" />
+    <Compile Include="Libraries\CustomShape.cs" />
+    <Compile Include="Libraries\GeneralMatrix.cs" />
+    <Compile Include="Libraries\GeoUtils.cs" />
+    <Compile Include="Libraries\LibreriaDecodificacion.cs" />
+    <Compile Include="Libraries\markersdrawings.cs" />
+    <Compile Include="Libraries\ReadFiles.cs" />
+    <Compile Include="Libraries\Trajectories.cs" />
+    <Compile Include="LoadFiles.xaml.cs">
+      <DependentUpon>LoadFiles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LoadHelp.xaml.cs">
+      <DependentUpon>LoadHelp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MapHelp.xaml.cs">
+      <DependentUpon>MapHelp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OldMarkersExceed.xaml.cs">
+      <DependentUpon>OldMarkersExceed.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RepetedFileDialog.xaml.cs">
+      <DependentUpon>RepetedFileDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExportKML.xaml.cs">
+      <DependentUpon>ExportKML.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MapView.xaml.cs">
+      <DependentUpon>MapView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NoMessages.xaml.cs">
+      <DependentUpon>NoMessages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Selectcat.xaml.cs">
+      <DependentUpon>Selectcat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SelectDay.xaml.cs">
+      <DependentUpon>SelectDay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewHelp.xaml.cs">
+      <DependentUpon>ViewHelp.xaml</DependentUpon>
+    </Compile>
+    <Page Include="HelpForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoadFiles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoadHelp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MapHelp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OldMarkersExceed.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RepetedFileDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ExportKML.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Intro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Intro.xaml.cs">
+      <DependentUpon>Intro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="MapView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NoMessages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Selectcat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SelectDay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewHelp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="PGTAWPF_TemporaryKey.pfx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Flecha Blanca.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Casa Blanca.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\File Blanco.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Lista Blanco.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Mapa Blanco.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Help Blanco.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Casa Color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\File Color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Lista Color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Flecha Color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Mapa Color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ICO APP.ico" />
+    <Resource Include="ICON.ico" />
+    <Resource Include="images\List Search Help.png" />
+    <Resource Include="images\Info List Help.png" />
+    <Resource Include="images\Esport CSV Help.png" />
+    <Resource Include="images\Select Airport Ico.png" />
+    <Resource Include="images\CapturaTabla.PNG" />
+    <Resource Include="images\FotoTabla.PNG" />
+    <Resource Include="images\File Help.png" />
+    <Resource Include="images\Files managment.png" />
+    <Resource Include="images\info Help.png" />
+    <Resource Include="images\Play help.png" />
+    <Resource Include="images\Restart Help.png" />
+    <Resource Include="images\Export KML help.png" />
+    <Resource Include="images\Speedometer Help.png" />
+    <Resource Include="images\Show Flight On Map Help.png" />
+    <Resource Include="images\ShowOnList Help.png" />
+    <Resource Include="images\SateliteView Help.png" />
+    <Resource Include="images\CenterMap Help.png" />
+    <Resource Include="images\SateliteMap.png" />
+    <Resource Include="images\Mesure.png" />
+    <Content Include="Markers\ActualCarIco.png" />
+    <Content Include="Markers\ActualUndeterminedMarker.png" />
+    <Resource Include="images\Measure Help.png" />
+    <Content Include="Markers\OldCarIco.png" />
+    <Content Include="Markers\OldUndeterminedMarker.png" />
+    <Resource Include="images\Parameters.png" />
+    <Content Include="Markers\PlaneActualMarker.png" />
+    <Content Include="Markers\PlaneOldMarker.png" />
+    <Content Include="Markers\RedCarIco.png" />
+    <Content Include="Markers\RedPlaneIco.png" />
+    <Content Include="Markers\RedUndeterminedMarker.png" />
+    <Resource Include="images\MapHelp help.png" />
+    <Resource Include="images\ListHelp List.png" />
+    <Resource Include="images\Loading - copia.png" />
+    <Resource Include="images\RepetedFileCancel.png" />
+    <Resource Include="images\RepetedFileOk.png" />
+    <Resource Include="images\SaveKML.png" />
+    <Resource Include="images\Maximize.png" />
+    <Resource Include="images\Minimize.png" />
+    <Resource Include="images\NoMessagesMap.png" />
+    <Resource Include="images\NoMessagesCatAll.png" />
+    <Resource Include="images\NoMessagesCAT21v21.png" />
+    <Resource Include="images\NoMessagesCAT21v23.png" />
+    <Resource Include="images\NoMessagesCAT10.png" />
+    <Resource Include="images\MapView.png" />
+    <Resource Include="images\MapViewMap.png" />
+    <Resource Include="images\MapView Map.png" />
+    <Resource Include="images\Satelite View Map.png" />
+    <Resource Include="images\SateliteView map.png" />
+    <Resource Include="images\Show Flight On Map.png" />
+    <Resource Include="images\ShowOnList Map.png" />
+    <Resource Include="images\Speedometer map.png" />
+    <Resource Include="images\Restart Map.png" />
+    <Resource Include="images\Pause Map.png" />
+    <Resource Include="images\Play map.png" />
+    <Resource Include="images\Info Map.png" />
+    <Resource Include="images\Loading.png" />
+    <Resource Include="images\Upload File.png" />
+    <Resource Include="images\List Search.png" />
+    <Resource Include="images\Info List.png" />
+    <Resource Include="images\Export CSV.png" />
+    <Resource Include="images\Error.png" />
+    <Resource Include="images\Delete.png" />
+    <Resource Include="images\Error - copia.png" />
+    <Resource Include="images\293686-512.png" />
+    <Resource Include="images\CoseHelp.png" />
+    <Resource Include="images\Export KML map.png" />
+    <Resource Include="images\Error - copia - copia.png" />
+    <Resource Include="images\CenterMap map.png" />
+    <Resource Include="images\Close.png" />
+    <Resource Include="images\ExportKML.png" />
+    <Resource Include="images\Close - copia.png" />
+    <Resource Include="images\Error - copia - copia - copia.png" />
+    <Resource Include="images\CloseMapHelp.png" />
+    <Resource Include="images\CalendarIco.png" />
+    <Content Include="images\Help Color.png" />
+    <Resource Include="images\Show On Map.png" />
+    <Resource Include="images\Show On Map help.png" />
+    <Resource Include="images\Intro Asterix Icon.png" />
+    <Resource Include="images\Help Color2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.112.2\build\net40\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.112.2\build\net40\System.Data.SQLite.Core.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.2\build\net40\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.2\build\net40\System.Data.SQLite.Core.targets')" />
+</Project>

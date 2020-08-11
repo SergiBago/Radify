@@ -1,0 +1,124 @@
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\Radify.exe.config
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\Radify.exe.manifest
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\Radify.application
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\Radify.exe
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\Radify.pdb
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\EntityFramework.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\FontAwesome.WPF.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\GMap.NET.Core.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\GMap.NET.WindowsPresentation.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\System.Data.SQLite.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\EntityFramework.xml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\FontAwesome.WPF.xml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\System.Data.SQLite.xml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify.csprojAssemblyReference.cache
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\HelpForm.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\LoadFiles.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\LoadHelp.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\MapHelp.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\OldMarkersExceed.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\RepetedFileDialog.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\ExportKML.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Intro.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\MainWindow.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\MapView.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\NoMessages.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Selectcat.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\SelectDay.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\View.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\ViewHelp.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\App.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify_Content.g.cs
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify_MarkupCompile.cache
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify_MarkupCompile.lref
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\HelpForm.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\LoadFiles.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\LoadHelp.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\MapHelp.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\OldMarkersExceed.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\RepetedFileDialog.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\ExportKML.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Intro.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\MainWindow.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\MapView.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\NoMessages.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Selectcat.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\SelectDay.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\View.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\ViewHelp.baml
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify.g.resources
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify.Properties.Resources.resources
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify.csproj.GenerateResource.cache
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify.csproj.CoreCompileInputs.cache
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify.exe.manifest
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify.application
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify.csproj.CopyComplete
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify.exe
+C:\Users\sergi\Desktop\PGTAWPF\PGTAWPF\obj\Debug\Radify.pdb
+C:\Users\sergi\Desktop\Radify Code\Radify\bin\Debug\Radify.exe.config
+C:\Users\sergi\Desktop\Radify Code\Radify\bin\Debug\Radify.exe.manifest
+C:\Users\sergi\Desktop\Radify Code\Radify\bin\Debug\Radify.application
+C:\Users\sergi\Desktop\Radify Code\Radify\bin\Debug\Radify.exe
+C:\Users\sergi\Desktop\Radify Code\Radify\bin\Debug\Radify.pdb
+C:\Users\sergi\Desktop\Radify Code\Radify\bin\Debug\EntityFramework.dll
+C:\Users\sergi\Desktop\Radify Code\Radify\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\sergi\Desktop\Radify Code\Radify\bin\Debug\FontAwesome.WPF.dll
+C:\Users\sergi\Desktop\Radify Code\Radify\bin\Debug\GMap.NET.Core.dll
+C:\Users\sergi\Desktop\Radify Code\Radify\bin\Debug\GMap.NET.WindowsPresentation.dll
+C:\Users\sergi\Desktop\Radify Code\Radify\bin\Debug\System.Data.SQLite.dll
+C:\Users\sergi\Desktop\Radify Code\Radify\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\sergi\Desktop\Radify Code\Radify\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\sergi\Desktop\Radify Code\Radify\bin\Debug\EntityFramework.xml
+C:\Users\sergi\Desktop\Radify Code\Radify\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\sergi\Desktop\Radify Code\Radify\bin\Debug\FontAwesome.WPF.xml
+C:\Users\sergi\Desktop\Radify Code\Radify\bin\Debug\System.Data.SQLite.xml
+C:\Users\sergi\Desktop\Radify Code\Radify\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\Radify.csprojAssemblyReference.cache
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\HelpForm.g.cs
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\LoadFiles.g.cs
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\LoadHelp.g.cs
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\MapHelp.g.cs
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\OldMarkersExceed.g.cs
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\RepetedFileDialog.g.cs
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\ExportKML.g.cs
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\Intro.g.cs
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\MainWindow.g.cs
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\MapView.g.cs
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\NoMessages.g.cs
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\Selectcat.g.cs
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\SelectDay.g.cs
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\View.g.cs
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\ViewHelp.g.cs
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\App.g.cs
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\Radify_Content.g.cs
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\Radify_MarkupCompile.cache
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\Radify_MarkupCompile.lref
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\HelpForm.baml
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\LoadFiles.baml
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\LoadHelp.baml
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\MapHelp.baml
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\OldMarkersExceed.baml
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\RepetedFileDialog.baml
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\ExportKML.baml
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\Intro.baml
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\MainWindow.baml
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\MapView.baml
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\NoMessages.baml
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\Selectcat.baml
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\SelectDay.baml
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\View.baml
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\ViewHelp.baml
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\Radify.g.resources
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\Radify.Properties.Resources.resources
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\Radify.csproj.GenerateResource.cache
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\Radify.csproj.CoreCompileInputs.cache
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\Radify.exe.manifest
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\Radify.application
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\Radify.csproj.CopyComplete
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\Radify.exe
+C:\Users\sergi\Desktop\Radify Code\Radify\obj\Debug\Radify.pdb

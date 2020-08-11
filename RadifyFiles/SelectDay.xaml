@@ -1,0 +1,59 @@
+﻿<Window x:Class="PGTAWPF.SelectDay"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PGTAWPF"
+        mc:Ignorable="d"
+        Title="File Config" Height="230" Width="500" ResizeMode="NoResize" WindowStyle="None" Background="#FF282828" Loaded="LoadForm">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <Border x:Name="TopPanel" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" MouseLeftButtonDown="DragPanel" Background="#FF323232" />
+        <Border Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="4" Background="#FF464646"/>
+        <TextBlock Text="Select file parameters" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="25,0,0,0" Foreground="#FFB0BEA6" FontFamily="Microsoft Sans Serif" FontSize="24"/>
+        <Image Source="images/CalendarIco.png" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Height="25" HorizontalAlignment="Left"  Margin="110,0,0,0" />
+        <!--<Image Source="Select Airport Ico.png" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Height="30" HorizontalAlignment="Right"  Margin="0,0,85,0" />-->
+        <Image Source="images/Close - copia.png" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right" Margin="0,0,10,0"  Height="20" Cursor="Hand" MouseLeftButtonUp="Close_click"/>
+        <TextBlock Text="This is not the first file you upload. So that the program can load the files in the correct order, you must tell it what day this file is with respect to the first file loaded." TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="15" TextAlignment="Center" Foreground="#FFB3BEA9" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+        <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" >
+            <ComboBox x:Name="Days" Foreground="#FFB0BEA9" Background="Black" BorderBrush="#FF646464" Height="22" VerticalAlignment="Top">
+                <!--<ComboBoxItem>0</ComboBoxItem>
+                <ComboBoxItem>1</ComboBoxItem>
+                <ComboBoxItem>2</ComboBoxItem>
+                <ComboBoxItem>3</ComboBoxItem>
+                <ComboBoxItem>4</ComboBoxItem>
+                <ComboBoxItem>5</ComboBoxItem>
+                <ComboBoxItem>6</ComboBoxItem>
+                <ComboBoxItem>7</ComboBoxItem>
+                <ComboBoxItem>8</ComboBoxItem>
+                <ComboBoxItem>9</ComboBoxItem>-->
+            </ComboBox>
+            <TextBlock Text="Days" VerticalAlignment="Center" Margin="10,0" Foreground="#FFB0BEA9" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            <ComboBox x:Name="Position" Foreground="#FFB0BEA9" Background="Black" Width="90" BorderBrush="#FF646464" FontFamily="Microsoft Sans Serif" FontSize="14" OpacityMask="#FF646464">
+            </ComboBox>
+            <TextBlock Text="first file date" VerticalAlignment="Center" Margin="10,0" Foreground="#FFB0BEA9" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+        </StackPanel>
+        <Button x:Name="AcceptButton" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Background="{x:Null}" BorderBrush="Black" Width="120" Margin="0,10,0,0" Cursor="Hand" Click="AcceptClick">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="images/RepetedFileOk.png" Height="25"/>
+            <TextBlock Text="Accept" Margin="5,0,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Foreground="#FFB0BEA9" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+            </StackPanel>
+        </Button>
+        <TextBlock Text="Please, select all the parameters" x:Name="AlertLabel" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Top" Margin="20,5,0,0"  HorizontalAlignment="Center" Foreground="#FFC00000" FontFamily="Microsoft Sans Serif" FontSize="14"/>
+        <Image Source="images/Error - copia - copia.png"  x:Name="AlertIco" Grid.Column="1" Grid.Row="4" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2,0,0" Height="20"/>
+    </Grid>
+    
+</Window>
