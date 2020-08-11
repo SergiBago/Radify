@@ -37,14 +37,6 @@ namespace PGTAWPF
     /// </summary>
     public partial class MapView : Page
     {
-
-        const double LatLEBL = 41.2956183;
-        const double LonLEBL = 2.095114166666667;
-        const double LatBCN = 41.364371;
-        const double LonBCN = 2.155633;
-        const double LatCAT = 41.953386;
-        const double LonCAT = 1.78876;
-
         public List<CATALL> List = new List<CATALL>();
         public int time;
         public int starttime;
@@ -53,8 +45,8 @@ namespace PGTAWPF
         public int Last_time;
         public bool started = false;
 
-        bool searchflightfromtable = false;// = false;
-                                           //  bool nolongeravailable = false;
+        bool searchflightfromtable = false;
+
         CATALL SearchingFlight;
         bool FollowPlane = false;
         int markertype; //0=Old; 1=new
@@ -75,9 +67,7 @@ namespace PGTAWPF
         int lastday;
         int days;
 
-        /// <summary>
-        /// HeyHeyHey
-        /// </summary>
+
         public MapView()
         {
             InitializeComponent();
@@ -88,6 +78,12 @@ namespace PGTAWPF
             CloseHelp();
         }
 
+
+        /// <summary>
+        /// Load Map page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MapForm_load(object sender, RoutedEventArgs e)
         {
             AlertVisible(false);
@@ -97,8 +93,13 @@ namespace PGTAWPF
             CheckBoxshowmlat.IsChecked = true;
             CheckBoxshowadsb.IsChecked = true;
             ShowMarkerInfoPanel(false);
+
             MarkerInfoViewLoad();
-            if (searchflightfromtable == true)
+
+            /*If we get here looking for a marker instead of starting the page 
+             * from "0" we will find the marker we are looking for, 
+             * we will advance to its time, and we will select it*/
+            if (searchflightfromtable == true) 
             {
                 CATALL message = SearchingFlight;
                 mark = NewMarker(Convert.ToDouble(message.Latitude_in_WGS_84), Convert.ToDouble(message.Longitude_in_WGS_84), message.Target_Identification, message.Time_Of_day, message.num, message.type, message.Target_Address, message.DetectionMode, message.CAT, message.SIC, message.SAC, message.Flight_level, message.Track_number, message.direction, message.refreshratio);
@@ -125,7 +126,30 @@ namespace PGTAWPF
             ShowMarkersOnMap();
             Mouse.OverrideCursor = null;
         }
+        
+        /// <summary>
+        /// Create datatable columns for the datatable that shows flight info
+        /// </summary>
+        private void MarkerInfoViewLoad()
+        {
+            MarkerInfoView.CanUserAddRows = false;
+            InfoMarker.Columns.Clear();
+            InfoMarker.Columns.Add("Target\nId");
+            InfoMarker.Columns.Add("Target\nAddress");
+            InfoMarker.Columns.Add("Track\nNumber");
+            InfoMarker.Columns.Add("CAT");
+            InfoMarker.Columns.Add("SIC");
+            InfoMarker.Columns.Add("SAC");
+            InfoMarker.Columns.Add("Detection\nMode");
+            InfoMarker.Columns.Add("Time");
+            InfoMarker.Columns.Add("Flight\nLevel");
+            MarkerInfoView.IsReadOnly = true;
+            MarkerInfoView.CanUserResizeColumns = false;
+        }
 
+        /// <summary>
+        /// Change animations in select speed buttons, so selected speed button is shown diferently in order we know at which speed we are going
+        /// </summary>
         private void selectspeed(TextBlock tex)
         {
             SolidColorBrush grey = new SolidColorBrush(System.Windows.Media.Color.FromRgb(100, 100, 100));
@@ -137,6 +161,9 @@ namespace PGTAWPF
             tex.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(50, 50, 50));
         }
 
+        /// <summary>
+        /// Loads de Gmap Control and sets the parameters
+        /// </summary>
         private void mapView_Loaded(object sender, RoutedEventArgs e)
         {
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
@@ -150,8 +177,12 @@ namespace PGTAWPF
             gMapControl1.Zoom = zoom;
             gMapControl1.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionWithoutCenter;
             gMapControl1.ShowCenter = false;
+            gMapControl1.IgnoreMarkerOnMouseWheel = true;
         }
 
+        /// <summary>
+        /// Change pages controls in function if we have or not a marker selected. If a marker is selected all his information and controls are shown, otherwise not. 
+        /// </summary>
         public void NoMarkerSelected(bool a)
         {
             if (a == true)
@@ -170,14 +201,21 @@ namespace PGTAWPF
             }
         }
 
-        int zoom;
+
+        int zoom;//If we use only one airport, zoom will be big, as we will center the map view on that airport. If we are using more than one airport zoom will be small, as we will center the view in all the peninsula
+
+        /// <summary>
+        /// Sets the time and ubication and zoom parameters.
+        /// </summary>
+        /// <param name="list"> List with all the messages. It's used to know from which to which time we will have</param>
+        /// <param name="AirportCodes">List with all used airports. It's used to adapt center map controls in function of used airports</param>
         public void GetList(List<CATALL> list, List<int> AirportCodes)
         {
-            if (list.Count() == 0) { time = 0; }
+            if (list.Count() == 0) { time = 0; } //If no messages, no time applies
             else
             {
-                ComputeTimeOfDay(list);
-                if (AirportCodes.Count > 1)
+                ComputeTimeOfDay(list); //Computing and setting time it's delegate to another function
+                if (AirportCodes.Count > 1) //If we have more than one airport used we directly center the peninsula
                 {
                     ViewAirport.Visibility = Visibility.Hidden;
                     ViewCity.Visibility = Visibility.Hidden;
@@ -188,7 +226,7 @@ namespace PGTAWPF
                         zoom = 6;
                     }
                 }
-                else
+                else //If only one airport used buttons apply to that airport
                 {
                     AirportsList AirpList = new AirportsList();
                     ViewAirport.Visibility = Visibility.Visible;
@@ -203,25 +241,33 @@ namespace PGTAWPF
                         zoom = 15;
                     }
                 }
-                if (mark != null)
+                if (mark != null) //If mark it's not null, we center in mark insted of an airport (Searching flight from lists)
                 {
                     gMapControl1.Position = mark.p;
                     if (gMapControl1.Zoom < 15) { gMapControl1.Zoom = 15; }
                     FollowPlane = true;
                     markertype = 1;
                 }
-
             }
         }
 
-
+        /// <summary>
+        /// Computes start and end time, and if there is more than one day used.
+        /// </summary>
+        /// <param name="list">List with all the messages</param>
         private void ComputeTimeOfDay(List<CATALL> list)
         {
-            this.List = list.OrderBy(CATAll => CATAll.List_Time_Of_Day).ToList();
-            int firsttime = List[0].List_Time_Of_Day;
+            this.List = list.OrderBy(CATAll => CATAll.List_Time_Of_Day).ToList(); //Order list by Time 
+            int firsttime = List[0].List_Time_Of_Day; 
             int lasttime = List[List.Count - 1].List_Time_Of_Day;
             double da = (lasttime) / 86400;
             days = Convert.ToInt32(Math.Truncate(da)) + 1;
+
+            /*We could have messages with negative time. If we first load a file on day 0 and then load 
+             * a file on previous days (ex: -1) the second file would have negative time. To fix this 
+             * we will look and if we have negative time we will apply offset to all messages, so that 
+             * the first one is on day 0, and the others on later days.*/
+
             if (List[0].List_Time_Of_Day < 0)
             {
                 double fir = (firsttime / 86400);
@@ -243,11 +289,14 @@ namespace PGTAWPF
                 lastday = days;
             }
 
-            this.time = List[0].Time_Of_day-1;
+            //Apply start, actual, and final time to this page.
+            this.time = List[0].Time_Of_day-1; //Time-1 so that the starting time is one second before that of the first messages, and in this way when pressing play, it will advance one second and start with the first message.
             this.starttime = List[0].Time_Of_day-1;
             First_time = List[0].Time_Of_day-1;
             Last_time =(days-1)*86400+86400;
 
+            /*Depending on whether I have messages for only one day or more, we will show or hide the day controls,
+             * and the help that will be explained by giving the time help will be different.*/
             if (days == 1)
             {
                 StartDayText.Visibility = Visibility.Hidden;
@@ -275,519 +324,9 @@ namespace PGTAWPF
             this.Form = Form;
         }
 
-        public void Pause()
-        {
-            timer.Stop();
-            started = false;
-            StartDayText.IsReadOnly = false;
-            StartDayText.Cursor = Cursors.IBeam;
-            StartHoursText.IsReadOnly = false;
-            StartHoursText.Cursor = Cursors.IBeam;
-            StartMinutesText.IsReadOnly = false;
-            StartMinutesText.Cursor = System.Windows.Input.Cursors.IBeam;
-            StartSecondsText.IsReadOnly = false;
-            StartSecondsText.Cursor = Cursors.IBeam;
-            FinalDayText.IsReadOnly = false;
-            FinalDayText.Cursor = Cursors.IBeam;
-            FinalHoursText.IsReadOnly = false;
-            FinalHoursText.Cursor = Cursors.IBeam;
-            FinalMinutesText.IsReadOnly = false;
-            FinalMinutesText.Cursor = System.Windows.Input.Cursors.IBeam;
-            FinalSecondsText.IsReadOnly = false;
-            FinalSecondsText.Cursor = Cursors.IBeam;
-            Play.Visibility = Visibility.Visible;
-            PauseBut.Visibility = Visibility.Hidden;
-        }
-
-        void timer_Tick(object sender, EventArgs e)
-        {
-            if (time >= Last_time)
-            {
-                started = false;
-                CanChangeHour(true);
-                timer.Stop();
-                Play.Visibility = Visibility.Visible;
-                PauseBut.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                time++;
-                TimeIncreasOne();
-                ShowFinalhour();
-                ShowStarthour();
-            }
-        }
-
-
-        private void TimeIncreasOne()
-        {
-            bool first_found = false;
-            int s = 0;
-            foreach (CustomActualGmapMarker marker in ActualMarkers) 
-            {
-                if ((time - marker.Time) >= marker.refreshratio)
-                {
-                    AddActualNotRefreshedMarker(marker);
-                }
-            }
-            foreach (CustomActualGmapMarker marker in ActualNotRefreshedMarkers) 
-            {
-                if( (time-marker.Time)>=marker.refreshratio*3) 
-                {
-                    if (OldMarkers.Count()>50000) { OldMarkers.RemoveAt(0); }
-                    AddOldMarker(marker);
-                    if (mark != null)
-                    {
-                        if (((marker.TargetAddress == mark.TargetAddress && marker.TargetAddress != null) || (marker.Track_number == mark.Track_number && marker.Track_number != null) || (marker.Callsign == mark.Callsign && marker.Callsign != null)) && marker.DetectionMode == mark.DetectionMode)
-                        {
-                            ListFlight.Add(NewOldMarkernoCallsign(marker));
-                        }
-                    }
-                    
-                }
-            }
-            ActualNotRefreshedMarkers.RemoveAll(x => (x.Time - time) <= - x.refreshratio*3);
-            //foreach (CustomActualGmapMarker marker in ActualMarkers)  { ActualNotRefreshedMarkers.Add(marker); }
-            ActualMarkers.RemoveAll(x => (x.Time - time) <= -x.refreshratio);
-            try
-            {
-                for (int i = 0; first_found == false; i++) { if (List[i].Time_Of_day == time) { first_found = true; s = i; }; }
-
-                while (List[s].Time_Of_day == time)
-                {
-                    CATALL message = List[s];
-                    if (message.Latitude_in_WGS_84 != -200 && message.Longitude_in_WGS_84 != -200)
-                    {
-                        bool DuplicatedTarget = false;
-                        bool DuplicatedTrackNumber = false;
-                        if (message.Target_Address != null) { DuplicatedTarget = ActualMarkers.Any(x => x.TargetAddress == message.Target_Address && x.TargetAddress != null && x.Time == message.Time_Of_day && message.DetectionMode == x.DetectionMode); }
-                        else { DuplicatedTrackNumber = ActualMarkers.Any(x => x.Track_number == message.Track_number && x.Track_number != null && x.Time == message.Time_Of_day && message.DetectionMode == x.DetectionMode); }
-                        if (DuplicatedTarget == false && DuplicatedTrackNumber == false)
-                        {
-
-                            if (mark != null && message.Target_Address == mark.TargetAddress && mark.TargetAddress != null && mark.DetectionMode == message.DetectionMode)
-                            {
-                                mark = NewMarker(Convert.ToDouble(message.Latitude_in_WGS_84), Convert.ToDouble(message.Longitude_in_WGS_84), message.Target_Identification, message.Time_Of_day, message.num, message.type, message.Target_Address, message.DetectionMode, message.CAT, message.SIC, message.SAC, message.Flight_level, message.Track_number, message.direction, message.refreshratio);
-                                markertype = 1;
-                            }
-                            else if (mark != null && mark.Track_number != null && message.Track_number == mark.Track_number && mark.DetectionMode == message.DetectionMode)
-                            {
-                                mark = NewMarker(Convert.ToDouble(message.Latitude_in_WGS_84), Convert.ToDouble(message.Longitude_in_WGS_84), message.Target_Identification, message.Time_Of_day, message.num, message.type, message.Target_Address, message.DetectionMode, message.CAT, message.SIC, message.SAC, message.Flight_level, message.Track_number, message.direction, message.refreshratio);
-                                markertype = 1;
-                            }
-
-                            foreach (CustomActualGmapMarker marker in ActualNotRefreshedMarkers)
-                            {
-                                if (((marker.TargetAddress == message.Target_Address && marker.TargetAddress != null) || (marker.Track_number == message.Track_number && marker.Track_number != null) || (marker.Callsign == message.Target_Identification && marker.Callsign != null)) && marker.DetectionMode == message.DetectionMode) 
-                                {
-                                    if (OldMarkers.Count() > 50000) { OldMarkers.RemoveAt(0); }
-                                    AddOldMarker(marker);
-                                    if (mark != null)
-                                    {
-                                        if (((marker.TargetAddress == mark.TargetAddress && marker.TargetAddress != null) || (marker.Track_number == mark.Track_number && marker.Track_number != null) || (marker.Callsign == mark.Callsign && marker.Callsign != null)) && marker.DetectionMode == mark.DetectionMode)
-                                        {
-                                            ListFlight.Add(NewOldMarkernoCallsign(marker));
-                                        }
-                                    }
-                                }
-                            }
-                            foreach (CustomActualGmapMarker marker in ActualMarkers)
-                            {
-                                if (((marker.TargetAddress == message.Target_Address && marker.TargetAddress != null) || (marker.Track_number == message.Track_number && marker.Track_number != null) || (marker.Callsign == message.Target_Identification && marker.Callsign != null)) && marker.DetectionMode == message.DetectionMode)
-                                {
-                                    if (OldMarkers.Count() > 50000) { OldMarkers.RemoveAt(0); }
-                                    AddOldMarker(marker);
-                                    if (mark != null)
-                                    {
-                                        if (((marker.TargetAddress == mark.TargetAddress && marker.TargetAddress != null) || (marker.Track_number == mark.Track_number && marker.Track_number != null) || (marker.Callsign == mark.Callsign && marker.Callsign != null)) && marker.DetectionMode == mark.DetectionMode)
-                                        {
-                                            ListFlight.Add(NewOldMarkernoCallsign(marker));
-                                        }
-                                    }
-                                }
-                            }
-                            ActualNotRefreshedMarkers.RemoveAll(item => (((item.TargetAddress == message.Target_Address && item.TargetAddress != null) || (item.Track_number == message.Track_number && item.Track_number != null) || (item.Callsign == message.Target_Identification && item.Callsign != null)) && item.DetectionMode == message.DetectionMode));
-                            ActualMarkers.RemoveAll(item => (((item.TargetAddress == message.Target_Address && item.TargetAddress != null) || (item.Track_number == message.Track_number && item.Track_number != null) || (item.Callsign == message.Target_Identification && item.Callsign != null)) && item.DetectionMode == message.DetectionMode));
-                            AddActualMarker(Convert.ToDouble(message.Latitude_in_WGS_84), Convert.ToDouble(message.Longitude_in_WGS_84), message.Target_Identification, time, message.num, message.type, message.Target_Address, message.DetectionMode, message.CAT, message.SIC, message.SAC, message.Flight_level, message.Track_number, message.direction, message.refreshratio);
-                        }
-                    }
-                    s++;
-
-                }
-            }
-            catch { }
-            if (mark != null)
-            {
-                ShowMarkerinfoOntable(mark);
-                if (FollowPlane == true && markertype == 1) { gMapControl1.Position = mark.p; }
-            }
-            if (mark != null)
-            {
-
-            }
-            //&& ShowFlightHistory.IsChecked == true) { GetListFlight(mark); }
-            List<MeasureLine> NewList = new List<MeasureLine>();
-            LabelsList.Clear();
-            for (int i = 0; i < LinesList.Count(); i++)
-            {
-
-                CustomActualGmapMarker marker1 = GetActualMarker(LinesList[i].marker1);
-                if (marker1 == null) { marker1 = LinesList[i].marker1; }
-                CustomActualGmapMarker marker2;
-                List<PointLatLng> ListPoints = new List<PointLatLng>();
-                PointLatLng p;
-                PointLatLng p2;
-                p = marker1.p;
-            //    MeasureLine line;
-                if (LinesList[i].marker2 != null)
-                {
-                    if (LinesList[i].OldMarker == false)
-                    {
-                        marker2 = GetActualMarker(LinesList[i].marker2);
-                        if (marker2 == null) { marker2 = LinesList[i].marker2; }
-                        NewList.Add(CreateLineTwoMarkers(marker1, marker2, false));
-                    }
-                    else
-                    {
-                        marker2 = LinesList[i].marker2;
-                        NewList.Add(CreateLineTwoMarkers(marker1, marker2, true));
-                    }
-                }
-                else
-                {
-                    p2 = LinesList[i].p2;
-                    NewList.Add(CreateLine(p, p2, marker1));
-                }
-
-                marker1 = null;
-                marker2 = null;
-            }
-            LinesList = NewList;
-            if (OldMarkers.Count > 0) { starttime = OldMarkers.Min(CustomOldGmapMarker => CustomOldGmapMarker.Time) -1; }
-            ShowMarkersOnMap();
-        }
-
-        
-        private CustomActualGmapMarker GetActualMarker (CustomActualGmapMarker marker0)
-        {
-            CustomActualGmapMarker marker1 = null; 
-            foreach (CustomActualGmapMarker marker in ActualMarkers)
-            {
-                if (marker0.TargetAddress != null && marker0.TargetAddress == marker.TargetAddress && marker0.DetectionMode == marker.DetectionMode)
-                {
-                    marker1 = marker;
-                }
-                else if (marker0.Callsign!= null && marker0.Callsign==marker.Callsign && marker0.DetectionMode==marker.DetectionMode)
-                {
-                    marker1 = marker;
-                }
-                else if (marker0.Track_number != null && marker0.Track_number == marker.Track_number && marker0.DetectionMode == marker.DetectionMode)
-                {
-                    marker1 = marker;
-                }               
-            }
-            return marker1;
-        }
-
-
-
-        
-        //FUNCTIONS TO CREATE MARKERS//
-        private void AddActualMarker(double X, double Y, string Callsign, int time, int num, string emmiter, string TargetAdd, string detectionmode, string CAT, string SIC, string SAC, string Flight_level, string Track_number, int direction, int refreshratio)
-        {
-            PointLatLng coordinates = new PointLatLng(X, Y);
-            CustomActualGmapMarker marker = new CustomActualGmapMarker(coordinates, Callsign, time, num, emmiter, TargetAdd, detectionmode, CAT, SIC, SAC, Flight_level, Track_number, direction, refreshratio);
-            ActualMarkers.Add(marker);
-            SetMarkerShape(marker);
-        }
-
-        private CustomActualGmapMarker NewMarker(double X, double Y, string Callsign, int time, int num, string emmiter, string TargetAdd, string detectionmode, string CAT, string SIC, string SAC, string Flight_level, string Track_number, int direction, int refreshratio)
-        {
-            PointLatLng coordinates = new PointLatLng(X, Y);
-            CustomActualGmapMarker marker = new CustomActualGmapMarker(coordinates, Callsign, time, num, emmiter, TargetAdd, detectionmode, CAT, SIC, SAC, Flight_level, Track_number, direction, refreshratio);
-            SetMarkerShape(marker);
-            return marker;
-        }
-
-        private void AddNewOldMarker(double X, double Y, string Callsign, int time, int num, string emitter, string TargetAdd, string Detectionmode, string CAT, string SIC, string SAC, string Flight_level, string Track_number, int direction, int refreshratio)
-        {
-            PointLatLng coordinates = new PointLatLng(X, Y);
-            CustomOldGmapMarker marker = new CustomOldGmapMarker(coordinates, Callsign, 0, time, num, emitter, TargetAdd, Detectionmode, CAT, SIC, SAC, Flight_level, Track_number, direction, refreshratio);
-            SetMarkerShape(marker);
-            OldMarkers.Add(marker);
-        }
-
-        private CustomOldGmapMarker NewOldMarkernoCallsign(CustomOldGmapMarker marker)
-        {
-            CustomOldGmapMarker oldmarker = new CustomOldGmapMarker(marker.p, marker.Callsign, 1, marker.Time, marker.number, marker.emitter, marker.TargetAddress, marker.DetectionMode, marker.CAT, marker.SIC, marker.SAC, marker.Flight_level, marker.Track_number, marker.direction, marker.refreshratio);
-            SetMarkerNoCallsignShape(oldmarker);
-            return oldmarker;
-        }
-
-        private CustomOldGmapMarker NewOldMarkernoCallsign(CustomActualGmapMarker marker)
-        {
-            CustomOldGmapMarker oldmarker = new CustomOldGmapMarker(marker.p, marker.Callsign, 1, marker.Time, marker.number, marker.emitter, marker.TargetAddress, marker.DetectionMode, marker.CAT, marker.SIC, marker.SAC, marker.Flight_level, marker.Track_number, marker.direction, marker.refreshratio);
-            SetMarkerNoCallsignShape(oldmarker);
-            return oldmarker;
-        }
-
-        private void AddMarkerToFlightList(CATALL message)
-        {
-            CustomOldGmapMarker oldmarker = new CustomOldGmapMarker(new PointLatLng(message.Latitude_in_WGS_84, message.Longitude_in_WGS_84), message.Target_Identification, 1, message.Time_Of_day, message.num, message.type, message.Target_Address, message.DetectionMode, message.CAT, message.SIC, message.SAC, message.Flight_level, message.Track_number, message.direction, message.refreshratio);
-            SetMarkerNoCallsignShape(oldmarker);
-            ListFlight.Add(oldmarker);
-           // return oldmarker;
-        }
-
-        private CustomActualGmapMarker NewActualMarkerFromOld(CustomOldGmapMarker marker)
-        {
-            CustomActualGmapMarker Actualmarker = new CustomActualGmapMarker(marker.p, marker.Callsign, marker.Time, marker.number, marker.emitter, marker.TargetAddress, marker.DetectionMode, marker.CAT, marker.SIC, marker.SAC, marker.Flight_level, marker.Track_number, marker.direction, marker.refreshratio);
-            SetMarkerShape(marker);
-            return Actualmarker;
-        }
-
-        private void AddOldMarker(CustomActualGmapMarker marker)
-        {
-            CustomOldGmapMarker oldmarker = new CustomOldGmapMarker(marker.p, marker.Callsign, 0, marker.Time, marker.number, marker.emitter, marker.TargetAddress, marker.DetectionMode, marker.CAT, marker.SIC, marker.SAC, marker.Flight_level, marker.Track_number, marker.direction, marker.refreshratio);
-            SetMarkerShape(oldmarker);
-            OldMarkers.Add(oldmarker);
-        }
-
-        private void AddActualNotRefreshedMarker(CustomActualGmapMarker marker)
-        {
-            CustomActualGmapMarker NotRefresehd = new CustomActualGmapMarker(marker.p, marker.Callsign, marker.Time, marker.number, marker.emitter, marker.TargetAddress, marker.DetectionMode, marker.CAT, marker.SIC, marker.SAC, marker.Flight_level, marker.Track_number, marker.direction, marker.refreshratio);
-            SetRedMarkerShape(NotRefresehd);
-           ActualNotRefreshedMarkers.Add(NotRefresehd);
-        }
-
-        private CustomOldGmapMarker NewOldmarkerfromactual(CustomActualGmapMarker marker)
-        {
-            CustomOldGmapMarker oldmarker = new CustomOldGmapMarker(marker.p, marker.Callsign, 0, marker.Time, marker.number, marker.emitter, marker.TargetAddress, marker.DetectionMode, marker.CAT, marker.SIC, marker.SAC, marker.Flight_level, marker.Track_number, marker.direction, marker.refreshratio);
-            return oldmarker;
-        }
-
-
-
-        //CREATING LINES
-
-        bool creatingline = false;
-        private void AddLineClick(object sender, RoutedEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.Cross;
-            creatingline = true;
-        }
-
-        List<MeasureLine> LinesList = new List<MeasureLine>();
-
-        private MeasureLine CreateLine(PointLatLng p, PointLatLng p2, CustomActualGmapMarker marker)
-        {
-            List<PointLatLng> ListPoints = new List<PointLatLng>();
-            ListPoints.Add(p);
-            ListPoints.Add(p2);
-            //int num;
-            //if (LinesList.Count == 0) { num = 0; }
-            //else { num = ((LinesList[LinesList.Count() - 1].num) + 1); }
-            int a = num;
-            MeasureLine line = new MeasureLine(p, p2, ListPoints, marker, a);
-            num++;
-            line.RegenerateShape(gMapControl1);
-            SolidColorBrush color = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, (byte)160, (byte)160, (byte)160));
-            (line.Shape as System.Windows.Shapes.Path).Stroke = color;
-            (line.Shape as System.Windows.Shapes.Path).StrokeThickness = 2;
-            (line.Shape as System.Windows.Shapes.Path).Effect = null;
-            line.Shape.MouseRightButtonUp += MouseRightButtonUpline;
-            CreateLabel(line);
-            return line;
-        }
-
-
-        private void AddLineLostFocus(object sender, RoutedEventArgs e)
-        {
-            Mouse.OverrideCursor = null;
-            if (gMapControl1.IsFocused == false)
-            {
-                creatingline = false;
-                Mouse.OverrideCursor = null;
-            }
-        }
-
-        private void mapclick(object sender, MouseButtonEventArgs e)
-        {
-            if (creatingline == true)
-            {
-                System.Windows.Point mousePoint = e.GetPosition(gMapControl1);
-                double lat = gMapControl1.FromLocalToLatLng(Convert.ToInt32(mousePoint.X), Convert.ToInt32(mousePoint.Y)).Lat;
-                double lng = gMapControl1.FromLocalToLatLng(Convert.ToInt32(mousePoint.X), Convert.ToInt32(mousePoint.Y)).Lng;
-                if (mark != null)
-                {
-                    LinesList.Add(CreateLine(mark.p, new PointLatLng(lat, lng), mark));
-                    ShowMarkersOnMap();
-                }
-            }
-            Mouse.OverrideCursor = null;
-            creatingline = false;
-        }
-
-        private void MouseRightButtonUpline(System.Object sender, RoutedEventArgs e)
-        {
-            var baseobj = sender as FrameworkElement;
-            var line = baseobj.DataContext as MeasureLine;
-          //  List<LinesLabel> newLabelsList = new List<LinesLabel>();
-            List<MeasureLine> newLineList = new List<MeasureLine>();
-            int i = line.num;
-            foreach (MeasureLine lin in LinesList)
-            {
-                if (lin.num != i) { newLineList.Add(lin); }
-           //     MessageBox.Show(Convert.ToString(lin.num));
-            }
-            // MessageBox.Show(Convert.ToString(i) + "  " Convert.ToString())
-            LinesList = newLineList;
-            LabelsList.Clear();
-            foreach(MeasureLine lin in LinesList) { CreateLabel(lin); }
-            ShowMarkersOnMap();
-           // MessageBox.Show(Convert.ToString(LabelsList.Count()) + " " + Convert.ToString(LinesList.Count())+ " "+ Convert.ToString(i));
-
-        }
-
-
-        private void LabelRightButton(System.Object sender, RoutedEventArgs e)
-        {
-            var baseobj = sender as FrameworkElement;
-            var linelabel = baseobj.DataContext as LinesLabel;
-            int i = linelabel.num;
-            List<MeasureLine> newLineList = new List<MeasureLine>();
-            foreach (MeasureLine line in LinesList)
-            {
-                if (line.num != i) { newLineList.Add(line); }
-            }
-            LabelsList.Remove(linelabel);
-            LinesList = newLineList;
-
-            ShowMarkersOnMap();
-         //   MessageBox.Show(Convert.ToString(LabelsList.Count())+" "+ Convert.ToString(LinesList.Count()) + " " + Convert.ToString(i));
-
-
-        }
-
-        List<LinesLabel> LabelsList = new List<LinesLabel>();
-
-        private void CreateLabel(MeasureLine line)
-        {
-            PointLatLng p = new PointLatLng(line.p.Lat + ((line.p2.Lat - line.p.Lat) / 2), line.p.Lng + ((line.p2.Lng - line.p.Lng) / 2));
-
-            LinesLabel linelabel = new LinesLabel(p, line.num);
-            linelabel.caption = line.ComputeParameters();
-            SetMarkerShape(linelabel);
-            LabelsList.Add(linelabel);
-        }
-
-
-        //FUNTIONS TO ADD MARKERS  AND LINES SHAPES//
-        private void SetMarkerShape(CustomActualGmapMarker marker)
-        {
-            Bitmap bitmaptxt = MarkersDrawings.InsertText(marker);
-            int heig = 50; //35
-            int wid = 50; //35
-            marker.Shape = new System.Windows.Controls.Image
-            {
-
-                Width = heig,
-                Height = wid,
-                Source = MarkersDrawings.ToBitmapImage(bitmaptxt)
-            };
-            marker.Offset = new System.Windows.Point((-wid / 2), (-heig / 2) - 5);
-
-            bitmaptxt.Dispose();
-            bitmaptxt = null;
-            marker.Shape.MouseLeftButtonUp += markerclick;
-        }
-
-        private void SetRedMarkerShape(CustomActualGmapMarker marker)
-        {
-            Bitmap bitmaptxt = MarkersDrawings.InsertTextRedImage(marker);
-            int heig = 50; //35
-            int wid = 50; //35
-            marker.Shape = new System.Windows.Controls.Image
-            {
-
-                Width = heig,
-                Height = wid,
-                Source = MarkersDrawings.ToBitmapImage(bitmaptxt)
-            };
-            marker.Offset = new System.Windows.Point((-wid / 2), (-heig / 2) - 5);
-
-            bitmaptxt.Dispose();
-            bitmaptxt = null;
-            marker.Shape.MouseLeftButtonUp += markerclick;
-        }
-
-
-
-        private void SetMarkerShape(CustomOldGmapMarker marker)
-        {
-            try
-            {
-                Bitmap bitmaptxt = MarkersDrawings.InsertText(marker);
-                int heig = 50;
-                int wid = 50;
-                System.Windows.Application.Current.Dispatcher.Invoke((Action)delegate
-                {
-                    marker.Shape = new System.Windows.Controls.Image
-                    {
-                        Width = wid,
-                        Height = heig,
-                        Source = MarkersDrawings.ToBitmapImage(bitmaptxt)
-                    };
-                });
-                marker.Offset = new System.Windows.Point((-wid / 2), (-heig / 2) - 5);
-                bitmaptxt.Dispose();
-
-                bitmaptxt = null;
-                //if ((OldMarkers.Count() % 1000) == 0 && OldMarkers.Count() > 500) { GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true); }
-            }
-            catch
-            {
-                GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
-                Bitmap bitmaptxt = MarkersDrawings.InsertText(marker);
-                int heig = 50;
-                int wid = 50;
-                System.Windows.Application.Current.Dispatcher.Invoke((Action)delegate
-                {
-                    marker.Shape = new System.Windows.Controls.Image
-                    {
-                        Width = wid,
-                        Height = heig,
-                        Source = MarkersDrawings.ToBitmapImage(bitmaptxt)
-                    };
-                });
-                marker.Offset = new System.Windows.Point((-wid / 2), (-heig / 2) - 5);
-                bitmaptxt.Dispose();
-                bitmaptxt = null;
-            }
-            marker.Shape.MouseUp += markerclick;
-        }
-
-        private void SetMarkerNoCallsignShape(CustomOldGmapMarker marker)
-        {
-            Bitmap bitmaptxt = MarkersDrawings.GetNoTextBitmap(marker);
-            int wid = 15;
-            int heig = 15;
-            marker.Shape = new System.Windows.Controls.Image
-            {
-                Width = wid,
-                Height = heig,
-                Source = MarkersDrawings.ToBitmapImage(bitmaptxt)
-            };
-            bitmaptxt.Dispose();
-            bitmaptxt = null;
-            marker.Offset = new System.Windows.Point((-wid / 2), -heig / 2);
-            marker.Shape.MouseUp += markerclick;
-        }
-
-
-
-
-
+        /// <summary>
+        /// Computes the final time in 00:00:00 format, and applies to the textblocks in the page
+        /// </summary>
         private void ShowFinalhour()
         {
             int showingtime = time;
@@ -801,6 +340,9 @@ namespace PGTAWPF
             FinalDayText.Text = Convert.ToString(days).PadLeft(2, '0');
         }
 
+        /// <summary>
+        /// Computes the start time in 00:00:00 format, and applies to the textblocks in the page
+        /// </summary>
         private void ShowStarthour()
         {
             int showingtime = starttime;
@@ -814,6 +356,9 @@ namespace PGTAWPF
             StartDayText.Text = Convert.ToString(days).PadLeft(2, '0');
         }
 
+        /// <summary>
+        /// When clicking in start, if hour has changed computes new time, and then starts timer.
+        /// </summary>
         private void Play_click(object sender, MouseButtonEventArgs e)
         {
             try
@@ -833,11 +378,31 @@ namespace PGTAWPF
 
         }
 
+        private void Pause_Click(object sender, MouseButtonEventArgs e)
+        {
+            Pause();
+        }
+
+        /// <summary>
+        /// Pause the simulation. When simulation is paused we can change time parameters. 
+        /// </summary>
+        public void Pause()
+        {
+            timer.Stop();
+            started = false;
+            CanChangeHour(true);
+            Play.Visibility = Visibility.Visible;
+            PauseBut.Visibility = Visibility.Hidden;
+        }
+
+        /// <summary>
+        /// Allows or denies to change the hour. 
+        /// </summary>
         private void CanChangeHour(bool a)
         {
-            if (a==true)
+            if (a == true)
             {
-                                StartDayText.IsReadOnly = false;
+                StartDayText.IsReadOnly = false;
                 StartDayText.Cursor = Cursors.IBeam;
                 StartHoursText.IsReadOnly = false;
                 StartHoursText.Cursor = Cursors.IBeam;
@@ -874,11 +439,10 @@ namespace PGTAWPF
             }
         }
 
-        private void Pause_Click(object sender, MouseButtonEventArgs e)
-        {
-            Pause();
-        }
 
+        /// <summary>
+        /// Shows or hides the time alert 
+        /// </summary>
         private void AlertVisible(bool a)
         {
             if (a == true)
@@ -893,6 +457,544 @@ namespace PGTAWPF
             }
         }
 
+
+        /// <summary>
+        /// Simulation timer tick
+        /// </summary>
+        void timer_Tick(object sender, EventArgs e)
+        {
+            if (time >= Last_time) //If it's last time, simulation pauses
+            {
+                started = false;
+                CanChangeHour(true);
+                timer.Stop();
+                Play.Visibility = Visibility.Visible;
+                PauseBut.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                time++;
+                TimeIncreasOne();
+                ShowFinalhour();
+                ShowStarthour();
+            }
+        }
+
+        /// <summary>
+        /// Simulation time increase by one. 
+        /// This funcion is used in timer tick so it computes all new markers
+        /// </summary>
+        private void TimeIncreasOne() 
+        {
+            bool first_found = false;
+            int s = 0;
+
+            /*If the marker is not updated, the radar refresh rate turns red, 
+             * to indicate that the marker has not updated its position.
+             * The refresh rate is how often the marker is supposed to be updated 
+             * depending on the radar that is detecting it, and we calculate it when loading the file*/
+            foreach (CustomActualGmapMarker marker in ActualMarkers) 
+            {
+                if ((time - marker.Time) >= marker.refreshratio)
+                {
+                    AddActualNotRefreshedMarker(marker);
+                }
+            }
+
+            /*If the radar fails three times to detect a marker, we understand that the vehicle has disappeared */
+            foreach (CustomActualGmapMarker marker in ActualNotRefreshedMarkers) 
+            {
+                if( (time-marker.Time)>=marker.refreshratio*3) 
+                {
+                    if (OldMarkers.Count()>50000) { OldMarkers.RemoveAt(0); } //The number of old markers is limited to 50,000 to avoid having excess markers that consume excessive resources. If we already have 50,000 bookmarks we delete the oldest one to make room for this
+                    AddOldMarker(marker);
+                    if (mark != null)
+                    {
+                        if (((marker.TargetAddress == mark.TargetAddress && marker.TargetAddress != null) || (marker.Track_number == mark.Track_number && marker.Track_number != null) || (marker.Callsign == mark.Callsign && marker.Callsign != null)) && marker.DetectionMode == mark.DetectionMode)
+                        {
+                            ListFlight.Add(NewOldMarkernoCallsign(marker));
+                        }
+                    }
+                    
+                }
+            }
+
+            //We delete the markers from the current and current not refreshed list that we have added in the other lists
+            ActualNotRefreshedMarkers.RemoveAll(x => (x.Time - time) <= - x.refreshratio*3);
+            ActualMarkers.RemoveAll(x => (x.Time - time) <= -x.refreshratio);
+
+            try
+            {
+                for (int i = 0; first_found == false; i++) { if (List[i].Time_Of_day == time) { first_found = true; s = i; }; }
+                while (List[s].Time_Of_day == time) //We go through all the markers in the list that have the time we are looking for, and add them to the list of current markers.
+                {
+                    CATALL message = List[s];
+                    if (message.Latitude_in_WGS_84 != -200 && message.Longitude_in_WGS_84 != -200)
+                    {
+                        //We check if we already have a marker of the same vehicle and time
+                        bool DuplicatedTarget = false;
+                        bool DuplicatedTrackNumber = false;
+                        if (message.Target_Address != null) { DuplicatedTarget = ActualMarkers.Any(x => x.TargetAddress == message.Target_Address && x.TargetAddress != null && x.Time == message.Time_Of_day && message.DetectionMode == x.DetectionMode); }
+                        else { DuplicatedTrackNumber = ActualMarkers.Any(x => x.Track_number == message.Track_number && x.Track_number != null && x.Time == message.Time_Of_day && message.DetectionMode == x.DetectionMode); }
+
+                        //If it's not duplicated 
+                        if (DuplicatedTarget == false && DuplicatedTrackNumber == false)
+                        {
+                            /*If we have a selected marker, we check if the marker that we are going to add is the same vehicle, and if it is, we update the selected marker with the new one.*/
+                            if (mark != null && message.Target_Address == mark.TargetAddress && mark.TargetAddress != null && mark.DetectionMode == message.DetectionMode)
+                            {
+                                mark = NewMarker(Convert.ToDouble(message.Latitude_in_WGS_84), Convert.ToDouble(message.Longitude_in_WGS_84), message.Target_Identification, message.Time_Of_day, message.num, message.type, message.Target_Address, message.DetectionMode, message.CAT, message.SIC, message.SAC, message.Flight_level, message.Track_number, message.direction, message.refreshratio);
+                                markertype = 1;
+                            }
+                            else if (mark != null && mark.Track_number != null && message.Track_number == mark.Track_number && mark.DetectionMode == message.DetectionMode)
+                            {
+                                mark = NewMarker(Convert.ToDouble(message.Latitude_in_WGS_84), Convert.ToDouble(message.Longitude_in_WGS_84), message.Target_Identification, message.Time_Of_day, message.num, message.type, message.Target_Address, message.DetectionMode, message.CAT, message.SIC, message.SAC, message.Flight_level, message.Track_number, message.direction, message.refreshratio);
+                                markertype = 1;
+                            }
+
+                            //We see if the vehicle that we are going to add is in any of the current lists, and if it is, we put it in the old list and then remove it from the actual list. Then add the new marker to the actual list. 
+                            foreach (CustomActualGmapMarker marker in ActualNotRefreshedMarkers)
+                            {
+                                if (((marker.TargetAddress == message.Target_Address && marker.TargetAddress != null) || (marker.Track_number == message.Track_number && marker.Track_number != null) || (marker.Callsign == message.Target_Identification && marker.Callsign != null)) && marker.DetectionMode == message.DetectionMode) 
+                                {
+                                    if (OldMarkers.Count() > 50000) { OldMarkers.RemoveAt(0); }
+                                    AddOldMarker(marker);
+                                    if (mark != null)
+                                    {
+                                        if (((marker.TargetAddress == mark.TargetAddress && marker.TargetAddress != null) || (marker.Track_number == mark.Track_number && marker.Track_number != null) || (marker.Callsign == mark.Callsign && marker.Callsign != null)) && marker.DetectionMode == mark.DetectionMode)
+                                        {
+                                            ListFlight.Add(NewOldMarkernoCallsign(marker));
+                                        }
+                                    }
+                                }
+                            }
+
+                            foreach (CustomActualGmapMarker marker in ActualMarkers)
+                            {
+                                if (((marker.TargetAddress == message.Target_Address && marker.TargetAddress != null) || (marker.Track_number == message.Track_number && marker.Track_number != null) || (marker.Callsign == message.Target_Identification && marker.Callsign != null)) && marker.DetectionMode == message.DetectionMode)
+                                {
+                                    if (OldMarkers.Count() > 50000) { OldMarkers.RemoveAt(0); }
+                                    AddOldMarker(marker);
+                                    if (mark != null)
+                                    {
+                                        if (((marker.TargetAddress == mark.TargetAddress && marker.TargetAddress != null) || (marker.Track_number == mark.Track_number && marker.Track_number != null) || (marker.Callsign == mark.Callsign && marker.Callsign != null)) && marker.DetectionMode == mark.DetectionMode)
+                                        {
+                                            ListFlight.Add(NewOldMarkernoCallsign(marker));
+                                        }
+                                    }
+                                }
+                            }
+
+
+                            ActualNotRefreshedMarkers.RemoveAll(item => (((item.TargetAddress == message.Target_Address && item.TargetAddress != null) || (item.Track_number == message.Track_number && item.Track_number != null) || (item.Callsign == message.Target_Identification && item.Callsign != null)) && item.DetectionMode == message.DetectionMode));
+                            ActualMarkers.RemoveAll(item => (((item.TargetAddress == message.Target_Address && item.TargetAddress != null) || (item.Track_number == message.Track_number && item.Track_number != null) || (item.Callsign == message.Target_Identification && item.Callsign != null)) && item.DetectionMode == message.DetectionMode));
+                            AddActualMarker(Convert.ToDouble(message.Latitude_in_WGS_84), Convert.ToDouble(message.Longitude_in_WGS_84), message.Target_Identification, time, message.num, message.type, message.Target_Address, message.DetectionMode, message.CAT, message.SIC, message.SAC, message.Flight_level, message.Track_number, message.direction, message.refreshratio);
+                        }
+                    }
+                    s++;
+                }
+            }
+
+            catch { }
+
+            if (mark != null)
+            {
+                ShowMarkerinfoOntable(mark); //Actualize marker data with new marker
+                if (FollowPlane == true && markertype == 1) { gMapControl1.Position = mark.p; } //If follow plane is active change map position in order to center the new marker
+            }
+
+            //Measure Lines part
+            List<MeasureLine> NewList = new List<MeasureLine>();
+            LabelsList.Clear();
+
+            for (int i = 0; i < LinesList.Count(); i++) //For each Measure Line we actualize it's data and position to match the new markers
+            {
+                CustomActualGmapMarker marker1 = GetActualMarker(LinesList[i].marker1);
+                if (marker1 == null) { marker1 = LinesList[i].marker1; }
+                CustomActualGmapMarker marker2;
+                List<PointLatLng> ListPoints = new List<PointLatLng>();
+                PointLatLng p;
+                PointLatLng p2;
+                p = marker1.p;
+                if (LinesList[i].marker2 != null)
+                {
+                    if (LinesList[i].OldMarker == false)
+                    {
+                        marker2 = GetActualMarker(LinesList[i].marker2);
+                        if (marker2 == null) { marker2 = LinesList[i].marker2; }
+                        NewList.Add(CreateLineTwoMarkers(marker1, marker2, false));
+                    }
+                    else
+                    {
+                        marker2 = LinesList[i].marker2;
+                        NewList.Add(CreateLineTwoMarkers(marker1, marker2, true));
+                    }
+                }
+                else
+                {
+                    p2 = LinesList[i].p2;
+                    NewList.Add(CreateLine(p, p2, marker1));
+                }
+
+                marker1 = null;
+                marker2 = null;
+            }
+            LinesList = NewList;
+            if (OldMarkers.Count > 0) { starttime = OldMarkers.Min(CustomOldGmapMarker => CustomOldGmapMarker.Time) -1; }
+            ShowMarkersOnMap();
+        }
+
+        /// <summary>
+        /// Find the newest marker of a vehicle given an old marker
+        /// </summary>
+        /// <param name="marker0">Old marker of the vehicle</param>
+        /// <returns>newest marker</returns>
+        private CustomActualGmapMarker GetActualMarker (CustomActualGmapMarker marker0)
+        {
+            CustomActualGmapMarker marker1 = null; 
+            foreach (CustomActualGmapMarker marker in ActualMarkers)
+            {
+                if (marker0.TargetAddress != null && marker0.TargetAddress == marker.TargetAddress && marker0.DetectionMode == marker.DetectionMode)
+                {
+                    marker1 = marker;
+                }
+                else if (marker0.Callsign!= null && marker0.Callsign==marker.Callsign && marker0.DetectionMode==marker.DetectionMode)
+                {
+                    marker1 = marker;
+                }
+                else if (marker0.Track_number != null && marker0.Track_number == marker.Track_number && marker0.DetectionMode == marker.DetectionMode)
+                {
+                    marker1 = marker;
+                }               
+            }
+            return marker1;
+        }
+
+
+
+        
+        //FUNCTIONS TO CREATE MARKERS//
+
+        /// <summary>
+        /// Adds an actual marker to the list given all it's parameters
+        /// </summary>
+        private void AddActualMarker(double X, double Y, string Callsign, int time, int num, string emmiter, string TargetAdd, string detectionmode, string CAT, string SIC, string SAC, string Flight_level, string Track_number, int direction, int refreshratio)
+        {
+            PointLatLng coordinates = new PointLatLng(X, Y);
+            CustomActualGmapMarker marker = new CustomActualGmapMarker(coordinates, Callsign, time, num, emmiter, TargetAdd, detectionmode, CAT, SIC, SAC, Flight_level, Track_number, direction, refreshratio);
+            ActualMarkers.Add(marker);
+            SetMarkerShape(marker);
+        }
+
+        /// <summary>
+        /// Returns an actual marker given all it's parameters
+        /// </summary>
+        private CustomActualGmapMarker NewMarker(double X, double Y, string Callsign, int time, int num, string emmiter, string TargetAdd, string detectionmode, string CAT, string SIC, string SAC, string Flight_level, string Track_number, int direction, int refreshratio)
+        {
+            PointLatLng coordinates = new PointLatLng(X, Y);
+            CustomActualGmapMarker marker = new CustomActualGmapMarker(coordinates, Callsign, time, num, emmiter, TargetAdd, detectionmode, CAT, SIC, SAC, Flight_level, Track_number, direction, refreshratio);
+            SetMarkerShape(marker);
+            return marker;
+        }
+
+        /// <summary>
+        /// Adds an Old marker to the list given all it's parameters
+        /// </summary>
+        private void AddNewOldMarker(double X, double Y, string Callsign, int time, int num, string emitter, string TargetAdd, string Detectionmode, string CAT, string SIC, string SAC, string Flight_level, string Track_number, int direction, int refreshratio)
+        {
+            PointLatLng coordinates = new PointLatLng(X, Y);
+            CustomOldGmapMarker marker = new CustomOldGmapMarker(coordinates, Callsign, 0, time, num, emitter, TargetAdd, Detectionmode, CAT, SIC, SAC, Flight_level, Track_number, direction, refreshratio);
+            SetMarkerShape(marker);
+            OldMarkers.Add(marker);
+        }
+
+        /// <summary>
+        /// Returns an Old marker given all it's parameters
+        /// </summary>
+        private CustomOldGmapMarker NewOldMarkernoCallsign(CustomActualGmapMarker marker)
+        {
+            CustomOldGmapMarker oldmarker = new CustomOldGmapMarker(marker.p, marker.Callsign, 1, marker.Time, marker.number, marker.emitter, marker.TargetAddress, marker.DetectionMode, marker.CAT, marker.SIC, marker.SAC, marker.Flight_level, marker.Track_number, marker.direction, marker.refreshratio);
+            SetMarkerNoCallsignShape(oldmarker);
+            return oldmarker;
+        }
+
+        /// <summary>
+        /// Adds an actual marker to the list given a message
+        /// </summary>
+        private void AddMarkerToFlightList(CATALL message)
+        {
+            CustomOldGmapMarker oldmarker = new CustomOldGmapMarker(new PointLatLng(message.Latitude_in_WGS_84, message.Longitude_in_WGS_84), message.Target_Identification, 1, message.Time_Of_day, message.num, message.type, message.Target_Address, message.DetectionMode, message.CAT, message.SIC, message.SAC, message.Flight_level, message.Track_number, message.direction, message.refreshratio);
+            SetMarkerNoCallsignShape(oldmarker);
+            ListFlight.Add(oldmarker);
+        }
+
+        /// <summary>
+        /// Returns an actual marker given a message
+        /// </summary>
+        private CustomActualGmapMarker NewActualMarkerFromOld(CustomOldGmapMarker marker)
+        {
+            CustomActualGmapMarker Actualmarker = new CustomActualGmapMarker(marker.p, marker.Callsign, marker.Time, marker.number, marker.emitter, marker.TargetAddress, marker.DetectionMode, marker.CAT, marker.SIC, marker.SAC, marker.Flight_level, marker.Track_number, marker.direction, marker.refreshratio);
+            SetMarkerShape(marker);
+            return Actualmarker;
+        }
+
+        /// <summary>
+        /// Adds an Old marker to the list given an actual marker
+        /// </summary>
+        private void AddOldMarker(CustomActualGmapMarker marker)
+        {
+            CustomOldGmapMarker oldmarker = new CustomOldGmapMarker(marker.p, marker.Callsign, 0, marker.Time, marker.number, marker.emitter, marker.TargetAddress, marker.DetectionMode, marker.CAT, marker.SIC, marker.SAC, marker.Flight_level, marker.Track_number, marker.direction, marker.refreshratio);
+            SetMarkerShape(oldmarker);
+            OldMarkers.Add(oldmarker);
+        }
+
+        /// <summary>
+        /// Adds an actual not refresehd marker to the list given an actual marker
+        /// </summary>
+        private void AddActualNotRefreshedMarker(CustomActualGmapMarker marker)
+        {
+            CustomActualGmapMarker NotRefresehd = new CustomActualGmapMarker(marker.p, marker.Callsign, marker.Time, marker.number, marker.emitter, marker.TargetAddress, marker.DetectionMode, marker.CAT, marker.SIC, marker.SAC, marker.Flight_level, marker.Track_number, marker.direction, marker.refreshratio);
+            SetRedMarkerShape(NotRefresehd);
+            ActualNotRefreshedMarkers.Add(NotRefresehd);
+        }
+
+
+        //CREATING LINES
+
+        bool creatingline = false;
+        private void AddLineClick(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Cross;
+            creatingline = true;
+        }
+
+        List<MeasureLine> LinesList = new List<MeasureLine>();
+
+        /// <summary>
+        /// Creates a measure line from one marker and two points (one of the points is the marker position, so the line is between the marker and the other point)
+        /// </summary>
+        /// <returns></returns>
+        private MeasureLine CreateLine(PointLatLng p, PointLatLng p2, CustomActualGmapMarker marker)
+        {
+            List<PointLatLng> ListPoints = new List<PointLatLng>();
+            ListPoints.Add(p);
+            ListPoints.Add(p2);
+            int a = num;
+            MeasureLine line = new MeasureLine(p, p2, ListPoints, marker, a);
+            num++;
+            line.RegenerateShape(gMapControl1);
+            SolidColorBrush color = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, (byte)160, (byte)160, (byte)160));
+            (line.Shape as System.Windows.Shapes.Path).Stroke = color;
+            (line.Shape as System.Windows.Shapes.Path).StrokeThickness = 2;
+            (line.Shape as System.Windows.Shapes.Path).Effect = null;
+            line.Shape.MouseRightButtonUp += MouseRightButtonUpline;
+            CreateLabel(line);
+            return line;
+        }
+
+        /// <summary>
+        /// When we click in add line, then we have to click on some point on the map (or marker, which is also considered a map) otherwise, we will stop the adding line function
+        /// /// </summary>
+        private void AddLineLostFocus(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = null;
+            if (gMapControl1.IsFocused == false)
+            {
+                creatingline = false;
+                Mouse.OverrideCursor = null;
+            }
+        }
+
+        /// <summary>
+        /// When we are adding a line, clicking on the map creates the line.
+        /// </summary>
+        private void mapclick(object sender, MouseButtonEventArgs e)
+        {
+            if (creatingline == true)
+            {
+                System.Windows.Point mousePoint = e.GetPosition(gMapControl1);
+                double lat = gMapControl1.FromLocalToLatLng(Convert.ToInt32(mousePoint.X), Convert.ToInt32(mousePoint.Y)).Lat;
+                double lng = gMapControl1.FromLocalToLatLng(Convert.ToInt32(mousePoint.X), Convert.ToInt32(mousePoint.Y)).Lng;
+                if (mark != null)
+                {
+                    LinesList.Add(CreateLine(mark.p, new PointLatLng(lat, lng), mark));
+                    ShowMarkersOnMap();
+                }
+                Mouse.OverrideCursor = null;
+                creatingline = false;
+            }
+        }
+
+        /// <summary>
+        /// Right clicking on a line deletes it
+        /// </summary>
+        private void MouseRightButtonUpline(System.Object sender, RoutedEventArgs e)
+        {
+            var baseobj = sender as FrameworkElement;
+            var line = baseobj.DataContext as MeasureLine;
+            List<MeasureLine> newLineList = new List<MeasureLine>();
+            int i = line.num;
+            foreach (MeasureLine lin in LinesList)
+            {
+                if (lin.num != i) { newLineList.Add(lin); }
+            }
+            LinesList = newLineList;
+            LabelsList.Clear();
+            foreach(MeasureLine lin in LinesList) { CreateLabel(lin); }
+            ShowMarkersOnMap();
+        }
+
+        /// <summary>
+        /// Right clicking on a line label deletes the line 
+        /// </summary>
+        private void LabelRightButton(System.Object sender, RoutedEventArgs e)
+        {
+            var baseobj = sender as FrameworkElement;
+            var linelabel = baseobj.DataContext as LinesLabel;
+            int i = linelabel.num;
+            List<MeasureLine> newLineList = new List<MeasureLine>();
+            foreach (MeasureLine line in LinesList)
+            {
+                if (line.num != i) { newLineList.Add(line); }
+            }
+            LabelsList.Remove(linelabel);
+            LinesList = newLineList;
+            ShowMarkersOnMap();
+        }
+
+
+        List<LinesLabel> LabelsList = new List<LinesLabel>();
+
+        /// <summary>
+        /// Creates a measure line label.
+        /// </summary>
+        private void CreateLabel(MeasureLine line)
+        {
+            PointLatLng p = new PointLatLng(line.p.Lat + ((line.p2.Lat - line.p.Lat) / 2), line.p.Lng + ((line.p2.Lng - line.p.Lng) / 2));
+            LinesLabel linelabel = new LinesLabel(p, line.num);
+            linelabel.caption = line.ComputeParameters();
+            SetMarkerShape(linelabel);
+            LabelsList.Add(linelabel);
+        }
+
+
+        //FUNTIONS TO ADD MARKERS  AND LINES SHAPES//
+
+        /// <summary>
+        /// Sets the sape of an Actual marker
+        /// </summary>
+        private void SetMarkerShape(CustomActualGmapMarker marker)
+        {
+            Bitmap bitmaptxt = MarkersDrawings.InsertText(marker);
+            int heig = 50; //35
+            int wid = 50; //35
+            marker.Shape = new System.Windows.Controls.Image
+            {
+
+                Width = heig,
+                Height = wid,
+                Source = MarkersDrawings.ToBitmapImage(bitmaptxt)
+            };
+            marker.Offset = new System.Windows.Point((-wid / 2), (-heig / 2) - 5);
+            bitmaptxt.Dispose();
+            bitmaptxt = null;
+            marker.Shape.MouseLeftButtonUp += markerclick;
+        }
+
+        /// <summary>
+        /// Sets de shape of an actual not refreshed marker (in red)
+        /// </summary>
+        private void SetRedMarkerShape(CustomActualGmapMarker marker)
+        {
+            Bitmap bitmaptxt = MarkersDrawings.InsertTextRedImage(marker);
+            int heig = 50; //35
+            int wid = 50; //35
+            marker.Shape = new System.Windows.Controls.Image
+            {
+
+                Width = heig,
+                Height = wid,
+                Source = MarkersDrawings.ToBitmapImage(bitmaptxt)
+            };
+            marker.Offset = new System.Windows.Point((-wid / 2), (-heig / 2) - 5);
+
+            bitmaptxt.Dispose();
+            bitmaptxt = null;
+            marker.Shape.MouseLeftButtonUp += markerclick;
+        }
+
+
+        /// <summary>
+        /// Sets the shape of an old marker
+        /// </summary>
+        private void SetMarkerShape(CustomOldGmapMarker marker)
+        {
+            try
+            {
+                Bitmap bitmaptxt = MarkersDrawings.InsertText(marker);
+                int heig = 50;
+                int wid = 50;
+                System.Windows.Application.Current.Dispatcher.Invoke((Action)delegate
+                {
+                    marker.Shape = new System.Windows.Controls.Image
+                    {
+                        Width = wid,
+                        Height = heig,
+                        Source = MarkersDrawings.ToBitmapImage(bitmaptxt)
+                    };
+                });
+                marker.Offset = new System.Windows.Point((-wid / 2), (-heig / 2) - 5);
+                bitmaptxt.Dispose();
+                bitmaptxt = null;
+            }
+            catch //Could be not possible to create a new Old marker due to low space available, so if we get an error we force the garbage collector. 
+            {
+                GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
+                Bitmap bitmaptxt = MarkersDrawings.InsertText(marker);
+                int heig = 50;
+                int wid = 50;
+                System.Windows.Application.Current.Dispatcher.Invoke((Action)delegate
+                {
+                    marker.Shape = new System.Windows.Controls.Image
+                    {
+                        Width = wid,
+                        Height = heig,
+                        Source = MarkersDrawings.ToBitmapImage(bitmaptxt)
+                    };
+                });
+                marker.Offset = new System.Windows.Point((-wid / 2), (-heig / 2) - 5);
+                bitmaptxt.Dispose();
+                bitmaptxt = null;
+            }
+            marker.Shape.MouseUp += markerclick;
+        }
+
+
+        /// <summary>
+        /// Set the shape of an old marker with no label.
+        /// </summary>
+        private void SetMarkerNoCallsignShape(CustomOldGmapMarker marker)
+        {
+            Bitmap bitmaptxt = MarkersDrawings.GetNoTextBitmap(marker);
+            int wid = 15;
+            int heig = 15;
+            marker.Shape = new System.Windows.Controls.Image
+            {
+                Width = wid,
+                Height = heig,
+                Source = MarkersDrawings.ToBitmapImage(bitmaptxt)
+            };
+            bitmaptxt.Dispose();
+            bitmaptxt = null;
+            marker.Offset = new System.Windows.Point((-wid / 2), -heig / 2);
+            marker.Shape.MouseUp += markerclick;
+        }
+
+
+        /// <summary>
+        /// Loads the old markers
+        /// </summary>
+        /// <param name="newstarttime"></param>
         private void LoadOldMarkers(int newstarttime)
         {
             int timefinal;
@@ -986,10 +1088,11 @@ namespace PGTAWPF
             }
             if (newstarttime > oldstarttime)
             {
-                OldMarkers.RemoveAll(item => (item.Time < newstarttime));// { ActualMarkers.Remove(item); }
+                OldMarkers.RemoveAll(item => (item.Time < newstarttime));
                 starttime = newstarttime;
             }
         }
+
 
         bool markerwarningresult;
         public void getMarkerresult(bool a)
@@ -999,11 +1102,6 @@ namespace PGTAWPF
 
         private string GetHour(int t)
         {
-            //int timemarker = marker.Time;
-            //int showingtime;
-            //if (timemarker > 86400) { showingtime = timemarker - 86400; }
-            //else { showingtime = timemarker; }
-
             int day = Convert.ToInt32(Math.Truncate(Convert.ToDouble(t / 86400)));
             int hour = Convert.ToInt32(Math.Truncate(Convert.ToDouble((t - (day * 86400)) / 3600)));
             int min = Convert.ToInt32(Math.Truncate(Convert.ToDouble((t - ((day * 86400) + (hour * 3600))) / 60)));
@@ -1130,8 +1228,6 @@ namespace PGTAWPF
 
         private void ShowMarkersOnMap()
         {
-
-
             try
             {
                 gMapControl1.Markers.Clear();
@@ -1310,9 +1406,6 @@ namespace PGTAWPF
             PointLatLng p2 = marker2.p;
             ListPoints.Add(p);
             ListPoints.Add(p2);
-            //int num;
-            //if (LinesList.Count==0) { num = 0; }
-            //else { num=((LinesList[LinesList.Count() - 1].num) + 1); }
             int a = num;
             MeasureLine line = new MeasureLine(p, p2, ListPoints, marker,marker2,a, old);
             num++;
@@ -1332,7 +1425,6 @@ namespace PGTAWPF
         {
             if (creatingline == true)
             {
-              //  MessageBox.Show("HI0");
                 var baseobj = sender as FrameworkElement;
                 var mark1 = baseobj.DataContext as CustomActualGmapMarker;
                 if (mark1 != null)
@@ -1375,13 +1467,8 @@ namespace PGTAWPF
                     else
                     {
                         ShowFlightHistory.Visibility = Visibility.Visible;
-                        //if (ShowFlightHistory.IsChecked == true)
-                        //{
-                            GetListFlight(mark);
-                        //}
+                        GetListFlight(mark);
                     }
-                  //  System.Windows.MessageBox.Show(Convert.ToString(mark.Time) + "  " + Convert.ToString(mark.refreshratio));
-
                     ShowMarkerinfoOntable(mark);
                     ShowMarkersOnMap();
                 }
@@ -1403,15 +1490,9 @@ namespace PGTAWPF
                     else
                     {
                         ShowFlightHistory.Visibility = Visibility.Visible;
-                        //if (ShowFlightHistory.IsChecked == true)
-                        //{
-                            GetListFlight(marktime);
-                        //}
+                        GetListFlight(marktime);
                     }
                     mark = NewActualMarkerFromOld(marktime);
-                    //CATALL mess = List.Find(x => x.num == mark.number);
-                    //System.Windows.MessageBox.Show(Convert.ToString(mess.Parameters));
-
                     ShowMarkerinfoOntable(mark);
                     ShowMarkersOnMap();
                 }
@@ -1420,22 +1501,7 @@ namespace PGTAWPF
         }
 
 
-        private void MarkerInfoViewLoad()
-        {
-            MarkerInfoView.CanUserAddRows = false;
-            InfoMarker.Columns.Clear();
-            InfoMarker.Columns.Add("Target\nId");
-            InfoMarker.Columns.Add("Target\nAddress");
-            InfoMarker.Columns.Add("Track\nNumber");
-            InfoMarker.Columns.Add("CAT");
-            InfoMarker.Columns.Add("SIC");
-            InfoMarker.Columns.Add("SAC");
-            InfoMarker.Columns.Add("Detection\nMode");
-            InfoMarker.Columns.Add("Time");
-            InfoMarker.Columns.Add("Flight\nLevel");
-            MarkerInfoView.IsReadOnly = true;
-            MarkerInfoView.CanUserResizeColumns = false;
-        }
+
 
         private void ShowMarkerInfoPanel(bool a)
         {
@@ -1487,19 +1553,18 @@ namespace PGTAWPF
         }
 
 
-        private void MouseWhel(object sender, MouseWheelEventArgs e)
-        {
-            // System.Windows.MessageBox.Show(Convert.ToString(e.Delta/));
-            if (e.Delta > 0)
-            {
-                gMapControl1.Zoom = gMapControl1.Zoom + 1; // SystemInformation.MouseWheelScrollLines;
-            }
-            else
-            {
-                gMapControl1.Zoom = gMapControl1.Zoom - 1; // SystemInformation.MouseWheelScrollLines;
+        //private void MouseWhel(object sender, MouseWheelEventArgs e)
+        //{
+        //    if (e.Delta > 0)
+        //    {
+        //        gMapControl1.Zoom = gMapControl1.Zoom + 1; 
+        //    }
+        //    else
+        //    {
+        //        gMapControl1.Zoom = gMapControl1.Zoom - 1; 
 
-            }
-        }
+        //    }
+        //}
 
         private void ShowSMR_Click(object sender, RoutedEventArgs e)
         {
@@ -1523,22 +1588,7 @@ namespace PGTAWPF
 
         private void ShowVehicleHistoryClick(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
-                //ListFlight = new List<CustomOldGmapMarker>();
-                //if (mark != null)
-                //{
-                //    if (ShowFlightHistory.IsChecked == true)
-                //    {
-                //        if (mark.TargetAddress != null || mark.Callsign != null || mark.Track_number != null)
-                //        {
-                //            GetListFlight(mark);
-                //        }
-                //    }
-                    ShowMarkersOnMap();
-            //    }
-            //}
-            //catch { }
+            ShowMarkersOnMap();
         }
 
         private void X1_Click(object sender, MouseButtonEventArgs e)
@@ -1817,14 +1867,12 @@ namespace PGTAWPF
                         {
                             Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
                             LoadOldMarkers(newstarttime);
-                            //starttime = newstarttime;
                             ShowFinalhour();
                             ShowStarthour();
                             ShowMarkersOnMap();
                             Mouse.OverrideCursor = null;
                         }
                         else { AlertVisible(true); }
-                        //ComputeOld;
                     }
                 }
             }
