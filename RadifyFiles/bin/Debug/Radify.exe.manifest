@@ -110,7 +110,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>0tXv9GY/rH32hrT4ugRTM4JJIaLkYQl7W1kZEMfeYj0=</dsig:DigestValue>
+        <dsig:DigestValue>tfZEuqi3nfU9r9OB1pwQlYnsmCffSZSSGpg0i8XbAsA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -249,13 +249,13 @@
       <dsig:DigestValue>nor/EtYdN2Y3IJ7R+8tNCusMe9CLExlTo1rOqakxRQE=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Radify.exe.config" size="1891">
+  <file name="Radify.exe.config" size="1862">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>GD72h5dNUJcJZ4SCANIreZLpAWB4S1TnrARpAdlA8Cw=</dsig:DigestValue>
+      <dsig:DigestValue>nPAdAj9fZ7aNIBZdda0NehDBxmlzfKMly3s5EOq+eNA=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
