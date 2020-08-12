@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\sergi\Desktop\Radify GitHub repository\Radify\RadifyFiles\obj\Debug\
+C:\Users\sergi\Desktop\GitHub Repositories\Radify GitHub repository\Radify\RadifyFiles\obj\Debug\
 Radify
 none
 false
 DEBUG;TRACE
-C:\Users\sergi\Desktop\Radify GitHub repository\Radify\RadifyFiles\App.xaml
+C:\Users\sergi\Desktop\GitHub Repositories\Radify GitHub repository\Radify\RadifyFiles\App.xaml
 15-1360622112
 101263484514
-32-1072360621
-24609516413
+33-612546298
+241020052898
 HelpForm.xaml;LoadFiles.xaml;LoadHelp.xaml;MapHelp.xaml;OldMarkersExceed.xaml;RepetedFileDialog.xaml;ExportKML.xaml;Intro.xaml;MainWindow.xaml;MapView.xaml;NoMessages.xaml;Selectcat.xaml;SelectDay.xaml;View.xaml;ViewHelp.xaml;
 
-False
+True
 
