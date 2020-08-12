@@ -1739,16 +1739,18 @@ namespace PGTAWPF
             }
         }
 
-        //private void DragMapEvent(object sender, System.Windows.DragEventArgs e)
-        //{
-        //    FollowPlane = false;
-        //}
 
+        /// <summary>
+        /// Drage event to deactivate the Follow Plane function
+        /// </summary>
         private void DragMapEvent()
         {
             FollowPlane = false;
         }
 
+        /// <summary>
+        /// Click on restart button
+        /// </summary>
         private void Restart_click(object sender, MouseButtonEventArgs e)
         {
             timer.Stop();
@@ -1777,11 +1779,13 @@ namespace PGTAWPF
             NoMarkerSelected(true);
             LinesList.Clear();
             LabelsList.Clear();
-
             ShowMarkersOnMap();
             GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
         }
 
+        /// <summary>
+        /// Click on Show On List button
+        /// </summary>
         private void ShowOnList_Click(object sender, MouseButtonEventArgs e)
         {
             if (mark != null)
@@ -1798,7 +1802,9 @@ namespace PGTAWPF
             }
         }
 
-
+        /// <summary>
+        /// Establish that we are accessing the map looking for a flight, and save which flight we are looking for
+        /// </summary>
         public void SearchFlightInMap(CATALL flight)
         {
             time = flight.Time_Of_day;
@@ -1806,23 +1812,20 @@ namespace PGTAWPF
             SearchingFlight = flight;
         }
 
-        private void ExportKMLImageClick(object sender, MouseButtonEventArgs e)
-        {
-            ExportKMLfun();
-        }
-
-        private void ExportKMLtextClick(object sender, MouseButtonEventArgs e)
-        {
-            ExportKMLfun();
-        }
-
-        private void ExportKMLfun()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportKML_Click(object sender, MouseButtonEventArgs e)
         {
             timer.Stop();
             ExportKML savekml = new ExportKML();
             savekml.GetMapForm(this);
             savekml.ShowDialog();
         }
+
+
 
         private void CloseHelpButton(object sender, MouseButtonEventArgs e)
         {
