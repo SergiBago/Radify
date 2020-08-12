@@ -1251,7 +1251,7 @@ namespace PGTAWPF
         {
             try
             {
-                gMapControl1.Markers.Clear(); //Clears all previous markers
+                gMapControl1.Markers.Clear(); 
 
                 if (ShowFlightHistory.IsChecked == true && ShowOld.IsChecked == true)
                 {
@@ -1260,8 +1260,6 @@ namespace PGTAWPF
                     if (mark.DetectionMode == "ADSB" && CheckBoxshowadsb.IsChecked == false) { foreach (CustomOldGmapMarker marker in ListFlight) { gMapControl1.Markers.Add(marker); }; }
                 }
                 if (mark != null && markertype == 0) { gMapControl1.Markers.Add(mark); }
-
-
 
                 if (ShowOld.IsChecked == true)
                 {
@@ -1401,11 +1399,14 @@ namespace PGTAWPF
             catch { System.Windows.MessageBox.Show(Convert.ToString(gMapControl1.Markers.Count())); }
         }
 
+        /// <summary>
+        /// Set measuring lines label shape
+        /// </summary>
         private void SetMarkerShape(LinesLabel line)
         {
             Bitmap bitmaptxt = MarkersDrawings.InsertText(line);
-            int heig = 10; //35
-            int wid = 120; //35
+            int heig = 10; 
+            int wid = 120; 
             line.Shape = new System.Windows.Controls.Image
             {
 
@@ -1420,6 +1421,9 @@ namespace PGTAWPF
             line.Shape.MouseRightButtonUp += LabelRightButton;
         }
 
+        /// <summary>
+        /// Creates a measuring line between two markers
+        /// </summary>
         int num = 0;
         private MeasureLine CreateLineTwoMarkers(CustomActualGmapMarker marker, CustomActualGmapMarker marker2, bool old)
         {
@@ -1442,10 +1446,12 @@ namespace PGTAWPF
         }
 
 
-
+        /// <summary>
+        /// Click on map marker event
+        /// </summary>
         private void markerclick(System.Object sender, RoutedEventArgs e)
         {
-            if (creatingline == true)
+            if (creatingline == true) //If we have the option to create a selected line by clicking on the marker we will create the line between both markers
             {
                 var baseobj = sender as FrameworkElement;
                 var mark1 = baseobj.DataContext as CustomActualGmapMarker;
@@ -1470,12 +1476,12 @@ namespace PGTAWPF
                 Mouse.OverrideCursor = null;
                 ShowMarkersOnMap();
             }
-            else
+            else //If not, selected marker is the clicked marker
             {
                 ListFlight = new List<CustomOldGmapMarker>();
                 var baseobj = sender as FrameworkElement;
                 var mark1 = baseobj.DataContext as CustomActualGmapMarker;
-                if (mark1 != null)
+                if (mark1 != null) //Marker could be of type CustomActualMarker or CustomOldMarker
                 {
                     ShowMarkerInfoPanel(true);
 
@@ -1518,13 +1524,14 @@ namespace PGTAWPF
                     ShowMarkerinfoOntable(mark);
                     ShowMarkersOnMap();
                 }
-
             }
         }
 
 
 
-
+        /// <summary>
+        /// Show or hide marker info and controls
+        /// </summary>
         private void ShowMarkerInfoPanel(bool a)
         {
             if (a == true)
@@ -1544,7 +1551,9 @@ namespace PGTAWPF
         }
 
 
-
+        /// <summary>
+        /// Actualize datatable whith new marker information
+        /// </summary>
         private void ShowMarkerinfoOntable(CustomActualGmapMarker marker)
         {
             if (mark != null)
@@ -1574,75 +1583,96 @@ namespace PGTAWPF
             }
         }
 
-
-        //private void MouseWhel(object sender, MouseWheelEventArgs e)
-        //{
-        //    if (e.Delta > 0)
-        //    {
-        //        gMapControl1.Zoom = gMapControl1.Zoom + 1; 
-        //    }
-        //    else
-        //    {
-        //        gMapControl1.Zoom = gMapControl1.Zoom - 1; 
-
-        //    }
-        //}
-
+        /// <summary>
+        /// Click on show SMR messages
+        /// </summary>
         private void ShowSMR_Click(object sender, RoutedEventArgs e)
         {
             ShowMarkersOnMap();
         }
 
+        /// <summary>
+        /// Click on show MLAT messages
+        /// </summary>
         private void ShowMLAT_Click(object sender, RoutedEventArgs e)
         {
             ShowMarkersOnMap();
         }
 
+        /// <summary>
+        /// Click on show ADSB messages
+        /// </summary>
         private void ShowADSB_Click(object sender, RoutedEventArgs e)
         {
             ShowMarkersOnMap();
         }
 
+        /// <summary>
+        /// Click on show Old messages
+        /// </summary>
         private void ShowOldClick(object sender, RoutedEventArgs e)
         {
             ShowMarkersOnMap();
         }
 
+        /// <summary>
+        /// Click on show Vehicle History messages
+        /// </summary>
         private void ShowVehicleHistoryClick(object sender, RoutedEventArgs e)
         {
             ShowMarkersOnMap();
         }
 
+        /// <summary>
+        /// Click on X1 speed button
+        /// </summary>
         private void X1_Click(object sender, MouseButtonEventArgs e)
         {
             selectspeed(X1);
             timer.Interval = TimeSpan.FromMilliseconds(1000);
         }
 
+        /// <summary>
+        /// Click on X2 speed button
+        /// </summary>
         private void X2_click(object sender, MouseButtonEventArgs e)
         {
             selectspeed(X2);
             timer.Interval = TimeSpan.FromMilliseconds(500);
         }
 
+        /// <summary>
+        /// Click on X5 speed button
+        /// </summary>
         private void X5_Click(object sender, MouseButtonEventArgs e)
         {
             selectspeed(X5);
             timer.Interval = TimeSpan.FromMilliseconds(200);
         }
 
+        /// <summary>
+        /// Click on X10 speed button
+        /// </summary>
         private void X10_Click(object sender, MouseButtonEventArgs e)
         {
             selectspeed(X10);
             timer.Interval = TimeSpan.FromMilliseconds(100);
         }
 
+        /// <summary>
+        /// Click on X20 speed button
+        /// </summary>
         private void X20_Clicl(object sender, MouseButtonEventArgs e)
         {
             selectspeed(X20);
             timer.Interval = TimeSpan.FromMilliseconds(50);
         }
 
+        /// <summary>
+        /// Change map background from satellite to street map
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChangeView_click(object sender, RoutedEventArgs e)
         {
             if (gMapControl1.MapProvider == GMapProviders.BingHybridMap)
@@ -1659,6 +1689,9 @@ namespace PGTAWPF
             }
         }
 
+        /// <summary>
+        /// Click on center CCAA button
+        /// </summary>
         private void ViewCat_Click(object sender, RoutedEventArgs e)
         {
             if (airport != null)
@@ -1674,29 +1707,28 @@ namespace PGTAWPF
 
         }
 
+        /// <summary>
+        /// Click on center city button
+        /// </summary>
         private void ViewBcn_Click(object sender, RoutedEventArgs e)
         {
             gMapControl1.Position = airport.AirportCoords;
             gMapControl1.Zoom = 12;
         }
 
+        /// <summary>
+        /// Click on center airport button
+        /// </summary>
         private void ViewLEBL_Click(object sender, RoutedEventArgs e)
         {
             gMapControl1.Position = airport.AirportCoords;
             gMapControl1.Zoom = 14;
         }
 
-        private void ShowVehicleImage_click(object sender, MouseButtonEventArgs e)
-        {
-            ShowPlaneOnMap();
-        }
-
-        private void ShowVehicleText_click(object sender, MouseButtonEventArgs e)
-        {
-            ShowPlaneOnMap();
-        }
-
-        private void ShowPlaneOnMap()
+        /// <summary>
+        /// Click on Show Vehicle button
+        /// </summary>
+        private void ShowVehicle_Click(object sender, MouseButtonEventArgs e)
         {
             if (mark != null)
             {
@@ -1707,9 +1739,13 @@ namespace PGTAWPF
             }
         }
 
-        private void DragMapEvent(object sender, System.Windows.DragEventArgs e)
-        {
+        //private void DragMapEvent(object sender, System.Windows.DragEventArgs e)
+        //{
+        //    FollowPlane = false;
+        //}
 
+        private void DragMapEvent()
+        {
             FollowPlane = false;
         }
 
@@ -1746,26 +1782,7 @@ namespace PGTAWPF
             GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
         }
 
-        private void ShowOnListImage_click(object sender, MouseButtonEventArgs e)
-        {
-            ShowOnList();
-        }
-
-        private void ShowOnListText_click(object sender, MouseButtonEventArgs e)
-        {
-            ShowOnList();
-        }
-
-        public void SearchFlightInMap(CATALL flight)
-        {
-            time = flight.Time_Of_day;
-            this.searchflightfromtable = true;
-            SearchingFlight = flight;
-        }
-
-
-
-        private void ShowOnList()
+        private void ShowOnList_Click(object sender, MouseButtonEventArgs e)
         {
             if (mark != null)
             {
@@ -1781,9 +1798,12 @@ namespace PGTAWPF
             }
         }
 
-        private void DragMapEvent()
+
+        public void SearchFlightInMap(CATALL flight)
         {
-            FollowPlane = false;
+            time = flight.Time_Of_day;
+            this.searchflightfromtable = true;
+            SearchingFlight = flight;
         }
 
         private void ExportKMLImageClick(object sender, MouseButtonEventArgs e)

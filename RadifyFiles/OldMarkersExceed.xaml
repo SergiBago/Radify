@@ -20,8 +20,8 @@
                 <RowDefinition Height="5"/>
             </Grid.RowDefinitions>
         <Border x:Name="TopBar" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0" Background="#FF282828" MouseLeftButtonDown="MouseLeftButtonDown" />
-        <Image Source="images/Error - copia - copia - copia.png" Grid.Column="1" Width="30" Margin="-60,0,0,0" Grid.Row="0" Grid.ColumnSpan="2" Height="30"/>
-        <Image Source="images/Close - copia.png" Grid.Column="3" Grid.Row="0" Height="20" Cursor="Hand" Margin="-20,0,5,0"  MouseLeftButtonUp="Close_click"/>
+        <Image Source="images/Error.png" Grid.Column="1" Width="30" Margin="-60,0,0,0" Grid.Row="0" Grid.ColumnSpan="2" Height="30"/>
+        <Image Source="images/Close.png" Grid.Column="3" Grid.Row="0" Height="20" Cursor="Hand" Margin="-20,0,5,0"  MouseLeftButtonUp="Close_click"/>
         <TextBlock Text="Error"  Margin="30,0,0,0" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFBE0000" FontFamily="Microsoft Sans Serif" FontSize="24"/>
         <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#FF464646"/>
         <TextBlock Text="You entered a too big record. The selected history exceeds the limit of 50,000 bookmarks administered for the program. In order to not exceed this limit, we can load from XXX. Anyway, we remind you that the limit only applies to the complete history of all flights, and does not affect the single flight history, which is always complete. Do you want to calculate the history from XXX?" x:Name="Label" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10,5" Foreground="#FFB0BEA9" FontFamily="Microsoft Sans Serif"/>

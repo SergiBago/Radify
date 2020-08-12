@@ -56,7 +56,7 @@
         <Border x:Name="UnderBorder12" Grid.Column="0" Grid.ColumnSpan="17" Grid.Row="6"/>
         <TextBlock x:Name="HelpLabel"  Grid.Column="1" Text="aaa" Visibility="Hidden" Grid.Row="5" Grid.ColumnSpan="14" TextWrapping="Wrap" FontFamily="Microsoft Sans Serif" FontSize="14" Foreground="#FFFAF8D4" TextAlignment="Center" Margin="0,0,10,0"/>
         <TextBlock x:Name="MessageNotValidLabel" TextAlignment="Right" Visibility="Visible" VerticalAlignment="Center" Grid.Column="3" Text="Selected message not valid" Grid.Row="5" Grid.ColumnSpan="6" TextWrapping="Wrap" FontFamily="Microsoft Sans Serif" FontSize="14" Foreground="#FFB40000"  Margin="0,0,20,0"/>
-        <Image x:Name="AlertLabelIco" Source="images/Error - copia.png" Grid.Column="2" HorizontalAlignment="Center" Margin="10,0" Grid.Row="5" Height="14" VerticalAlignment="Bottom" />
+        <Image x:Name="AlertLabelIco" Source="images/Error.png" Grid.Column="2" HorizontalAlignment="Center" Margin="10,0" Grid.Row="5" Height="14" VerticalAlignment="Bottom" />
         <Image x:Name="CloseHelpIco" Source="images/CoseHelp.png" Grid.Column="15" Grid.Row="5" MouseLeftButtonUp="CloseHelp_click" Cursor="Hand"/>
         <DataGrid Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" EnableRowVirtualization="True" VerticalGridLinesBrush="#404040" Grid.ColumnSpan="17" x:Name="DatagridView"  SelectionChanged="DataGricCell_Click" MouseLeftButtonUp="CellContent_Click" SelectionUnit="FullRow" Background="#FF464646" FontFamily="Microsoft Tai Le" FontSize="14" Cursor="Hand" HeadersVisibility="Column" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" BorderBrush="{x:Null}" Foreground="#FFFAF8D4">
             <DataGrid.CellStyle>

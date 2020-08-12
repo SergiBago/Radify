@@ -345,8 +345,6 @@
     <Resource Include="images\RepetedFileCancel.png" />
     <Resource Include="images\RepetedFileOk.png" />
     <Resource Include="images\SaveKML.png" />
-    <Resource Include="images\Maximize.png" />
-    <Resource Include="images\Minimize.png" />
     <Resource Include="images\NoMessagesMap.png" />
     <Resource Include="images\NoMessagesCatAll.png" />
     <Resource Include="images\NoMessagesCAT21v21.png" />
@@ -371,16 +369,11 @@
     <Resource Include="images\Export CSV.png" />
     <Resource Include="images\Error.png" />
     <Resource Include="images\Delete.png" />
-    <Resource Include="images\Error - copia.png" />
     <Resource Include="images\293686-512.png" />
     <Resource Include="images\CoseHelp.png" />
     <Resource Include="images\Export KML map.png" />
-    <Resource Include="images\Error - copia - copia.png" />
     <Resource Include="images\CenterMap map.png" />
-    <Resource Include="images\Close.png" />
     <Resource Include="images\ExportKML.png" />
-    <Resource Include="images\Close - copia.png" />
-    <Resource Include="images\Error - copia - copia - copia.png" />
     <Resource Include="images\CloseMapHelp.png" />
     <Resource Include="images\CalendarIco.png" />
     <Content Include="images\Help Color.png" />

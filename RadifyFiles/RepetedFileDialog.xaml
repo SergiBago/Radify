@@ -20,8 +20,8 @@
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
         <Border x:Name="TopBar" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0" Background="#FF282828" MouseLeftButtonDown="MouseLeftButtonDownClick" />
-        <Image Source="images/Error - copia - copia - copia.png" Grid.Column="1" Margin="-140,0,0,0" Grid.Row="0" Grid.ColumnSpan="2" Height="30"/>
-        <Image Source="images/Close - copia.png" Grid.Column="3" Grid.Row="0" Height="20" Cursor="Hand" Margin="-20,0,5,0"  MouseLeftButtonUp="Close_Click"/>
+        <Image Source="images/Error.png" Grid.Column="1" Margin="-140,0,0,0" Grid.Row="0" Grid.ColumnSpan="2" Height="30"/>
+        <Image Source="images/Close.png" Grid.Column="3" Grid.Row="0" Height="20" Cursor="Hand" Margin="-20,0,5,0"  MouseLeftButtonUp="Close_Click"/>
         <TextBlock Text="Repeted File"  Margin="30,0,0,0" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFBE0000" FontFamily="Microsoft Sans Serif" FontSize="24"/>
         <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#FF464646"/>
         <TextBlock Text="It looks like you've already uploaded that file. Do you want to load it anyway?" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Margin="10,5" Foreground="#FFB0BEA9" FontFamily="Microsoft Sans Serif"/>

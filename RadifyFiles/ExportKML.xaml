@@ -41,7 +41,7 @@
         </Grid.RowDefinitions>
         <Border x:Name="TopBar" Grid.Column="0" Grid.ColumnSpan="13" Grid.Row="0" Background="#FF282828" MouseLeftButtonDown="MouseLeftButtonDownClick" />
         <Image Source="images/ExportKML.png" Grid.Column="2" Margin="-130,0,0,0" Grid.Row="0" Grid.ColumnSpan="9" Height="30"/>
-        <Image Source="images/Close - copia.png" Grid.Column="11" Grid.Row="0" Height="20" Cursor="Hand" MouseLeftButtonUp="Close_Click"/>
+        <Image Source="images/Close.png" Grid.Column="11" Grid.Row="0" Height="20" Cursor="Hand" MouseLeftButtonUp="Close_Click"/>
         <TextBlock Text="Save KML"  Margin="25,0,0,0" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="9" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFFFBB97" FontFamily="Microsoft Sans Serif" FontSize="24"/>
 
         <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="13" Grid.ColumnSpan="11" Background="#FF464646"/>
@@ -67,7 +67,7 @@
             </StackPanel>
         </Button>
         <TextBlock x:Name="AlertLabel" Text="Select at least one type of detection." VerticalAlignment="Center" Grid.Row="13" Margin="15,0,0,0"  Grid.Column="1" Grid.ColumnSpan="11"  HorizontalAlignment="Center"  Foreground="#FFC00000" FontFamily="Microsoft Sans Serif"/>
-        <Image x:Name="AlertIco" Source="images/Error - copia - copia - copia.png" Grid.Column="1" Grid.ColumnSpan="11" Grid.Row="13" Height="15" Margin="-205,0,0,0" />
+        <Image x:Name="AlertIco" Source="images/Error.png" Grid.Column="1" Grid.ColumnSpan="11" Grid.Row="13" Height="15" Margin="-205,0,0,0" />
     </Grid>
    
 </Window>

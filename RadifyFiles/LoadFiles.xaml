@@ -50,7 +50,7 @@
         </Image>
         <Image Source="images/Upload File.png" x:Name="LoadFirst" Grid.Column="6" Grid.Row="4"  Visibility="Hidden"  Margin="0,0,0,0" Height="180" Cursor="Hand" MouseLeftButtonUp="LoadFirsClick" />
         <Image Source="images/Delete.png" x:Name="DeleteIcon" Grid.Column="8" Grid.Row="4" Height="180" Margin="0,0,0,10" Visibility="Visible"  Cursor="Hand" MouseLeftButtonUp="Delete_click" />
-        <Image Source="images/Error - copia.png" x:Name="ErrorIcon" Grid.Column="3" Grid.Row="5" Height="40" Margin="0,0,0,0" Visibility="Visible" />
+        <Image Source="images/Error.png" x:Name="ErrorIcon" Grid.Column="3" Grid.Row="5" Height="40" Margin="0,0,0,0" Visibility="Visible" />
         <TextBlock  x:Name="ErrorLabel" Grid.Row="5" Grid.Column="4" TextAlignment="Center" Grid.ColumnSpan="5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0" Text="Error loading the file. Please, try another one." Foreground="#FFC00000" FontFamily="Microsoft Sans Serif" FontSize="22" />
         <TextBlock  x:Name="ProcessLabel" Grid.Row="6"  Grid.Column="1" Visibility="Hidden" TextAlignment="Center" Grid.ColumnSpan="9" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10" Text="Decodifying file..." Foreground="#FFB0BEA9" FontFamily="Microsoft Sans Serif" FontSize="22" />
     </Grid>

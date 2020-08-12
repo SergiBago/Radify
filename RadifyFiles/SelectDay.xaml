@@ -26,7 +26,7 @@
         <TextBlock Text="Select file parameters" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="25,0,0,0" Foreground="#FFB0BEA6" FontFamily="Microsoft Sans Serif" FontSize="24"/>
         <Image Source="images/CalendarIco.png" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Height="25" HorizontalAlignment="Left"  Margin="110,0,0,0" />
         <!--<Image Source="Select Airport Ico.png" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Height="30" HorizontalAlignment="Right"  Margin="0,0,85,0" />-->
-        <Image Source="images/Close - copia.png" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right" Margin="0,0,10,0"  Height="20" Cursor="Hand" MouseLeftButtonUp="Close_click"/>
+        <Image Source="images/Close.png" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right" Margin="0,0,10,0"  Height="20" Cursor="Hand" MouseLeftButtonUp="Close_click"/>
         <TextBlock Text="This is not the first file you upload. So that the program can load the files in the correct order, you must tell it what day this file is with respect to the first file loaded." TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="15" TextAlignment="Center" Foreground="#FFB3BEA9" FontFamily="Microsoft Sans Serif" FontSize="14"/>
         <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" >
             <ComboBox x:Name="Days" Foreground="#FFB0BEA9" Background="Black" BorderBrush="#FF646464" Height="22" VerticalAlignment="Top">
@@ -53,7 +53,7 @@
             </StackPanel>
         </Button>
         <TextBlock Text="Please, select all the parameters" x:Name="AlertLabel" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Top" Margin="20,5,0,0"  HorizontalAlignment="Center" Foreground="#FFC00000" FontFamily="Microsoft Sans Serif" FontSize="14"/>
-        <Image Source="images/Error - copia - copia.png"  x:Name="AlertIco" Grid.Column="1" Grid.Row="4" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2,0,0" Height="20"/>
+        <Image Source="images/Error.png"  x:Name="AlertIco" Grid.Column="1" Grid.Row="4" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,2,0,0" Height="20"/>
     </Grid>
     
 </Window>
