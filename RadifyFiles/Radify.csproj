@@ -328,6 +328,9 @@
     <Resource Include="images\CenterMap Help.png" />
     <Resource Include="images\SateliteMap.png" />
     <Resource Include="images\Mesure.png" />
+    <Resource Include="images\Close.png" />
+    <Resource Include="images\Maximize.png" />
+    <Resource Include="images\Minimize.png" />
     <Content Include="Markers\ActualCarIco.png" />
     <Content Include="Markers\ActualUndeterminedMarker.png" />
     <Resource Include="images\Measure Help.png" />

@@ -94,8 +94,8 @@
         <CheckBox x:Name="CheckBoxshowmlat" VerticalAlignment="Center" TextBlock.TextAlignment="Left" Content="Show MLAT" Grid.Row="3" Grid.Column="13" Background="#FF646464" Foreground="#FF0097FF" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="13" Click="ShowMLAT_Click" Cursor="Hand" />
         <CheckBox x:Name="CheckBoxshowadsb" VerticalAlignment="Center" TextBlock.TextAlignment="Left" Content="Show ADS-B" Grid.Row="4" Grid.Column="13" Background="#FF646464" Foreground="#FFFF9700" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="13" Click="ShowADSB_Click" Cursor="Hand" />
         <CheckBox x:Name="ShowOld" VerticalAlignment="Center" TextBlock.TextAlignment="Left" Grid.RowSpan="2"  Content="Show Old Positions" Grid.Row="5" Grid.Column="13" Background="#FF646464" Foreground="#FF938172" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="13" Click="ShowOldClick" Cursor="Hand" />
-        <Image Source="images/Export KML map.png" Grid.Column="15" Grid.Row="1" Grid.RowSpan="4" Height="45" VerticalAlignment="Bottom" MouseLeftButtonUp="ExportKMLImageClick" Cursor="Hand" />
-        <TextBlock Text="Export KML" Grid.Column="15" Grid.Row="5" Grid.RowSpan="2" FontFamily="Microsoft Sans Serif" FontSize="13" Foreground="#FFE4BB97" FontWeight="Bold" MouseLeftButtonUp="ExportKMLtextClick" Cursor="Hand"/>
+        <Image Source="images/Export KML map.png" Grid.Column="15" Grid.Row="1" Grid.RowSpan="4" Height="45" VerticalAlignment="Bottom" MouseLeftButtonUp="ExportKML_Click" Cursor="Hand" />
+        <TextBlock Text="Export KML" Grid.Column="15" Grid.Row="5" Grid.RowSpan="2" FontFamily="Microsoft Sans Serif" FontSize="13" Foreground="#FFE4BB97" FontWeight="Bold" MouseLeftButtonUp="ExportKML_Click" Cursor="Hand"/>
 
         <Border Grid.Column="20" Grid.ColumnSpan="13" Grid.Row="2" Grid.RowSpan="4" Margin="-5,0,-5,-5"  Background="#FF323232"/>
         <Image Source="images/Speedometer map.png" Height="90" Grid.Column="20" Grid.Row="3" Grid.RowSpan="3"/>

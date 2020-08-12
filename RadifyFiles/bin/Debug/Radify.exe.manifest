@@ -103,14 +103,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Radify.exe" size="1844696">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Radify.exe" size="1847256">
       <assemblyIdentity name="Radify" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>gSLj0L3GRupNF70yxg8cI/BT2/K0H10h0BE7o1ucryg=</dsig:DigestValue>
+        <dsig:DigestValue>Hd+7pDLnjKQwd7aV3AwjbsJDg/aW6jfMBM8YI4MwexQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
