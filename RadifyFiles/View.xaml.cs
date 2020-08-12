@@ -1338,7 +1338,7 @@ namespace PGTAWPF
                         }
                     }
                 }
-               File.WriteAllText(path, sb.ToString());
+                File.WriteAllText(path, sb.ToString());
                 Mouse.OverrideCursor = null;
             }
         }

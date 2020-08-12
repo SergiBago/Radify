@@ -105,7 +105,7 @@ namespace PGTAWPF
                 mark = NewMarker(Convert.ToDouble(message.Latitude_in_WGS_84), Convert.ToDouble(message.Longitude_in_WGS_84), message.Target_Identification, message.Time_Of_day, message.num, message.type, message.Target_Address, message.DetectionMode, message.CAT, message.SIC, message.SAC, message.Flight_level, message.Track_number, message.direction, message.refreshratio);
                 NoMarkerSelected(false);
                 time = message.Time_Of_day;
-                ComputeTime(time);
+                ComputeSimulationForTime(time);
                 starttime = time;
                 ShowStarthour();
                 markertype = 1;
@@ -1812,7 +1812,9 @@ namespace PGTAWPF
             SearchingFlight = flight;
         }
 
-
+        /// <summary>
+        /// Click on Export KML file 
+        /// </summary>
         private void ExportKML_Click(object sender, MouseButtonEventArgs e)
         {
             timer.Stop();
@@ -1822,7 +1824,9 @@ namespace PGTAWPF
         }
 
  
-
+        /// <summary>
+        /// Close time help panel
+        /// </summary>
         private void CloseHelpButton(object sender, MouseButtonEventArgs e)
         {
             CloseHelp();
@@ -1834,6 +1838,9 @@ namespace PGTAWPF
             Helpvisible = false;
         }
 
+        /// <summary>
+        /// Open time help panel
+        /// </summary>
         private void OpenHelp()
         {
             HelpRow.Height = new GridLength(1, GridUnitType.Auto);
@@ -1852,26 +1859,17 @@ namespace PGTAWPF
             }
         }
 
-        private void secondskey(object sender, System.Windows.Input.KeyEventArgs e)
+        /// <summary>
+        /// Key pressed event in time textboxes
+        /// </summary>
+        private void TimeBoxKey(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Enter) { TimeBoxEnter(); }
         }
 
-        private void minuteskey(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter) { TimeBoxEnter(); }
-        }
-
-        private void hourskey(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter) { TimeBoxEnter(); }
-        }
-
-        private void dayskey(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter) { TimeBoxEnter(); }
-        }
-
+        /// <summary>
+        /// Computes time parameters, and applies them to the simulation
+        /// </summary>
         private void TimeBoxEnter()
         {
             try
@@ -1885,24 +1883,24 @@ namespace PGTAWPF
                 int startmin = Convert.ToInt32(StartMinutesText.Text);
                 int starthours = Convert.ToInt32(StartHoursText.Text);
                 int startsec = Convert.ToInt32(StartSecondsText.Text);
-                if (finaldays > lastday || finaldays < 0 || finalmin > 60 || finalhours > 24 || finalsec > 60 || finalmin < 0 || finalhours <0 || finalsec < 0 || startdays > lastday || startdays < 0 || startmin > 60 || starthours > 24 || startsec > 60 || startmin < 0 || starthours < 0 || startsec < 0 ) { AlertVisible(true); ShowFinalhour(); }
+                if (finaldays > lastday || finaldays < 0 || finalmin > 60 || finalhours > 24 || finalsec > 60 || finalmin < 0 || finalhours < 0 || finalsec < 0 || startdays > lastday || startdays < 0 || startmin > 60 || starthours > 24 || startsec > 60 || startmin < 0 || starthours < 0 || startsec < 0) { AlertVisible(true); ShowFinalhour(); }
                 else
                 {
                     int previoustime = time;
                     int previousstarttime = starttime;
                     time = finaldays * 86400 + finalhours * 3600 + finalmin * 60 + finalsec;
-                    int newstarttime= startdays * 86400 + starthours * 3600 + startmin * 60 + startsec;
+                    int newstarttime = startdays * 86400 + starthours * 3600 + startmin * 60 + startsec;
                     if (time != previoustime)
                     {
                         Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
-                        ComputeTime(time);
+                        ComputeSimulationForTime(time);
                         ShowFinalhour();
                         starttime = time;
                         ShowStarthour();
                         ShowMarkersOnMap();
                         Mouse.OverrideCursor = null;
                     }
-                    else if (time==previoustime && newstarttime!=starttime)
+                    else if (time == previoustime && newstarttime != starttime)
                     {
                         if (newstarttime <= previoustime)
                         {
@@ -1922,10 +1920,14 @@ namespace PGTAWPF
                 AlertVisible(true);
                 ShowFinalhour();
                 Mouse.OverrideCursor = null;
-            }
+            }            
         }
 
-        private void ComputeTime(int time)
+        /// <summary>
+        /// Computes the messages of the simulation in a given time. 
+        /// </summary>
+        /// <param name="time"></param>
+        private void ComputeSimulationForTime(int time)
         {
             bool first_found = false;
             int s = 0;

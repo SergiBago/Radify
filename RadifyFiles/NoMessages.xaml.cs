@@ -38,6 +38,11 @@ namespace PGTAWPF
             this.Form = form;
         }
 
+        /// <summary>
+        /// Depending on the selected tab we customize this page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NoMessages_load(object sender, RoutedEventArgs e)
         {
             if (type==1)
