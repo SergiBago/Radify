@@ -8,13 +8,64 @@
       d:DesignHeight="450" d:DesignWidth="960"
       
       Title="MapView">
+    <Page.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FF323232"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF323232"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FF323232"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF323232"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
     <Grid Background="#FF464646" Loaded="MapForm_load"  >
-        <!--<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <Canvas Width="400" Height="400">
-                <Button Canvas.Left="300">Left 300</Button>
-                <Button Canvas.Top="300">Top 300</Button>
-            </Canvas>
-        </ScrollViewer>-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="15"/>
             <ColumnDefinition Width="110"/>
@@ -96,7 +147,6 @@
         <CheckBox x:Name="ShowOld" VerticalAlignment="Center" TextBlock.TextAlignment="Left" Grid.RowSpan="2"  Content="Show Old Positions" Grid.Row="5" Grid.Column="13" Background="#FF646464" Foreground="#FF938172" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="13" Click="ShowOldClick" Cursor="Hand" />
         <Image Source="images/Export KML map.png" Grid.Column="15" Grid.Row="1" Grid.RowSpan="4" Height="45" VerticalAlignment="Bottom" MouseLeftButtonUp="ExportKML_Click" Cursor="Hand" />
         <TextBlock Text="Export KML" Grid.Column="15" Grid.Row="5" Grid.RowSpan="2" FontFamily="Microsoft Sans Serif" FontSize="13" Foreground="#FFE4BB97" FontWeight="Bold" MouseLeftButtonUp="ExportKML_Click" Cursor="Hand"/>
-
         <Border Grid.Column="20" Grid.ColumnSpan="13" Grid.Row="2" Grid.RowSpan="4" Margin="-5,0,-5,-5"  Background="#FF323232"/>
         <Image Source="images/Speedometer map.png" Height="90" Grid.Column="20" Grid.Row="3" Grid.RowSpan="3"/>
         <Border Grid.Column="22" Grid.ColumnSpan="11" Grid.Row="3" Grid.RowSpan="3" Background="#FF646464"/>
@@ -123,7 +173,6 @@
                     <Setter Property="FontSize" Value="13"/>
                     <Setter Property="BorderThickness" Value="0,0,0,0"/>
                     <Setter Property="BorderBrush" Value="#000000"/>
-                    <!--<Setter Property="HorizontalContentAlignment" Value="Stretch"/>-->
                     <Setter Property="TextBlock.TextAlignment" Value="Center" />
                 </Style>
             </DataGrid.CellStyle>
@@ -135,21 +184,18 @@
                     <Setter Property="BorderThickness" Value="15,5"/>
                     <Setter Property="FontFamily" Value="Microsoft Tai Le"/>
                     <Setter Property="FontSize" Value="15"/>
-                    <!--<Setter Property="Margin" Value="0,0"/>-->
                     <Setter Property="FontWeight" Value="Light"/>
                     <Setter Property="Height" Value="auto" />
                     <Setter Property="Width" Value="Auto"/>
-                    <!--<Setter Property="Margin" Value="15,5"/>-->
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                     <Setter Property="TextBlock.TextAlignment" Value="Center" />
                 </Style>
             </DataGrid.Resources>
         </DataGrid>
-        <!--<DataGrid Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="16"/>-->
         <CheckBox Grid.Row="10" Grid.Column="18" VerticalContentAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="1" Grid.RowSpan="3" x:Name="ShowFlightHistory" Foreground="#FFE4BB97" FontFamily="Microsoft Sans Serif" FontSize="15" FontWeight="Bold" Click="ShowVehicleHistoryClick" Cursor="Hand">
             <TextBlock Text="Show Vehicle History" TextWrapping="Wrap" FontSize="13" Cursor="Hand"/>
         </CheckBox>
-        <Button x:Name="AddLine" Grid.Column="20" HorizontalAlignment="Center" Width="70" Grid.Row="10" Grid.RowSpan="3" Grid.ColumnSpan="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFE4BB97" Click="AddLineClick" LostFocus="AddLineLostFocus">
+        <Button x:Name="AddLine" Grid.Column="20" HorizontalAlignment="Center" Cursor="Hand" Width="70" Grid.Row="10" Grid.RowSpan="3" Grid.ColumnSpan="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFE4BB97" Click="AddLineClick" LostFocus="AddLineLostFocus" Style="{DynamicResource ButtonStyle1}">
             <StackPanel Orientation="Vertical">
                 <Image Source="images/Mesure.png" Height="30" x:Name="AddLineImage" LostFocus="AddLineLostFocus" />
                 <TextBlock Text="Measure" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="13" />
@@ -160,33 +206,29 @@
         <Image Source="images/ShowOnList Map.png" Grid.Column="29" Grid.ColumnSpan="3" Grid.RowSpan="2" Grid.Row="10" Height="27" Margin="0,0,0,0" MouseLeftButtonUp="ShowOnList_Click" Cursor="Hand"/>
         <TextBlock Text="Show On List" Grid.Column="29" HorizontalAlignment="Center" Grid.RowSpan="3" Grid.ColumnSpan="3" Grid.Row="10" VerticalAlignment="Bottom"  Margin="0,0,0,5" FontFamily="Microsoft Sans Serif" FontSize="13" FontWeight="Bold" Foreground="#FFE4BB97" MouseLeftButtonUp="ShowOnList_Click" Cursor="Hand"/>
         <gmaps:GMapControl x:Name="gMapControl1" Loaded="mapView_Loaded" Grid.Column="0" Grid.ColumnSpan="34" Grid.Row="13" Grid.RowSpan="3" OnMapDrag="DragMapEvent" MouseLeftButtonUp="mapclick" />
-        <Button x:Name="ChangeView" Grid.Column="31" Grid.Row="14" Grid.ColumnSpan="1" Margin="-20, 0,-10,0" Background="#FF323232" FontFamily="Microsoft Sans Serif" Click="ChangeView_click" Cursor="Hand" >
+        <Button x:Name="ChangeView" Style="{DynamicResource ButtonStyle1}" Grid.Column="31" Grid.Row="14" Grid.ColumnSpan="1" Margin="-20, 0,-10,0" Background="#FF323232" FontFamily="Microsoft Sans Serif" Click="ChangeView_click" Cursor="Hand" >
             <StackPanel>
                 <Image x:Name="ChangeviewImage" Source="images/Satelite View Map.png" Height="70" Margin="-3,-26,0,0"/>
                 <TextBlock x:Name="Viewbuttontext" VerticalAlignment="Bottom" Margin="0,-11,0,0" HorizontalAlignment="Center" TextAlignment="Center" Foreground="#FFE4BB97" TextWrapping="Wrap" > Satelite View</TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="ViewCCAA" Grid.Column="27" Grid.Row="14" Grid.ColumnSpan="1" Margin="-10, 0,-20,0" Background="#FF323232" FontFamily="Microsoft Sans Serif" Click="ViewCat_Click" Cursor="Hand" >
+        <Button x:Name="ViewCCAA" Style="{DynamicResource ButtonStyle1}" Grid.Column="27" Grid.Row="14" Grid.ColumnSpan="1" Margin="-10, 0,-20,0" Background="#FF323232" FontFamily="Microsoft Sans Serif" Click="ViewCat_Click" Cursor="Hand" >
             <StackPanel>
                 <Image Source="images/CenterMap map.png" Height="70" Margin="-3,-15,0,0"/>
                 <TextBlock VerticalAlignment="Bottom" x:Name="ViewCCAAName"  Margin="0,-11,0,0" HorizontalAlignment="Center" TextAlignment="Center" Foreground="#FFE4BB97" TextWrapping="Wrap" > View Spain</TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="ViewCity" Grid.Column="23" Grid.Row="14" Grid.ColumnSpan="1" Margin="0, 0,-30,0" Background="#FF323232" FontFamily="Microsoft Sans Serif" Click="ViewBcn_Click" Cursor="Hand" >
+        <Button x:Name="ViewCity" Style="{DynamicResource ButtonStyle1}" Grid.Column="23" Grid.Row="14" Grid.ColumnSpan="1" Margin="0, 0,-30,0" Background="#FF323232" FontFamily="Microsoft Sans Serif" Click="ViewBcn_Click" Cursor="Hand" >
             <StackPanel>
                 <Image Source="images/CenterMap map.png" Height="70" Margin="-3,-15,0,0"/>
                 <TextBlock VerticalAlignment="Bottom" x:Name="ViewCityName" Margin="0,-11,0,0" HorizontalAlignment="Center" TextAlignment="Center" Foreground="#FFE4BB97" TextWrapping="Wrap" > View BCN</TextBlock>
             </StackPanel>
         </Button>
-        <Button x:Name="ViewAirport" Grid.Column="21" Grid.Row="14" Grid.ColumnSpan="1" Margin="-70, 0,5,0" Background="#FF323232" FontFamily="Microsoft Sans Serif" Click="ViewLEBL_Click" Foreground="#FF464646" Cursor="Hand" >
+        <Button x:Name="ViewAirport" Style="{DynamicResource ButtonStyle1}" Grid.Column="21" Grid.Row="14" Grid.ColumnSpan="1" Margin="-70, 0,5,0" Background="#FF323232" FontFamily="Microsoft Sans Serif" Click="ViewLEBL_Click" Foreground="#FF464646" Cursor="Hand" >
             <StackPanel>
                 <Image Source="images/CenterMap map.png" Height="70" Margin="-3,-15,0,0"/>
                 <TextBlock VerticalAlignment="Bottom" x:Name="ViewAirportName" Margin="0,-11,0,0" HorizontalAlignment="Center" TextAlignment="Center" Foreground="#FFE4BB97" TextWrapping="Wrap" > View LEBL</TextBlock>
             </StackPanel>
         </Button>
-        <!--<Button x:Name="ViewLEBL" Grid.Column="27" Grid.Row="13" />
-        <Button x:Name="ViewBCN" Grid.Column="25" Grid.Row="13" />
-        <Button x:Name="ViewCAT" Grid.Column="23" Grid.Row="13" />-->
     </Grid>
-    <!--</ScrollViewer>-->
 </Page>

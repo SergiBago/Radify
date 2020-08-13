@@ -35,9 +35,6 @@ namespace PGTAWPF
         string FileName;
         StringBuilder KMLbuilder = new StringBuilder();
         List<CATALL> List = new List<CATALL>();
-        //List<CustomActualGmapMarker> ActualMarkers = new List<CustomActualGmapMarker>();
-        //List<CustomOldGmapMarker> OldMarkers = new List<CustomOldGmapMarker>();
-        //List<CustomOldGmapMarker> ListFlight = new List<CustomOldGmapMarker>();
         List<Trajectories> SMRTrajectories = new List<Trajectories>();
         List<Trajectories> MLATTrajectories = new List<Trajectories>();
         List<Trajectories> ADSBTrajectories = new List<Trajectories>();

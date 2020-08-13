@@ -32,16 +32,16 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
-        <Border x:Name="TopBar" Grid.Column="0" Grid.ColumnSpan="43" Grid.Row="0" Background="#FF282828" MouseLeftButtonDown="MouseLeftButtonDown" />
+        <Border x:Name="TopBar" Grid.Column="0" Grid.ColumnSpan="43" Grid.Row="0" Background="#FF282828" MouseLeftButtonDown="TopBarMouseLeftButtonDown" />
         <Image Source="images/Parameters.png" Grid.Column="2" Margin="-185,0,0,0" Grid.Row="0" Grid.ColumnSpan="9" Height="30"/>
         <Image Source="images/Close.png" Grid.Column="3" Grid.Row="0" Height="20" Cursor="Hand" MouseLeftButtonUp="Close_click"/>
         <TextBlock Text="Load Categories"  Margin="25,0,0,0" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="9" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFB3BEA9" FontFamily="Microsoft Sans Serif" FontSize="24"/>
         <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="14" Grid.ColumnSpan="3" Background="#FF464646"/>
         <TextBlock Text="Which categories do you want to load?" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Foreground="#FFB3BEA9" FontFamily="Microsoft Sans Serif" FontSize="18" TextDecorations="{x:Null}"/>
-        <CheckBox Content="Load All" VerticalAlignment="Center" x:Name="CheckBoxAll" Grid.Column="2"   Grid.Row="4" Margin="60,0,0,0" BorderBrush="Black" Foreground="#FFB3BEA9" Background="#FF464646" FontFamily="Microsoft Sans Serif" FontSize="16" Click="LoadAll"/>
-        <CheckBox Content="Load CAT 10" VerticalAlignment="Center" x:Name="CheckBoxCAT10" Grid.Column="2" Margin="60,0,0,0" Grid.Row="6" BorderBrush="Black" Foreground="#FFB3BEA9" Background="#FF464646" FontFamily="Microsoft Sans Serif" FontSize="16" Click="LoadCAT10"/>
-        <CheckBox Content="Load CAT 21 v. 0.23/26" VerticalAlignment="Center" x:Name="CheckBoxCAT21v23" Grid.Column="2" Margin="60,0,0,0"  Grid.Row="8" BorderBrush="Black" Foreground="#FFB3BEA9" Background="#FF464646" FontFamily="Microsoft Sans Serif" FontSize="16" Click="LoadCAT21v23"/>
-        <CheckBox Content="Load CAT 21 v 2.1" VerticalAlignment="Center" x:Name="CheckBoxCAT21v21" Margin="60,0,0,0" Grid.Column="2"   Grid.Row="10" BorderBrush="Black" Foreground="#FFB3BEA9" Background="#FF464646" FontFamily="Microsoft Sans Serif" FontSize="16" Click="LoadCAT21v21"/>
+        <CheckBox Content="Load All" VerticalAlignment="Center" x:Name="CheckBoxAll" Grid.Column="2"   Grid.Row="4" Margin="60,0,0,0" BorderBrush="Black" Foreground="#FFB3BEA9" Background="#FF464646" FontFamily="Microsoft Sans Serif" FontSize="16" Click="LoadAllCheckBoxClick"/>
+        <CheckBox Content="Load CAT 10" VerticalAlignment="Center" x:Name="CheckBoxCAT10" Grid.Column="2" Margin="60,0,0,0" Grid.Row="6" BorderBrush="Black" Foreground="#FFB3BEA9" Background="#FF464646" FontFamily="Microsoft Sans Serif" FontSize="16" Click="LoadCAT10CheckBoxClick"/>
+        <CheckBox Content="Load CAT 21 v. 0.23/26" VerticalAlignment="Center" x:Name="CheckBoxCAT21v23" Grid.Column="2" Margin="60,0,0,0"  Grid.Row="8" BorderBrush="Black" Foreground="#FFB3BEA9" Background="#FF464646" FontFamily="Microsoft Sans Serif" FontSize="16" Click="LoadCAT21v23CheckBoxClick"/>
+        <CheckBox Content="Load CAT 21 v 2.1" VerticalAlignment="Center" x:Name="CheckBoxCAT21v21" Margin="60,0,0,0" Grid.Column="2"   Grid.Row="10" BorderBrush="Black" Foreground="#FFB3BEA9" Background="#FF464646" FontFamily="Microsoft Sans Serif" FontSize="16" Click="LoadCAT21v21CheckBoxClick"/>
         <Button x:Name="ExportClick" Grid.Column="1" Grid.ColumnSpan="11" Width="100" Grid.Row="12" Background="#FF464646" Height="30" VerticalAlignment="Center" BorderBrush="#FFB3BEA9" Foreground="#FFB3BEA9" Click="LoadClick" Cursor="Hand">
             <StackPanel Orientation="Horizontal">
                 <Image Source="images/Upload File.png" Height="25" />

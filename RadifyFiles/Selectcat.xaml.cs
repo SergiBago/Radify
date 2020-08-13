@@ -31,11 +31,13 @@ namespace PGTA_WPF
             CheckBoxCAT10.IsChecked = true;
             CheckBoxCAT21v21.IsChecked = true;
             CheckBoxCAT21v23.IsChecked = true;
-
         }
 
+        /// <summary>
+        /// When clicking in load all, if checkbox load all is checked all others must be checked. If load all checkbox is unchecked others must be unchecked
+        /// </summary>
         LoadFiles form;
-        private void LoadAll(object sender, RoutedEventArgs e)
+        private void LoadAllCheckBoxClick(object sender, RoutedEventArgs e)
         {
             if (CheckBoxAll.IsChecked == true)
             {
@@ -51,29 +53,51 @@ namespace PGTA_WPF
             }
         }
 
-        private void LoadCAT10(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// If Load cat 10 is unchecked load all must be unchecked too. 
+        /// </summary>
+        private void LoadCAT10CheckBoxClick(object sender, RoutedEventArgs e)
         {
-            if (CheckBoxCAT10.IsChecked == false) { CheckBoxAll.IsChecked = false; }
+            if (CheckBoxCAT10.IsChecked == false) {  
+                CheckBoxAll.IsChecked = false;
+            }
         }
 
-        private void LoadCAT21v23(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// If Load cat 21 v. 0.23 is unchecked load all must be unchecked too. 
+        /// </summary>
+        private void LoadCAT21v23CheckBoxClick(object sender, RoutedEventArgs e)
         {
-            if (CheckBoxCAT21v23.IsChecked == false) { CheckBoxAll.IsChecked = false; }
+            if (CheckBoxCAT21v23.IsChecked == false) { 
+                CheckBoxAll.IsChecked = false;
+            }
         }
 
-        private void LoadCAT21v21(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// If Load cat 21 v. 2.1 is unchecked load all must be unchecked too. 
+        /// </summary>
+        private void LoadCAT21v21CheckBoxClick(object sender, RoutedEventArgs e)
         {
             if (CheckBoxCAT21v21.IsChecked == false) { CheckBoxAll.IsChecked = false; }
         }
 
-
+        /// <summary>
+        /// Clicking on load button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoadClick(object sender, RoutedEventArgs e)
         {
             AlertVisible(false);
-            if (CheckBoxCAT10.IsChecked == false && CheckBoxCAT21v21.IsChecked == false && CheckBoxCAT21v23.IsChecked == false) { AlertVisible(true); }
+            if (CheckBoxCAT10.IsChecked == false && CheckBoxCAT21v21.IsChecked == false && CheckBoxCAT21v23.IsChecked == false) { //If all are unchecked throw an alert
+                AlertVisible(true); 
+            }
             else
             {
-                List<bool> selcats = new List<bool>();
+                /*We will create a list of booleans, where each boolean indicates
+                 * whether or not that category should be loaded. The first position 
+                 * corresponds to cat10, the second to cat 21 v. 0.23 and the third to cat 21 v. 2.1*/
+                List<bool> selcats = new List<bool>(); 
                 if (CheckBoxCAT10.IsChecked == true) { selcats.Add(true); }
                 else { selcats.Add(false); }
                 if (CheckBoxCAT21v23.IsChecked == true) { selcats.Add(true); }
@@ -85,6 +109,9 @@ namespace PGTA_WPF
             }
         }
 
+        /// <summary>
+        /// Shows or hides the alert message
+        /// </summary>
         private void AlertVisible(bool i)
         {
             if (i == true)
@@ -104,7 +131,10 @@ namespace PGTA_WPF
             this.form = form;
         }
 
-        private void MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// Drags the window on click and drag in the top bar
+        /// </summary>
+        private void TopBarMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonDown(e);
             this.DragMove();

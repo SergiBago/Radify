@@ -262,12 +262,19 @@ namespace PGTAWPF
             }
         }
 
-
+        /// <summary>
+        /// Gets if a duplicated file must be loaded again
+        /// </summary>
+        /// <param name="i"> Inidcates if must be or not loaded. 0= load, 1= not load</param>
         public void GetDuplicated(int i)
         {
             this.duplicated = i;
         }
 
+        /// <summary>
+        /// Gets the days parameter of a file
+        /// </summary>
+        /// <param name="time"></param>
         public void GetParameters(int time)
         {
             this.seconds = time;

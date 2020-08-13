@@ -82,6 +82,10 @@ namespace PGTA_WPF
             MarkerInfoView.UpdateLayout();
         }
 
+        /// <summary>
+        /// Clicking on every element changes the help label content, to show the help of every element
+        /// </summary>
+
         private void ChangeViewClick(object sender, RoutedEventArgs e)
         {
             ExplanationLabel.Text = "CHANGE MAP STYLE: With this button you can choose the map style that you like the most.";

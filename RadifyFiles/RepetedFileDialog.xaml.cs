@@ -33,13 +33,19 @@ namespace PGTAWPF
             this.form = form;
         }
 
-
+        /// <summary>
+        /// Cancel button click. It indicates to the load page that the file should not be loaded and closes this window
+        /// </summary>
         private void Cancle_click(object sender, RoutedEventArgs e)
         {
             form.GetDuplicated(1);
             this.Close();
         }
 
+
+        /// <summary>
+        /// Load button click. It indicates to the load page that the file should be loaded and closes this window
+        /// </summary>
         private void Load_Clicl(object sender, RoutedEventArgs e)
         {
 
@@ -47,6 +53,10 @@ namespace PGTAWPF
             this.Close();
         }
 
+
+        /// <summary>
+        /// close button click. It indicates to the load page that the file should not be loaded and closes this window
+        /// </summary>
         private void Close_Click(object sender, MouseButtonEventArgs e)
         {
 
@@ -55,7 +65,9 @@ namespace PGTAWPF
         }
 
 
-
+        /// <summary>
+        /// Drags the window on click and drag in the top bar
+        /// </summary>
         private void MouseLeftButtonDownClick(object sender, MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonDown(e);

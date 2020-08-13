@@ -170,7 +170,7 @@ namespace MultiCAT6.Utils
                 else
                     height = 0;
             }
-            catch (Exception e)
+            catch 
             {
                 //Program.logger.Log(NSpring.Logging.Level.Exception, "expecting line(" + line + ") to be accomply with the following regex:" + Environment.NewLine +
                 //    pattern + Environment.NewLine +

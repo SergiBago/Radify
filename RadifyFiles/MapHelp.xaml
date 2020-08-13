@@ -78,13 +78,6 @@
         <TextBlock Grid.Column="4"  Margin="5,0" VerticalAlignment="Center" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="7" Text="01:08:56:34"  HorizontalAlignment="Left" Foreground="#FFD69E6B" FontFamily="Microsoft Sans Serif" FontSize="20" Cursor="Hand" MouseLeftButtonUp="TimeClick"/>
         <TextBlock Grid.Column="4"  Margin="5,0" VerticalAlignment="Center" Grid.Row="6" Grid.RowSpan="3" Grid.ColumnSpan="7" Text="01:08:56:34"  HorizontalAlignment="Left" Foreground="#FFD69E6B" FontFamily="Microsoft Sans Serif" FontSize="20" Cursor="Hand" MouseLeftButtonUp="TimeClick"/>
 
-        <!--<TextBox x:Name="DayText" Margin="0,0,-2,0" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="4" Grid.Column="3" Grid.RowSpan="4" Text="00" Background="#FF464646" BorderBrush="#FF464646" Foreground="#FFE4BB97" FontFamily="Microsoft Sans Serif" FontSize="28" SelectionBrush="#FF464646" />
-        <TextBlock Grid.Row="4" Grid.Column="4" x:Name="doubledotlabel" Grid.RowSpan="4" Text=":"  VerticalAlignment="Center" Background="#FF464646" Foreground="#FFE4BB97" FontFamily="Microsoft Sans Serif" FontSize="28"/>
-        <TextBlock Grid.Row="4" Grid.Column="6" Grid.RowSpan="4" Text=":"  VerticalAlignment="Center" Background="#FF464646"  Foreground="#FFE4BB97" FontFamily="Microsoft Sans Serif" FontSize="28"/>
-        <TextBox x:Name="HoursText" VerticalAlignment="Center"  Grid.Row="4" Grid.Column="5" Grid.RowSpan="4" Text="00" Background="#FF464646" BorderBrush="#FF464646" Foreground="#FFE4BB97" FontFamily="Microsoft Sans Serif" FontSize="28" SelectionBrush="#FF464646" />
-        <TextBox x:Name="MinutesText" VerticalAlignment="Center"  Grid.Row="4" Grid.Column="7" Grid.RowSpan="4" Text="00" Background="#FF464646" BorderBrush="#FF464646" Foreground="#FFE4BB97" FontFamily="Microsoft Sans Serif" FontSize="28" SelectionBrush="#FF464646" />
-        <TextBlock Grid.Row="4" Grid.Column="8" Grid.RowSpan="4" Text=":"  VerticalAlignment="Center" Background="#FF464646"  Foreground="#FFE4BB97" FontFamily="Microsoft Sans Serif" FontSize="28"/>-->
-        <!--<TextBox x:Name="SecondsText" VerticalAlignment="Center"  Grid.Row="4" Grid.Column="9" Grid.RowSpan="4" Text="00" Background="#FF464646" BorderBrush="#FF464646" Foreground="#FFE4BB97" FontFamily="Microsoft Sans Serif" FontSize="28" SelectionBrush="#FF464646" />-->
         <Image x:Name="Play" Visibility="Visible" Source="images/Play help.png" VerticalAlignment="Center" Grid.Row="4" Grid.RowSpan="4" Grid.Column="11" Cursor="Hand" MouseLeftButtonUp="PlayClick"/>
         <Image x:Name="PauseBut" Source="images/Pause Map.png" Visibility="Hidden" VerticalAlignment="Center" Grid.Row="4" Grid.RowSpan="4" Grid.Column="11" Height="60" />
         <Image x:Name="Restart" Source="images/Restart Help.png" VerticalAlignment="Center" Grid.Row="4" Grid.RowSpan="4" Grid.Column="13"  Cursor="Hand" MouseLeftButtonUp="RestartClick" />
@@ -105,36 +98,35 @@
         <Border Grid.Column="2" Grid.Row="10" Grid.ColumnSpan="33" />
         <TextBlock Text="No Marker Selected. Try Clicking one!" Margin="0,10" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="29" Foreground="#FFE4BB97" FontFamily="Microsoft Sans Serif" FontSize="20" FontWeight="Bold" />
             <Border Grid.Column="2" Grid.Row="10" Grid.ColumnSpan="33" Grid.RowSpan="3" Background="#FF323232"/>
-            <DataGrid  Grid.Column="2" Grid.Row="10" Grid.RowSpan="3" Grid.ColumnSpan="16" x:Name="MarkerInfoView" GridLinesVisibility="None"  Background="#FF464646" FontFamily="Microsoft Tai Le" FontSize="14" Cursor="Hand" HeadersVisibility="Column"   BorderBrush="{x:Null}" Foreground="#FFFAF8D4" Loaded="DatatableLoaded" MouseLeftButtonUp="DataGridClick" GotFocus="DataGridClick" Sorting="DataGridClick" >
-                <DataGrid.CellStyle>
-                    <Style TargetType="DataGridCell" >
-                        <Setter Property="Foreground" Value="#faf8d4"/>
-                        <Setter Property="Background" Value="#404040"/>
-                        <Setter Property="VerticalContentAlignment" Value="Center"/>
-                        <Setter Property="FontFamily" Value="Microsoft Tai Le"/>
-                        <Setter Property="FontSize" Value="13"/>
-                        <Setter Property="BorderThickness" Value="0,0,0,0"/>
+        <DataGrid  Grid.Column="2" Grid.Row="10" Grid.RowSpan="3" Grid.ColumnSpan="16" x:Name="MarkerInfoView" GridLinesVisibility="None"  Background="#FF464646" FontFamily="Microsoft Tai Le" FontSize="14" Cursor="Hand" HeadersVisibility="Column"   BorderBrush="{x:Null}" Foreground="#FFFAF8D4" Loaded="DatatableLoaded" MouseLeftButtonUp="DataGridClick" GotFocus="DataGridClick" Sorting="DataGridClick" >
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell" >
+                    <Setter Property="Foreground" Value="#faf8d4"/>
+                    <Setter Property="Background" Value="#404040"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="FontFamily" Value="Microsoft Tai Le"/>
+                    <Setter Property="FontSize" Value="13"/>
+                    <Setter Property="BorderThickness" Value="0,0,0,0"/>
                     <Setter Property="BorderBrush" Value="#000000"/>
                     <Setter Property="TextBlock.TextAlignment" Value="Center" />
-                    </Style>
-                </DataGrid.CellStyle>
-                <DataGrid.Resources>
-                    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}" >
-                        <Setter Property="Background" Value="#323232" />
-                        <Setter Property="Foreground" Value="#faf8d4" />
-                        <Setter Property="BorderBrush" Value="#323232"/>
-                        <Setter Property="BorderThickness" Value="15,5"/>
-                        <Setter Property="FontFamily" Value="Microsoft Tai Le"/>
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.Resources>
+                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}" >
+                    <Setter Property="Background" Value="#323232" />
+                    <Setter Property="Foreground" Value="#faf8d4" />
+                    <Setter Property="BorderBrush" Value="#323232"/>
+                    <Setter Property="BorderThickness" Value="15,5"/>
+                    <Setter Property="FontFamily" Value="Microsoft Tai Le"/>
                     <Setter Property="FontSize" Value="15"/>
                     <Setter Property="FontWeight" Value="Light"/>
-                        <Setter Property="Height" Value="auto" />
+                    <Setter Property="Height" Value="auto" />
                     <Setter Property="Width" Value="Auto"/>
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
-                    </Style>
-                </DataGrid.Resources>
-            </DataGrid>
-            <!--<DataGrid Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="16"/>-->
+                    <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                </Style>
+            </DataGrid.Resources>
+        </DataGrid>
         <CheckBox Grid.Row="10" Grid.Column="19" VerticalContentAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="1" Grid.RowSpan="3" x:Name="ShowFlightHistory" Foreground="#FFD69E6B" FontFamily="Microsoft Sans Serif" FontSize="15" FontWeight="Bold" Cursor="Hand" Click="ShowVeicleHistoryClick">
                 <TextBlock Text="Show Vehicle History" TextWrapping="Wrap" FontSize="13" Cursor="Hand"/>
             </CheckBox>

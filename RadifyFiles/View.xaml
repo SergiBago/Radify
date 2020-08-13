@@ -38,15 +38,14 @@
             <RowDefinition Height="3" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <!--<Border Background="#404040"/>-->
         <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="Selected Message:  " Foreground="#FFFAF8D4" FontFamily="Microsoft YaHei" FontSize="16" VerticalAlignment="Center" FontStyle="Italic"/>
         <TextBlock Grid.Row="2" Grid.Column="1"  Grid.RowSpan="2" Text="Target ID:" Foreground="#FFFAF8D4" FontFamily="Microsoft YaHei" FontSize="16" VerticalAlignment="Center" FontStyle="Italic"/>
         <TextBlock x:Name="SelectedNumber" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Text="Not Selected" Foreground="#FFFAF8D4" FontFamily="Microsoft YaHei" FontSize="16" VerticalAlignment="Center"/>
         <TextBlock x:Name="SelectedID" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" Text="Not Selected" Foreground="#FFFAF8D4" FontFamily="Microsoft YaHei" FontSize="16" VerticalAlignment="Center" Margin="-10,0,0,0 "/>
-        <Image Grid.Row="1" Grid.Column="5" Grid.RowSpan="2" Source="images/Show On Map.png" MouseLeftButtonUp="ShowOnMapPictureClick" Cursor="Hand" />
-        <Image Grid.Row="1" Grid.Column="7" Grid.RowSpan="2" Source="images/Export CSV.png" MouseLeftButtonUp="ExportCsvImageClick" Cursor="Hand"/>
-        <TextBlock Grid.Row="3" Grid.Column="5" Text="Show on Map" Foreground="#FFFAF8D2" FontFamily="Microsoft Sans Serif" MouseLeftButtonUp="ShowOnMapTextClick" Cursor=""/>
-        <TextBlock Grid.Row="3" Grid.Column="7" Text="Export CSV" FontFamily="Microsoft Sans Serif" Foreground="#FFFAF8CF" MouseLeftButtonUp="ExportCSVTextClick"/>
+        <Image Grid.Row="1" Grid.Column="5" Grid.RowSpan="2" Source="images/Show On Map.png" MouseLeftButtonUp="ShowOnMap_Click" Cursor="Hand" />
+        <Image Grid.Row="1" Grid.Column="7" Grid.RowSpan="2" Source="images/Export CSV.png" MouseLeftButtonUp="ExportCSV_Click" Cursor="Hand"/>
+        <TextBlock Grid.Row="3" Grid.Column="5" Text="Show on Map" Foreground="#FFFAF8D2" FontFamily="Microsoft Sans Serif" MouseLeftButtonUp="ShowOnMap_Click" Cursor=""/>
+        <TextBlock Grid.Row="3" Grid.Column="7" Text="Export CSV" FontFamily="Microsoft Sans Serif" Foreground="#FFFAF8CF" MouseLeftButtonUp="ExportCSV_Click"/>
         <Image Grid.Column="10" Grid.Row="1" Grid.RowSpan="2" Source="images/Info List.png" MouseLeftButtonUp="Help_Click" Cursor="Hand"/>
         <TextBox Grid.Column="12" Grid.Row="1" Grid.RowSpan="2" x:Name="SearchBox"  VerticalAlignment="Center" VerticalContentAlignment="Center" Text="Ex:VLG22PPY" Height="30" Background="#FF646464" BorderBrush="#FF1E1E1E" Margin="0,5,0,0" KeyDown="EnterPress" GotFocus="TextBox_GotFocus" LostFocus="SearchTextBox_LostFocus" Foreground="#FF969696" FontFamily="Microsoft Sans Serif" FontSize="22" Cursor="IBeam" IsEnabled="True"/>
         <Image Grid.Column="14" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Source="images/List Search.png" Margin="0,6,0,0" MouseLeftButtonUp="SearchButton_click" OpacityMask="#FF8F4545"/>
@@ -58,7 +57,7 @@
         <TextBlock x:Name="MessageNotValidLabel" TextAlignment="Right" Visibility="Visible" VerticalAlignment="Center" Grid.Column="3" Text="Selected message not valid" Grid.Row="5" Grid.ColumnSpan="6" TextWrapping="Wrap" FontFamily="Microsoft Sans Serif" FontSize="14" Foreground="#FFB40000"  Margin="0,0,20,0"/>
         <Image x:Name="AlertLabelIco" Source="images/Error.png" Grid.Column="2" HorizontalAlignment="Center" Margin="10,0" Grid.Row="5" Height="14" VerticalAlignment="Bottom" />
         <Image x:Name="CloseHelpIco" Source="images/CoseHelp.png" Grid.Column="15" Grid.Row="5" MouseLeftButtonUp="CloseHelp_click" Cursor="Hand"/>
-        <DataGrid Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" EnableRowVirtualization="True" VerticalGridLinesBrush="#404040" Grid.ColumnSpan="17" x:Name="DatagridView"  SelectionChanged="DataGricCell_Click" MouseLeftButtonUp="CellContent_Click" SelectionUnit="FullRow" Background="#FF464646" FontFamily="Microsoft Tai Le" FontSize="14" Cursor="Hand" HeadersVisibility="Column" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" BorderBrush="{x:Null}" Foreground="#FFFAF8D4">
+        <DataGrid Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" EnableRowVirtualization="True" VerticalGridLinesBrush="#404040" Grid.ColumnSpan="17" x:Name="DatagridView" MouseLeftButtonUp="CellContent_Click" SelectionUnit="FullRow" Background="#FF464646" FontFamily="Microsoft Tai Le" FontSize="14" Cursor="Hand" HeadersVisibility="Column" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" BorderBrush="{x:Null}" Foreground="#FFFAF8D4">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell" >
                     <Setter Property="Foreground" Value="#FFFAF8D4"/>
@@ -70,10 +69,7 @@
                     <Setter Property="BorderThickness" Value="5,2"/>
                     <Setter Property="BorderBrush" Value="#404040"/>
                     <Setter Property="FontWeight" Value="Light"/>
-                    <!--<Setter Property="BorderBrush" Value="#C8C8C8"/>-->
-                    <!--<Setter Property="HorizontalContentAlignment" Value="Stretch"/>-->
                     <Setter Property="TextBlock.TextAlignment" Value="Center" />
-                    <!--<Setter Property="VerticalAlignment" Value="Center"/>-->
                     <Setter Property="VerticalContentAlignment" Value="Center"/>
                     <Style.Triggers>
                         <Trigger Property="IsSelected" Value="True">
@@ -96,11 +92,9 @@
                     <Setter Property="FontFamily" Value="Microsoft Ya Hey"/>
                     <Setter Property="FontSize" Value="16"/>
                     <Setter Property="FontWeight" Value="Bold"/>
-                    <!--<Setter Property="Margin" Value="0,0"/>-->
                     <Setter Property="FontWeight" Value="Light"/>
                     <Setter Property="Height" Value="auto" />
                     <Setter Property="Width" Value="Auto"/>
-                    <!--<Setter Property="Margin" Value="15,5"/>-->
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                     <Setter Property="TextBlock.TextAlignment" Value="Center" />
                 </Style>

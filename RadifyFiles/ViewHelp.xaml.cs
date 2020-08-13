@@ -25,6 +25,10 @@ namespace PGTA_WPF
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Clicking on every element changes the help label content, to show the help of every element
+        /// </summary>
+
         private void ExportCSVClick(object sender, MouseButtonEventArgs e)
         {
             ExplanationLabel.Text = "EXPORT CSV: This button allows you to export the table to a csv file so that you can see the data from another program, such as Microsoft Excel or Libre Office.";

@@ -212,7 +212,9 @@ namespace PGTAWPF
                 {
                     viewCat10 = new View();
                     viewCat10.GetType(0);
-                    viewCat10.GetAll(listaCAT10, listaCAT21v21, listaCAT21v23, listaCATALL, TableCat10, TableCat21v23, TableCat21v21, TableAll, TableCat10.Copy());
+                    viewCat10.GetAll(listaCAT10,null, null, listaCATALL, TableCat10, null, null, null, TableCat10.Copy());
+
+                   // viewCat10.GetAll(listaCAT10, listaCAT21v21, listaCAT21v23, listaCATALL, TableCat10, TableCat21v23, TableCat21v21, TableAll, TableCat10.Copy());
                     viewCat10.GetForm(this);
                     CAT10started = true;
                 }
@@ -263,7 +265,7 @@ namespace PGTAWPF
                 {
                     viewCat23 = new View();
                     viewCat23.GetType(2);
-                    viewCat23.GetAll(listaCAT10, listaCAT21v21, listaCAT21v23, listaCATALL, TableCat10, TableCat21v23, TableCat21v21, TableAll, TableCat21v23.Copy());
+                    viewCat23.GetAll(null,null, listaCAT21v23, listaCATALL, null, TableCat21v23, null, null, TableCat21v23.Copy());
                     viewCat23.GetForm(this);
                     CAT21v23started = true;
                 }
@@ -316,7 +318,7 @@ namespace PGTAWPF
                 {
                     viewCat21 = new View();
                     viewCat21.GetType(1);
-                    viewCat21.GetAll(listaCAT10, listaCAT21v21, listaCAT21v23, listaCATALL, TableCat10, TableCat21v23, TableCat21v21, TableAll, TableCat21v21.Copy());
+                    viewCat21.GetAll(null, listaCAT21v21,null, listaCATALL, null, null, TableCat21v21, null, TableCat21v21.Copy());
                     viewCat21.GetForm(this);
                     CAT21v21started = true;
                 }
@@ -367,7 +369,7 @@ namespace PGTAWPF
                 {
                     viewAll = new View();
                     viewAll.GetType(3);
-                    viewAll.GetAll(listaCAT10, listaCAT21v21, listaCAT21v23, listaCATALL, TableCat10, TableCat21v23, TableCat21v21, TableAll, TableAll.Copy());
+                    viewAll.GetAll(listaCAT10, listaCAT21v21, listaCAT21v23, listaCATALL, null, null, null, TableAll, TableAll.Copy());
                     viewAll.GetForm(this);
                     CATAllstarted = true;
                 }
@@ -505,25 +507,25 @@ namespace PGTAWPF
                 activeSeecat10button();
                 viewCat10 = new View();
                 viewCat10.GetSearching(0, message);
-                viewCat10.GetAll(listaCAT10, listaCAT21v21, listaCAT21v23, listaCATALL, TableCat10, TableCat21v23, TableCat21v21, TableAll, TableCat10.Copy());
+                viewCat10.GetAll(listaCAT10, null, null, listaCATALL, TableCat10, null, null, null, TableCat10.Copy());
                 viewCat10.GetForm(this);
                 PanelChildForm.Navigate(viewCat10);
             }
             if (Cat == "21 v. 2.1")
             {
-                activeSeeCat21button();// ActiveButton(Cat21v21, RGBColors.color3, 2, this.Listview);
+                activeSeeCat21button();
                 viewCat21 = new View();
                 viewCat21.GetSearching(1, message);
-                viewCat21.GetAll(listaCAT10, listaCAT21v21, listaCAT21v23, listaCATALL, TableCat10, TableCat21v23, TableCat21v21, TableAll, TableCat21v21.Copy());
+                viewCat21.GetAll(null, listaCAT21v21, null, listaCATALL,null, null, TableCat21v21,null, TableCat21v21.Copy());
                 viewCat21.GetForm(this);
                 PanelChildForm.Navigate(viewCat21);
             }
             if (Cat == "21 v. 0.23" || Cat=="21 v. 0.26")
             {
-                activeSeecat23button(); //ActiveButton(Cat21v23, RGBColors.color3, 2, this.Listview);
+                activeSeecat23button(); 
                 viewCat23 = new View();
                 viewCat23.GetSearching(2, message);
-                viewCat23.GetAll(listaCAT10, listaCAT21v21, listaCAT21v23, listaCATALL, TableCat10, TableCat21v23, TableCat21v21, TableAll, TableCat21v23.Copy());
+                viewCat23.GetAll(null, null, listaCAT21v23, listaCATALL, null, TableCat21v23, null, null, TableCat21v23.Copy());
                 viewCat23.GetForm(this);
                 PanelChildForm.Navigate(viewCat23);
             }

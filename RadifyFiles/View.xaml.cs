@@ -41,17 +41,17 @@ namespace PGTAWPF
         CATALL SearchingMessage = new CATALL();
         bool searching = false;
         bool cell = false;
-        DispatcherTimer timer = new DispatcherTimer();
         bool started = false;
+
 
         public View()
         {
             InitializeComponent();
-            timer.Interval = TimeSpan.FromMilliseconds(3000);
-            timer.Tick += timer_Tick;
         }
 
-
+        /// <summary>
+        /// Get all data
+        /// </summary>
         public void GetAll(List<CAT10> list10, List<CAT21vs21> list21v21, List<CAT21vs23> list21v23, List<CATALL> listCATAll, DataTable tableCat10, DataTable tableCat21v23, DataTable tableCat21v21, DataTable tableCatAll, DataTable table)
         {
             this.listaCAT10 = list10;
@@ -66,6 +66,11 @@ namespace PGTAWPF
             this.TableAll = tableCatAll;
             started = false;
         }
+
+        /// <summary>
+        /// Gets data type (know if we are looking cat 10, 21 v2.1 21 v0.23 or all)
+        /// </summary>
+        /// <param name="i">int indicating which cat we are looking at (0=cat 10, 1=cat21v21, 2=cat21v23, 3=all)</param>
         public void GetType(int i)
         {
             this.type = i;
@@ -76,6 +81,11 @@ namespace PGTAWPF
             this.Form = Form;
         }
 
+        /// <summary>
+        /// Stablishes if we are looking for a message or not.
+        /// </summary>
+        /// <param name="i">int indicating which cat we are looking at (0=cat 10, 1=cat21v21, 2=cat21v23, 3=all)</param>
+        /// <param name="message">message we are looking for</param>
         public void GetSearching(int i, CATALL message)
         {
             this.type = i;
@@ -83,35 +93,47 @@ namespace PGTAWPF
             searching = true;
         }
 
+        /// <summary>
+        /// Page load
+        /// </summary>
         private void View_loaded(object sender, RoutedEventArgs e)
         {
-            if (started == false)
+            if (started == false) //If page is already started we can just show the page and avoid all this
             {
-                Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+                Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait; 
+
+                //Hides all alerts
                 Alertvisible(false);
                 AlertNoMessageSelected(false);
                 AlertMessageNotValid(false);
                 WaterMarkActive();
                 SeeHelp(false);
-                //DatagridView.Visible = true;
-                // Datatable.Columns.RemoveAt(1);
-                //DatagridView.Source = Datatable;
+
+                //Stablished the datagrid source
                 DatagridView.ItemsSource = Datatable.DefaultView;
                 DatagridView.DataContext = Datatable;
                 DatagridView.Items.Refresh();
+
+                //Adjusts all columns to content width
                 foreach (DataGridColumn col in DatagridView.Columns)
                 {
                     col.Width = new DataGridLength(1, DataGridLengthUnitType.Auto);
                 }
+
+
                 this.DatagridView.CanUserResizeColumns = false;
                 this.DatagridView.CanUserResizeRows = false;
                 DatagridView.IsReadOnly = true;
+
+                //If page openmed while searching a flight from a map we search for that flight
                 if (searching == true)
                 {
                     Searchflightfrommap(SearchingMessage);
                 }
 
-
+                /*Calculate the width that the table should have and if it is smaller than the width 
+                 * of the page it establishes it. In this way the table has the necessary width,
+                 * and not the entire page, which would leave very large cells */
                 double tableWidth = 0;
                 for (int i = 0; i < DatagridView.Columns.Count(); i++)
                 {
@@ -130,30 +152,27 @@ namespace PGTAWPF
             Mouse.OverrideCursor = null;
         }
 
-        private void View_Shown(object sender, EventArgs e)
-        {
-            if (searching == true)
-            {
-                Searchflightfrommap(SearchingMessage);
-            }
-        }
-
-
+        /// <summary>
+        /// When textbox gots focus we disables the textbox watermark
+        /// </summary>
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             WaterMarkDisabled();
         }
 
+        /// <summary>
+        /// When textbox losts focus we activate the watermark
+        /// </summary>
         private void SearchTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            search = SearchBox.Text;
+            search = SearchBox.Text; // We save the text entered in the textbox by the user, since the watermark will change it to another
             WaterMarkActive();
         }
 
-
+        string search;
         private void WaterMarkActive()
         {
-            search = SearchBox.Text;
+            search = SearchBox.Text; // We save the text entered in the textbox by the user, since the watermark will change it to another
             this.SearchBox.Text = "Ex: VLG22PPY";
             this.SearchBox.Foreground =  new SolidColorBrush(Color.FromRgb(60, 60, 60));
             Alertvisible(false);
@@ -167,7 +186,9 @@ namespace PGTAWPF
             this.SearchBox.Foreground = new SolidColorBrush(Color.FromRgb(10,10,10));
         }
 
-        string search;
+        /// <summary>
+        /// When pressing a key we check if it's enter key. If its, we search
+        /// </summary>
         private void EnterPress(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -176,8 +197,9 @@ namespace PGTAWPF
             }
         }
 
-
-
+        /// <summary>
+        /// When clicking in search button we call the search funcion
+        /// </summary>
         private void SearchButton_click(object sender, MouseButtonEventArgs e)
         {
             search = SearchBox.Text;
@@ -185,6 +207,10 @@ namespace PGTAWPF
         }
 
 
+        /// <summary>
+        /// Search for a message
+        /// </summary>
+        /// <param name="search"> parameter we are searching</param>
         private void Functionsearch(string search)
         {
             Alertvisible(false);
@@ -192,22 +218,28 @@ namespace PGTAWPF
             Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
             try
             {
+                int searchnum = Convert.ToInt32(search); //Try converting the search string to an int, if possible, we will probably be looking for a message number
                 for (int s = 0; s < DatagridView.Items.Count; s++)
                 {
-                    if (Convert.ToInt32(search) == Convert.ToInt32((DatagridView.Items[s] as DataRowView).Row.ItemArray[0]))
+                    if (searchnum == Convert.ToInt32((DatagridView.Items[s] as DataRowView).Row.ItemArray[0])) 
                     {
-                        //MessageBox.Show(Convert.ToString(s));
-                        int num = Convert.ToInt32((DatagridView.Items[s] as DataRowView).Row.ItemArray[0]);
-                        SortDataGrid(DatagridView, 0, ListSortDirection.Ascending);
-                        for (int i = 0; i < DatagridView.Items.Count; i++)
+                        SortDataGrid(DatagridView, 0, ListSortDirection.Ascending); //If found, we order the table for the number column
+                        for (int i = 0; i < DatagridView.Items.Count; i++) 
                         {
-                            if (Convert.ToInt32((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]) == num)
+                            if (Convert.ToInt32((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]) == searchnum)
                             {
+                                /*We deselect all the messages that may be selected, we select the message, 
+                                 * we change the text that indicates the number and ID of the message,
+                                 * we move the table so that the selected message is displayed first and
+                                 * we stop going through the table and search*/
                                 DatagridView.UnselectAll();
                                 DatagridView.SelectedItem = DatagridView.Items[i];
                                 SelectedNumber.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]);
                                 SelectedID.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[4]);
-                                DatagridView.ScrollIntoView(DatagridView.Items[DatagridView.Items.Count-1], DatagridView.Columns[0]);
+
+                                /*We move the table first to the last message and then to the one found because this way we make
+                                 * sure that the message we are looking for is displayed in the first position of the table, and not in the last.*/
+                                DatagridView.ScrollIntoView(DatagridView.Items[DatagridView.Items.Count-1], DatagridView.Columns[0]); 
                                 DatagridView.ScrollIntoView(DatagridView.Items[i], DatagridView.Columns[0]);
                                 i = DatagridView.Items.Count;
                                 s = DatagridView.Items.Count;
@@ -222,13 +254,13 @@ namespace PGTAWPF
             {
                 try
                 {
-                    if (search.Count() > 3 && search.Substring(0, 3).ToUpper() == "TR:")
+                    if (search.Count() > 3 && search.Substring(0, 3).ToUpper() == "TR:") //We check if we are looking for a track number
                     {
-                        if (type == 2) { Alertvisible(true); found = true; }
+                        if (type == 2) { Alertvisible(true); found = true; } //If we are in type 2 and searching for a track number we throw an alert, so type 2 messages doesn't have track number
                         else
                         {
-                            search = search.Substring(3, (search.Length - 3));
-                            for (int s = 0; s < DatagridView.Items.Count; s++)
+                            search = search.Substring(3, (search.Length - 3)); //If searching for a track number, we delete the "TR:" from the search string 
+                            for (int s = 0; s < DatagridView.Items.Count; s++) 
                             {
                                 try
                                 {
@@ -240,10 +272,18 @@ namespace PGTAWPF
                                         {
                                             if (Convert.ToInt32((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]) == num)
                                             {
+
+                                                /*We deselect all the messages that may be selected, we select the message, 
+                                                 * we change the text that indicates the number and ID of the message,
+                                                 * we move the table so that the selected message is displayed first and
+                                                 * we stop going through the table and search*/
                                                 DatagridView.UnselectAll();
                                                 DatagridView.SelectedItem = DatagridView.Items[i];
                                                 SelectedNumber.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]);
                                                 SelectedID.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[4]);
+
+                                                /*We move the table first to the last message and then to the one found because this way we make
+                                                 * sure that the message we are looking for is displayed in the first position of the table, and not in the last.*/
                                                 DatagridView.ScrollIntoView(DatagridView.Items[DatagridView.Items.Count - 1], DatagridView.Columns[0]);
                                                 DatagridView.ScrollIntoView(DatagridView.Items[i], DatagridView.Columns[0]);
 
@@ -259,32 +299,40 @@ namespace PGTAWPF
                             if (found == false) { Alertvisible(true); }
                         }
                     }
-                    else if (search.Count() >3 && search.Substring(0,3).ToUpper()=="TA:")
+                    else if (search.Count() >3 && search.Substring(0,3).ToUpper()=="TA:") // We check if we are looking for a target address
                     {
+                        /*Depending on which category we are in, we will have to search in one column or another*/
                         int col = 0;
                         if (type==0) { col = 17; }
                         else if (type==1) { col = 13; }
                         else if (type ==2) { col = 14; }
                         else { col = 6; }
-                        search = search.Substring(3, (search.Length - 3)).ToUpper();
-                      //  MessageBox.Show(Convert.ToString(search));
+
+                        search = search.Substring(3, (search.Length - 3)).ToUpper(); //If searching for a target address, we delete the "TA:" from the search string 
+
                         for (int s = 0; s < DatagridView.Items.Count; s++)
                         {
                             try
                             {
                                 if (search == Convert.ToString((DatagridView.Items[s] as DataRowView).Row.ItemArray[col]))
                                 {
-                                   // MessageBox.Show("found");
                                     int num = Convert.ToInt32((DatagridView.Items[s] as DataRowView).Row.ItemArray[0]);
                                     SortDataGrid(DatagridView, col, ListSortDirection.Descending);
                                     for (int i = 0; i < DatagridView.Items.Count; i++)
                                     {
                                         if (Convert.ToInt32((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]) == num)
                                         {
+                                            /*We deselect all the messages that may be selected, we select the message, 
+                                             * we change the text that indicates the number and ID of the message,
+                                             * we move the table so that the selected message is displayed first and
+                                             * we stop going through the table and search*/
                                             DatagridView.UnselectAll();
                                             DatagridView.SelectedItem = DatagridView.Items[i];
                                             SelectedNumber.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]);
                                             SelectedID.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[4]);
+
+                                            /*We move the table first to the last message and then to the one found because this way we make
+                                             * sure that the message we are looking for is displayed in the first position of the table, and not in the last.*/
                                             DatagridView.ScrollIntoView(DatagridView.Items[DatagridView.Items.Count - 1], DatagridView.Columns[0]);
                                             DatagridView.ScrollIntoView(DatagridView.Items[i], DatagridView.Columns[0]);
                                             i = DatagridView.Items.Count;
@@ -313,10 +361,17 @@ namespace PGTAWPF
                                     {
                                         if (Convert.ToInt32((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]) == num)
                                         {
+                                            /*We deselect all the messages that may be selected, we select the message, 
+                                             * we change the text that indicates the number and ID of the message,
+                                             * we move the table so that the selected message is displayed first and
+                                             * we stop going through the table and search*/
                                             DatagridView.UnselectAll();
                                             DatagridView.SelectedItem = DatagridView.Items[i];
                                             SelectedNumber.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]);
                                             SelectedID.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[4]);
+
+                                            /*We move the table first to the last message and then to the one found because this way we make
+                                             * sure that the message we are looking for is displayed in the first position of the table, and not in the last.*/
                                             DatagridView.ScrollIntoView(DatagridView.Items[DatagridView.Items.Count - 1], DatagridView.Columns[0]);
                                             DatagridView.ScrollIntoView(DatagridView.Items[i], DatagridView.Columns[0]);
                                             i = DatagridView.Items.Count;
@@ -328,18 +383,21 @@ namespace PGTAWPF
                             }
                             if (found == false) { Alertvisible(true); }
                         }
-                    }
-                    
+                    }                    
                 }
                 catch { Alertvisible(true); }
             }
             Mouse.OverrideCursor = null;
         }
 
+        /// <summary>
+        /// Function to search for a flight from the map
+        /// </summary>
+        /// <param name="message">message we are looking for</param>
         private void Searchflightfrommap(CATALL message)
         {
 
-            if (message.Target_Identification != null)
+            if (message.Target_Identification != null)  //If message target identification is not null, we search the message for target identification
             {
                 SortDataGrid(DatagridView,4 , ListSortDirection.Ascending);
                 DatagridView.UnselectAll();
@@ -347,9 +405,17 @@ namespace PGTAWPF
                 {
                     if (Convert.ToInt32((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]) == message.num)
                     {
+                        /*We deselect all the messages that may be selected, we select the message, 
+                         * we change the text that indicates the number and ID of the message,
+                         * we move the table so that the selected message is displayed first and
+                         * we stop going through the table and search*/
                         DatagridView.SelectedItem= DatagridView.Items[i];
                         SelectedNumber.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]);
                         SelectedID.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[4]);
+
+
+                        /*We move the table first to the last message and then to the one found because this way we make
+                         * sure that the message we are looking for is displayed in the first position of the table, and not in the last.*/
                         DatagridView.ScrollIntoView(DatagridView.Items[DatagridView.Items.Count - 1], DatagridView.Columns[0]);
                         DatagridView.ScrollIntoView(DatagridView.Items[i], DatagridView.Columns[0]);
                         i = DatagridView.Items.Count;
@@ -357,61 +423,38 @@ namespace PGTAWPF
                 }
 
             }
-            else if (message.Target_Address != null)
+            else if (message.Target_Address != null) //If target identification is null but target adress is no, we search the message for target address
             {
-                if (type == 0) //cat10
+
+                int col = 0;
+                if (type == 0) { col = 17; }
+                else if (type == 1) { col = 13; }
+                else if (type == 2) { col = 14; }
+                else { col = 6; }
+
+                SortDataGrid(DatagridView, col, ListSortDirection.Descending);
+                DatagridView.UnselectAll();
+                for (int i = 0; i < DatagridView.Items.Count; i++)
                 {
-                    SortDataGrid(DatagridView, 17, ListSortDirection.Descending);
-                    DatagridView.UnselectAll();
-                    for (int i = 0; i < DatagridView.Items.Count; i++)
+                    if (Convert.ToInt32((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]) == message.num)
                     {
-                        if (Convert.ToInt32((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]) == message.num)
-                        {
-                            DatagridView.SelectedItem = DatagridView.Items[i];
-                            SelectedNumber.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]);
-                            SelectedID.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[4]);
-                            DatagridView.ScrollIntoView(DatagridView.Items[DatagridView.Items.Count - 1], DatagridView.Columns[0]);
-                            DatagridView.ScrollIntoView(DatagridView.Items[i], DatagridView.Columns[0]);
-                            i = DatagridView.Items.Count;
-                        }
-                    }
-                }
-                if (type == 1) //cat21v21
-                {
-                    SortDataGrid(DatagridView, 13, ListSortDirection.Descending);
-                    DatagridView.UnselectAll();
-                    for (int i = 0; i < DatagridView.Items.Count; i++)
-                    {
-                        if (Convert.ToInt32((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]) == message.num)
-                        {
-                            DatagridView.SelectedItem = DatagridView.Items[i];
-                            SelectedNumber.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]);
-                            SelectedID.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[4]);
-                            DatagridView.ScrollIntoView(DatagridView.Items[DatagridView.Items.Count - 1], DatagridView.Columns[0]);
-                            DatagridView.ScrollIntoView(DatagridView.Items[i], DatagridView.Columns[0]);
-                            i = DatagridView.Items.Count;
-                        }
-                    }
-                }
-                else if (type == 2) //Cat21v23
-                {
-                    SortDataGrid(DatagridView, 14, ListSortDirection.Descending);
-                    DatagridView.UnselectAll();
-                    for (int i = 0; i < DatagridView.Items.Count; i++)
-                    {
-                        if (Convert.ToInt32((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]) == message.num)
-                        {
-                            DatagridView.SelectedItem = DatagridView.Items[i];
-                            SelectedNumber.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]);
-                            SelectedID.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[4]);
-                            DatagridView.ScrollIntoView(DatagridView.Items[DatagridView.Items.Count - 1], DatagridView.Columns[0]);
-                            DatagridView.ScrollIntoView(DatagridView.Items[i], DatagridView.Columns[0]);
-                            i = DatagridView.Items.Count;
-                        }
+                        /*We deselect all the messages that may be selected, we select the message, 
+                         * we change the text that indicates the number and ID of the message,
+                         * we move the table so that the selected message is displayed first and
+                         * we stop going through the table and search*/
+                        DatagridView.SelectedItem = DatagridView.Items[i];
+                        SelectedNumber.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]);
+                        SelectedID.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[4]);
+
+                        /*We move the table first to the last message and then to the one found because this way we make
+                         * sure that the message we are looking for is displayed in the first position of the table, and not in the last.*/
+                        DatagridView.ScrollIntoView(DatagridView.Items[DatagridView.Items.Count - 1], DatagridView.Columns[0]);
+                        DatagridView.ScrollIntoView(DatagridView.Items[i], DatagridView.Columns[0]);
+                        i = DatagridView.Items.Count;
                     }
                 }
             }
-            else if (message.Track_number != null)
+            else if (message.Track_number != null) //If target identification and target address are null but track number is no, we search the flight for track number
             {
                 if (type != 2)
                 {
@@ -421,9 +464,16 @@ namespace PGTAWPF
                     {
                         if (Convert.ToInt32((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]) == message.num)
                         {
+                            /*We deselect all the messages that may be selected, we select the message, 
+                             * we change the text that indicates the number and ID of the message,
+                             * we move the table so that the selected message is displayed first and
+                             * we stop going through the table and search*/
                             DatagridView.SelectedItem = DatagridView.Items[i];
                             SelectedNumber.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]);
                             SelectedID.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[4]);
+
+                            /*We move the table first to the last message and then to the one found because this way we make
+                             * sure that the message we are looking for is displayed in the first position of the table, and not in the last.*/
                             DatagridView.ScrollIntoView(DatagridView.Items[DatagridView.Items.Count - 1], DatagridView.Columns[0]);
                             DatagridView.ScrollIntoView(DatagridView.Items[i], DatagridView.Columns[0]);
                             i = DatagridView.Items.Count;
@@ -431,7 +481,7 @@ namespace PGTAWPF
                     }
                 }
             }
-            else
+            else //If target address, target identification and track number are null, we search the message for number
             {
                 SortDataGrid(DatagridView, 0, ListSortDirection.Descending);
                 DatagridView.UnselectAll();
@@ -439,9 +489,16 @@ namespace PGTAWPF
                 {
                     if (Convert.ToInt32((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]) == message.num)
                     {
+                        /*We deselect all the messages that may be selected, we select the message, 
+                         * we change the text that indicates the number and ID of the message,
+                         * we move the table so that the selected message is displayed first and
+                         * we stop going through the table and search*/
                         DatagridView.SelectedItem = DatagridView.Items[i];
                         SelectedNumber.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]);
                         SelectedID.Text = Convert.ToString((DatagridView.Items[i] as DataRowView).Row.ItemArray[4]);
+
+                        /*We move the table first to the last message and then to the one found because this way we make
+                         * sure that the message we are looking for is displayed in the first position of the table, and not in the last.*/
                         DatagridView.ScrollIntoView(DatagridView.Items[DatagridView.Items.Count - 1], DatagridView.Columns[0]);
                         DatagridView.ScrollIntoView(DatagridView.Items[i], DatagridView.Columns[0]);
                         i = DatagridView.Items.Count;
@@ -450,7 +507,12 @@ namespace PGTAWPF
             }
         }
 
-
+        /// <summary>
+        /// Sort de dataGrid
+        /// </summary>
+        /// <param name="dataGrid"> Datagrid to sort</param>
+        /// <param name="columnIndex">Index of the column we want to sort by</param>
+        /// <param name="sortDirection">direction of sorting</param>
         public void SortDataGrid(DataGrid dataGrid, int columnIndex , ListSortDirection sortDirection)
         {
             var column = dataGrid.Columns[columnIndex];
@@ -464,6 +526,7 @@ namespace PGTAWPF
             DatagridView.UpdateLayout();
         }
 
+
         private void Help_Click(object sender, MouseButtonEventArgs e)
         {
             SeeHelp(true);
@@ -474,11 +537,14 @@ namespace PGTAWPF
             SeeHelp(false);
         }
 
+        /// <summary>
+        /// Shows or hides the time help
+        /// </summary>
         private void SeeHelp(bool a)
         {
             if (a== true)
             {
-                HelpLabel.Text = "You can search by flight number or ID directly. If you want to search by the track number enter 'TR:' followed by the number. If you want to search by Target Adress enter 'T.A:' followed by the address.";
+                HelpLabel.Text = "You can search by flight number or ID directly. If you want to search by the track number enter 'TR:' followed by the number. If you want to search by Target Adress enter 'TA:' followed by the address.";
                 HelpLabelVisible = true;
                 HelpLabel.Visibility = Visibility.Visible;
                 MessageNotValidLabel.Visibility = Visibility.Hidden;
@@ -497,9 +563,13 @@ namespace PGTAWPF
             }
         }
 
+
         int Datarow;
         int Datacol;
         DataGridLength Columnwith;
+        /// <summary>
+        /// When clicking on a cell, if cell content is "Click to expand" expands the cell with the rest of the information. Also, if there was an extended cell, contracts it
+        /// </summary>
         private void CellContent_Click(object sender, MouseButtonEventArgs e)
         {
             try
@@ -509,75 +579,49 @@ namespace PGTAWPF
                 DataGridCellInfo selcell = DatagridView.CurrentCell;
                 int columnindex = selcell.Column.DisplayIndex;
                 int rowIndex = DatagridView.Items.IndexOf(selcell.Item);
-                DatagridView.Items.IndexOf(DatagridView.CurrentItem);
                 SelectedNumber.Text = Convert.ToString((DatagridView.Items[rowIndex] as DataRowView).Row.ItemArray[0]);
                 SelectedID.Text = Convert.ToString((DatagridView.Items[rowIndex] as DataRowView).Row.ItemArray[4]);
-                if (Convert.ToString((DatagridView.Items[rowIndex] as DataRowView).Row.ItemArray[columnindex]) == "Click to expand")
+
+                if (cell == true) //If there was an extended cell, changes it value to "Click to expand", and contracts it
                 {
-                    if (cell == true)
-                    {
-                        DataRowView rowView0 = (DatagridView.Items[Datarow] as DataRowView); //Get RowView
-                        rowView0.BeginEdit();
-                        rowView0[Datacol] = "Click to expand";
-                        rowView0.EndEdit();
-                        DatagridView.Columns[Datacol].Width = Columnwith;
-                    }
+                    cell = false;
+                    DataRowView rowView0 = (DatagridView.Items[Datarow] as DataRowView); 
+                    rowView0.BeginEdit();
+                    rowView0[Datacol] = "Click to expand";
+                    rowView0.EndEdit();
+                    DatagridView.Columns[Datacol].Width = Columnwith;
+                }
+                if (Convert.ToString((DatagridView.Items[rowIndex] as DataRowView).Row.ItemArray[columnindex]) == "Click to expand") //If selected cell value is "Click to expand" change it's value with all the data of that parameter, and expands the cell
+                {
                     Datacol = columnindex;
                     Datarow = rowIndex;
                     Columnwith =DatagridView.Columns[Datacol].Width.DisplayValue;
-                    string value = this.GetValues(columnindex, rowIndex);
-                    DataRowView rowView = (DatagridView.Items[Datarow] as DataRowView); //Get RowView
+                    string value = this.GetValues(columnindex, rowIndex); //Get all parameters value
+                    DataRowView rowView = (DatagridView.Items[Datarow] as DataRowView); 
                     rowView.BeginEdit();
                     rowView[Datacol] = value;
                     rowView.EndEdit();
-                    DatagridView.Columns[Datacol].Width = new DataGridLength(1, DataGridLengthUnitType.Auto);
                     cell = true;
                 }
-                else
-                {
-                    DatagridView.Columns[columnindex].Width = new DataGridLength(1.0, DataGridLengthUnitType.Auto);
-                    if (cell == true)
-                    {
-                        cell = false;
-                        DataRowView rowView0 = (DatagridView.Items[Datarow] as DataRowView); //Get RowView
-                        rowView0.BeginEdit();
-                        rowView0[Datacol] = "Click to expand";
-                        rowView0.EndEdit();
-                        DatagridView.Columns[Datacol].Width = Columnwith;
-                    }
-                }
+
+                DatagridView.Columns[columnindex].Width = new DataGridLength(1.0, DataGridLengthUnitType.Auto); //Resizes column to fit new content
                 DatagridView.UpdateLayout();
             }
             catch { }
         }
 
-        private void DataGricCell_Click(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
-
-
-        private void Returncellvalue(object sender, EventArgs e)
-        {
-            if (cell == true)
-            {
-                DataRowView rowView0 = (DatagridView.Items[Datarow] as DataRowView); //Get RowView
-                rowView0.BeginEdit();
-                rowView0[Datacol] = "Click to expand";
-                rowView0.EndEdit();
-                DatagridView.UpdateLayout();
-                DatagridView.Columns[Datacol].Width = Columnwith;
-
-            }
-        }
-
+        /// <summary>
+        /// Given the row and the column of the selected cell, returns an string with the full parameters
+        /// </summary>
+        /// <param name="i">Column index</param>
+        /// <param name="e">row index</param>
+        /// <returns>string with the full parameters</returns>
         private string GetValues(int i, int e)
         {
-          //  MessageBox.Show("hi");
             int num = Convert.ToInt32((DatagridView.Items[e] as DataRowView).Row.ItemArray[0]);
+
             if (type == 0)
             {
-
                 CAT10 message = new CAT10();
                 foreach (CAT10 mes in listaCAT10) { if (mes.num == num) { message = mes; }; }
                 string nl = Environment.NewLine;
@@ -799,7 +843,6 @@ namespace PGTAWPF
                 string nl = Environment.NewLine;
                 string Value = "";
                 string CAT = Convert.ToString((DatagridView.Items[e] as DataRowView).Row.ItemArray[1]);
-               // MessageBox.Show(CAT);
                 if (CAT == "10")
                 {
                     CAT10 message = new CAT10();
@@ -810,7 +853,6 @@ namespace PGTAWPF
                 }
                 if (CAT == "21 v. 2.1")
                 {
-                 //   MessageBox.Show("HIi");
                     CAT21vs21 message = new CAT21vs21();
                     foreach (CAT21vs21 mes in listaCAT21v21) { if (mes.num == num) { message = mes; }; }
                     Value = " Address Type: " + message.ATP + nl + "Altitude Reporting Capability: " + message.ARC + nl + "Range Check: " + message.RC + nl + "Report Type: " + message.RAB;
@@ -834,6 +876,10 @@ namespace PGTAWPF
             else { return "No Data"; }
         }
 
+        /// <summary>
+        /// Shows or hides the alert showing that the search string introduced is not valid
+        /// </summary>
+        /// <param name="i"></param>
         private void Alertvisible(bool i)
         {
             if (i == true)
@@ -848,25 +894,15 @@ namespace PGTAWPF
             }
         }
 
-
-        private void ShowOnMapPictureClick(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// Show flight on map click
+        /// </summary>
+        private void ShowOnMap_Click(object sender, MouseButtonEventArgs e)
         {
-            ShowOnMap();
-        }
-
-        private void ShowOnMapTextClick(object sender, MouseButtonEventArgs e)
-        {
-            ShowOnMap();
-        }
-
-
-        private void ShowOnMap()
-        {
-            if (SelectedID.Text != "Not Selected")
+            if (SelectedNumber.Text != "Not Selected") //Checks if there is a selected flight
             {
-               
-                CATALL FlightSelected = listaCATALL.Find(x => x.num == Convert.ToInt32(SelectedNumber.Text)); //= new CATALL();
-                if (FlightSelected.Latitude_in_WGS_84 != -200 || FlightSelected.Longitude_in_WGS_84 != -200)
+                CATALL FlightSelected = listaCATALL.Find(x => x.num == Convert.ToInt32(SelectedNumber.Text)); //Finds the selected flight in the cat all list
+                if (FlightSelected.Latitude_in_WGS_84 != -200 || FlightSelected.Longitude_in_WGS_84 != -200) //Checks if the parameters are valid
                 {
                     Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
                     Form.OpenFlightInMap(FlightSelected);
@@ -876,34 +912,33 @@ namespace PGTAWPF
                     AlertMessageNotValid(true);
                 }
             }
-            else { AlertNoMessageSelected(true); }
+            else
+            {
+                AlertNoMessageSelected(true);
+            }
         }
 
-     //   string AlertNoMessageVisible;
-        void timer_Tick(object sender, EventArgs e)
-        {
-            AlertNoMessageSelected(false);
-           
-        }
-
+        /// <summary>
+        /// Shows or hides an alert showing that there is no selected message
+        /// </summary>
         private void AlertNoMessageSelected(bool a)
         {
             if (a == true)
             {
                 SelectedNumber.Foreground = new SolidColorBrush(Color.FromRgb(194, 0, 0));
                 SelectedID.Foreground = new SolidColorBrush(Color.FromRgb(194, 0, 0));
-                timer.Start();
             }
             else
             {
                 SelectedNumber.Foreground = new SolidColorBrush(Color.FromRgb(250, 248, 212));
                 SelectedID.Foreground = new SolidColorBrush(Color.FromRgb(250, 248, 212));
-                timer.Stop();
             }
         }
 
-    //    string SelectedMessage;
 
+        /// <summary>
+        /// Shows or hides an alert showing that the selected message is not valid
+        /// </summary>
         private void AlertMessageNotValid(bool a)
         {
             if (a == true)
@@ -924,19 +959,13 @@ namespace PGTAWPF
             }
         }
 
-        private void ExportCsvImageClick(object sender, MouseButtonEventArgs e)
-        {
-            SaveCSV();
-        }
-
-        private void ExportCSVTextClick(object sender, MouseButtonEventArgs e)
-        {
-            SaveCSV();
-        }
-        private void SaveCSV()
+        /// <summary>
+        /// Exports all the table to CSV format
+        /// </summary>>
+        private void ExportCSV_Click(object sender, MouseButtonEventArgs e)
         {
             SaveFileDialog saveFileDialog1 = new Microsoft.Win32.SaveFileDialog();
-            saveFileDialog1.Filter = "csv files (*.csv*)|*.csv*";//|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.Filter = "csv files (*.csv*)|*.csv*";
             saveFileDialog1.FilterIndex = 2;
             saveFileDialog1.RestoreDirectory = true;
 
@@ -955,7 +984,6 @@ namespace PGTAWPF
                     {
                         if (col.ColumnName != "CAT number")
                         {
-                            //string Name = col.ColumnName.Replace('\n', ' ');
                             string Name = col.ColumnName.Replace('\n', ' ');
                             ColumnsNames.Append(Name + ",");
                         }
@@ -1040,7 +1068,6 @@ namespace PGTAWPF
                     {
                         if (col.ColumnName != "CAT number")
                         {
-                            //string colname = col.ColumnName;
                             string Name = col.ColumnName.Replace('\n',' ');
                             ColumnsNames.Append(Name + ",");
                         }
@@ -1343,6 +1370,9 @@ namespace PGTAWPF
             }
         }
 
+        /// <summary>
+        /// On page resize, recomputes the datagrid needed size
+        /// </summary>
         private void ResizeForm(object sender, SizeChangedEventArgs e)
         {
             double tableWidth = 0;
