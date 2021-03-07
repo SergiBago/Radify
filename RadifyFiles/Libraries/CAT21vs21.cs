@@ -750,7 +750,8 @@ namespace PGTAWPF
         private int Compute_PositionWGS_84(string[] message, int pos)
         {
             
-            double Latitude  =lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1], message[pos + 2]))*(180/(Math.Pow(2,23))); pos += 3;
+            double Latitude  =lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1], message[pos + 2]))*(180/(Math.Pow(2,23)));
+            pos += 3;
             double Longitude = lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1], message[pos + 2])) * (180 / (Math.Pow(2, 23)));
             LatitudeWGS_84_map = Convert.ToDouble(Latitude);
             LongitudeWGS_84_map = Convert.ToDouble(Longitude);
@@ -939,7 +940,10 @@ namespace PGTAWPF
         public string True_Air_Speed;
         private int Compute_True_Air_Speed(string[] message, int pos)
         {
-            if (message[pos].Substring(0, 1) == "0") { True_Air_Speed = Convert.ToString(Convert.ToInt32(string.Concat(message[pos], message[pos + 1]).Substring(1, 15),2)) + " Knots"; }
+            if (message[pos].Substring(0, 1) == "0")
+            { 
+                True_Air_Speed = Convert.ToString(Convert.ToInt32(string.Concat(message[pos], message[pos + 1]).Substring(1, 15),2)) + " Knots";
+            }
             else { True_Air_Speed = "Value exceeds defined rage"; }
             pos += 2;
             return pos;
@@ -977,7 +981,8 @@ namespace PGTAWPF
         public string Barometric_Vertical_Rate;
         private int Compute_Barometric_Vertical_Rate(string[] message, int pos)
         {
-            if (message[pos].Substring(0, 1) == "0") { Barometric_Vertical_Rate = Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1]).Substring(1, 15)) * 6.25) + " feet/minute"; }
+            if (message[pos].Substring(0, 1) == "0") {
+                Barometric_Vertical_Rate = Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1]).Substring(1, 15)) * 6.25) + " feet/minute"; }
             else { Barometric_Vertical_Rate = "Value exceeds defined rage"; }
             pos += 2;
             return pos;
