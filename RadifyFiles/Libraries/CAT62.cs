@@ -186,15 +186,15 @@ namespace PGTAWPF
 
 
         #region Time of Track Information
-
         public string Time_of_Track_Information;
+        public int Time_of_day_sec;
 
         private int Compute_Time_of_Track_Information(string[] message, int pos)
         {
 
             int str = Convert.ToInt32(string.Concat(message[pos], message[pos + 1], message[pos + 2]), 2);
             double segundos = (Convert.ToDouble(str) / 128);
-            //   Time_of_day_sec = Convert.ToInt32(Math.Truncate(segundos));
+            Time_of_day_sec = Convert.ToInt32(Math.Truncate(segundos));
             TimeSpan tiempo = TimeSpan.FromSeconds(segundos);
             Time_of_Track_Information = tiempo.ToString(@"hh\:mm\:ss\:fff");
             pos += 3;
@@ -2328,7 +2328,7 @@ namespace PGTAWPF
                 int ecat = Convert.ToInt32(message[pos], 2);
                 if(ecat==1)
                 {
-                    Derived_Data_EMC_ECAT = "light aircraft ≤ 7000 kg";
+                    Derived_Data_EMC_ECAT = "Light aircraft";
                 }
                 else if (ecat == 2)
                 {
@@ -2337,7 +2337,7 @@ namespace PGTAWPF
 
                 else if (ecat == 3)
                 {
-                    Derived_Data_EMC_ECAT = "7000 kg < medium aircraft < 136000 kg";
+                    Derived_Data_EMC_ECAT = "Medium aircraft";
                 }
 
                 else if (ecat == 4)
@@ -2347,7 +2347,7 @@ namespace PGTAWPF
 
                 else if (ecat == 5)
                 {
-                    Derived_Data_EMC_ECAT = "136000 kg ≤ heavy aircraft";
+                    Derived_Data_EMC_ECAT = "Heavy aircraft";
                 }
 
                 else if (ecat == 6)
@@ -2390,7 +2390,7 @@ namespace PGTAWPF
 
                 else if (ecat == 16)
                 {
-                    Derived_Data_EMC_ECAT = "parachutist / skydiver";
+                    Derived_Data_EMC_ECAT = "Parachutist / skydiver";
                 }
 
                 else if (ecat == 17|| ecat == 18|| ecat == 19)
@@ -2400,17 +2400,17 @@ namespace PGTAWPF
 
                 else if (ecat == 20)
                 {
-                    Derived_Data_EMC_ECAT = "surface emergency vehicle";
+                    Derived_Data_EMC_ECAT = "Surface emergency vehicle";
                 }
 
                 else if (ecat == 21)
                 {
-                    Derived_Data_EMC_ECAT = "surface service vehicle";
+                    Derived_Data_EMC_ECAT = "Surface service vehicle";
                 }
 
                 else if (ecat == 22)
                 {
-                    Derived_Data_EMC_ECAT = "fixed ground or tethered obstruction";
+                    Derived_Data_EMC_ECAT = "Fixed ground or tethered obstruction";
                 }
                 else 
                 {
