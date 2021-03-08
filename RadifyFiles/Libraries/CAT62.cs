@@ -31,9 +31,9 @@ namespace PGTAWPF
         readonly LibreriaDecodificacion lib;
         readonly string FSPEC1;
         readonly string[] mensaje;
-        public string CAT = "21 v. 2.1";
+        public string CAT = "62";
         public int num;
-        public int cat21v21num;
+        public int cat62num;
         public int airportCode;
 
         #region Constructors
@@ -193,13 +193,15 @@ namespace PGTAWPF
         #region Time of Track Information
 
         public string Time_of_Track_Information;
-
+        public int Time_of_day_sec;
+        public double Time_of_day_milisec;
         private int Compute_Time_of_Track_Information(string[] message, int pos)
         {
 
             int str = Convert.ToInt32(string.Concat(message[pos], message[pos + 1], message[pos + 2]), 2);
             double segundos = (Convert.ToDouble(str) / 128);
-            //   Time_of_day_sec = Convert.ToInt32(Math.Truncate(segundos));
+            Time_of_day_milisec =segundos;
+            Time_of_day_sec = Convert.ToInt32(Math.Truncate(segundos));
             TimeSpan tiempo = TimeSpan.FromSeconds(segundos);
             Time_of_Track_Information = tiempo.ToString(@"hh\:mm\:ss\:fff");
             pos += 3;

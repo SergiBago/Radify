@@ -31,6 +31,7 @@ namespace PGTA_WPF
             CheckBoxCAT10.IsChecked = true;
             CheckBoxCAT21v21.IsChecked = true;
             CheckBoxCAT21v23.IsChecked = true;
+            CheckBoxCAT62.IsChecked = true;
         }
 
         /// <summary>
@@ -44,12 +45,16 @@ namespace PGTA_WPF
                 CheckBoxCAT10.IsChecked = true;
                 CheckBoxCAT21v21.IsChecked = true;
                 CheckBoxCAT21v23.IsChecked = true;
+                CheckBoxCAT62.IsChecked = true;
+
             }
             else
             {
                 CheckBoxCAT10.IsChecked = false;
                 CheckBoxCAT21v21.IsChecked = false;
                 CheckBoxCAT21v23.IsChecked = false;
+                CheckBoxCAT62.IsChecked = false;
+
             }
         }
 
@@ -73,6 +78,14 @@ namespace PGTA_WPF
             }
         }
 
+        private void LoadCAT62CheckBoxClick(object sender, RoutedEventArgs e)
+        {
+            if (CheckBoxCAT62.IsChecked == false)
+            {
+                CheckBoxAll.IsChecked = false;
+            }
+        }
+
         /// <summary>
         /// If Load cat 21 v. 2.1 is unchecked load all must be unchecked too. 
         /// </summary>
@@ -89,7 +102,7 @@ namespace PGTA_WPF
         private void LoadClick(object sender, RoutedEventArgs e)
         {
             AlertVisible(false);
-            if (CheckBoxCAT10.IsChecked == false && CheckBoxCAT21v21.IsChecked == false && CheckBoxCAT21v23.IsChecked == false) { //If all are unchecked throw an alert
+            if (CheckBoxCAT10.IsChecked == false && CheckBoxCAT21v21.IsChecked == false && CheckBoxCAT21v23.IsChecked == false && CheckBoxCAT62.IsChecked == false) { //If all are unchecked throw an alert
                 AlertVisible(true); 
             }
             else
@@ -103,6 +116,8 @@ namespace PGTA_WPF
                 if (CheckBoxCAT21v23.IsChecked == true) { selcats.Add(true); }
                 else { selcats.Add(false); }
                 if (CheckBoxCAT21v21.IsChecked == true) { selcats.Add(true); }
+                else { selcats.Add(false); }
+                if (CheckBoxCAT62.IsChecked == true) { selcats.Add(true); }
                 else { selcats.Add(false); }
                 form.GetSelectedCats(selcats);
                 this.Close();
@@ -144,5 +159,7 @@ namespace PGTA_WPF
         {
             this.Close();
         }
+
+
     }
 }

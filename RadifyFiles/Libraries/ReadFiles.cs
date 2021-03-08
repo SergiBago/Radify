@@ -24,6 +24,8 @@ namespace PGTAWPF
         readonly List<CAT10> listaCAT10 = new List<CAT10>(); //List with all of cat 10 message
         readonly List<CAT21vs21> listaCAT21v21 = new List<CAT21vs21>();// List with all of cat21 v2.1 messages
         readonly List<CAT21vs23> listaCAT21v23 = new List<CAT21vs23>(); //List with all of cat21 v0.23(or 0.26) messages
+        readonly List<CAT62> listaCAT62 = new List<CAT62>(); //List with all of cat21 v0.23(or 0.26) messages
+
         List<CATALL> listaCATAll = new List<CATALL>();//List containing all messages in Cat all form
 
         public int numficheros = 0; //number of loaded files
@@ -32,6 +34,7 @@ namespace PGTAWPF
         public int CAT10num = 0; //number of loaded cat 10 messages
         public int CAT21v23num = 0; //number of loaded cat21 v0.23 messages
         public int CAT21v21num = 0; //number of loaded cat21 v2.1 messages
+        public int CAT62num = 0; //number of loaded cat21 v2.1 messages
 
         public List<string> names = new List<string>(); //List with loaded files names
 
@@ -40,6 +43,9 @@ namespace PGTAWPF
         readonly DataTable tablaCAT10 = new DataTable(); //Datatable with all message cat 10 information
         readonly DataTable tablaCAT21v21 = new DataTable(); //Datatable with all cat21 v2.1 messages information
         readonly DataTable tablaCAT21v23 = new DataTable(); //Datatable with all cat21 v0.23 messages information
+        readonly DataTable tablaCAT62 = new DataTable(); //Datatable with all cat21 v0.23 messages information
+
+
         readonly DataTable tablaAll = new DataTable(); //Datatable with all messages information
 
         public List<int> AirportCodesList = new List<int>(); //List of used airports. This list is useful to know which buttons to center on the map put
@@ -49,6 +55,7 @@ namespace PGTAWPF
         List<Trajectories> SMRTrajectories = new List<Trajectories>(); //List with SMR trajectories
         List<Trajectories> MLATTrajectories = new List<Trajectories>(); //List with MLAT trajectories
         List<Trajectories> ADSBTrajectories = new List<Trajectories>(); //List with ADSB trajectories
+        List<Trajectories> CAT62Trajectories = new List<Trajectories>(); //List with ADSB trajectories
 
         /// <summary>
         /// When creatinmg a new instance of this class we create all tables to fill them later
@@ -58,6 +65,7 @@ namespace PGTAWPF
             this.StartTable10();
             this.StartTable21vs21();
             this.StartTable21v23();
+            this.StartTable62();
             this.StartTableAll();
         }
 
@@ -69,10 +77,12 @@ namespace PGTAWPF
             listaCAT10.Clear();
             listaCAT21v21.Clear();
             listaCAT21v23.Clear();
+            listaCAT62.Clear();
             listaCATAll.Clear();
             tablaCAT10.Clear();
             tablaCAT21v21.Clear();
             tablaCAT21v23.Clear();
+            tablaCAT62.Clear();
             AirportCodesList.Clear();
             tablaAll.Clear();
             names.Clear();
@@ -81,6 +91,7 @@ namespace PGTAWPF
             CAT10num = 0;
             CAT21v23num = 0;
             CAT21v21num = 0;
+            CAT62num = 0;
         }
 
 
@@ -96,6 +107,12 @@ namespace PGTAWPF
         {
             return listaCAT21v23;
         }
+
+        public List<CAT62> GetListCAT62()
+        {
+            return listaCAT62;
+        }
+
 
         public List<CATALL> GetListCATALL()
         {
@@ -285,6 +302,42 @@ namespace PGTAWPF
 
                         }
                     }
+                    if (CAT == 62 && listchecked[3] == true) //If listcheked[0]== true because list checked indicates which cat of messages load. ListCheked[0] is a bool indicating if CAT10 must be loaded or not
+                    {
+                        CAT62 newcat62 = new CAT62(arraystring, lib); //Create the CAT10 message from the string[] values
+                        newcat62.num = numero; //Set number to message
+                        newcat62.cat62num = this.CAT62num; //set cat10 number to message
+
+                        numero++; //increase counter so numbers are unics
+                        CAT62num++;
+
+                        if (first == true)
+                        {
+                            /*Set the time of this file first message.  
+                             * This is useful because a file will generally never last more than 24 hours, but it may take two days.
+                             * In this way, if we have a message with a time less than the time of the first message, it will surely
+                             * be the next day (file that goes from 23:00 to 01:00, the messages from 00:00 will be the next day,
+                             * and We will know because they will have an h before the first message */
+                            first_time_file = newcat62.Time_of_day_sec;
+                            first = false;
+                        }
+
+                        CATALL newcatall = new CATALL(newcat62, first_time, first_time_file); //Create a CAT all message, usefull for map and for See Cat All tab.
+
+                        /*We will add the messages to the lists and tables. It is interesting to add them to both, since the lists are very useful to search for
+                         * messages and work with them, while the tables are interesting because then when loading the tabs it 
+                         * loads faster than if all the information had to be passed from the list every time*/
+                        listaCAT62.Add(newcat62);
+                        newCatAll.Add(newcatall);
+
+                        AddRowTable62(newcat62);
+                        AddRowTableAllCat62(newcat62);
+
+                        /*We will see if the airport of which the file is already in the list of used airports or not, 
+                         * and if it is not, we will add it. This list is useful to know which buttons to center on the map put*/
+                        bool exists = AirportCodesList.Contains(newcat62.airportCode);
+                        if (exists == false) { AirportCodesList.Add(newcat62.airportCode); }
+                    }
                 }
 
 
@@ -336,6 +389,13 @@ namespace PGTAWPF
         {
             return tablaCAT21v23;
         }
+
+        public DataTable GetTablaCAT62()
+        {
+            return tablaCAT62;
+        }
+
+
         public DataTable GetTablaAll()
         {
             return tablaAll;
@@ -466,6 +526,12 @@ namespace PGTAWPF
             tablaCAT21v23.Columns.Add("Trajectory\nIntent");
             tablaCAT21v23.Columns.Add("Mode-3A\nCode");
             tablaCAT21v23.Columns.Add("Signal\nAmplitude");
+
+        }
+
+
+        private void StartTable62()
+        {
 
         }
 
@@ -731,6 +797,10 @@ namespace PGTAWPF
             tablaCAT21v23.Rows.Add(row);
         }
 
+        private void AddRowTable62(CAT62 Message)
+        {
+        }
+
 
         /// <summary>
         /// Adds a row to datatable cat all from Class Cat10 message
@@ -801,6 +871,8 @@ namespace PGTAWPF
             tablaAll.Rows.Add(row);
         }
 
+ 
+
         /// <summary>
         /// Adds a row to datatable cat all from Class Cat21v23 message
         /// </summary>
@@ -827,6 +899,35 @@ namespace PGTAWPF
             if (Message.Flight_Level != null) { row["Flight\nLevel"] = Message.Flight_Level; }
             else { row["Flight\nLevel"] = "No Data"; }
             if (Message.ATP != null) { row["Target\nReport\nDescriptor"] = "Click to expand"; } //
+            else { row["Target\nReport\nDescriptor"] = "No Data"; }
+            row["Track\nNumber"] = "No Data";
+            if (Message.ModeA3 != null) { row["Mode-3A\nCode"] = Message.ModeA3; }
+            else { row["Mode-3A\nCode"] = "No Data"; }
+            tablaAll.Rows.Add(row);
+        }
+
+        private void AddRowTableAllCat62(CAT62 Message)
+        {
+            var row = tablaAll.NewRow();
+            row["Number"] = Message.num;
+            row["CAT number"] = Message.cat62num;
+            if (Message.CAT != null) { row["Category"] = Message.CAT; }
+            else { row["Category"] = "No Data"; }
+            if (Message.SAC != null) { row["SAC"] = Message.SAC; }
+            else { row["SAC"] = "No Data"; }
+            if (Message.SIC != null) { row["SIC"] = Message.SIC; }
+            else { row["SIC"] = "No Data"; }
+            if (Message.Target_Identification != null) { row["Target\nIdentification"] = Message.Target_Identification; }
+            else { row["Target\nIdentification"] = "No Data"; }
+            if (Message.Derived_Data_Address != null) { row["Target\nAddress"] = Message.Time_of_Track_Information; }
+            else { row["Target\nAddress"] = "No Data"; }
+            if (Message.Time_of_Track_Information != null) { row["Time of\nDay"] = Message.Time_of_Track_Information; }
+            else { row["Time of\nDay"] = "No Data"; }
+            if (Message.LatitudeWGS_84 != null && Message.LongitudeWGS_84 != null) { row["Position in WGS-84 co-ordinates"] = Message.LatitudeWGS_84 + ", " + Message.LongitudeWGS_84; }
+            else { row["Position in WGS-84 co-ordinates"] = "No Data"; }
+            if (Message.Measured_Flight_Level != null) { row["Flight\nLevel"] = Message.Measured_Flight_Level; }
+            else { row["Flight\nLevel"] = "No Data"; }
+            if (Message.Derived_Data_REP != null) { row["Target\nReport\nDescriptor"] = "Click to expand"; } //
             else { row["Target\nReport\nDescriptor"] = "No Data"; }
             row["Track\nNumber"] = "No Data";
             if (Message.ModeA3 != null) { row["Mode-3A\nCode"] = Message.ModeA3; }
@@ -866,6 +967,10 @@ namespace PGTAWPF
                     {
                         FindDirection(ADSBTrajectories, message);
                     }
+                    if(message.DetectionMode=="CAT 62")
+                    {
+                        FindDirection(CAT62Trajectories, message);
+                    }
                 }
             }
         }
@@ -884,6 +989,7 @@ namespace PGTAWPF
             SMRTrajectories = new List<Trajectories>(); 
             MLATTrajectories = new List<Trajectories>();
             ADSBTrajectories = new List<Trajectories>();
+            CAT62Trajectories = new List<Trajectories>();
             int i = 0;
 
             foreach (CATALL message in List)
@@ -987,6 +1093,36 @@ namespace PGTAWPF
                             }
                         }
                     }
+                    else if (message.DetectionMode == "CAT 62")
+                    {
+                        if (message.Target_Identification != null)
+                        {
+                            if (CAT62Trajectories.Exists(x => x.Target_Identification == message.Target_Identification)) { CAT62Trajectories.Find(x => x.Target_Identification == message.Target_Identification).AddTimePoint(message.Latitude_in_WGS_84, message.Longitude_in_WGS_84, message.Time_Of_day); }
+                            else
+                            {
+                                Trajectories traj = new Trajectories(message.Target_Identification, message.Time_Of_day, message.Latitude_in_WGS_84, message.Longitude_in_WGS_84, message.type, message.Target_Address, message.DetectionMode, message.CAT, message.SAC, message.SIC, message.Track_number);
+                                CAT62Trajectories.Add(traj);
+                            }
+                        }
+                        else if (message.Target_Address != null)
+                        {
+                            if (CAT62Trajectories.Exists(x => x.Target_Address == message.Target_Address)) { CAT62Trajectories.Find(x => x.Target_Address == message.Target_Address).AddTimePoint(message.Latitude_in_WGS_84, message.Longitude_in_WGS_84, message.Time_Of_day); }
+                            else
+                            {
+                                Trajectories traj = new Trajectories(message.Target_Identification, message.Time_Of_day, message.Latitude_in_WGS_84, message.Longitude_in_WGS_84, message.type, message.Target_Address, message.DetectionMode, message.CAT, message.SAC, message.SIC, message.Track_number);
+                                CAT62Trajectories.Add(traj);
+                            }
+                        }
+                        else if (message.Track_number != null)
+                        {
+                            if (CAT62Trajectories.Exists(x => x.Track_number == message.Track_number)) { CAT62Trajectories.Find(x => x.Track_number == message.Track_number).AddTimePoint(message.Latitude_in_WGS_84, message.Longitude_in_WGS_84, message.Time_Of_day); }
+                            else
+                            {
+                                Trajectories traj = new Trajectories(message.Target_Identification, message.Time_Of_day, message.Latitude_in_WGS_84, message.Longitude_in_WGS_84, message.type, message.Target_Address, message.DetectionMode, message.CAT, message.SAC, message.SIC, message.Track_number);
+                                CAT62Trajectories.Add(traj);
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -1000,6 +1136,7 @@ namespace PGTAWPF
             SMRTrajectories = new List<Trajectories>();
             MLATTrajectories = new List<Trajectories>();
             ADSBTrajectories = new List<Trajectories>();
+            CAT62Trajectories = new List<Trajectories>();
         }
 
         /// <summary>
@@ -1170,6 +1307,7 @@ namespace PGTAWPF
             double ADSBratio = 0;
             int ADSBRatio;
             int ADSBCount = 0;
+
             if (ADSBTrajectories.Count() > 0)
             {
                 foreach (Trajectories t in ADSBTrajectories)

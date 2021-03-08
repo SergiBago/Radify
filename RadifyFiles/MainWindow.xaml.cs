@@ -31,20 +31,26 @@ namespace PGTAWPF
         List<System.Windows.Controls.Image> UnActiveButtons;
         List<Border> ListPanels;
         List<TextBlock> ListLabels;
+
         bool mapstarted = false;
         bool CAT10started = false;
         bool CAT21v21started = false;
         bool CAT21v23started = false;
+        bool CAT62started = false;
         bool CATAllstarted = false;
         bool Loadstarted = false;
         ReadFiles Archivo = new ReadFiles();
+
         List<CAT10> listaCAT10 = new List<CAT10>();
         List<CAT21vs21> listaCAT21v21 = new List<CAT21vs21>();
         List<CAT21vs23> listaCAT21v23 = new List<CAT21vs23>();
+        List<CAT62> listaCAT62 = new List<CAT62>();
         List<CATALL> listaCATALL = new List<CATALL>();
+        
         DataTable TableCat10 = new DataTable();
         DataTable TableCat21v21 = new DataTable();
         DataTable TableCat21v23 = new DataTable();
+        DataTable TableCat62 = new DataTable();
         DataTable TableAll = new DataTable();
 
         MapView mapview = new MapView();
@@ -52,6 +58,7 @@ namespace PGTAWPF
         View viewCat10;
         View viewCat23;
         View viewCat21;
+        View viewCat62;
         View viewAll;
         MapView mapform;
         HelpForm help;
@@ -60,10 +67,10 @@ namespace PGTAWPF
         public MainWindow()
         {
             InitializeComponent();
-            ActiveButtons = new List<System.Windows.Controls.Image> { HomeIco2, LoadIco2, ListIco2, seeIco12, SeeIco22, SeeIco32, SeeIco42, MapIco2,HelpIco2};
-            UnActiveButtons = new List<System.Windows.Controls.Image> { HomeIco1, LoadIco1, ListIco1, seeIco11, SeeIco21, SeeIco31, SeeIco41 ,MapIco1,HelpIco1};
+            ActiveButtons = new List<System.Windows.Controls.Image> { HomeIco2, LoadIco2, ListIco2, seeIco12, SeeIco22, SeeIco32, SeeIco42, SeeIco52, MapIco2,HelpIco2};
+            UnActiveButtons = new List<System.Windows.Controls.Image> { HomeIco1, LoadIco1, ListIco1, seeIco11, SeeIco21, SeeIco31, SeeIco41, SeeIco51 ,MapIco1,HelpIco1};
             ListPanels = new List<Border> { HomePanel, LoadPanel, ListPanel, MapPanel, HelpPanel };
-            ListLabels = new List<TextBlock> { HomeLabel, LoadFilesLabel, ListLabel, SeeCat10Label, SeeCat21v23Label, SeeCat21v21Label, SeeAllLabel, MapLabel,HelpLabel };
+            ListLabels = new List<TextBlock> { HomeLabel, LoadFilesLabel, ListLabel, SeeCat10Label, SeeCat21v23Label, SeeCat21v21Label, SeeCat62Label, SeeAllLabel, MapLabel,HelpLabel };
             this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
 
@@ -212,7 +219,7 @@ namespace PGTAWPF
                 {
                     viewCat10 = new View();
                     viewCat10.GetType(0);
-                    viewCat10.GetAll(listaCAT10,null, null, listaCATALL, TableCat10, null, null, null, TableCat10.Copy());
+                    viewCat10.GetAll(listaCAT10,null, null,null, listaCATALL, TableCat10, null, null,null, null, TableCat10.Copy());
 
                    // viewCat10.GetAll(listaCAT10, listaCAT21v21, listaCAT21v23, listaCATALL, TableCat10, TableCat21v23, TableCat21v21, TableAll, TableCat10.Copy());
                     viewCat10.GetForm(this);
@@ -265,7 +272,7 @@ namespace PGTAWPF
                 {
                     viewCat23 = new View();
                     viewCat23.GetType(2);
-                    viewCat23.GetAll(null,null, listaCAT21v23, listaCATALL, null, TableCat21v23, null, null, TableCat21v23.Copy());
+                    viewCat23.GetAll(null,null, listaCAT21v23, null,listaCATALL, null, TableCat21v23, null, null,null, TableCat21v23.Copy());
                     viewCat23.GetForm(this);
                     CAT21v23started = true;
                 }
@@ -318,7 +325,7 @@ namespace PGTAWPF
                 {
                     viewCat21 = new View();
                     viewCat21.GetType(1);
-                    viewCat21.GetAll(null, listaCAT21v21,null, listaCATALL, null, null, TableCat21v21, null, TableCat21v21.Copy());
+                    viewCat21.GetAll(null, listaCAT21v21,null,null, listaCATALL, null, null, TableCat21v21, null,null, TableCat21v21.Copy());
                     viewCat21.GetForm(this);
                     CAT21v21started = true;
                 }
@@ -355,6 +362,51 @@ namespace PGTAWPF
         }
 
 
+        private void SeeCat62Click(object sender, MouseButtonEventArgs e)
+        {
+            activeSeeCat62button();
+            if (mapview.started == true) { mapform.Pause(); }  //If simulation is running in map tab, pause the simulation before opening this tab
+            if (listaCAT62.Count > 0) //check if there are CAT62 messages loaded
+            {
+                Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+                if (CAT62started == false) //If it's first time we open the see cat 21 v.2.3 tab we create the page and load it, otherwise, we show it directily
+                {
+                    viewCat62 = new View();
+                    viewCat62.GetType(4);
+                    viewCat62.GetAll(null, null,null,  listaCAT62, listaCATALL, null,null, TableCat62, null, null, TableCat62.Copy());
+                    viewCat62.GetForm(this);
+                    CAT62started = true;
+                }
+                PanelChildForm.Navigate(viewCat23);
+            }
+            else //If no CAT 21 v0.23 messages loaded we show the page indicating there is no cat10 messages loaded
+            {
+                NoMessages panel = new NoMessages();
+                panel.GetType(4);
+                panel.GetForm(this);
+                PanelChildForm.Navigate(panel);
+            }
+        }
+
+        private void activeSeeCat62button()
+        {
+
+            DisableButtons();
+            ListLabel.HorizontalAlignment = HorizontalAlignment.Right;
+            SeeCat62Label.HorizontalAlignment = HorizontalAlignment.Right;
+            SeeIco51.Visibility = Visibility.Hidden;
+            SeeIco52.Visibility = Visibility.Visible;
+            ListIco1.Visibility = Visibility.Hidden;
+            ListIco2.Visibility = Visibility.Visible;
+            ListPanel.Background = new SolidColorBrush(RGBColors.color3);
+            FormTitle.Text = "List View";
+            FormTitle.Foreground = new SolidColorBrush(RGBColors.color3);
+            ListLabel.Foreground = new SolidColorBrush(RGBColors.color3);
+            SeeCat62Label.Foreground = new SolidColorBrush(RGBColors.color3);
+            FormIco.Source = new BitmapImage(new Uri(@"images/Lista Color.png", UriKind.Relative));
+        }
+
+
         /// <summary>
         /// Open the see table All page
         /// </summary>
@@ -369,7 +421,7 @@ namespace PGTAWPF
                 {
                     viewAll = new View();
                     viewAll.GetType(3);
-                    viewAll.GetAll(listaCAT10, listaCAT21v21, listaCAT21v23, listaCATALL, null, null, null, TableAll, TableAll.Copy());
+                    viewAll.GetAll(listaCAT10, listaCAT21v21, listaCAT21v23, listaCAT62,listaCATALL, null, null, null, null,TableAll, TableAll.Copy());
                     viewAll.GetForm(this);
                     CATAllstarted = true;
                 }
@@ -484,15 +536,19 @@ namespace PGTAWPF
             listaCAT10 = Archivo.GetListCAT10();
             listaCAT21v21 = Archivo.GetListCAT21v21();
             listaCAT21v23 = Archivo.GetListCAT21v23();
+            listaCAT62 = Archivo.GetListCAT62();
             listaCATALL = Archivo.GetListCATALL();
             this.TableCat10 = Archivo.GetTablaCAT10();
             this.TableCat21v21 = Archivo.GetTablaCAT21v21();
             this.TableCat21v23 = Archivo.GetTablaCAT21v23();
+            this.TableCat62 = Archivo.GetTablaCAT62();
             this.TableAll = Archivo.GetTablaAll();
             if (mapstarted == true) { mapform = new MapView(); mapstarted = false; }
             if (CAT10started == true) { viewCat10 = new View(); CAT10started = false; }
             if (CAT21v21started == true) { viewCat21= new View(); CAT21v21started = false; }
             if (CAT21v23started == true) { viewCat23 = new View(); CAT21v23started = false; }
+            if (CAT62started == true) { viewCat62 = new View(); CAT62started = false; }
+
             if (CATAllstarted == true) { viewAll = new View(); CATAllstarted = false; }
         }
 
@@ -507,7 +563,7 @@ namespace PGTAWPF
                 activeSeecat10button();
                 viewCat10 = new View();
                 viewCat10.GetSearching(0, message);
-                viewCat10.GetAll(listaCAT10, null, null, listaCATALL, TableCat10, null, null, null, TableCat10.Copy());
+                viewCat10.GetAll(listaCAT10, null, null,null, listaCATALL, TableCat10, null, null, null, null,TableCat10.Copy());
                 viewCat10.GetForm(this);
                 PanelChildForm.Navigate(viewCat10);
             }
@@ -516,7 +572,7 @@ namespace PGTAWPF
                 activeSeeCat21button();
                 viewCat21 = new View();
                 viewCat21.GetSearching(1, message);
-                viewCat21.GetAll(null, listaCAT21v21, null, listaCATALL,null, null, TableCat21v21,null, TableCat21v21.Copy());
+                viewCat21.GetAll(null, listaCAT21v21, null, null,listaCATALL,null, null, TableCat21v21,null,null, TableCat21v21.Copy());
                 viewCat21.GetForm(this);
                 PanelChildForm.Navigate(viewCat21);
             }
@@ -525,7 +581,16 @@ namespace PGTAWPF
                 activeSeecat23button(); 
                 viewCat23 = new View();
                 viewCat23.GetSearching(2, message);
-                viewCat23.GetAll(null, null, listaCAT21v23, listaCATALL, null, TableCat21v23, null, null, TableCat21v23.Copy());
+                viewCat23.GetAll(null, null, listaCAT21v23,null, listaCATALL, null, TableCat21v23, null, null, null,TableCat21v23.Copy());
+                viewCat23.GetForm(this);
+                PanelChildForm.Navigate(viewCat23);
+            }
+            if (Cat == "62")
+            {
+                activeSeecat23button();
+                viewCat23 = new View();
+                viewCat23.GetSearching(4, message);
+                viewCat23.GetAll(null, null, null, listaCAT62, listaCATALL, null, null, null, null,TableCat62, TableCat21v23.Copy());
                 viewCat23.GetForm(this);
                 PanelChildForm.Navigate(viewCat23);
             }
@@ -595,6 +660,7 @@ namespace PGTAWPF
         {
             this.WindowState = WindowState.Minimized;
         }
+
 
     }
 }

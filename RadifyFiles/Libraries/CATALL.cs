@@ -134,5 +134,39 @@ namespace PGTAWPF
             DetectionMode = "ADSB";
         }
 
+        /// <summary>
+        /// Create an instance of class CAT all from an instance of class CAT 21 v. 0.23
+        /// </summary>
+        /// <param name="message">CAT 21 v. 0.23 instance from which you want to create a CAT All instance</param>
+        /// <param name="First_time_of_day">Parameter that indicates the time 00:00:00 of the day of the message (if the message is from the second day the time will be 86400)</param>
+        /// <param name="first_time">Indicates the time of the first message in that file. In this way, if a file lasts 2
+        /// days we can identify the messages that are on the second day and host them correctly</param>
+        public CATALL(CAT62 message, int First_time_of_day, int first_time)
+        {
+            this.num = message.num;
+            this.CAT = message.CAT;
+            this.SAC = message.SAC;
+            this.SIC = message.SIC;
+            this.Target_Identification = message.Target_Identification;
+            this.Target_Address = message.Derived_Data_Address;
+            this.Latitude_in_WGS_84 = message.LatitudeWGS_84_map;
+            this.Longitude_in_WGS_84 = message.LongitudeWGS_84_map;
+            this.Flight_level = message.Measured_Flight_Level;
+            if (message.Time_of_day_sec < first_time)
+            {
+                this.List_Time_Of_Day = message.Time_of_day_sec + 86400 + First_time_of_day;
+            }
+            else
+            {
+                this.List_Time_Of_Day = message.Time_of_day_sec + First_time_of_day;
+            }
+            if (message.Derived_Data_EMC_ECAT == "Surface emergency vehicle" || message.Derived_Data_EMC_ECAT == "Surface service vehicle")
+            {
+                type = "car";
+            }
+            else if (message.Derived_Data_EMC_ECAT == "Light aircraft" || message.Derived_Data_EMC_ECAT == "Medium aircraft" || message.Derived_Data_EMC_ECAT == "Heavy aircraft") { type = "plane"; }
+            else { type = "undetermined"; }
+            DetectionMode = "CAT 62";
+        }
     }
 }

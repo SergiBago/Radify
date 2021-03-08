@@ -30,10 +30,12 @@ namespace PGTAWPF
         List<CAT10> listaCAT10 = new List<CAT10>();
         List<CAT21vs21> listaCAT21v21 = new List<CAT21vs21>();
         List<CAT21vs23> listaCAT21v23 = new List<CAT21vs23>();
+        List<CAT62> listaCAT62 = new List<CAT62>();
         List<CATALL> listaCATALL = new List<CATALL>();
         DataTable TableCat10 = new DataTable();
         DataTable TableCat21v21 = new DataTable();
         DataTable TableCat21v23 = new DataTable();
+        DataTable TableCat62 = new DataTable();
         DataTable TableAll = new DataTable();
         DataTable Datatable = new DataTable();
         MainWindow Form;
@@ -52,17 +54,19 @@ namespace PGTAWPF
         /// <summary>
         /// Get all data
         /// </summary>
-        public void GetAll(List<CAT10> list10, List<CAT21vs21> list21v21, List<CAT21vs23> list21v23, List<CATALL> listCATAll, DataTable tableCat10, DataTable tableCat21v23, DataTable tableCat21v21, DataTable tableCatAll, DataTable table)
+        public void GetAll(List<CAT10> list10, List<CAT21vs21> list21v21, List<CAT21vs23> list21v23, List<CAT62> list62, List<CATALL> listCATAll, DataTable tableCat10, DataTable tableCat21v23, DataTable tableCat21v21,DataTable tableCat62, DataTable tableCatAll, DataTable table)
         {
             this.listaCAT10 = list10;
             this.listaCAT21v21 = list21v21;
             this.listaCAT21v23 = list21v23;
+            this.listaCAT62 = listaCAT62;
             this.listaCATALL = listCATAll;
             this.Datatable = table;
             this.Datatable.Columns.RemoveAt(1);
             this.TableCat10 = tableCat10;
             this.TableCat21v23 = tableCat21v23;
             this.TableCat21v21 = tableCat21v21;
+            this.TableCat62 = tableCat62;
             this.TableAll = tableCatAll;
             started = false;
         }
@@ -70,7 +74,7 @@ namespace PGTAWPF
         /// <summary>
         /// Gets data type (know if we are looking cat 10, 21 v2.1 21 v0.23 or all)
         /// </summary>
-        /// <param name="i">int indicating which cat we are looking at (0=cat 10, 1=cat21v21, 2=cat21v23, 3=all)</param>
+        /// <param name="i">int indicating which cat we are looking at (0=cat 10, 1=cat21v21, 2=cat21v23, 3=all, 4= cat62)</param>
         public void GetType(int i)
         {
             this.type = i;
@@ -84,7 +88,7 @@ namespace PGTAWPF
         /// <summary>
         /// Stablishes if we are looking for a message or not.
         /// </summary>
-        /// <param name="i">int indicating which cat we are looking at (0=cat 10, 1=cat21v21, 2=cat21v23, 3=all)</param>
+        /// <param name="i">int indicating which cat we are looking at (0=cat 10, 1=cat21v21, 2=cat21v23, 3=all, 4=cat62)</param>
         /// <param name="message">message we are looking for</param>
         public void GetSearching(int i, CATALL message)
         {
