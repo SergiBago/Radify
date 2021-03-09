@@ -934,7 +934,7 @@ namespace PGTAWPF
             else { row["SIC"] = "No Data"; }
             if (Message.Target_Identification != null) { row["Target\nIdentification"] = Message.Target_Identification; }
             else { row["Target\nIdentification"] = "No Data"; }
-            if (Message.Derived_Data_Address != null) { row["Target\nAddress"] = Message.Time_of_Track_Information; }
+            if (Message.Derived_Data_Address != null) { row["Target\nAddress"] = Message.Derived_Data_Address; }
             else { row["Target\nAddress"] = "No Data"; }
             if (Message.Time_of_Track_Information != null) { row["Time of\nDay"] = Message.Time_of_Track_Information; }
             else { row["Time of\nDay"] = "No Data"; }
@@ -1350,6 +1350,10 @@ namespace PGTAWPF
                 if (message.CAT == "21 v. 2.1")
                 {
                     message.refreshratio = ADSBRatio;
+                }
+                else if(message.CAT=="62")
+                {
+                    message.refreshratio = 5;
                 }
                 else
                 {

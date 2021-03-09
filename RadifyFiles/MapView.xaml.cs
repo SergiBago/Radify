@@ -92,6 +92,7 @@ namespace PGTAWPF
             CheckBoxshowsmr.IsChecked = true;
             CheckBoxshowmlat.IsChecked = true;
             CheckBoxshowadsb.IsChecked = true;
+            CheckBoxshowcat62.IsChecked = true;
             ShowMarkerInfoPanel(false);
 
             MarkerInfoViewLoad();
@@ -1258,12 +1259,13 @@ namespace PGTAWPF
                     if (mark.DetectionMode == "SMR" && CheckBoxshowsmr.IsChecked == false) { foreach (CustomOldGmapMarker marker in ListFlight) { gMapControl1.Markers.Add(marker); }; }
                     if (mark.DetectionMode == "MLAT" && CheckBoxshowmlat.IsChecked == false) { foreach (CustomOldGmapMarker marker in ListFlight) { gMapControl1.Markers.Add(marker); }; }
                     if (mark.DetectionMode == "ADSB" && CheckBoxshowadsb.IsChecked == false) { foreach (CustomOldGmapMarker marker in ListFlight) { gMapControl1.Markers.Add(marker); }; }
+                    if (mark.DetectionMode == "CAT 62" && CheckBoxshowcat62.IsChecked == false) { foreach (CustomOldGmapMarker marker in ListFlight) { gMapControl1.Markers.Add(marker); }; }
                 }
                 if (mark != null && markertype == 0) { gMapControl1.Markers.Add(mark); }
 
                 if (ShowOld.IsChecked == true)
                 {
-                    if ((ShowFlightHistory.IsChecked == true) && ((mark.DetectionMode == "SMR" && CheckBoxshowsmr.IsChecked == false) || (mark.DetectionMode == "MLAT" && CheckBoxshowmlat.IsChecked == false) || (mark.DetectionMode == "ADSB" && CheckBoxshowadsb.IsChecked == false)))
+                    if ((ShowFlightHistory.IsChecked == true) && ((mark.DetectionMode == "SMR" && CheckBoxshowsmr.IsChecked == false) || (mark.DetectionMode == "MLAT" && CheckBoxshowmlat.IsChecked == false) || (mark.DetectionMode == "CAT 62" && CheckBoxshowcat62.IsChecked == false) || (mark.DetectionMode == "ADSB" && CheckBoxshowadsb.IsChecked == false)))
                     {
                         if (mark.DetectionMode == "SMR")
                         {
@@ -1295,13 +1297,29 @@ namespace PGTAWPF
                                 if (marker.DetectionMode == "ADSB") { if (CheckBoxshowadsb.IsChecked == true) { gMapControl1.Markers.Add(marker); }; }
                             }
                         }
-                        else
+                        else if (mark.DetectionMode=="ADSB")
                         {
                             foreach (CustomOldGmapMarker marker in OldMarkers)
                             {
                                 if (marker.DetectionMode == "SMR") { if (CheckBoxshowsmr.IsChecked == true) { gMapControl1.Markers.Add(marker); }; }
                                 if (marker.DetectionMode == "MLAT") { if (CheckBoxshowmlat.IsChecked == true) { gMapControl1.Markers.Add(marker); }; }
                                 if (marker.DetectionMode == "ADSB")
+                                {
+                                    if (((marker.TargetAddress == mark.TargetAddress && marker.TargetAddress != null) || (marker.Track_number == mark.Track_number && marker.Track_number != null) || (marker.Callsign == mark.Callsign && marker.Callsign != null)) && marker.DetectionMode == mark.DetectionMode)
+                                    {
+                                        gMapControl1.Markers.Add(marker);
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            foreach (CustomOldGmapMarker marker in OldMarkers)
+                            {
+                                if (marker.DetectionMode == "SMR") { if (CheckBoxshowsmr.IsChecked == true) { gMapControl1.Markers.Add(marker); }; }
+                                if (marker.DetectionMode == "MLAT") { if (CheckBoxshowmlat.IsChecked == true) { gMapControl1.Markers.Add(marker); }; }
+                                if (marker.DetectionMode == "ADSB") { if (CheckBoxshowadsb.IsChecked == true) { gMapControl1.Markers.Add(marker); }; }
+                                if (marker.DetectionMode == "CAT 62")
                                 {
                                     if (((marker.TargetAddress == mark.TargetAddress && marker.TargetAddress != null) || (marker.Track_number == mark.Track_number && marker.Track_number != null) || (marker.Callsign == mark.Callsign && marker.Callsign != null)) && marker.DetectionMode == mark.DetectionMode)
                                     {
@@ -1318,13 +1336,15 @@ namespace PGTAWPF
                             if (marker.DetectionMode == "SMR") { if (CheckBoxshowsmr.IsChecked == true) { gMapControl1.Markers.Add(marker); }; }
                             if (marker.DetectionMode == "MLAT") { if (CheckBoxshowmlat.IsChecked == true) { gMapControl1.Markers.Add(marker); }; }
                             if (marker.DetectionMode == "ADSB") { if (CheckBoxshowadsb.IsChecked == true) { gMapControl1.Markers.Add(marker); }; }
+                            if (marker.DetectionMode == "CAT62") { if (CheckBoxshowcat62.IsChecked == true) { gMapControl1.Markers.Add(marker); }; }
+
                         }
 
                     }
                 }
 
-                if (mark != null && markertype == 1 && ((mark.DetectionMode == "SMR" && CheckBoxshowsmr.IsChecked == false) || (mark.DetectionMode == "MLAT" && CheckBoxshowmlat.IsChecked == false) || (mark.DetectionMode == "ADSB" && CheckBoxshowadsb.IsChecked == false))) { gMapControl1.Markers.Add(mark); }
-                else if (mark != null && markertype == 0 && ((mark.DetectionMode == "SMR" && CheckBoxshowsmr.IsChecked == false) || (mark.DetectionMode == "MLAT" && CheckBoxshowmlat.IsChecked == false) || (mark.DetectionMode == "ADSB" && CheckBoxshowadsb.IsChecked == false)))
+                if (mark != null && markertype == 1 && ((mark.DetectionMode == "SMR" && CheckBoxshowsmr.IsChecked == false) || (mark.DetectionMode == "MLAT" && CheckBoxshowmlat.IsChecked == false) || (mark.DetectionMode == "CAT 62" && CheckBoxshowcat62.IsChecked == false) || (mark.DetectionMode == "ADSB" && CheckBoxshowadsb.IsChecked == false))) { gMapControl1.Markers.Add(mark); }
+                else if (mark != null && markertype == 0 && ((mark.DetectionMode == "SMR" && CheckBoxshowsmr.IsChecked == false) || (mark.DetectionMode == "MLAT" && CheckBoxshowmlat.IsChecked == false) || (mark.DetectionMode == "ADSB" && CheckBoxshowadsb.IsChecked == false) || (mark.DetectionMode == "CAT 62" && CheckBoxshowcat62.IsChecked == false)))
                 {
                     foreach (CustomActualGmapMarker marker in ActualMarkers)
                     {
@@ -1379,12 +1399,16 @@ namespace PGTAWPF
                     if (marker.DetectionMode == "SMR" && CheckBoxshowsmr.IsChecked == true) { gMapControl1.Markers.Add(marker); }
                     if (marker.DetectionMode == "MLAT") { if (CheckBoxshowmlat.IsChecked == true) { gMapControl1.Markers.Add(marker); }; }
                     if (marker.DetectionMode == "ADSB" && CheckBoxshowadsb.IsChecked == true) { gMapControl1.Markers.Add(marker); }
+                    if (marker.DetectionMode == "CAT 62" && CheckBoxshowadsb.IsChecked == true) { gMapControl1.Markers.Add(marker); }
+
                 }
                 foreach (CustomActualGmapMarker marker in ActualNotRefreshedMarkers)
                 {
                     if (marker.DetectionMode == "SMR" && CheckBoxshowsmr.IsChecked == true) { gMapControl1.Markers.Add(marker); }
                     if (marker.DetectionMode == "MLAT") { if (CheckBoxshowmlat.IsChecked == true) { gMapControl1.Markers.Add(marker); }; }
                     if (marker.DetectionMode == "ADSB" && CheckBoxshowadsb.IsChecked == true) { gMapControl1.Markers.Add(marker); }
+                    if (marker.DetectionMode == "CAT 62" && CheckBoxshowadsb.IsChecked == true) { gMapControl1.Markers.Add(marker); }
+
                 }
 
                 foreach (GMapPolygon line in LinesList)
