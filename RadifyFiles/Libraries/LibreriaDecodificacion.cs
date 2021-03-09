@@ -106,7 +106,16 @@ namespace PGTAWPF
         public string OctetoBinarioASCII(string octeto)
         {
             int num = Convert.ToInt32(octeto, 2);
-            string Character = Decimal_a_ASCII[num];
+            string Character;
+            try
+            {
+
+                Character = Decimal_a_ASCII[num];
+            }
+            catch
+            {
+                Character = "_";
+            }
             return Character;
 
         }

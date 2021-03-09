@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,27 +71,27 @@ namespace PGTAWPF
                     if (FSPEC[11] == '1') { pos = this.Compute_Track_Number(mensaje, pos); }
                     if (FSPEC[12] == '1') { pos = this.Compute_Target_Status(mensaje, pos); }
                     if (FSPEC[13] == '1') { pos = this.Compute_System_Track_Update_Ages(mensaje, pos); }
-                }
-                if (FSPEC.Count() > 16)
-                {
-                    if (FSPEC[14] == '1') { pos = this.Compute_Mode_of_Movement(mensaje, pos); }
-                    if (FSPEC[15] == '1') { pos = this.Compute_System_Track_Data_Ages(mensaje, pos); }
-                    if (FSPEC[16] == '1') { pos = this.Compute_Flight_level(mensaje, pos); }
-                    if (FSPEC[17] == '1') { pos = this.Compute_Calculated_Track_Geometric_Altitude(mensaje, pos); }
-                    if (FSPEC[18] == '1') { pos = this.Compute_Calculated_Track_Barometric_Altitude(mensaje, pos); }
-                    if (FSPEC[19] == '1') { pos = this.Compute_Calculated_Rate_of_Climb(mensaje, pos); }
-                    if (FSPEC[20] == '1') { pos = this.Compute_Flight_Plan_Related_Data(mensaje, pos); }
-                }
-                if (FSPEC.Count() > 22)
-                {
-                    if (FSPEC[21] == '1') { pos = this.Compute_Target_Size_and_Orientation(mensaje, pos); }
-                    if (FSPEC[22] == '1') { pos = this.Compute_Vehicle_Fleet_Identificatior(mensaje, pos); }
-                    if (FSPEC[23] == '1') { pos = this.Compute_Mode_5_Data_Reports(mensaje, pos); }
-                    if (FSPEC[24] == '1') { pos = this.Compute_Mode_2_code(mensaje, pos); }
-                    if (FSPEC[25] == '1') { pos = this.Compute_Composed_Track_Number(mensaje, pos); }
-                    if (FSPEC[26] == '1') { pos = this.Compute_Estimated_accuracies(mensaje, pos); }
-                    if (FSPEC[27] == '1') { pos = this.Compute_System_Measured_Information(mensaje, pos); }
-                }
+            }
+            if (FSPEC.Count() > 16)
+            {
+                if (FSPEC[14] == '1') { pos = this.Compute_Mode_of_Movement(mensaje, pos); }
+                if (FSPEC[15] == '1') { pos = this.Compute_System_Track_Data_Ages(mensaje, pos); }
+                if (FSPEC[16] == '1') { pos = this.Compute_Flight_level(mensaje, pos); }
+                if (FSPEC[17] == '1') { pos = this.Compute_Calculated_Track_Geometric_Altitude(mensaje, pos); }
+                if (FSPEC[18] == '1') { pos = this.Compute_Calculated_Track_Barometric_Altitude(mensaje, pos); }
+                if (FSPEC[19] == '1') { pos = this.Compute_Calculated_Rate_of_Climb(mensaje, pos); }
+                if (FSPEC[20] == '1') { pos = this.Compute_Flight_Plan_Related_Data(mensaje, pos); }
+            }
+            if (FSPEC.Count() > 22)
+            {
+                if (FSPEC[21] == '1') { pos = this.Compute_Target_Size_and_Orientation(mensaje, pos); }
+                if (FSPEC[22] == '1') { pos = this.Compute_Vehicle_Fleet_Identificatior(mensaje, pos); }
+                if (FSPEC[23] == '1') { pos = this.Compute_Mode_5_Data_Reports(mensaje, pos); }
+                if (FSPEC[24] == '1') { pos = this.Compute_Mode_2_code(mensaje, pos); }
+                if (FSPEC[25] == '1') { pos = this.Compute_Composed_Track_Number(mensaje, pos); }
+                if (FSPEC[26] == '1') { pos = this.Compute_Estimated_accuracies(mensaje, pos); }
+                if (FSPEC[27] == '1') { pos = this.Compute_System_Measured_Information(mensaje, pos); }
+            }
             //}
             //catch
             //{
@@ -242,6 +243,18 @@ namespace PGTAWPF
         public string ADS;
         public string SUC;
         public string AAC;
+        public string SDS;
+        public string EMS;
+        public string PFT; 
+        public string FPLT;
+        public string DUPT;
+        public string DUPF;
+        public string DUPM;
+        public string SFC;
+        public string IDD;
+        public string IEC;
+
+
         private int Compute_Target_Status(string[] message, int pos)
         {
             if (message[pos].Substring(0, 1) == "0")
@@ -459,35 +472,158 @@ namespace PGTAWPF
                         }
                         if (message[pos].Substring(3, 1) == "0")
                         {
-                            FPC = "Not flight-plan correlated";
+                            MDS = "Default value";
                         }
                         else
                         {
-                            FPC = "Flight plan correlated";
+                            MDS = "Age of the last received Mode S track update is higher than system dependent threshold";
                         }
                         if (message[pos].Substring(4, 1) == "0")
                         {
-                            AFF = "Default value";
+                            ADS = "Default value";
                         }
                         else
                         {
-                            AFF = "ADS-B data inconsistent with other surveillance information ";
+                            ADS = "Age of the last received ADS-B track update is higher than system dependent threshold ";
                         }
                         if (message[pos].Substring(5, 1) == "0")
                         {
-                            STP = "Default value";
+                            SUC = "Default value";
                         }
                         else
                         {
-                            STP = "Slave Track Promotion";
+                            SUC = "Special Used Code (Mode A codes to be defined in the system to mark a track with special interest)";
                         }
                         if (message[pos].Substring(6, 1) == "0")
                         {
-                            KOS = "Complementary service used";
+                            AAC = "Complementary service used";
                         }
                         else
                         {
-                            KOS = "Background service used";
+                            AAC = "Assigned Mode A Code Conflict (same discrete Mode A Code assigned to another track)";
+                        }
+                        if (message[pos].Substring(7, 1) == "1")
+                        {
+                            pos++;
+                            string ssd = message[pos].Substring(0, 2);
+                            if(ssd=="00")
+                            {
+                                SDS = "Combined";
+                            }
+                            else if (ssd == "01")
+                            {
+                                SDS = "Cooperative only";
+                            }
+                            else if (ssd == "10")
+                            {
+                                SDS = "Non-Cooperative only";
+                            }
+                            else if (ssd == "11")
+                            {
+                                SDS = "Not defined";
+                            }
+                            int ems= Convert.ToInt32(message[pos].Substring(2,3),2);
+                            if (ems == 0)
+                            {
+                                EMS = "No emergency";
+                            }
+                            else if (ems == 1)
+                            {
+                                EMS = "General emergency";
+                            }
+                            else if (ems == 2)
+                            {
+                                EMS = "Lifeguard / medical";
+                            }
+                            else if (ems == 3)
+                            {
+                                EMS = "Minimum fuel";
+                            }
+                            else if (ems == 4)
+                            {
+                                EMS = "No communications";
+                            }
+                            else if (ems == 5)
+                            {
+                                EMS = "Unlawful interference";
+                            }
+                            else if (ems == 6)
+                            {
+                                EMS = "“Downed” Aircraft";
+                            }
+                            else if (ems == 7)
+                            {
+                                EMS = "Undefined";
+                            }
+                            if(message[pos].Substring(5,1)=="0")
+                            {
+                                PFT = "No indication";
+                            }
+                            else
+                            {
+                                PFT = "Potential False Track Indication";
+                            }
+                            if (message[pos].Substring(6, 1) == "0")
+                            {
+                                PFT = "Default value";
+                            }
+                            else
+                            {
+                                PFT = "Track created / updated with FPL data";
+                            }
+                            if (message[pos].Substring(7, 1) == "1")
+                            {
+                                pos++;
+                                if (message[pos].Substring(0, 1) == "0")
+                                {
+                                    DUPT = "Default value";
+                                }
+                                else
+                                {
+                                    DUPT= "Duplicate Mode 3/A Code";
+                                }
+                                if (message[pos].Substring(1, 1) == "0")
+                                {
+                                    DUPF= "Default value";
+                                }
+                                else
+                                {
+                                    DUPF = "Duplicate Flight Plan";
+                                }
+                                if (message[pos].Substring(2, 1) == "0")
+                                {
+                                    DUPM = "Default value";
+                                }
+                                else
+                                {
+                                    DUPM = "Duplicate Flight Plan due to manual correlation";
+                                }
+                                if (message[pos].Substring(3, 1) == "0")
+                                {
+                                    SFC = "Default value";
+                                }
+                                else
+                                {
+                                    SFC = "Surface target";
+                                }
+                                if (message[pos].Substring(4, 1) == "0")
+                                {
+                                    IDD = "No indication";
+                                }
+                                else
+                                {
+                                    IDD = "Duplicate Flight-ID";
+                                }
+                                if (message[pos].Substring(5, 1) == "0")
+                                {
+                                    IEC = "Default value";
+                                }
+                                else
+                                {
+                                    IEC = "Inconsistent Emergency Code";
+                                }
+                              
+                            }
                         }
                     }
                 }
@@ -956,8 +1092,6 @@ namespace PGTAWPF
             {
                 ADF = "Altitude discrepancy";
             }
-
-
             pos++;
             return pos;
         }
@@ -1003,7 +1137,7 @@ namespace PGTAWPF
         private int Compute_Calculated_Rate_of_Climb(string[] message, int pos)
         {
             Calculated_Rate_of_Climb = Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1])) * 6.25)+"ft/min";
-            pos = +2;
+            pos += 2;
             return pos;
         }
 
@@ -1034,6 +1168,7 @@ namespace PGTAWPF
             string octets = string.Concat(message[pos + 1], message[pos + 2], message[pos + 3], message[pos + 4], message[pos + 5], message[pos + 6]);
             for (int i = 0; i < 8; i++) { Identification.Append(lib.Compute_Char(octets.Substring(i * 6, 6))); }
             TAR = Identification.ToString().Trim();
+            Target_Identification = TAR;
             pos += 7;
             return pos;
         }
@@ -1058,17 +1193,17 @@ namespace PGTAWPF
         {
             LENGHT = "Lenght:  " + Convert.ToString(Convert.ToInt32(message[pos].Substring(0, 7), 2)) + "m";
             Target_size_and_orientation = LENGHT;
-            pos = pos++;
-            if (message[pos - 1].Substring(7, 1) == "1")
+            pos++;
+            if (message[pos].Substring(7, 1) == "1")
             {
                 ORIENTATION = "Orientation: " + Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos].Substring(0, 7), 2)) * (360 / 128)) + "°";
                 Target_size_and_orientation = Target_size_and_orientation + ", " + ORIENTATION;
-                pos = pos++;
-                if (message[pos - 1].Substring(7, 1) == "1")
+                pos++;
+                if (message[pos].Substring(7, 1) == "1")
                 {
                     WIDTH = "Widht: " + Convert.ToString(Convert.ToInt32(message[pos].Substring(0, 7), 2)) + "m";
                     Target_size_and_orientation = Target_size_and_orientation + ", " + WIDTH;
-                    pos = pos++;
+                    pos++;
                 }
             }
             return pos;
@@ -1116,10 +1251,10 @@ namespace PGTAWPF
             pos++;
             if (message[pos].Substring(7, 1) == "1")
             {
-               
-                Update_Ages_TRK = message[pos].Substring(0, 1);
-                Update_Ages_TRK = message[pos].Substring(1, 1);
-                Update_Ages_TRK = message[pos].Substring(2, 1);
+
+                Update_Ages_UAT = message[pos].Substring(0, 1);
+                Update_Ages_LOP = message[pos].Substring(1, 1);
+                Update_Ages_MLT = message[pos].Substring(2, 1);
                 pos++;
             }
             if(Update_Ages_TRK=="1")
@@ -1263,9 +1398,10 @@ namespace PGTAWPF
             Track_Ages_MD4 = message[pos].Substring(4, 1);
             Track_Ages_MD5 = message[pos].Substring(5, 1);
             Track_Ages_MHG = message[pos].Substring(6, 1);
-            pos++;
             if (message[pos].Substring(7, 1) == "1")
             {
+                pos++;
+
                 Track_Ages_IAS = message[pos].Substring(0, 1);
                 Track_Ages_TAS = message[pos].Substring(1, 1);
                 Track_Ages_SAL = message[pos].Substring(2, 1);
@@ -1273,9 +1409,10 @@ namespace PGTAWPF
                 Track_Ages_TID = message[pos].Substring(4, 1);
                 Track_Ages_COM = message[pos].Substring(5, 1);
                 Track_Ages_SAB = message[pos].Substring(6, 1);
-                pos++;
                 if (message[pos].Substring(7, 1) == "1")
                 {
+                    pos++;
+
                     Track_Ages_ACS = message[pos].Substring(0, 1);
                     Track_Ages_BVR = message[pos].Substring(1, 1);
                     Track_Ages_GVR = message[pos].Substring(2, 1);
@@ -1283,9 +1420,10 @@ namespace PGTAWPF
                     Track_Ages_TAR = message[pos].Substring(4, 1);
                     Track_Ages_TAN = message[pos].Substring(5, 1);
                     Track_Ages_GSP = message[pos].Substring(6, 1);
-                    pos++;
                     if (message[pos].Substring(7, 1) == "1")
                     {
+                        pos++;
+
                         Track_Ages_VUN = message[pos].Substring(0, 1);
                         Track_Ages_MET = message[pos].Substring(1, 1);
                         Track_Ages_EMC = message[pos].Substring(2, 1);
@@ -1293,17 +1431,19 @@ namespace PGTAWPF
                         Track_Ages_GAL = message[pos].Substring(4, 1);
                         Track_Ages_PUN = message[pos].Substring(5, 1);
                         Track_Ages_MB = message[pos].Substring(6, 1);
-                        pos++;
                         if (message[pos].Substring(7, 1) == "1")
                         {
+                            pos++;
+
                             Track_Ages_IAR = message[pos].Substring(0, 1);
                             Track_Ages_MAC = message[pos].Substring(1, 1);
                             Track_Ages_BPS = message[pos].Substring(2, 1);                         
-                            pos++;
                         }
                     }
                 }
             }
+            pos++;
+
             if (Track_Ages_MFL == "1")
             {
                 Track_Ages_MFL_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
@@ -1591,7 +1731,7 @@ namespace PGTAWPF
                 {
                     Measured_Information_G = "Garbled code";
                 }
-                Measured_Information_Mode_C_Code = Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1]).Substring(2,14)) * 0.25) + " ft";
+                Measured_Information_Mode_C_Code = Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1]).Substring(2,14)) * 0.25) + " FL";
                 pos += 2;
             }
 
@@ -1685,6 +1825,7 @@ namespace PGTAWPF
                 {
                     Measured_Information_TST_Value = "Test target report";
                 }
+                pos++;
             }
             return pos;
         }
@@ -1871,15 +2012,18 @@ namespace PGTAWPF
             if (Derived_Data_ID == "1")
             {
                 StringBuilder Identification = new StringBuilder();
-                string octets = string.Concat(message[pos], message[pos + 1], message[pos + 2], message[pos + 3], message[pos + 4], message[pos + 5], message[pos + 6]);
-                for (int i = 0; i < 8; i++) { Identification.Append(lib.Compute_Char(octets.Substring(i * 6, 6))); }
+                string octets = string.Concat(message[pos], message[pos + 1], message[pos + 2], message[pos + 3], message[pos + 4], message[pos + 5]);
+                for (int i = 0; i < 8; i++) 
+                { 
+                    Identification.Append(lib.Compute_Char(octets.Substring(i * 6, 6))); 
+                }
                 Derived_Data_Target_id = Identification.ToString().Trim();
-                pos += 7;
+                pos += 6;
             }
 
             if (Derived_Data_MHG == "1")
             {
-                Derived_Data_MHG_value =Convert.ToString(Convert.ToInt32(string.Concat(message[pos], message[pos]), 2) * (360 / (Math.Pow(2, 16)))) + "º";
+                Derived_Data_MHG_value =Convert.ToString(Convert.ToInt32(string.Concat(message[pos], message[pos+1]), 2) * (360 / (Math.Pow(2, 16)))) + "º";
                 pos += 2;
             }
 
@@ -1980,10 +2124,10 @@ namespace PGTAWPF
                 {
                     Derived_Data_TIS_NVB_value = "Trajectory Intent Data is not valid";
                 }
+                pos++;
             }
             if(Derived_Data_TID=="1")
             {
-                pos++;
                 Derived_Data_REP = Convert.ToInt32(message[pos], 2);
                 Derived_Data_TCA = new string[Derived_Data_REP];
                 Derived_Data_NC = new string[Derived_Data_REP];
@@ -2009,10 +2153,10 @@ namespace PGTAWPF
                     pos++;
                     Derived_Data_Altitude[i] = Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1])) * 10) + " ft";
                     pos += 2;
-                    Derived_Data_Latitude[i] = Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1])) * (180 / (Math.Pow(2, 23)))) + " deg";
-                    pos += 2;
-                    Derived_Data_Longitude[i] = Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1])) * (180 / (Math.Pow(2, 23)))) + " deg";
-                    pos += 2;
+                    Derived_Data_Latitude[i] = Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1], message[pos + 2])) * (180 / (Math.Pow(2, 23)))) + " deg";
+                    pos += 3;
+                    Derived_Data_Longitude[i] = Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1], message[pos + 2])) * (180 / (Math.Pow(2, 23)))) + " deg";
+                    pos += 3;
                     int pt = Convert.ToInt32(message[pos].Substring(0, 4), 2);
                     if (pt == 0) { Derived_Data_Point_Type[i] = "Unknown"; }
                     else if (pt == 1) { Derived_Data_Point_Type[i] = "Fly by waypoint (LT) "; }
@@ -2423,6 +2567,7 @@ namespace PGTAWPF
                 {
                     Derived_Data_EMC_ECAT = "reserved ";
                 }
+                pos++;
             }
 
             if (Derived_Data_POS=="1")
@@ -2603,7 +2748,7 @@ namespace PGTAWPF
                 {
                     Identification.Append(lib.OctetoBinarioASCII(message[pos+i])); 
                 }
-                Derived_Data_Target_id = Identification.ToString().Trim();
+                Flight_Plan_Data_CSN_value = Identification.ToString().Trim();
                 pos += 7;
             }
 
@@ -2626,7 +2771,7 @@ namespace PGTAWPF
                 {
                     Flight_Plan_Data_IFI_TYP = "Unit 3 internal flight number";
                 }
-                Flight_Plan_Data_IFI_NBR = Convert.ToString(Convert.ToInt32(String.Concat(message[pos],message[pos+1]).Substring(5,27), 2));
+                Flight_Plan_Data_IFI_NBR = Convert.ToString(Convert.ToInt32(String.Concat(message[pos],message[pos+1], message[pos + 2], message[pos + 3]).Substring(5,27), 2));
                 pos += 4;
             }
             if(Flight_Plan_Data_FCT=="1")
@@ -2766,7 +2911,7 @@ namespace PGTAWPF
             }
             if(Flight_Plan_Data_TOD=="1")
             {
-                pos++;
+
                 Flight_Plan_Data_TOD_REP = Convert.ToInt32(message[pos], 2);
                 Flight_Plan_Data_TOD_TYP = new string[Flight_Plan_Data_TOD_REP];
                 Flight_Plan_Data_TOD_DAY = new string[Flight_Plan_Data_TOD_REP];
@@ -2869,7 +3014,8 @@ namespace PGTAWPF
                         Flight_Plan_Data_TOD_AVS[i] = "Seconds not available";
                     }
 
-                    Flight_Plan_Data_TOD_SEC[i] = Convert.ToString(Convert.ToInt32(message[pos].Substring(2, 6), 2));              
+                    Flight_Plan_Data_TOD_SEC[i] = Convert.ToString(Convert.ToInt32(message[pos].Substring(2, 6), 2));
+                    pos++;
                 }
             }
         
@@ -2921,6 +3067,7 @@ namespace PGTAWPF
                 {
                     Flight_Plan_Data_STS_AVL = "Invalid";
                 }
+                pos++;
             }
 
             if(Flight_Plan_Data_STD=="1")
@@ -3021,7 +3168,7 @@ namespace PGTAWPF
                 Estimated_accuracies_ARC = message[pos].Substring(0, 1);
 
             }
-
+            pos++;
             if(Estimated_accuracies_APC=="1")
             {
                 Estimated_accuracies_APC_X = Convert.ToString(Convert.ToInt32(string.Concat(message[pos], message[pos]), 2) * 0.5) + " m";

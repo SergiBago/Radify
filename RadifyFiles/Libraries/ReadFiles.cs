@@ -129,8 +129,8 @@ namespace PGTAWPF
         public int Leer(string path, int first_time, List<bool> listchecked)
         {
             GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true); //collect garbage from previous files to free up space
-            try
-            {
+            //try
+            //{
                 /*We create a new cat all list. The cat all list contains values that are only used in that list for the map,
                  * such as the refresh rate, the direction, the total time including the day, ... In order not to calculate
                  * the entire list of all files each time, we will create a new list with those messages, we will do the 
@@ -367,12 +367,12 @@ namespace PGTAWPF
                 numficheros++;
                 names.Add(path);
                 return 1;
-            }
-            catch
-            {
-                GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
-                return 0;
-            }
+            //}
+            //catch
+            //{
+            //    GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);
+            //    return 0;
+            //}
         }
 
 
@@ -1146,7 +1146,7 @@ namespace PGTAWPF
         /// <param name="message">message of which we are looking for direcion</param>
         private void FindDirection(List<Trajectories> listtraj, CATALL message)
         {
-            if (message.Target_Identification != null && message.Target_Identification.Count() > 1) // && listtraj.Exists(x => x.Target_Identification == message.Target_Identification))
+            if (message.Target_Identification != null && message.Target_Identification.Count() > 1 && listtraj.Exists(x => x.Target_Identification == message.Target_Identification))
             {
                 Trajectories t = listtraj.Find(x => x.Target_Identification == message.Target_Identification);
                 int index = t.ListTimePoints.FindIndex(x => x.time == message.Time_Of_day);
@@ -1154,14 +1154,14 @@ namespace PGTAWPF
                 ComputedirectionFromindex(t, index, message);
             }
 
-            else if (message.Target_Address != null)// && listtraj.Exists(x => x.Target_Address == message.Target_Address))
+            else if (message.Target_Address != null && listtraj.Exists(x => x.Target_Address == message.Target_Address))
             {
                 Trajectories t = listtraj.Find(x => x.Target_Address == message.Target_Address);
                 int index = t.ListTimePoints.FindIndex(x => x.time == message.Time_Of_day);
                 ComputedirectionFromindex(t, index, message);
             }
 
-            else if (message.Track_number != null)// && listtraj.Exists(x => x.Track_number == message.Track_number))
+            else if (message.Track_number != null && listtraj.Exists(x => x.Track_number == message.Track_number))
             {
                 Trajectories t = listtraj.Find(x => x.Track_number == message.Track_number);
                 int index = t.ListTimePoints.FindIndex(x => x.time == message.Time_Of_day);

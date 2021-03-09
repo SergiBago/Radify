@@ -103,14 +103,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Radify.exe" size="1901528">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Radify.exe" size="1904088">
       <assemblyIdentity name="Radify" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>5PIC6JfqazuHmtiiinUdGhKSKwnvMIYa2hILHLp+LDA=</dsig:DigestValue>
+        <dsig:DigestValue>lkk17is3HVmuKN4s3D296REe1Xt2w2+Ap8t0P7mzq5M=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -249,13 +249,13 @@
       <dsig:DigestValue>nor/EtYdN2Y3IJ7R+8tNCusMe9CLExlTo1rOqakxRQE=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Radify.exe.config" size="1891">
+  <file name="Radify.exe.config" size="1862">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>GD72h5dNUJcJZ4SCANIreZLpAWB4S1TnrARpAdlA8Cw=</dsig:DigestValue>
+      <dsig:DigestValue>nPAdAj9fZ7aNIBZdda0NehDBxmlzfKMly3s5EOq+eNA=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
