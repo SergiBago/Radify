@@ -373,11 +373,11 @@ namespace PGTAWPF
                 {
                     viewCat62 = new View();
                     viewCat62.GetType(4);
-                    viewCat62.GetAll(null, null,null,  listaCAT62, listaCATALL, null,null, TableCat62, null, null, TableCat62.Copy());
+                    viewCat62.GetAll(null, null,null,  listaCAT62, listaCATALL, null,null, null, TableCat62,null, TableCat62.Copy());
                     viewCat62.GetForm(this);
                     CAT62started = true;
                 }
-                PanelChildForm.Navigate(viewCat23);
+                PanelChildForm.Navigate(viewCat62);
             }
             else //If no CAT 21 v0.23 messages loaded we show the page indicating there is no cat10 messages loaded
             {
@@ -587,12 +587,12 @@ namespace PGTAWPF
             }
             if (Cat == "62")
             {
-                activeSeecat23button();
-                viewCat23 = new View();
-                viewCat23.GetSearching(4, message);
-                viewCat23.GetAll(null, null, null, listaCAT62, listaCATALL, null, null, null, null,TableCat62, TableCat21v23.Copy());
-                viewCat23.GetForm(this);
-                PanelChildForm.Navigate(viewCat23);
+                activeSeeCat62button();
+                viewCat62 = new View();
+                viewCat62.GetSearching(4, message);
+                viewCat62.GetAll(null, null, null, listaCAT62, listaCATALL, null, null, null, null,TableCat62, TableCat62.Copy());
+                viewCat62.GetForm(this);
+                PanelChildForm.Navigate(viewCat62);
             }
         }
 

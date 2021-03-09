@@ -100,6 +100,7 @@ namespace PGTAWPF
             /*If we get here looking for a marker instead of starting the page 
              * from "0" we will find the marker we are looking for, 
              * we will advance to its time, and we will select it*/
+
             if (searchflightfromtable == true) 
             {
                 CATALL message = SearchingFlight;
@@ -291,9 +292,18 @@ namespace PGTAWPF
             }
 
             //Apply start, actual, and final time to this page.
-            this.time = List[0].Time_Of_day-1; //Time-1 so that the starting time is one second before that of the first messages, and in this way when pressing play, it will advance one second and start with the first message.
-            this.starttime = List[0].Time_Of_day-1;
-            First_time = List[0].Time_Of_day-1;
+            if (List[0].Time_Of_day > 0)
+            {
+                this.time = List[0].Time_Of_day - 1; //Time-1 so that the starting time is one second before that of the first messages, and in this way when pressing play, it will advance one second and start with the first message.
+                this.starttime = List[0].Time_Of_day - 1;
+                First_time = List[0].Time_Of_day - 1;
+            }
+            else
+            {
+                this.time = List[0].Time_Of_day; //Time-1 so that the starting time is one second before that of the first messages, and in this way when pressing play, it will advance one second and start with the first message.
+                this.starttime = List[0].Time_Of_day ;
+                First_time = List[0].Time_Of_day;
+            }
             Last_time =(days-1)*86400+86400;
 
             /*Depending on whether I have messages for only one day or more, we will show or hide the day controls,
@@ -1336,7 +1346,7 @@ namespace PGTAWPF
                             if (marker.DetectionMode == "SMR") { if (CheckBoxshowsmr.IsChecked == true) { gMapControl1.Markers.Add(marker); }; }
                             if (marker.DetectionMode == "MLAT") { if (CheckBoxshowmlat.IsChecked == true) { gMapControl1.Markers.Add(marker); }; }
                             if (marker.DetectionMode == "ADSB") { if (CheckBoxshowadsb.IsChecked == true) { gMapControl1.Markers.Add(marker); }; }
-                            if (marker.DetectionMode == "CAT62") { if (CheckBoxshowcat62.IsChecked == true) { gMapControl1.Markers.Add(marker); }; }
+                            if (marker.DetectionMode == "CAT 62") { if (CheckBoxshowcat62.IsChecked == true) { gMapControl1.Markers.Add(marker); }; }
 
                         }
 
@@ -1399,7 +1409,7 @@ namespace PGTAWPF
                     if (marker.DetectionMode == "SMR" && CheckBoxshowsmr.IsChecked == true) { gMapControl1.Markers.Add(marker); }
                     if (marker.DetectionMode == "MLAT") { if (CheckBoxshowmlat.IsChecked == true) { gMapControl1.Markers.Add(marker); }; }
                     if (marker.DetectionMode == "ADSB" && CheckBoxshowadsb.IsChecked == true) { gMapControl1.Markers.Add(marker); }
-                    if (marker.DetectionMode == "CAT 62" && CheckBoxshowadsb.IsChecked == true) { gMapControl1.Markers.Add(marker); }
+                    if (marker.DetectionMode == "CAT 62" && CheckBoxshowcat62.IsChecked == true) { gMapControl1.Markers.Add(marker); }
 
                 }
                 foreach (CustomActualGmapMarker marker in ActualNotRefreshedMarkers)
@@ -1407,7 +1417,7 @@ namespace PGTAWPF
                     if (marker.DetectionMode == "SMR" && CheckBoxshowsmr.IsChecked == true) { gMapControl1.Markers.Add(marker); }
                     if (marker.DetectionMode == "MLAT") { if (CheckBoxshowmlat.IsChecked == true) { gMapControl1.Markers.Add(marker); }; }
                     if (marker.DetectionMode == "ADSB" && CheckBoxshowadsb.IsChecked == true) { gMapControl1.Markers.Add(marker); }
-                    if (marker.DetectionMode == "CAT 62" && CheckBoxshowadsb.IsChecked == true) { gMapControl1.Markers.Add(marker); }
+                    if (marker.DetectionMode == "CAT 62" && CheckBoxshowcat62.IsChecked == true) { gMapControl1.Markers.Add(marker); }
 
                 }
 
@@ -1821,8 +1831,17 @@ namespace PGTAWPF
                 Play.Visibility = Visibility.Visible;
                 int num = mark.number;
                 CATALL message = new CATALL();
-                foreach (CATALL mes in List) { if (mes.num == num) { message = mes; }; }
-                if (message.CAT != "") { Form.OpenFlightInList(message); }
+                foreach (CATALL mes in List)
+                { 
+                    if (mes.num == num) 
+                    {
+                        message = mes; 
+                    }
+                }
+                if (message.CAT != "") 
+                {
+                    Form.OpenFlightInList(message);
+                }
             }
         }
 

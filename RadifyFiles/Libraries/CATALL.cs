@@ -164,8 +164,9 @@ namespace PGTAWPF
             {
                 type = "car";
             }
-            else if (message.Derived_Data_EMC_ECAT == "Light aircraft" || message.Derived_Data_EMC_ECAT == "Medium aircraft" || message.Derived_Data_EMC_ECAT == "Heavy aircraft") { type = "plane"; }
-            else { type = "undetermined"; }
+            else if (message.Derived_Data_EMC_ECAT == "Light aircraft" || message.Derived_Data_EMC_ECAT == "Medium aircraft" || message.Derived_Data_EMC_ECAT == "Heavy aircraft") 
+            { type = "plane"; }
+            else { type = "plane"; }
             DetectionMode = "CAT 62";
         }
     }

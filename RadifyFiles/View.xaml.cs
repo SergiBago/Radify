@@ -17,6 +17,7 @@ using System.ComponentModel;
 using Microsoft.Win32;
 using System.IO;
 using System.Windows.Threading;
+using System.Threading;
 //using System.Windows.Forms;
 
 namespace PGTAWPF
@@ -59,7 +60,7 @@ namespace PGTAWPF
             this.listaCAT10 = list10;
             this.listaCAT21v21 = list21v21;
             this.listaCAT21v23 = list21v23;
-            this.listaCAT62 = listaCAT62;
+            this.listaCAT62 = list62;
             this.listaCATALL = listCATAll;
             this.Datatable = table;
             this.Datatable.Columns.RemoveAt(1);
@@ -263,15 +264,17 @@ namespace PGTAWPF
                         if (type == 2) { Alertvisible(true); found = true; } //If we are in type 2 and searching for a track number we throw an alert, so type 2 messages doesn't have track number
                         else
                         {
+                            int col = 5;
+                            if (type == 4) { col = 6; }
                             search = search.Substring(3, (search.Length - 3)); //If searching for a track number, we delete the "TR:" from the search string 
                             for (int s = 0; s < DatagridView.Items.Count; s++) 
                             {
                                 try
                                 {
-                                    if (Convert.ToInt32(search) == Convert.ToInt32((DatagridView.Items[s] as DataRowView).Row.ItemArray[5]))
+                                    if (Convert.ToInt32(search) == Convert.ToInt32((DatagridView.Items[s] as DataRowView).Row.ItemArray[col]))
                                     {
                                         int num = Convert.ToInt32((DatagridView.Items[s] as DataRowView).Row.ItemArray[0]);
-                                        SortDataGrid(DatagridView, 5, ListSortDirection.Descending);
+                                        SortDataGrid(DatagridView, col, ListSortDirection.Descending);
                                         for (int i = 0; i < DatagridView.Items.Count; i++)
                                         {
                                             if (Convert.ToInt32((DatagridView.Items[i] as DataRowView).Row.ItemArray[0]) == num)
@@ -310,6 +313,7 @@ namespace PGTAWPF
                         if (type==0) { col = 17; }
                         else if (type==1) { col = 13; }
                         else if (type ==2) { col = 14; }
+                        else if (type == 4) { col = 5; ; }
                         else { col = 6; }
 
                         search = search.Substring(3, (search.Length - 3)).ToUpper(); //If searching for a target address, we delete the "TA:" from the search string 
@@ -434,6 +438,7 @@ namespace PGTAWPF
                 if (type == 0) { col = 17; }
                 else if (type == 1) { col = 13; }
                 else if (type == 2) { col = 14; }
+                else if (type == 4) { col = 5; }
                 else { col = 6; }
 
                 SortDataGrid(DatagridView, col, ListSortDirection.Descending);
@@ -462,7 +467,9 @@ namespace PGTAWPF
             {
                 if (type != 2)
                 {
-                    SortDataGrid(DatagridView, 5, ListSortDirection.Descending);
+                    int col = 5;
+                    if (type == 4) { col = 6; }
+                    SortDataGrid(DatagridView, col, ListSortDirection.Descending);
                     DatagridView.UnselectAll();
                     for (int i = 0; i < DatagridView.Items.Count; i++)
                     {
@@ -874,6 +881,471 @@ namespace PGTAWPF
                     CAT21vs23 message = new CAT21vs23();
                     foreach (CAT21vs23 mes in listaCAT21v23) { if (mes.num == num) { message = mes; }; }
                     Value = Value + message.DCR + nl + message.GBS + nl + message.SIM + nl + "Test Target: " + message.TST + nl + message.RAB + nl + message.SAA + nl + message.SPI + nl + "ATP: " + message.ATP + nl + "ARC: " + message.ARC;
+                }
+                return Value;
+            }
+            else if(type==4)
+            {
+                CAT62 message = new CAT62();
+                foreach (CAT62 mes in listaCAT62) 
+                { 
+                    if (mes.num == num) { message = mes; }
+                    
+                }
+                string nl = "\n";
+                string Value = "";
+                if (i == 14) //Aircraft derived data
+                {
+                    if(message.Derived_Data_ADR=="1")
+                    {
+                        Value = "Target Address: "+ message.Derived_Data_Address+nl;
+                    }
+                    if (message.Derived_Data_ID == "1")
+                    {
+                        Value = Value +"Target Identification: " + message.Derived_Data_Target_id + nl;
+                    }
+                    if (message.Derived_Data_MHG == "1")
+                    {
+                        Value = Value + "Magnetic Heading: " + message.Derived_Data_MHG_value + nl;
+                    }
+                    if (message.Derived_Data_IAS == "1")
+                    {
+                        Value = Value + "IAS: " + message.Derived_Data_IAS_value + nl;
+                    }
+                    if (message.Derived_Data_TAS == "1")
+                    {
+                        Value = Value + "TAS: " + message.Derived_Data_TAS_value + nl;
+                    }
+                    if (message.Derived_Data_SAL== "1")
+                    {
+                        Value = Value + "Selected Altitude: " + "SAS: "+message.Derived_Data_SAL_SAS_value + " Source: "+message.Derived_Data_SAL_Source_value+" Alt: "+ message.Derived_Data_SAL_Altitude_value+ nl;
+                    }
+                    if (message.Derived_Data_FSS == "1")
+                    {
+                        Value = Value +"FSS: MV: "+message.Derived_Data_FSS_MV_value+" AH: "+message.Derived_Data_FSS_MV_value+" AM: "+ message.Derived_Data_FSS_AM_value+" Alt: " + message.Derived_Data_FSS_Altitude_value + nl;
+                    }
+                    if (message.Derived_Data_TIS == "1")
+                    {
+                        Value = Value + "TIS: NAV: " +message.Derived_Data_TIS_NAV_value+" NVB: " + message.Derived_Data_TIS_NVB_value + nl;
+                    }
+                    if (message.Derived_Data_TID == "1")
+                    {
+                        Value = Value + "TID (" + message.Derived_Data_REP + " Repetitions) " + nl;
+                        for (int z = 0; z < message.Derived_Data_REP; z++)
+                        {
+                            Value = Value + $"Rep. {z} of {+message.Derived_Data_REP}: TCA: {message.Derived_Data_TCA[z]} NC:{message.Derived_Data_NC[z]} TCP: {message.Derived_Data_TCP[z]} " + nl;
+                            Value = Value + $"Rep. {z} of {+message.Derived_Data_REP}: Alt: {message.Derived_Data_Altitude[z]} Lat: {message.Derived_Data_Latitude[z]} Lon: {message.Derived_Data_Longitude}" + nl;
+                            Value = Value + $"Rep. {z} of {+message.Derived_Data_REP}: Point Type: {message.Derived_Data_Point_Type[z]} TD: {message.Derived_Data_TD[z]} TRA: {message.Derived_Data_TRA[z]} TOA: {message.Derived_Data_TOA[z]}" + nl;
+                            Value = Value + $"Rep. {z} of {+message.Derived_Data_REP}: TOV: {message.Derived_Data_TOV[z]} TTR: {message.Derived_Data_TTR[z]} " + nl;
+                        }
+                    }
+                    if (message.Derived_Data_COM == "1")
+                    {
+                        Value = Value +$"Comunications/ACAS: COM: {message.Derived_Data_COM_Value} STAT: {message.Derived_Data_COM_STAT} " + nl;
+                        Value = Value + $"Comunications/ACAS: SSC: {message.Derived_Data_COM_SSC} ARC: {message.Derived_Data_COM_ARC} AIC: {message.Derived_Data_COM_AIC} B1A: {message.Derived_Data_COM_B1A} B1B: {message.Derived_Data_COM_B1B} " + nl;
+                    }
+                    if (message.Derived_Data_SAB == "1")
+                    {
+                        Value = Value + $"ADS-B status reported: AC: {message.Derived_Data_SAB_AC} MN: {message.Derived_Data_SAB_MN}  DC:{message.Derived_Data_SAB_DC} " + nl;
+                        Value = Value + $"ADS-B status reported: GBS: {message.Derived_Data_SAB_GBS} STAT: {message.Derived_Data_SAB_STAT}"+ nl;
+                    }
+
+                    if (message.Derived_Data_ACS == "1")
+                    {
+                        Value = Value + $"ACAS resolution: TYP: {message.Derived_Data_ACS_TYP} STYP: {message.Derived_Data_ACS_STYP} ARA: {message.Derived_Data_ACS_ARA}" + nl;
+                        Value = Value + $"ACAS resolution: RAC: {message.Derived_Data_ACS_RAC} RAT: {message.Derived_Data_ACS_RAT} MTE: {message.Derived_Data_ACS_MTE}" + nl;
+                        Value = Value + $"ACAS resolution: TTI: {message.Derived_Data_ACS_TTI} TID: {message.Derived_Data_ACS_TID}" + nl;
+                    }
+                    if (message.Derived_Data_BVR == "1")
+                    {
+                        Value = Value + $"Barometric Vert. Rate:  {message.Derived_Data_BVR_value}" + nl;
+                    }
+                    if (message.Derived_Data_GVR == "1")
+                    {
+                        Value = Value + $"Geometric Vert. Rate:  {message.Derived_Data_GVR_value}" + nl;
+                    }
+                    if (message.Derived_Data_RAN == "1")
+                    {
+                        Value = Value + $"Roll Angle:  {message.Derived_Data_RAN_value}" + nl;
+                    }
+                    if (message.Derived_Data_TAR == "1")
+                    {
+                        Value = Value + $"Track angle:  TI:{message.Derived_Data_TAR_TI} Rate of turn: {message.Derived_Data_TAR_value}" + nl;
+                    }
+                    if (message.Derived_Data_TAN == "1")
+                    {
+                        Value = Value + $"Track Angle:  {message.Derived_Data_TAN_value}" + nl;
+                    }
+                    if (message.Derived_Data_GSP == "1")
+                    {
+                        Value = Value + $"Ground Speed:  {message.Derived_Data_GSP_value}" + nl;
+                    }
+                    if (message.Derived_Data_VUN == "1")
+                    {
+                        Value = Value + $"Velocity uncertainty:  {message.Derived_Data_VUN_value}" + nl;
+                    }
+                    if (message.Derived_Data_MET == "1")
+                    {
+                        Value = Value + $"Met Data:  {message.Derived_Data_MET_WS}, {message.Derived_Data_MET_WD}, {message.Derived_Data_MET_TMP}, {message.Derived_Data_MET_TRB}" + nl;
+                        Value = Value + $"Met Data:  Wind Speed: {message.Derived_Data_MET_WS_value} Wind Direction: {message.Derived_Data_MET_WD_value}" + nl;
+                        Value = Value + $"Met Data:  Temperature : {message.Derived_Data_MET_TMP_value} Turbulence: {message.Derived_Data_MET_TRB_value}" + nl;
+                    }
+                    if (message.Derived_Data_EMC == "1")
+                    {
+                        Value = Value + $"ECAT:  {message.Derived_Data_EMC_ECAT}" + nl;
+                    }
+                    if (message.Derived_Data_POS == "1")
+                    {
+                        Value = Value + $"Position:  {message.Derived_Data_POS_Latitude}, {message.Derived_Data_POS_Longitude}" + nl;
+                    }
+                    if (message.Derived_Data_GAL == "1")
+                    {
+                        Value = Value + $"Geometric Altitude:  {message.Derived_Data_GAL_value}" + nl;
+                    }
+                    if (message.Derived_Data_PUN == "1")
+                    {
+                        Value = Value + $"Position Uncertainty:  {message.Derived_Data_PUN_value}" + nl;
+                    }
+                    if (message.Derived_Data_MB == "1")
+                    {
+                        Value = Value + "Mode S MB (" + message.Derived_Data_MB_modeS_rep + " Repetitions): " + nl;
+                        for (int z = 0; z < message.Derived_Data_MB_modeS_rep; z++)
+                        {
+                            Value = Value + $"Rep. {z} of {+message.Derived_Data_MB_modeS_rep}: MB data: {message.Derived_Data_MB_Data[z]}" + nl;
+                            Value = Value + $"Rep. {z} of {+message.Derived_Data_MB_modeS_rep}: BDS 1: {message.Derived_Data_MB_BDS1[z]} BDS 2: {message.Derived_Data_MB_BDS2[z]}" + nl;
+                        }
+                    }
+                    if (message.Derived_Data_IAR == "1")
+                    {
+                        Value = Value + $"Indicated Airspeed:  {message.Derived_Data_IAR_value}" + nl;
+                    }
+                    if (message.Derived_Data_MAC == "1")
+                    {
+                        Value = Value + $"Mach Number:  {message.Derived_Data_MAC_value}" + nl;
+                    }
+                    if (message.Derived_Data_BPS == "1")
+                    {
+                        Value = Value + $"Bar. Press. Setting:  {message.Derived_Data_BPS_value}" + nl;
+                    }
+                    Value = Value.TrimEnd('\n');
+                }
+                if (i == 15) //Track Status
+                {
+                    if(message.MON!=null)
+                    {
+                        Value = $"{message.MON}, {message.SPI}, {message.MRH}"+nl;
+                        Value = Value + $"Source: {message.SRC}, {message.CNF}" + nl;
+                        if(message.SIM!=null)
+                        {
+                            Value = Value + $"{message.SIM}, {message.TSE}, {message.TSB} , {message.FPC}" +nl;
+                            Value = Value+ $"{message.AFF}, {message.STP}, {message.KOS}" + nl;
+                            if (message.AMA != null)
+                            {
+                                Value = Value+ $"{message.AMA}, {message.MD4}" + nl;
+                                Value = Value + $"{message.ME}, {message.MI} MD5: {message.MD5}" + nl;
+                                if(message.CST!=null)
+                                {
+                                    Value = Value + $"{message.CST}, {message.PSR} , {message.SSR}" + nl;
+                                    Value = Value + $"{message.MDS}, {message.ADS}" + nl;
+                                    Value = Value + $"{message.SUC}, {message.AAC}" + nl;
+                                    if(message.SDS!=null)
+                                    {
+                                        Value = Value + $"SDS: {message.SDS}, EMS: {message.EMS}" + nl;
+                                        Value = Value + $"PFT: {message.PFT}, FPLT: {message.FPLT}" + nl;
+
+                                        if(message.DUPT!=null)
+                                        {
+                                            Value = Value + $"{message.DUPT}, {message.DUPF}, {message.DUPM}" + nl;
+                                            Value = Value + $"{message.SFC}, {message.IDD}, {message.IEC}" + nl;
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                    Value = Value.TrimEnd('\n');
+                }
+                if (i == 16) //System Track Update Ages
+                {
+                    if(message.Update_Ages_TRK=="1")
+                    {
+                        Value = Value + $"Track Age {message.Update_Ages_TRK_value}"+nl;
+                    }
+                    if (message.Update_Ages_PSR == "1")
+                    {
+                        Value = Value + $"PSR Age {message.Update_Ages_PSR_value}" + nl;
+                    }
+                    if (message.Update_Ages_SSR == "1")
+                    {
+                        Value = Value + $"SSR Age {message.Update_Ages_SSR_value}" + nl;
+                    }
+                    if (message.Update_Ages_MDS == "1")
+                    {
+                        Value = Value + $"MDS Age {message.Update_Ages_MDS_value}" + nl;
+                    }
+                    if (message.Update_Ages_ADS == "1")
+                    { 
+                        Value = Value + $"ADS Age {message.Update_Ages_ADS_value}" + nl;
+                    }
+                    if (message.Update_Ages_ES == "1")
+                    {
+                        Value = Value + $"ES Age {message.Update_Ages_ES_value}" + nl;
+                    }
+                    if (message.Update_Ages_VDL == "1")
+                    {
+                        Value = Value + $"VDL Age {message.Update_Ages_VDL_value}" + nl;
+                    }
+                    if (message.Update_Ages_UAT == "1")
+                    {
+                        Value = Value + $"UAT Age {message.Update_Ages_UAT_value}" + nl;
+                    }
+                    if (message.Update_Ages_LOP == "1")
+                    {
+                        Value = Value + $"LOP Age {message.Update_Ages_LOP_value}" + nl;
+                    }
+                    if (message.Update_Ages_MLT == "1")
+                    {
+                        Value = Value + $"MLT Age {message.Update_Ages_MLT_value}" + nl;
+                    }
+                    Value = Value.TrimEnd('\n');
+
+                }
+                if (i == 17) //Mode of Movement
+                {
+                    Value = $"Transversal Acceleration: {message.TRANS}, Longitudinal Acceleration: {message.LONG}"+nl;
+                    Value =Value+ $"Vertical Rate: {message.VERT}, Altitude discrepancy: {message.ADF}";
+                }
+                if (i == 18) //System Track Data Ages
+                {
+                    if (message.Track_Ages_MFL == "1")
+                    {
+                        Value = Value + $"Measured Flight level:  {message.Track_Ages_MFL_value}" + nl;
+                    }
+                    if (message.Track_Ages_MD1 == "1")
+                    {
+                        Value = Value + $"Mode 1:  {message.Track_Ages_MD1_value}" + nl;
+                    }
+                    if (message.Track_Ages_MD2 == "1")
+                    {
+                        Value = Value + $"Mode 2:  {message.Track_Ages_MD2_value}" + nl;
+                    }
+                    if (message.Track_Ages_MDA == "1")
+                    {
+                        Value = Value + $"Mode 3/A:  {message.Track_Ages_MDA_value}" + nl;
+                    }
+                    if (message.Track_Ages_MD4 == "1")
+                    {
+                        Value = Value + $"Mode 4:  {message.Track_Ages_MD4_value}" + nl;
+                    }
+                    if (message.Track_Ages_MD5 == "1")
+                    {
+                        Value = Value + $"Mode 5:  {message.Track_Ages_MD5_value}" + nl;
+                    }
+                    if (message.Track_Ages_MHG == "1")
+                    {
+                        Value = Value + $"Magnetic Heading:  {message.Track_Ages_MHG_value}" + nl;
+                    }
+                    if (message.Track_Ages_IAS == "1")
+                    {
+                        Value = Value + $"IAS:  {message.Track_Ages_IAS_value}" + nl;
+                    }
+                    if (message.Track_Ages_TAS == "1")
+                    {
+                        Value = Value + $"TAS:  {message.Track_Ages_TAS_value}" + nl;
+                    }
+                    if (message.Track_Ages_SAL == "1")
+                    {
+                        Value = Value + $"Selected Altitude:  {message.Track_Ages_SAL_value}" + nl;
+                    }
+                    if (message.Track_Ages_FSS == "1")
+                    {
+                        Value = Value + $"Final State Selected Altitude:  {message.Track_Ages_FSS_value}" + nl;
+                    }
+                    if (message.Track_Ages_TID == "1")
+                    {
+                        Value = Value + $"Trajectory intent:  {message.Track_Ages_TID_value}" + nl;
+                    }
+                    if (message.Track_Ages_COM == "1")
+                    {
+                        Value = Value + $"Comunications/ACAS:  {message.Track_Ages_COM_value}" + nl;
+                    }
+                    if (message.Track_Ages_SAB == "1")
+                    {
+                        Value = Value + $"Reported ADS-B:  {message.Track_Ages_SAB_value}" + nl;
+                    }
+                    if (message.Track_Ages_ACS == "1")
+                    {
+                        Value = Value + $"ACAS resolution:  {message.Track_Ages_ACS_value}" + nl;
+                    }
+                    if (message.Track_Ages_BVR == "1")
+                    {
+                        Value = Value + $"Barometric Vertical Rate:  {message.Track_Ages_BVR_value}" + nl;
+
+                    }
+                    if (message.Track_Ages_GVR == "1")
+                    {
+                        Value = Value + $"Geometric Vertical Rate: {message.Track_Ages_GVR_value}" + nl;
+                    }
+                    if (message.Track_Ages_RAN == "1")
+                    {
+                        Value = Value + $"Roll Angle:  {message.Track_Ages_RAN_value}" + nl;
+                    }
+                    if (message.Track_Ages_TAR == "1")
+                    {
+                        Value = Value + $"Track Angle Rate:  {message.Track_Ages_TAR_value}" + nl;
+                    }
+                    if (message.Track_Ages_TAN == "1")
+                    {
+                        Value = Value + $"Track Angle:  {message.Track_Ages_TAN_value}" + nl;
+                    }
+                    if (message.Track_Ages_GSP == "1")
+                    {
+                        Value = Value + $"Ground Speed:  {message.Track_Ages_GSP_value}" + nl;
+                    }
+                    if (message.Track_Ages_VUN == "1")
+                    {
+                        Value = Value + $"Velocity uncertainty:  {message.Track_Ages_VUN_value}" + nl;
+                    }
+                    if (message.Track_Ages_MET == "1")
+                    {
+                        Value = Value + $"Meteorological Data:  {message.Track_Ages_MET_value}" + nl;
+                    }
+                    if (message.Track_Ages_EMC == "1")
+                    {
+                        Value = Value + $"Emitter category:  {message.Track_Ages_EMC_value}" + nl;
+                    }
+                    if (message.Track_Ages_POS == "1")
+                    {
+                        Value = Value + $"Position Data:  {message.Track_Ages_POS_value}" + nl;
+                    }
+                    if (message.Track_Ages_GAL == "1")
+                    {
+                        Value = Value + $"Geometric Altitude:  {message.Track_Ages_GAL_value}" + nl;
+                    }
+                    if (message.Track_Ages_PUN == "1")
+                    {
+                        Value = Value + $"Position Uncertainty:  {message.Track_Ages_PUN_value}" + nl;
+                    }
+                    if (message.Track_Ages_MB == "1")
+                    {
+                        Value = Value + $"Mode S MB:  {message.Track_Ages_MB_value}" + nl;
+                    }
+                    if (message.Track_Ages_IAR == "1")
+                    {
+                        Value = Value + $"Indicated Airspeed:  {message.Track_Ages_IAR_value}" + nl;
+                    }
+                    if (message.Track_Ages_MAC == "1")
+                    {
+                        Value = Value + $"Mach Number:  {message.Track_Ages_MAC_value}" + nl;
+                    }
+                    if (message.Track_Ages_BPS == "1")
+                    {
+                        Value = Value + $"Barometric Pressure Setting:  {message.Track_Ages_BPS_value}" + nl;
+                    }
+                    Value = Value.TrimEnd('\n');
+                }
+                if (i == 22) //Flight plan related data
+                {
+                    if(message.Flight_Plan_Data_TAG=="1")
+                    {
+                        Value = Value + $"SIC: {message.Flight_Plan_Data_TAG_SIC}, SAC:{message.Flight_Plan_Data_TAG_SAC}" + nl;
+
+                    }
+                    if (message.Flight_Plan_Data_CSN == "1")
+                    {
+                        Value = Value + $"Target ID: {message.Flight_Plan_Data_CSN_value}" + nl;
+                    }
+                    if (message.Flight_Plan_Data_IFI == "1")
+                    {
+                        Value = Value + $"IFI: TYP:{message.Flight_Plan_Data_IFI_TYP}, Number: {message.Flight_Plan_Data_IFI_NBR}" + nl;
+                    }
+
+                    if (message.Flight_Plan_Data_FCT == "1")
+                    {
+                        Value = Value + $"Flight Category: GAT/OAT: {message.Flight_Plan_Data_FCT_GAT}, FR1/FR2: {message.Flight_Plan_Data_FCT_FR1}" + nl;
+                        Value = Value + $"Flight Category: RVSM: {message.Flight_Plan_Data_FCT_RVSM},HPR: {message.Flight_Plan_Data_FCT_HPR}" + nl;
+                    }
+                    if (message.Flight_Plan_Data_TAC == "1")
+                    {
+                        Value = Value + $"Type of Aircraft: {message.Flight_Plan_Data_TAC_value}" + nl;
+                    }
+                    if (message.Flight_Plan_Data_WTC == "1")
+                    {
+                        Value = Value + $"Wake Turbulence Category: {message.Flight_Plan_Data_WTC_value}" + nl;
+                    }
+                    if (message.Flight_Plan_Data_DEP == "1")
+                    {
+                        Value = Value + $"Departure Airport: {message.Flight_Plan_Data_DEP_value}" + nl;
+                    }
+                    if (message.Flight_Plan_Data_DST == "1")
+                    {
+                        Value = Value + $"Destination Airport: {message.Flight_Plan_Data_DST_value}" + nl;
+                    }
+                    if (message.Flight_Plan_Data_RDS == "1")
+                    {
+                        Value = Value + $"Runway destination: {message.Flight_Plan_Data_RDS_value}" + nl;
+                    }
+                    if (message.Flight_Plan_Data_CFL == "1")
+                    {
+                        Value = Value + $"Current cleared FL: {message.Flight_Plan_Data_CFL_value}" + nl;
+                    }
+                    if (message.Flight_Plan_Data_CTL == "1")
+                    {
+                        Value = Value + $"CTL: Centre: {message.Flight_Plan_Data_CTL_Centre}, Position: {message.Flight_Plan_Data_CTL_Position}" + nl;
+                    }
+                    if (message.Flight_Plan_Data_TOD == "1")
+                    {
+                        Value = Value + "Time of Departure / Arrival (" + message.Flight_Plan_Data_TOD_REP + " Repetitions): " + nl;
+                        for (int z = 0; z < message.Flight_Plan_Data_TOD_REP; z++)
+                        {
+                            Value = Value + $"Rep. {z} of {+message.Flight_Plan_Data_TOD_REP}: TYP: {message.Flight_Plan_Data_TOD_TYP[z]}, DAY: {message.Flight_Plan_Data_TOD_DAY[z]}" + nl;
+                            Value = Value + $"Rep. {z} of {+message.Flight_Plan_Data_TOD_REP}: Time: {message.Flight_Plan_Data_TOD_HOR[z]}:{message.Flight_Plan_Data_TOD_MIN[z]}:{message.Flight_Plan_Data_TOD_SEC[z]}" + nl;
+
+                        }
+                    }
+                    if (message.Flight_Plan_Data_AST == "1")
+                    {
+                        Value = Value + $"Aircraft Stand: {message.Flight_Plan_Data_AST_value}" + nl;
+                    }
+                    if (message.Flight_Plan_Data_STS == "1")
+                    {
+                        Value = Value + $"Stand Status: EMP:{message.Flight_Plan_Data_STS_EMP}, AVL:{message.Flight_Plan_Data_STS_AVL}" + nl;
+                    }
+                    if (message.Flight_Plan_Data_STD == "1")
+                    {
+                        Value = Value + $"Standard Instrument Departure: {message.Flight_Plan_Data_STD_value}" + nl;
+                    }
+                    if (message.Flight_Plan_Data_STA == "1")
+                    {
+                        Value = Value + $"Standard Instrument Arrival: {message.Flight_Plan_Data_STA_value}" + nl;
+                    }
+                    if (message.Flight_Plan_Data_PEM == "1")
+                    {
+                        Value = Value + $"Pre-Emergency: Validity:{message.Flight_Plan_Data_PEM_validity}, reply: {message.Flight_Plan_Data_PEM_reply}" + nl;
+                    }
+                    if (message.Flight_Plan_Data_PEC == "1")
+                    {
+                        Value = Value + $"Pre-Emergency Callsign: {message.Flight_Plan_Data_PEC_value}" + nl;
+                    }
+                    Value = Value.TrimEnd('\n');
+
+                }
+                if (i == 25) //Mode 5 data reports
+                {
+                    Value = "Mode 5 data reports";
+                }
+                if (i == 27) //Composed track number
+                {
+                    Value = "Composed track number";
+                }
+                if (i == 28) //Estimated Accuracies
+                {
+                    Value = "Estimated Accuracies";
+                }
+                if (i == 29) //Measured Information
+                {
+                    Value = "Measured Information";
                 }
                 return Value;
             }

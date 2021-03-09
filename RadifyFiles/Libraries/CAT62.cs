@@ -171,6 +171,8 @@ namespace PGTAWPF
         public string ModeA3;
 
         public string ModeA3_Has_Changed;
+
+        public string FullA3Info;
         private int Compute_Mode_A3(string[] message, int pos)
         {
             ModeA3 = Convert.ToString(lib.ConvertDecimalToOctal(Convert.ToInt32(string.Concat(message[pos], message[pos + 1]).Substring(4, 12), 2))).PadLeft(4, '0');
@@ -183,6 +185,7 @@ namespace PGTAWPF
                 ModeA3_Has_Changed = "Mode 3/A has changed";
 
             }
+            FullA3Info = ModeA3_Has_Changed + ", value:" + ModeA3;
             pos += 2;
             return pos;
         }
@@ -212,7 +215,7 @@ namespace PGTAWPF
         #endregion
 
 
-        #region Data Item I062/080, TrackStatus
+        #region Data Item I062/080, Track Status
         /// <summary>
         /// Data Item I021/200, Target Status
         /// 
@@ -267,7 +270,7 @@ namespace PGTAWPF
             }
             if (message[pos].Substring(1, 1) == "0")
             {
-                SPI = "default value";
+                SPI = "SPI default value";
             }
             else
             {
@@ -335,7 +338,7 @@ namespace PGTAWPF
                 }
                 if (message[pos].Substring(1, 1) == "0")
                 {
-                    TSE = "Default value";
+                    TSE = "TSE Default value";
                 }
                 else
                 {
@@ -343,7 +346,7 @@ namespace PGTAWPF
                 }
                 if (message[pos].Substring(2, 1) == "0")
                 {
-                    TSB = "Default value";
+                    TSB = "TSB Default value";
                 }
                 else
                 {
@@ -359,7 +362,7 @@ namespace PGTAWPF
                 }
                 if (message[pos].Substring(4, 1) == "0")
                 {
-                    AFF = "Default value";
+                    AFF = "AFF Default value";
                 }
                 else
                 {
@@ -367,7 +370,7 @@ namespace PGTAWPF
                 }
                 if (message[pos].Substring(5, 1) == "0")
                 {
-                    STP = "Default value";
+                    STP = "STP Default value";
                 }
                 else
                 {
@@ -386,11 +389,11 @@ namespace PGTAWPF
                     pos++;
                     if (message[pos].Substring(0, 1) == "0")
                     {
-                        AMA = "track not resulting from amalgamation process";
+                        AMA = "Track not resulting from amalgamation process";
                     }
                     else
                     {
-                        AMA = "track resulting from amalgamation process";
+                        AMA = "Track resulting from amalgamation process";
                     }
                     string md4 = message[pos].Substring(1, 2);
                     if (md4 == "00")
@@ -411,7 +414,7 @@ namespace PGTAWPF
                     }
                     if (message[pos].Substring(3, 1) == "0")
                     {
-                        ME = "Default value";
+                        ME = "ME Default value";
                     }
                     else
                     {
@@ -419,7 +422,7 @@ namespace PGTAWPF
                     }
                     if (message[pos].Substring(4, 1) == "0")
                     {
-                        MI = "Default value";
+                        MI = "MI Default value";
                     }
                     else
                     {
@@ -448,7 +451,7 @@ namespace PGTAWPF
                         pos++;
                         if (message[pos].Substring(0, 1) == "0")
                         {
-                            CST = "Default value ";
+                            CST = "CST Default value ";
                         }
                         else
                         {
@@ -456,7 +459,7 @@ namespace PGTAWPF
                         }
                         if (message[pos].Substring(1, 1) == "0")
                         {
-                            PSR = "Default value";
+                            PSR = "PSR Default value";
                         }
                         else
                         {
@@ -464,7 +467,7 @@ namespace PGTAWPF
                         }
                         if (message[pos].Substring(2, 1) == "0")
                         {
-                            SSR = "Default value";
+                            SSR = " SSR Default value";
                         }
                         else
                         {
@@ -472,7 +475,7 @@ namespace PGTAWPF
                         }
                         if (message[pos].Substring(3, 1) == "0")
                         {
-                            MDS = "Default value";
+                            MDS = "MDS Default value";
                         }
                         else
                         {
@@ -480,7 +483,7 @@ namespace PGTAWPF
                         }
                         if (message[pos].Substring(4, 1) == "0")
                         {
-                            ADS = "Default value";
+                            ADS = "ADS Default value";
                         }
                         else
                         {
@@ -488,7 +491,7 @@ namespace PGTAWPF
                         }
                         if (message[pos].Substring(5, 1) == "0")
                         {
-                            SUC = "Default value";
+                            SUC = "SUC Default value";
                         }
                         else
                         {
@@ -565,18 +568,18 @@ namespace PGTAWPF
                             }
                             if (message[pos].Substring(6, 1) == "0")
                             {
-                                PFT = "Default value";
+                                FPLT = "Default value";
                             }
                             else
                             {
-                                PFT = "Track created / updated with FPL data";
+                                FPLT = "Track created / updated with FPL data";
                             }
                             if (message[pos].Substring(7, 1) == "1")
                             {
                                 pos++;
                                 if (message[pos].Substring(0, 1) == "0")
                                 {
-                                    DUPT = "Default value";
+                                    DUPT = "DUPT Default value";
                                 }
                                 else
                                 {
@@ -584,7 +587,7 @@ namespace PGTAWPF
                                 }
                                 if (message[pos].Substring(1, 1) == "0")
                                 {
-                                    DUPF= "Default value";
+                                    DUPF= "DUPF Default value";
                                 }
                                 else
                                 {
@@ -592,7 +595,7 @@ namespace PGTAWPF
                                 }
                                 if (message[pos].Substring(2, 1) == "0")
                                 {
-                                    DUPM = "Default value";
+                                    DUPM = "DUPM Default value";
                                 }
                                 else
                                 {
@@ -600,7 +603,7 @@ namespace PGTAWPF
                                 }
                                 if (message[pos].Substring(3, 1) == "0")
                                 {
-                                    SFC = "Default value";
+                                    SFC = "SFC Default value";
                                 }
                                 else
                                 {
@@ -608,7 +611,7 @@ namespace PGTAWPF
                                 }
                                 if (message[pos].Substring(4, 1) == "0")
                                 {
-                                    IDD = "No indication";
+                                    IDD = "IDD No indication";
                                 }
                                 else
                                 {
@@ -616,7 +619,7 @@ namespace PGTAWPF
                                 }
                                 if (message[pos].Substring(5, 1) == "0")
                                 {
-                                    IEC = "Default value";
+                                    IEC = "IEC Default value";
                                 }
                                 else
                                 {
@@ -704,6 +707,7 @@ namespace PGTAWPF
 
         #region Mode 5 Data reports & extended mode 
 
+        public bool Mode5_present = false;
 
         public string SUM;
         public string PMN;
@@ -756,7 +760,7 @@ namespace PGTAWPF
             pos++;
             if (SUM=="1")
             {
-                
+                Mode5_present = true;
                 if(message[pos].Substring(0,1)=="0")
                 {
                     M5 = "No Mode 5 interrogation";
@@ -825,6 +829,8 @@ namespace PGTAWPF
             }
             if(PMN == "1")
             {
+                Mode5_present = true;
+
                 PIN = Convert.ToInt32(string.Concat(message[pos], message[pos + 1]).Substring(2,14), 2);
                 NAT = Convert.ToInt32(message[pos+2].Substring(4,5), 2);
                 MIS = Convert.ToInt32(message[pos+3].Substring(3,6), 2);
@@ -832,6 +838,7 @@ namespace PGTAWPF
             }
             if(POS=="1")
             {
+                Mode5_present = true;
 
                 double Latitude = lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1], message[pos + 2])) * (180 / (Math.Pow(2, 23)));
                 pos += 3;
@@ -849,6 +856,8 @@ namespace PGTAWPF
             }
             if(GA=="1")
             {
+                Mode5_present = true;
+
                 if (message[pos].Substring(0, 1) == "1")
                 {
                     Mode5_GNSS_RES = "GA reported in 100 ft increments";
@@ -862,17 +871,23 @@ namespace PGTAWPF
             }
             if(EM1=="1")
             {
+                Mode5_present = true;
+
                 EM1_value = Convert.ToString(lib.ConvertDecimalToOctal(Convert.ToInt32(string.Concat(message[pos], message[pos + 1]).Substring(4, 12), 2))).PadLeft(4, '0');
                 pos += 2;
             }
             if(TOS=="1")
             {
+                Mode5_present = true;
+
                 TOS_value = lib.ComputeA2Complement(message[pos]) /128;
                 pos++;
             }
             if (XP=="1")
             {
-                if(message[pos].Substring(3,1)=="0")
+                Mode5_present = true;
+
+                if (message[pos].Substring(3,1)=="0")
                 {
                     X5 = "X-pulse set to zero or no authenticated Data reply or Report received.";
                 }
@@ -1214,6 +1229,8 @@ namespace PGTAWPF
 
         #region Data Item I062/290, System Track Update Ages
 
+        public bool Update_ages_present = false;
+
         public string Update_Ages_TRK;
         public string Update_Ages_PSR;
         public string Update_Ages_SSR;
@@ -1259,52 +1276,70 @@ namespace PGTAWPF
             }
             if(Update_Ages_TRK=="1")
             {
-
+                Update_ages_present =true;
                 Update_Ages_TRK_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if(Update_Ages_PSR == "1")
             {
+                Update_ages_present = true;
+
                 Update_Ages_PSR_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Update_Ages_SSR == "1")
             {
+                Update_ages_present = true;
+
                 Update_Ages_SSR_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Update_Ages_MDS == "1")
             {
+                Update_ages_present = true;
+
                 Update_Ages_MDS_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Update_Ages_ADS == "1")
             {
+                Update_ages_present = true;
+
                 Update_Ages_ADS_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(string.Concat(message[pos], message[pos+1]), 2)) * 0.25) + "s";
                 pos+=2;
             }
             if (Update_Ages_ES == "1")
             {
+                Update_ages_present = true;
+
                 Update_Ages_ES_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Update_Ages_VDL == "1")
             {
+                Update_ages_present = true;
+
                 Update_Ages_VDL_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Update_Ages_UAT == "1")
             {
+                Update_ages_present = true;
+
                 Update_Ages_UAT_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Update_Ages_LOP == "1")
             {
+                Update_ages_present = true;
+
                 Update_Ages_LOP_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Update_Ages_MLT == "1")
             {
+                Update_ages_present = true;
+
                 Update_Ages_MLT_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
@@ -1316,6 +1351,9 @@ namespace PGTAWPF
 
 
         #region Data Item I062/295, Track Data Ages 
+
+        public bool Data_ages_present = false;
+
         public string Track_Ages_MFL;
         public string Track_Ages_MD1;
         public string Track_Ages_MD2;
@@ -1446,156 +1484,217 @@ namespace PGTAWPF
 
             if (Track_Ages_MFL == "1")
             {
+                Data_ages_present = true;
                 Track_Ages_MFL_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_MD1 == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_MD1_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_MD2 == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_MD2_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_MDA == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_MDA_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_MD4 == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_MD4_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_MD5 == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_MD5_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_MHG == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_MHG_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_IAS == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_IAS_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_TAS == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_TAS_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_SAL == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_SAL_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_FSS == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_FSS_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_TID == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_TID_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_COM == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_COM_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_SAB == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_SAB_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_ACS == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_ACS_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_BVR == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_BVR_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_GVR == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_GVR_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_RAN == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_RAN_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_TAR == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_TAR_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_TAN == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_TAN_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_GSP == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_GSP_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_VUN== "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_VUN_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_MET == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_MET_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_EMC == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_EMC_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_POS == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_POS_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_GAL == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_GAL_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_PUN == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_PUN_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_MB == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_MB_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_IAR == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_IAR_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_MAC == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_MAC_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }
             if (Track_Ages_BPS == "1")
             {
+                Data_ages_present = true;
+
                 Track_Ages_BPS_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * 0.25) + "s";
                 pos++;
             }        
@@ -1640,6 +1739,8 @@ namespace PGTAWPF
 
         #region Data Item I062/340, Measured Information 
 
+        public bool Measured_Information_present = false;
+
         public string Measured_Information_SID;
         public string Measured_Information_POS;
         public string Measured_Information_HEI;
@@ -1681,6 +1782,7 @@ namespace PGTAWPF
 
             if (Measured_Information_SID == "1")
             {
+                Measured_Information_present = true;
                 SAC = Convert.ToString(Convert.ToInt32(message[pos], 2));
                 SIC = Convert.ToString(Convert.ToInt32(message[pos + 1], 2));
                 this.airportCode = lib.GetAirporteCode(Convert.ToInt32(SIC)); //Computes airport code from SIC 
@@ -1689,6 +1791,8 @@ namespace PGTAWPF
 
             if(Measured_Information_POS=="1")
             {
+                Measured_Information_present = true;
+
                 double Range = Convert.ToInt32(string.Concat(message[pos], message[pos + 1]), 2); //I suppose in meters
                 string RHO;
                 string THETA;
@@ -1708,12 +1812,16 @@ namespace PGTAWPF
 
             if(Measured_Information_HEI=="1")
             {
+                Measured_Information_present = true;
+
                 Measured_Information_Height = Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1])) * 25) + " ft";
                 pos += 2;
             }
             if(Measured_Information_MDC=="1")
             {
-                if(message[pos].Substring(0,1)=="0")
+                Measured_Information_present = true;
+
+                if (message[pos].Substring(0,1)=="0")
                 {
                     Measured_Information_V = "Code validated";
 
@@ -1737,6 +1845,8 @@ namespace PGTAWPF
 
             if(Measured_Information_MDA=="1")
             {
+                Measured_Information_present = true;
+
                 char[] OctetoChar = message[pos].ToCharArray(0, 8);
                 if (OctetoChar[0] == '0') 
                 {
@@ -1834,6 +1944,8 @@ namespace PGTAWPF
 
 
         #region Data Item I062/380, Aircraft Derived Data 
+
+        public bool Derived_data_present = false;
 
         public string Derived_Data_ADR;
         public string Derived_Data_ID;
@@ -2006,11 +2118,14 @@ namespace PGTAWPF
 
             if (Derived_Data_ADR=="1")
             {
+                Derived_data_present = true;
                 Derived_Data_Address = string.Concat(lib.BinarytoHexa(message[pos]), lib.BinarytoHexa(message[pos + 1]), lib.BinarytoHexa(message[pos + 2]));
                 pos += 3;
             }
             if (Derived_Data_ID == "1")
             {
+                Derived_data_present = true;
+
                 StringBuilder Identification = new StringBuilder();
                 string octets = string.Concat(message[pos], message[pos + 1], message[pos + 2], message[pos + 3], message[pos + 4], message[pos + 5]);
                 for (int i = 0; i < 8; i++) 
@@ -2023,12 +2138,16 @@ namespace PGTAWPF
 
             if (Derived_Data_MHG == "1")
             {
-                Derived_Data_MHG_value =Convert.ToString(Convert.ToInt32(string.Concat(message[pos], message[pos+1]), 2) * (360 / (Math.Pow(2, 16)))) + "º";
+                Derived_data_present = true;
+
+                Derived_Data_MHG_value = Convert.ToString(Convert.ToInt32(string.Concat(message[pos], message[pos+1]), 2) * (360 / (Math.Pow(2, 16)))) + "º";
                 pos += 2;
             }
 
             if(Derived_Data_IAS=="1")
             {
+                Derived_data_present = true;
+
                 double val = Convert.ToInt32(string.Concat(message[pos], message[pos + 1]).Substring(1, 15), 2);
                 if(message[pos].Substring(0,1)=="0")
                 {
@@ -2042,12 +2161,16 @@ namespace PGTAWPF
             }
             if(Derived_Data_TAS=="1")
             {
+                Derived_data_present = true;
+
                 Derived_Data_TAS_value = Convert.ToString(Convert.ToInt32(string.Concat(message[pos], message[pos + 1]), 2)) + " Knots";
                 pos += 2;
             }
             if (Derived_Data_SAL=="1")
             {
-                if(message[pos].Substring(0,1)=="0")
+                Derived_data_present = true;
+
+                if (message[pos].Substring(0,1)=="0")
                 {
                     Derived_Data_SAL_SAS_value = "No source information provided";
                 }
@@ -2078,7 +2201,9 @@ namespace PGTAWPF
 
             if (Derived_Data_FSS=="1")
             {
-                if(message[pos].Substring(0,1)=="0")
+                Derived_data_present = true;
+
+                if (message[pos].Substring(0,1)=="0")
                 {
                     Derived_Data_FSS_MV_value = "Not active";
                 }
@@ -2108,7 +2233,9 @@ namespace PGTAWPF
 
             if(Derived_Data_TIS=="1")
             {
-                if(message[pos].Substring(0,1)=="0")
+                Derived_data_present = true;
+
+                if (message[pos].Substring(0,1)=="0")
                 {
                     Derived_Data_TIS_NAV_value = "Trajectory Intent Data is available for this aircraft";
                 }
@@ -2128,6 +2255,8 @@ namespace PGTAWPF
             }
             if(Derived_Data_TID=="1")
             {
+                Derived_data_present = true;
+
                 Derived_Data_REP = Convert.ToInt32(message[pos], 2);
                 Derived_Data_TCA = new string[Derived_Data_REP];
                 Derived_Data_NC = new string[Derived_Data_REP];
@@ -2189,6 +2318,8 @@ namespace PGTAWPF
 
             if(Derived_Data_COM=="1")
             {
+                Derived_data_present = true;
+
                 int com = Convert.ToInt32(message[pos].Substring(0, 3), 2);
                 if(com==0)
                 {
@@ -2266,6 +2397,8 @@ namespace PGTAWPF
 
             if(Derived_Data_SAB=="1")
             {
+                Derived_data_present = true;
+
                 string ac = message[pos].Substring(0, 2);
                 if(ac=="00")
                 {
@@ -2364,6 +2497,8 @@ namespace PGTAWPF
 
             if (Derived_Data_ACS=="1")
             {
+                Derived_data_present = true;
+
                 string messg = string.Concat(message[pos], message[pos + 1], message[pos + 2], message[pos + 3], message[pos + 4], message[pos + 5], message[pos + 6]);
                 Derived_Data_ACS_TYP = messg.Substring(0, 5);
                 Derived_Data_ACS_STYP = messg.Substring(5, 3);
@@ -2378,23 +2513,31 @@ namespace PGTAWPF
 
             if(Derived_Data_BVR=="1")
             {
+                Derived_data_present = true;
+
                 Derived_Data_BVR_value = Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1])) * 6.25) + " feet/minute";
                 pos += 2;
             }
 
             if(Derived_Data_GVR=="1")
             {
+                Derived_data_present = true;
+
                 Derived_Data_GVR_value = Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1])) * 6.25) + " feet/minute";
                 pos += 2;
             }
             if(Derived_Data_RAN=="1")
             {
+                Derived_data_present = true;
+
                 Derived_Data_RAN_value = Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos])) * 0.01) + "º";
                 pos += 2;
             }
 
             if(Derived_Data_TAR=="1")
             {
+                Derived_data_present = true;
+
                 string ti = message[pos].Substring(0, 2);
                 if(ti=="00")
                 {
@@ -2417,22 +2560,30 @@ namespace PGTAWPF
             }
             if(Derived_Data_TAN=="1")
             {
+                Derived_data_present = true;
+
                 Derived_Data_TAN_value = Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos],message[pos+1])) * (360/Math.Pow(2,16))) + "º";
                 pos += 2;
             }
             if(Derived_Data_GSP=="1")
             {
-                Derived_Data_GSP_value= Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1])) * (Math.Pow(2, -14))) + "NM/s";
+                Derived_data_present = true;
+
+                Derived_Data_GSP_value = Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1])) * (Math.Pow(2, -14))) + "NM/s";
                 pos += 2;
             }
             if(Derived_Data_VUN=="1")
             {
+                Derived_data_present = true;
+
                 Derived_Data_VUN_value = "Unknown";
                 pos++;
             }
             if(Derived_Data_MET=="1")
             {
-                if(message[pos].Substring(0,1)=="0")
+                Derived_data_present = true;
+
+                if (message[pos].Substring(0,1)=="0")
                 {
                     Derived_Data_MET_WS = "Not valid Wind Speed";
                 }
@@ -2476,6 +2627,8 @@ namespace PGTAWPF
             }
             if(Derived_Data_EMC=="1")
             {
+                Derived_data_present = true;
+
                 int ecat = Convert.ToInt32(message[pos], 2);
                 if(ecat==1)
                 {
@@ -2572,6 +2725,8 @@ namespace PGTAWPF
 
             if (Derived_Data_POS=="1")
             {
+                Derived_data_present = true;
+
                 double Latitude = lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1], message[pos + 2])) * (180 / (Math.Pow(2, 23)));
                 pos += 3;
                 double Longitude = lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1], message[pos + 2])) * (180 / (Math.Pow(2, 23)));
@@ -2588,17 +2743,23 @@ namespace PGTAWPF
 
             if(Derived_Data_GAL=="1")
             {
-                Derived_Data_GAL_value =Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1])) * 6.25)+"ft";
+                Derived_data_present = true;
+
+                Derived_Data_GAL_value = Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1])) * 6.25)+"ft";
                 pos += 2;
             }
             if (Derived_Data_PUN=="1")
             {
+                Derived_data_present = true;
+
                 Derived_Data_PUN_value = Convert.ToString(Convert.ToInt32(message[pos].Substring(4, 4), 2));
                 pos++;
             }
 
             if(Derived_Data_MB=="1")
             {
+                Derived_data_present = true;
+
                 int modeS_rep = Convert.ToInt32(message[pos], 2);
                 if (modeS_rep < 0) { Derived_Data_MB_Data = new string[modeS_rep]; Derived_Data_MB_BDS1 = new string[modeS_rep]; Derived_Data_MB_BDS2 = new string[modeS_rep]; }
                 pos++;
@@ -2613,19 +2774,25 @@ namespace PGTAWPF
 
             if(Derived_Data_IAR=="1")
             {
+                Derived_data_present = true;
+
                 Derived_Data_IAR_value = Convert.ToString(Convert.ToInt32(string.Concat(message[pos], message[pos + 1]), 2)) + " Knots";
                 pos += 2;
             }
 
             if(Derived_Data_MAC=="1")
             {
+                Derived_data_present = true;
+
                 Derived_Data_MAC_value = Convert.ToString(Convert.ToInt32(string.Concat(message[pos], message[pos + 1]), 2)*0.008) + " Mach";
                 pos += 2;
             }
 
             if(Derived_Data_BPS=="1")
             {
-                Derived_Data_BPS_value=Convert.ToString(Convert.ToInt32(string.Concat(message[pos], message[pos + 1]).Substring(4,12), 2) * 0.1) + " mb";
+                Derived_data_present = true;
+
+                Derived_Data_BPS_value = Convert.ToString(Convert.ToInt32(string.Concat(message[pos], message[pos + 1]).Substring(4,12), 2) * 0.1) + " mb";
                 pos += 2;
             }
 
@@ -2636,6 +2803,8 @@ namespace PGTAWPF
         #endregion
 
         #region Data Item I062/390, Flight Plan Related Data 
+
+        public bool Flight_plan_related_present=false;
 
         public string Flight_Plan_Data_TAG;
         public string Flight_Plan_Data_CSN;
@@ -2736,15 +2905,18 @@ namespace PGTAWPF
             pos++;
             if (Flight_Plan_Data_TAG == "1")
             {
+                Flight_plan_related_present = true;
                 Flight_Plan_Data_TAG_SAC = Convert.ToString(Convert.ToInt32(message[pos], 2));
                 Flight_Plan_Data_TAG_SIC = Convert.ToString(Convert.ToInt32(message[pos + 1], 2));
                 pos += 2;
             }
             if (Flight_Plan_Data_CSN == "1")
             {
+                Flight_plan_related_present = true;
+
                 StringBuilder Identification = new StringBuilder();
                 //string octets = string.Concat(message[pos], message[pos + 1], message[pos + 2], message[pos + 3], message[pos + 4], message[pos + 5], message[pos + 6]);
-                for (int i = 0; i < 8; i++)
+                for (int i = 0; i < 6; i++)
                 {
                     Identification.Append(lib.OctetoBinarioASCII(message[pos+i])); 
                 }
@@ -2754,6 +2926,8 @@ namespace PGTAWPF
 
             if(Flight_Plan_Data_IFI=="1")
             {
+                Flight_plan_related_present = true;
+
                 string typ = message[pos].Substring(0,2);
                 if(typ=="00")
                 {
@@ -2776,6 +2950,8 @@ namespace PGTAWPF
             }
             if(Flight_Plan_Data_FCT=="1")
             {
+                Flight_plan_related_present = true;
+
                 string val = message[pos].Substring(0, 2);
                 if(val=="00")
                 {
@@ -2850,9 +3026,11 @@ namespace PGTAWPF
 
             if(Flight_Plan_Data_TAC_value=="1")
             {
+                Flight_plan_related_present = true;
+
                 StringBuilder Identification = new StringBuilder();
                 //string octets = string.Concat(message[pos], message[pos + 1], message[pos + 2], message[pos + 3], message[pos + 4], message[pos + 5], message[pos + 6]);
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 4; i++)
                 {
                     Identification.Append(lib.OctetoBinarioASCII(message[pos + i]));
                 }
@@ -2862,14 +3040,18 @@ namespace PGTAWPF
 
             if(Flight_Plan_Data_WTC=="1")
             {
-                Flight_Plan_Data_WTC_value=lib.OctetoBinarioASCII(message[pos]);
+                Flight_plan_related_present = true;
+
+                Flight_Plan_Data_WTC_value = lib.OctetoBinarioASCII(message[pos]);
                 pos++;
             }
 
             if(Flight_Plan_Data_DEP=="1")
             {
+                Flight_plan_related_present = true;
+
                 StringBuilder Identification = new StringBuilder();
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 4; i++)
                 {
                     Identification.Append(lib.OctetoBinarioASCII(message[pos + i]));
                 }
@@ -2878,8 +3060,10 @@ namespace PGTAWPF
             }
             if (Flight_Plan_Data_DST == "1")
             {
+                Flight_plan_related_present = true;
+
                 StringBuilder Identification = new StringBuilder();
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 4; i++)
                 {
                     Identification.Append(lib.OctetoBinarioASCII(message[pos + i]));
                 }
@@ -2889,6 +3073,8 @@ namespace PGTAWPF
 
             if(Flight_Plan_Data_RDS=="1")
             {
+                Flight_plan_related_present = true;
+
                 StringBuilder Identification = new StringBuilder();
                 for (int i = 0; i < 4; i++)
                 {
@@ -2900,17 +3086,23 @@ namespace PGTAWPF
 
             if(Flight_Plan_Data_CFL=="1")
             {
+                Flight_plan_related_present = true;
+
                 Flight_Plan_Data_CFL_value = Convert.ToString(Convert.ToInt32(string.Concat(message[pos],message[pos]),2))+"FL";
                 pos += 2;
             }
             if(Flight_Plan_Data_CTL=="1")
             {
+                Flight_plan_related_present = true;
+
                 Flight_Plan_Data_CTL_Centre = message[pos];
                 Flight_Plan_Data_CTL_Position = message[pos + 1];
                 pos += 2;
             }
             if(Flight_Plan_Data_TOD=="1")
             {
+                Flight_plan_related_present = true;
+
 
                 Flight_Plan_Data_TOD_REP = Convert.ToInt32(message[pos], 2);
                 Flight_Plan_Data_TOD_TYP = new string[Flight_Plan_Data_TOD_REP];
@@ -3021,8 +3213,10 @@ namespace PGTAWPF
         
             if(Flight_Plan_Data_AST=="1")
             {
+                Flight_plan_related_present = true;
+
                 StringBuilder Identification = new StringBuilder();
-                for (int i = 0; i < 7; i++)
+                for (int i = 0; i < 6; i++)
                 {
                     Identification.Append(lib.OctetoBinarioASCII(message[pos + i]));
                 }
@@ -3032,6 +3226,8 @@ namespace PGTAWPF
 
             if (Flight_Plan_Data_STS=="1")
             {
+                Flight_plan_related_present = true;
+
                 string emp = message[pos].Substring(0, 2);
                 if(emp=="00")
                 {
@@ -3072,8 +3268,10 @@ namespace PGTAWPF
 
             if(Flight_Plan_Data_STD=="1")
             {
+                Flight_plan_related_present = true;
+
                 StringBuilder Identification = new StringBuilder();
-                for (int i = 0; i < 8; i++)
+                for (int i = 0; i < 7; i++)
                 {
                     Identification.Append(lib.OctetoBinarioASCII(message[pos + i]));
                 }
@@ -3082,8 +3280,10 @@ namespace PGTAWPF
             }
             if (Flight_Plan_Data_STA == "1")
             {
+                Flight_plan_related_present = true;
+
                 StringBuilder Identification = new StringBuilder();
-                for (int i = 0; i < 8; i++)
+                for (int i = 0; i < 7; i++)
                 {
                     Identification.Append(lib.OctetoBinarioASCII(message[pos + i]));
                 }
@@ -3092,7 +3292,9 @@ namespace PGTAWPF
             }
             if (Flight_Plan_Data_PEM=="1")
             {
-                if(message[pos].Substring(3,1)=="0")
+                Flight_plan_related_present = true;
+
+                if (message[pos].Substring(3,1)=="0")
                 {
                     Flight_Plan_Data_PEM_validity = "No valid Mode 3/A available";
                 }
@@ -3106,8 +3308,10 @@ namespace PGTAWPF
 
             if(Flight_Plan_Data_PEC=="1")
             {
+                Flight_plan_related_present = true;
+
                 StringBuilder Identification = new StringBuilder();
-                for (int i = 0; i < 8; i++)
+                for (int i = 0; i < 7; i++)
                 {
                     Identification.Append(lib.OctetoBinarioASCII(message[pos + i]));
                 }
@@ -3123,6 +3327,8 @@ namespace PGTAWPF
 
 
         #region Data Item I062/500, Estimated Accuracies
+
+        public bool Estimated_accuracies_present = false;
 
         public string Estimated_accuracies_APC;
         public string Estimated_accuracies_COV;
@@ -3171,6 +3377,7 @@ namespace PGTAWPF
             pos++;
             if(Estimated_accuracies_APC=="1")
             {
+                Estimated_accuracies_present = true;
                 Estimated_accuracies_APC_X = Convert.ToString(Convert.ToInt32(string.Concat(message[pos], message[pos]), 2) * 0.5) + " m";
                 pos += 2;
                 Estimated_accuracies_APC_Y = Convert.ToString(Convert.ToInt32(string.Concat(message[pos], message[pos]), 2) * 0.5) + " m";
@@ -3180,11 +3387,15 @@ namespace PGTAWPF
 
             if (Estimated_accuracies_COV=="1")
             {
-                Estimated_accuracies_COV_value=Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1])) * 0.5)+"m";
+                Estimated_accuracies_present = true;
+
+                Estimated_accuracies_COV_value = Convert.ToString(lib.ComputeA2Complement(string.Concat(message[pos], message[pos + 1])) * 0.5)+"m";
                 pos += 2;
             }
             if(Estimated_accuracies_APW=="1")
             {
+                Estimated_accuracies_present = true;
+
                 Estimated_accuracies_APW_Latitude = Convert.ToString(Convert.ToDouble(Convert.ToInt32(string.Concat(message[pos], message[pos + 1]), 2)) * (180 / Math.Pow(2, 25)))+"º";
                 pos += 2;
                 Estimated_accuracies_APW_Longitude = Convert.ToString(Convert.ToDouble(Convert.ToInt32(string.Concat(message[pos], message[pos + 1]), 2)) * (180 / Math.Pow(2, 25)))+"º";
@@ -3193,23 +3404,31 @@ namespace PGTAWPF
 
             if(Estimated_accuracies_AGA=="1")
             {
+                Estimated_accuracies_present = true;
+
                 Estimated_accuracies_AGA_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * (6.25))+" ft";
                 pos ++;
             }
             if( Estimated_accuracies_ABA=="1")
             {
+                Estimated_accuracies_present = true;
+
                 Estimated_accuracies_AGA_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * (0.25)) + " FL";
                 pos++;
             }
             if(Estimated_accuracies_ATV=="1")
             {
-                Estimated_accuracies_ATV_X= Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * (0.25)) + " m/s";
+                Estimated_accuracies_present = true;
+
+                Estimated_accuracies_ATV_X = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * (0.25)) + " m/s";
                 pos++;
                 Estimated_accuracies_ATV_Y = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * (0.25)) + " m/s";
                 pos++;
             }
             if (Estimated_accuracies_AA=="1")
             {
+                Estimated_accuracies_present = true;
+
                 Estimated_accuracies_AA_X = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * (0.25)) + " m/s^2";
                 pos++;
                 Estimated_accuracies_AA_Y = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * (0.25)) + " m/s^2";
@@ -3218,6 +3437,8 @@ namespace PGTAWPF
 
             if(Estimated_accuracies_ARC=="1")
             {
+                Estimated_accuracies_present = true;
+
                 Estimated_accuracies_ARC_value = Convert.ToString(Convert.ToDouble(Convert.ToInt32(message[pos], 2)) * (6.25)) + " ft/min";
                 pos++;
             }
@@ -3238,12 +3459,12 @@ namespace PGTAWPF
         private int Compute_Composed_Track_Number(string[] message, int pos)
         {
             system_unit_identification = message[pos];
-            system_track_number=string.Concat(message[pos+1],message[pos+2]).Substring(0, 15);
+            system_track_number=Convert.ToString(Convert.ToInt32(string.Concat(message[pos+1],message[pos+2]).Substring(0, 15)));
             if(message[pos+2].Substring(7,1)=="1")
             {
                 pos += 3;
                 system_unit_identification_composed = message[pos];
-                system_track_number_composed = string.Concat(message[pos + 1], message[pos + 2]).Substring(0, 15);
+                system_track_number_composed = Convert.ToString(Convert.ToInt32(string.Concat(message[pos + 1], message[pos + 2]).Substring(0, 15)));
             }
             pos += 3;
             return pos;

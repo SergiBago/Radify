@@ -185,7 +185,7 @@ namespace PGTAWPF
 
             //   Parallel.ForEach(listahex, arraystring =>
             // {
-            for (int q = 0; q < listahex.Count; q++)
+            for (int q = 0; q < 1000; q++) ///q < listahex.Count
             {
 
                 process = "Loading message " + Convert.ToString(numero) + " of " + Convert.ToString(listahex.Count) + " messages...";
@@ -295,8 +295,8 @@ namespace PGTAWPF
                          * loads faster than if all the information had to be passed from the list every time*/
                         listaCAT21v21.Add(newcat21);
                         newCatAll.Add(newcatall);
-                        //   AddRowTable21v21(newcat21);
-                        // AddRowTableAllCat21v21(newcat21);
+                        AddRowTable21v21(newcat21);
+                        AddRowTableAllCat21v21(newcat21);
 
                         /*We will see if the airport of which the file is already in the list of used airports or not, 
                         * and if it is not, we will add it. This list is useful to know which buttons to center on the map put*/
@@ -547,7 +547,37 @@ namespace PGTAWPF
 
         private void StartTable62()
         {
-
+            tablaCAT62.Columns.Add("Number", typeof(int));
+            tablaCAT62.Columns.Add("CAT number");
+            tablaCAT62.Columns.Add("Category");
+            tablaCAT62.Columns.Add("SAC");
+            tablaCAT62.Columns.Add("SIC");
+            tablaCAT62.Columns.Add("Target\nIdentification");
+            tablaCAT62.Columns.Add("Target Address");
+            tablaCAT62.Columns.Add("Track\nNumber");
+            tablaCAT62.Columns.Add("Time of\nTrack Information");
+            tablaCAT62.Columns.Add("Service\nIdentification");
+            tablaCAT62.Columns.Add("Calculated Position in WGS-84 co-ordinates");
+            tablaCAT62.Columns.Add("Calculated Position in cartesian co-ordinates");
+            tablaCAT62.Columns.Add("Calculated velocity in cartesian");
+            tablaCAT62.Columns.Add("Calculated acceleration in cartesian");
+            tablaCAT62.Columns.Add("Mode-3A\nCode");
+            tablaCAT62.Columns.Add("Aircraft Derived\nData");
+            tablaCAT62.Columns.Add("Track Status");
+            tablaCAT62.Columns.Add("System Track\nUpdate Ages");
+            tablaCAT62.Columns.Add("Mode of movement");
+            tablaCAT62.Columns.Add("System Track\nData Ages");
+            tablaCAT62.Columns.Add("Calculated track\nGeometric Altitude");
+            tablaCAT62.Columns.Add("Calculated track\nBarometric Altitude");
+            tablaCAT62.Columns.Add("Calcualted rate\nof Climb");
+            tablaCAT62.Columns.Add("Flight Plan\nRelated Data");
+            tablaCAT62.Columns.Add("Target Size and Orientation");
+            tablaCAT62.Columns.Add("Vehicle Fleet\nIdentification");
+            tablaCAT62.Columns.Add("Mode 5 Data Reports\n& Extended Mode 1 Code");
+            tablaCAT62.Columns.Add("Track Mode 2 Code");
+            tablaCAT62.Columns.Add("Composed Track Number");
+            tablaCAT62.Columns.Add("Estimated Accuracies");
+            tablaCAT62.Columns.Add("Measured Information");
         }
 
         /// <summary>
@@ -814,6 +844,70 @@ namespace PGTAWPF
 
         private void AddRowTable62(CAT62 Message)
         {
+            var row = tablaCAT62.NewRow();
+            row["Number"] = Message.num;
+            row["CAT number"] = Message.cat62num;
+            if (Message.CAT != null) { row["Category"] = Message.CAT; }
+            else { row["Category"] = "No Data"; }
+            if (Message.SAC != null) { row["SAC"] = Message.SAC; }
+            else { row["SAC"] = "No Data"; }
+            if (Message.SIC != null) { row["SIC"] = Message.SIC; }
+            else { row["SIC"] = "No Data"; }
+            if (Message.Target_Identification != null) { row["Target\nIdentification"] = Message.Target_Identification; }
+            else { row["Target\nIdentification"] = "No Data"; }
+            if (Message.Derived_Data_Address != null) { row["Target Address"] = Message.Derived_Data_Address; }
+            else { row["Target Address"] = "No Data"; }
+            if (Message.Track_Number != null) { row["Track\nNumber"] = Message.Track_Number; }
+            else { row["Track\nNumber"] = "No Data"; }
+            if (Message.Service_Identification != null) { row["Service\nIdentification"] = Message.Service_Identification; }
+            else { row["Service\nIdentification"] = "No Data"; }
+            if (Message.Time_of_Track_Information != null) { row["Time of\nTrack Information"] = Message.Time_of_Track_Information; }
+            else { row["Time of\nTrack Information"] = "No Data"; }
+            if (Message.LatitudeWGS_84 != null && Message.LongitudeWGS_84 != null) { row["Calculated Position in WGS-84 co-ordinates"] = Message.LatitudeWGS_84 + ", " + Message.LongitudeWGS_84; }
+            else { row["Calculated Position in WGS-84 co-ordinates"] = "No Data"; }
+            if(Message.Position_Cartesian_Coordinates !=null ) { row["Calculated Position in cartesian co-ordinates"] = Message.Position_Cartesian_Coordinates; }
+            else { row["Calculated Position in cartesian co-ordinates"] = "No Data"; }
+            if (Message.Track_Velocity_in_Cartesian_Coordinates != null) { row["Calculated velocity in cartesian"] = Message.Track_Velocity_in_Cartesian_Coordinates; }
+            else { row["Calculated velocity in cartesian"] = "No Data"; }
+            if (Message.Calculated_Acceleration != null) { row["Calculated acceleration in cartesian"] = Message.Calculated_Acceleration; }
+            else { row["Calculated acceleration in cartesian"] = "No Data"; }
+            if (Message.FullA3Info != null) { row["Mode-3A\nCode"] = Message.FullA3Info; }
+            else { row["Mode-3A\nCode"] = "No Data"; }
+            if(Message.Derived_data_present) { row["Aircraft Derived\nData"] = "Click to expand"; }
+            else { row["Aircraft Derived\nData"] = "No Data"; }
+            if (Message.MON != null) { row["Track Status"] = "Click to expand"; }
+            else { row["Track Status"] = "No Data"; }
+            if (Message.Update_ages_present) { row["System Track\nUpdate Ages"] = "Click to expand"; }
+            else { row["System Track\nUpdate Ages"] = "No Data"; }
+            if (Message.TRANS != null) { row["Mode of movement"] = "Click to expand"; }
+            else { row["Mode of movement"] = "No Data"; }
+            if (Message.Data_ages_present) { row["System Track\nData Ages"] = "Click to expand"; }
+            else { row["System Track\nData Ages"] = "No Data"; }
+            if (Message.Calculated_Track_Geometric_Altitude != null) { row["Calculated track\nGeometric Altitude"] = Message.Calculated_Track_Geometric_Altitude; }
+            else { row["Calculated track\nGeometric Altitude"] = "No Data"; }
+            if (Message.Calculated_Track_Barometric_Altitude != null) { row["Calculated track\nBarometric Altitude"] = Message.Calculated_Track_Barometric_Altitude; }
+            else { row["Calculated track\nBarometric Altitude"] = "No Data"; }
+            if (Message.Calculated_Rate_of_Climb != null) { row["Calcualted rate\nof Climb"] = Message.Calculated_Rate_of_Climb; }
+            else { row["Calcualted rate\nof Climb"] ="No Data"; }
+            if (Message.Flight_plan_related_present) { row["Flight Plan\nRelated Data"] = "Click to expand"; }
+            else { row["Flight Plan\nRelated Data"] = "No Data"; }
+            if (Message.Target_size_and_orientation != null) { row["Target Size and Orientation"] = Message.Target_size_and_orientation; }
+            else { row["Target Size and Orientation"] = "No data"; }
+            if(Message.VFI!=null) { row["Vehicle Fleet\nIdentification"] = Message.VFI; }
+            else { row["Vehicle Fleet\nIdentification"] = "No data"; }
+            if (Message.Mode5_present) { row["Mode 5 Data Reports\n& Extended Mode 1 Code"] = "Click to expand"; }
+            else { row["Mode 5 Data Reports\n& Extended Mode 1 Code"] = "No data"; }
+            if(Message.Mode_2_code!=null) { row["Track Mode 2 Code"] = Message.Mode_2_code; }
+            else { row["Track Mode 2 Code"] = "No data"; }
+            if (Message.system_unit_identification != null) { row["Composed Track Number"] = "Click to expand"; }
+            else { row["Composed Track Number"] = "No data"; }
+            if (Message.Estimated_accuracies_present) { row["Estimated Accuracies"] = "Click to expand"; }
+            else { row["Estimated Accuracies"] = "No data"; }
+            if (Message.Measured_Information_present) { row["Measured Information"] = "Click to expand"; }
+            else { row["Measured Information"] = "No data"; }
+
+
+            tablaCAT62.Rows.Add(row);
         }
 
 
@@ -942,7 +1036,7 @@ namespace PGTAWPF
             else { row["Position in WGS-84 co-ordinates"] = "No Data"; }
             if (Message.Measured_Flight_Level != null) { row["Flight\nLevel"] = Message.Measured_Flight_Level; }
             else { row["Flight\nLevel"] = "No Data"; }
-            if (Message.Derived_Data_REP != null) { row["Target\nReport\nDescriptor"] = "Click to expand"; } //
+            if (Message.Derived_Data_REP !=0) { row["Target\nReport\nDescriptor"] = "Click to expand"; } //
             else { row["Target\nReport\nDescriptor"] = "No Data"; }
             row["Track\nNumber"] = "No Data";
             if (Message.ModeA3 != null) { row["Mode-3A\nCode"] = Message.ModeA3; }

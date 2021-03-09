@@ -141,9 +141,9 @@
         <Image x:Name="Play" Visibility="Visible" Source="images/Play map.png" VerticalAlignment="Center" Grid.Row="0" Grid.RowSpan="8" Grid.Column="9" MouseLeftButtonUp="Play_click" Cursor="Hand"/>
         <Image x:Name="PauseBut" Source="images/Pause Map.png" Visibility="Hidden" VerticalAlignment="Center" Grid.Row="1" Grid.RowSpan="6" Grid.Column="9" Height="100" MouseLeftButtonUp="Pause_Click" Cursor="Hand"/>
         <Image x:Name="Restart" Source="images/Restart Map.png" VerticalAlignment="Center" Grid.Row="2" Grid.RowSpan="4" Grid.Column="11" MouseLeftButtonUp="Restart_click" Cursor="Hand" />
-        <StackPanel x:Name="ShowPanel" Grid.Row="0" Grid.Column="13" Grid.RowSpan="8">
+        <StackPanel x:Name="ShowPanel" Grid.Row="0" Grid.Column="13" Grid.RowSpan="8" >
             <StackPanel Orientation="Vertical" Background="#FF323232" Margin="0,3,0,0">
-                <StackPanel Orientation="Vertical" Background="#FF464646" Margin="4">
+                <StackPanel Orientation="Vertical" Background="#FF464646" Margin="3">
                     <StackPanel Orientation="Horizontal" Margin="4,0">
                     <StackPanel Orientation="Vertical">
                         <CheckBox x:Name="CheckBoxshowsmr" VerticalAlignment="Center" TextBlock.TextAlignment="Left" Grid.RowSpan="2" Margin="0,3,5,0" Content="Show SMR" Background="#FF646464" Foreground="#FF46FF00" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="11" Cursor="Hand" Click="ShowSMR_Click" />
@@ -158,7 +158,7 @@
 
 
                 </StackPanel>
-                <CheckBox x:Name="ShowOld" VerticalAlignment="Center" TextBlock.TextAlignment="Left" Grid.RowSpan="2" Margin="0,3,0,3" HorizontalAlignment="Center"  Content="Show Old Positions"  Background="#FF646464" Foreground="#FF938172" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="14" Click="ShowOldClick" Cursor="Hand" />
+                <CheckBox x:Name="ShowOld" VerticalAlignment="Center" TextBlock.TextAlignment="Left" Grid.RowSpan="2" Margin="0,2,0,2" HorizontalAlignment="Center"  Content="Show Old Positions"  Background="#FF646464" Foreground="#FF938172" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="13" Click="ShowOldClick" Cursor="Hand" />
                 </StackPanel>
 
             </StackPanel>

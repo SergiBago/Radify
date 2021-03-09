@@ -77,8 +77,10 @@ namespace PGTAWPF
 
             System.Drawing.Brush color = new SolidBrush(System.Drawing.Color.FromArgb(255, (byte)0, (byte)0, (byte)0)); //Set color to match radar detection color
             if (marker.DetectionMode == "SMR") { color = new SolidBrush(System.Drawing.Color.FromArgb(70, 255, 0)); }
-            if (marker.DetectionMode == "MLAT") { color = new SolidBrush(System.Drawing.Color.FromArgb(0, 151, 255)); }
-            if (marker.DetectionMode == "ADSB") { color = new SolidBrush(System.Drawing.Color.FromArgb(255, 151, 0)); }
+            else if (marker.DetectionMode == "MLAT") { color = new SolidBrush(System.Drawing.Color.FromArgb(0, 151, 255)); }
+            else if (marker.DetectionMode == "ADSB") { color = new SolidBrush(System.Drawing.Color.FromArgb(255, 151, 0)); }
+            else if (marker.DetectionMode == "CAT 62") { color = new SolidBrush(System.Drawing.Color.FromArgb(252,4 , 109)); }
+
 
 
             g.DrawString(marker.caption, font, color, localPoint);
@@ -144,8 +146,9 @@ namespace PGTAWPF
 
             System.Drawing.Brush color = new SolidBrush(System.Drawing.Color.FromArgb(255, (byte)0, (byte)0, (byte)0)); //Set color to match radar detection color
             if (marker.DetectionMode == "SMR") { color = new SolidBrush(System.Drawing.Color.FromArgb(70, 255, 0)); }
-            if (marker.DetectionMode == "MLAT") { color = new SolidBrush(System.Drawing.Color.FromArgb(0, 151, 255)); }
-            if (marker.DetectionMode == "ADSB") { color = new SolidBrush(System.Drawing.Color.FromArgb(255, 151, 0)); }
+            else if (marker.DetectionMode == "MLAT") { color = new SolidBrush(System.Drawing.Color.FromArgb(0, 151, 255)); }
+            else if (marker.DetectionMode == "ADSB") { color = new SolidBrush(System.Drawing.Color.FromArgb(255, 151, 0)); }
+            else if (marker.DetectionMode == "CAT 62") { color = new SolidBrush(System.Drawing.Color.FromArgb(252, 4, 109)); }
 
             g.DrawString(marker.caption, font, color, localPoint); 
 
@@ -229,8 +232,9 @@ namespace PGTAWPF
 
             System.Drawing.Brush color = new SolidBrush(System.Drawing.Color.FromArgb(255, (byte)0, (byte)0, (byte)0)); //Set color to match radar detection color
             if (marker.DetectionMode == "SMR") { color = new SolidBrush(System.Drawing.Color.FromArgb(70, 255, 0)); }
-            if (marker.DetectionMode == "MLAT") { color = new SolidBrush(System.Drawing.Color.FromArgb(0, 151, 255)); }
-            if (marker.DetectionMode == "ADSB") { color = new SolidBrush(System.Drawing.Color.FromArgb(255, 151, 0)); }
+            else if (marker.DetectionMode == "MLAT") { color = new SolidBrush(System.Drawing.Color.FromArgb(0, 151, 255)); }
+            else if (marker.DetectionMode == "ADSB") { color = new SolidBrush(System.Drawing.Color.FromArgb(255, 151, 0)); }
+            else if (marker.DetectionMode == "CAT 62") { color = new SolidBrush(System.Drawing.Color.FromArgb(252, 4, 109)); }
 
             bmp.Dispose();
             bmp = null;

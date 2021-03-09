@@ -28,7 +28,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>96</ApplicationRevision>
+    <ApplicationRevision>104</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -308,6 +308,7 @@
     <Resource Include="images\Mapa Color.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Notes.txt" />
     <Resource Include="ICO APP.ico" />
     <Resource Include="ICON.ico" />
     <Resource Include="images\List Search Help.png" />

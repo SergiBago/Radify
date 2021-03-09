@@ -1,0 +1,32 @@
+﻿
+
+tablaCAT62.Columns.Add("Number", typeof(int)); o
+tablaCAT62.Columns.Add("CAT number"); o
+tablaCAT62.Columns.Add("Category"); o
+tablaCAT62.Columns.Add("SAC"); o
+tablaCAT62.Columns.Add("SIC"); o
+tablaCAT62.Columns.Add("Time of\nTrack Information"); 0
+tablaCAT62.Columns.Add("Target\nIdentification"); o
+tablaCAT62.Columns.Add("Target\nAddress"); o
+tablaCAT62.Columns.Add("Track\nNumber"); o
+tablaCAT62.Columns.Add("Calculated Position in WGS-84 co-ordinates"); 0
+tablaCAT62.Columns.Add("Calculated Position in cartesian co-ordinates"); 0
+tablaCAT62.Columns.Add("Calculated velocity in cartesian"); 0
+tablaCAT62.Columns.Add("Calculated acceleration in cartesian"); 0
+tablaCAT62.Columns.Add("Mode-3A\nCode"); 0
+tablaCAT62.Columns.Add("Aircraft Derived\nData"); 0
+tablaCAT62.Columns.Add("Track Status"); 0
+tablaCAT62.Columns.Add("System Track\nUpdate Ages"); 0
+tablaCAT62.Columns.Add("Mode of movement"); 0
+tablaCAT62.Columns.Add("System Track\nData Ages"); 0
+tablaCAT62.Columns.Add("Calculated track\nGeometric Altitude"); 0
+tablaCAT62.Columns.Add("Calculated track\nBarometric Altitude"); 0
+tablaCAT62.Columns.Add("Calcualted rate\nof Climb"); 0
+tablaCAT62.Columns.Add("Flight Plan\nRelated Data"); 0
+tablaCAT62.Columns.Add("Target Size and Orientation"); 0
+tablaCAT62.Columns.Add("Vehicle Fleet\nIdentification");
+tablaCAT62.Columns.Add("Mode 5 Data Reports\n& Extended Mode 1 Code");
+tablaCAT62.Columns.Add("Track Mode 2 Code");
+tablaCAT62.Columns.Add("Composed Track Number");
+tablaCAT62.Columns.Add("Estimated Accuracies");
+tablaCAT62.Columns.Add("Measured Information");
