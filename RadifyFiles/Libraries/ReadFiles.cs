@@ -187,7 +187,7 @@ namespace PGTAWPF
 
             //   Parallel.ForEach(listahex, arraystring =>
             // {
-            for (int q = 0; q < 1000; q++) ///q < listahex.Count
+            for (int q = 0; q < listahex.Count; q++) ///q < listahex.Count
             {
 
                 process = "Loading message " + Convert.ToString(numero) + " of " + Convert.ToString(listahex.Count) + " messages...";
@@ -1040,7 +1040,8 @@ namespace PGTAWPF
             else { row["Flight\nLevel"] = "No Data"; }
             if (Message.Derived_Data_REP !=0) { row["Target\nReport\nDescriptor"] = "Click to expand"; } //
             else { row["Target\nReport\nDescriptor"] = "No Data"; }
-            row["Track\nNumber"] = "No Data";
+            if (Message.Track_Number != null) { row["Track\nNumber"] = Message.Track_Number; }
+            else { row["Track\nNumber"] = "No Data"; }
             if (Message.ModeA3 != null) { row["Mode-3A\nCode"] = Message.ModeA3; }
             else { row["Mode-3A\nCode"] = "No Data"; }
             tablaAll.Rows.Add(row);

@@ -129,10 +129,11 @@ namespace PGTAWPF
             else if (Target_Address != null ) { caption = "T.A:"+Target_Address; }
             else if (Track_number != null ) { caption = "T.N:"+Track_number; }
             else { caption = "No Data"; }
-            string color;
-            if (DetectionMode=="SMR") { color = "ff00ff00"; }
+            string color="ff000000";
+            if (DetectionMode == "SMR") { color = "ff00ff00"; }
             else if (DetectionMode == "MLAT") { color = "ff00ffff"; }
-            else { color = "ff0080ff"; }
+            else if (DetectionMode == "ADSB") { color = "ff0080ff"; }
+            else if (DetectionMode == "CAT 62") { color = "fffc046d"; }
             KMLBuilder.AppendLine("<Placemark>");
             KMLBuilder.AppendLine("<Style id='yellowLineGreenPoly'>");
             KMLBuilder.AppendLine("<LineStyle>");

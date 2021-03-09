@@ -38,6 +38,7 @@ namespace PGTAWPF
         List<Trajectories> SMRTrajectories = new List<Trajectories>();
         List<Trajectories> MLATTrajectories = new List<Trajectories>();
         List<Trajectories> ADSBTrajectories = new List<Trajectories>();
+        List<Trajectories> CAT62Trajectories = new List<Trajectories>();
 
 
         /// <summary>
@@ -105,7 +106,7 @@ namespace PGTAWPF
             showcantExportAlert(false);
             showNomessagesExported(false);
             bool Correct = true;
-            if (CheckBoxSMR.IsChecked == false && CheckBoxMLAT.IsChecked == false && CheckBoxADSB.IsChecked == false) //At least one type of vehciles must be selected
+            if (CheckBoxSMR.IsChecked == false && CheckBoxMLAT.IsChecked == false && CheckBoxADSB.IsChecked == false &&CheckBoxCAT62.IsChecked==false) //At least one type of vehciles must be selected
             {
                 showDetectionAlert(true);
             }
@@ -149,7 +150,7 @@ namespace PGTAWPF
                         if (File.Exists(path)) { File.Delete(path); }
                         CreateTrajectoriesLists(); //Creates trajectoires for all vehicles
 
-                        if (SMRTrajectories.Count == 0 && MLATTrajectories.Count == 0 && ADSBTrajectories.Count == 0) //At least one trajectory must be created to export something
+                        if (SMRTrajectories.Count == 0 && MLATTrajectories.Count == 0 && ADSBTrajectories.Count == 0 && CAT62Trajectories.Count==0) //At least one trajectory must be created to export something
                         {
                             showNomessagesExported(true); 
                         }
@@ -175,6 +176,7 @@ namespace PGTAWPF
             SMRTrajectories = new List<Trajectories>();
             MLATTrajectories = new List<Trajectories>();
             ADSBTrajectories = new List<Trajectories>();
+            CAT62Trajectories = new List<Trajectories>();
             int i = 0;
             try
             {
@@ -273,6 +275,36 @@ namespace PGTAWPF
                                 }
                             }
                         }
+                        else if (message.DetectionMode == "CAT 62" && CheckBoxCAT62.IsChecked == true)
+                        {
+                            if (message.Target_Identification != null)
+                            {
+                                if (CAT62Trajectories.Exists(x => x.Target_Identification == message.Target_Identification)) { CAT62Trajectories.Find(x => x.Target_Identification == message.Target_Identification).AddPoint(message.Latitude_in_WGS_84, message.Longitude_in_WGS_84, message.Time_Of_day); }
+                                else
+                                {
+                                    Trajectories traj = new Trajectories(message.Target_Identification, message.Time_Of_day, message.Latitude_in_WGS_84, message.Longitude_in_WGS_84, message.type, message.Target_Address, message.DetectionMode, message.CAT, message.SAC, message.SIC, message.Track_number);
+                                    CAT62Trajectories.Add(traj);
+                                }
+                            }
+                            else if (message.Target_Address != null)
+                            {
+                                if (CAT62Trajectories.Exists(x => x.Target_Address == message.Target_Address)) { CAT62Trajectories.Find(x => x.Target_Address == message.Target_Address).AddPoint(message.Latitude_in_WGS_84, message.Longitude_in_WGS_84, message.Time_Of_day); }
+                                else
+                                {
+                                    Trajectories traj = new Trajectories(message.Target_Identification, message.Time_Of_day, message.Latitude_in_WGS_84, message.Longitude_in_WGS_84, message.type, message.Target_Address, message.DetectionMode, message.CAT, message.SAC, message.SIC, message.Track_number);
+                                    CAT62Trajectories.Add(traj);
+                                }
+                            }
+                            else if (message.Track_number != null)
+                            {
+                                if (CAT62Trajectories.Exists(x => x.Track_number == message.Track_number)) { CAT62Trajectories.Find(x => x.Track_number == message.Track_number).AddPoint(message.Latitude_in_WGS_84, message.Longitude_in_WGS_84, message.Time_Of_day); }
+                                else
+                                {
+                                    Trajectories traj = new Trajectories(message.Target_Identification, message.Time_Of_day, message.Latitude_in_WGS_84, message.Longitude_in_WGS_84, message.type, message.Target_Address, message.DetectionMode, message.CAT, message.SAC, message.SIC, message.Track_number);
+                                    CAT62Trajectories.Add(traj);
+                                }
+                            }
+                        }
                     }
                     i++;
                 }
@@ -290,6 +322,8 @@ namespace PGTAWPF
             if (CheckBoxSMR.IsChecked == true && SMRTrajectories.Count > 0) { CreateSMRFolder(); }
             if (CheckBoxMLAT.IsChecked == true && MLATTrajectories.Count > 0) { CreateMLATFolder(); }
             if (CheckBoxADSB.IsChecked == true && ADSBTrajectories.Count > 0) { CreateADSBFolder(); }
+            if (CheckBoxCAT62.IsChecked == true && CAT62Trajectories.Count > 0) { CreateCAT62Folder(); }
+
             EndKMLFile();
         }
 
@@ -348,6 +382,19 @@ namespace PGTAWPF
         {
             KMLbuilder.AppendLine("<Folder><name>ADS-B</name><open>1</open>");
             foreach (Trajectories tra in ADSBTrajectories)
+            {
+                KMLbuilder.AppendLine(tra.GetTrajectorieKML());
+            }
+            KMLbuilder.AppendLine("</Folder>");
+        }
+
+        /// <summary>
+        /// Creates an CAT62 folder with all the trajectories of that type
+        /// </summary>
+        private void CreateCAT62Folder()
+        {
+            KMLbuilder.AppendLine("<Folder><name>CAT 62</name><open>1</open>");
+            foreach (Trajectories tra in CAT62Trajectories)
             {
                 KMLbuilder.AppendLine(tra.GetTrajectorieKML());
             }
@@ -484,12 +531,16 @@ namespace PGTAWPF
                 CheckBoxADSB.IsChecked = true;
                 CheckBoxMLAT.IsChecked = true;
                 CheckBoxSMR.IsChecked = true;
+                CheckBoxCAT62.IsChecked = true;
+
             }
             else
             {
                 CheckBoxADSB.IsChecked = false;
                 CheckBoxMLAT.IsChecked = false;
                 CheckBoxSMR.IsChecked = false;
+
+                CheckBoxCAT62.IsChecked = false;
             }
         }
 
@@ -512,6 +563,11 @@ namespace PGTAWPF
 
         }
 
+        private void ExportCAT62Click(object sender, RoutedEventArgs e)
+        {
+            if (CheckBoxCAT62.IsChecked == false) { CheckBoxAll.IsChecked = false; }
+
+        }
 
         private void ExportCustomTimeClick(object sender, RoutedEventArgs e)
         {
@@ -546,6 +602,8 @@ namespace PGTAWPF
             else { CheckAllTime.IsChecked = true; }
 
         }
+
+
     }
 
 }

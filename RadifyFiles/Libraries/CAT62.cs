@@ -1783,8 +1783,8 @@ namespace PGTAWPF
             if (Measured_Information_SID == "1")
             {
                 Measured_Information_present = true;
-                SAC = Convert.ToString(Convert.ToInt32(message[pos], 2));
-                SIC = Convert.ToString(Convert.ToInt32(message[pos + 1], 2));
+                Measured_Information_SAC = Convert.ToString(Convert.ToInt32(message[pos], 2));
+                Measured_Information_SIC = Convert.ToString(Convert.ToInt32(message[pos + 1], 2));
                 this.airportCode = lib.GetAirporteCode(Convert.ToInt32(SIC)); //Computes airport code from SIC 
                 pos += 2;
             }
@@ -3453,7 +3453,7 @@ namespace PGTAWPF
         public string system_unit_identification;
         public string system_track_number;
 
-        public List<string> system_unit_identification_composed = new List<string>();;
+        public List<string> system_unit_identification_composed = new List<string>();
         public List<string> system_track_number_composed= new List<string>();
 
         private int Compute_Composed_Track_Number(string[] message, int pos)

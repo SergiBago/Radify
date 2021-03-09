@@ -1419,31 +1419,27 @@ namespace PGTAWPF
                 {
                     if(message.Measured_Information_SID=="1")
                     {
-                        Value += $"" + nl;
+                        Value += $"SIC: {message.Measured_Information_SID}, SAC: {message.Measured_Information_SAC}" + nl;
                     }
-                    if (message.Measured_Information_SID == "1")
+                    if (message.Measured_Information_POS == "1")
                     {
-                        Value += $"" + nl;
+                        Value += $"Measured position: {message.Measured_Information_Polar_Position}" + nl;
                     }
-                    if (message.Measured_Information_SID == "1")
+                    if (message.Measured_Information_HEI == "1")
                     {
-                        Value += $"" + nl;
+                        Value += $"3-D Height: {message.Measured_Information_Height}" + nl;
                     }
-                    if (message.Measured_Information_SID == "1")
+                    if (message.Measured_Information_MDC == "1")
                     {
-                        Value += $"" + nl;
+                        Value += $"Mode C Code: V: {message.Measured_Information_V}, G: {message.Measured_Information_G}, Code: {message.Measured_Information_Mode_C_Code}" + nl;
                     }
-                    if (message.Measured_Information_SID == "1")
+                    if (message.Measured_Information_MDA == "1")
                     {
-                        Value += $"" + nl;
+                        Value += $"Mode 3/A Code: V: {message.Measured_Information_V_Mode_3A}, G: {message.Measured_Information_G_Mode_3A},\nL: {message.Measured_Information_L_Mode_3A} Code: {message.Measured_Information_Mode_3A}" + nl;
                     }
-                    if (message.Measured_Information_SID == "1")
+                    if (message.Measured_Information_TYP == "1")
                     {
-                        Value += $"" + nl;
-                    }
-                    if (message.Measured_Information_SID == "1")
-                    {
-                        Value += $"" + nl;
+                        Value += $"Report Type: TYP: {message.Measured_Information_TYP_Value}, SIM: {message.Measured_Information_SIM_Value}\nRAB: {message.Measured_Information_RAB_Value}, TST: {message.Measured_Information_TST_Value}" + nl;
                     }
                     Value = Value.TrimEnd('\n');
 
@@ -1872,6 +1868,601 @@ namespace PGTAWPF
                         sb.AppendLine(RowDat);
                     }
                 }
+
+                if (type == 4) //CAT 62
+                {
+                    StringBuilder ColumnsNames = new StringBuilder();
+                    foreach (DataColumn col in TableCat62.Columns)
+                    {
+                        if (col.ColumnName != "CAT number")
+                        {
+                            string Name = col.ColumnName.Replace('\n', ' ');
+                            ColumnsNames.Append(Name + ",");
+                        }
+                    }
+                    string ColNames = ColumnsNames.ToString();
+                    ColNames = ColNames.TrimEnd(',');
+                    sb.AppendLine(ColNames);
+                    foreach (DataRow row in TableCat62.Rows) //cat10
+                    {
+                        string nl = "; ";
+                        StringBuilder RowData = new StringBuilder();
+                        int number = Convert.ToInt32(row[1].ToString());
+                        CAT62 message = listaCAT62[number];
+                        foreach (DataColumn column in TableCat62.Columns)
+                        {
+                            string Value = "";
+                            if (column.ColumnName != "CAT number")
+                            {
+                                string data = row[column].ToString();
+                                if (data == "Click to expand")
+                                {
+
+                                    if (column.ColumnName == "Aircraft Derived\nData") //Aircraft derived data
+                                    {
+                                        if (message.Derived_Data_ADR == "1")
+                                        {
+                                            Value = "Target Address: " + message.Derived_Data_Address + nl;
+                                        }
+                                        if (message.Derived_Data_ID == "1")
+                                        {
+                                            Value = Value + "Target Identification: " + message.Derived_Data_Target_id + nl;
+                                        }
+                                        if (message.Derived_Data_MHG == "1")
+                                        {
+                                            Value = Value + "Magnetic Heading: " + message.Derived_Data_MHG_value + nl;
+                                        }
+                                        if (message.Derived_Data_IAS == "1")
+                                        {
+                                            Value = Value + "IAS: " + message.Derived_Data_IAS_value + nl;
+                                        }
+                                        if (message.Derived_Data_TAS == "1")
+                                        {
+                                            Value = Value + "TAS: " + message.Derived_Data_TAS_value + nl;
+                                        }
+                                        if (message.Derived_Data_SAL == "1")
+                                        {
+                                            Value = Value + "Selected Altitude: " + "SAS: " + message.Derived_Data_SAL_SAS_value + " Source: " + message.Derived_Data_SAL_Source_value + " Alt: " + message.Derived_Data_SAL_Altitude_value + nl;
+                                        }
+                                        if (message.Derived_Data_FSS == "1")
+                                        {
+                                            Value = Value + "FSS: MV: " + message.Derived_Data_FSS_MV_value + " AH: " + message.Derived_Data_FSS_MV_value + " AM: " + message.Derived_Data_FSS_AM_value + " Alt: " + message.Derived_Data_FSS_Altitude_value + nl;
+                                        }
+                                        if (message.Derived_Data_TIS == "1")
+                                        {
+                                            Value = Value + "TIS: NAV: " + message.Derived_Data_TIS_NAV_value + " NVB: " + message.Derived_Data_TIS_NVB_value + nl;
+                                        }
+                                        if (message.Derived_Data_TID == "1")
+                                        {
+                                            Value = Value + "TID (" + message.Derived_Data_REP + " Repetitions) " + nl;
+                                            for (int z = 0; z < message.Derived_Data_REP; z++)
+                                            {
+                                                Value = Value + $"Rep. {z} of {+message.Derived_Data_REP}: TCA: {message.Derived_Data_TCA[z]} NC:{message.Derived_Data_NC[z]} TCP: {message.Derived_Data_TCP[z]} " + nl;
+                                                Value = Value + $"Rep. {z} of {+message.Derived_Data_REP}: Alt: {message.Derived_Data_Altitude[z]} Lat: {message.Derived_Data_Latitude[z]} Lon: {message.Derived_Data_Longitude}" + nl;
+                                                Value = Value + $"Rep. {z} of {+message.Derived_Data_REP}: Point Type: {message.Derived_Data_Point_Type[z]} TD: {message.Derived_Data_TD[z]} TRA: {message.Derived_Data_TRA[z]} TOA: {message.Derived_Data_TOA[z]}" + nl;
+                                                Value = Value + $"Rep. {z} of {+message.Derived_Data_REP}: TOV: {message.Derived_Data_TOV[z]} TTR: {message.Derived_Data_TTR[z]} " + nl;
+                                            }
+                                        }
+                                        if (message.Derived_Data_COM == "1")
+                                        {
+                                            Value = Value + $"Comunications/ACAS: COM: {message.Derived_Data_COM_Value} STAT: {message.Derived_Data_COM_STAT} " + nl;
+                                            Value = Value + $"Comunications/ACAS: SSC: {message.Derived_Data_COM_SSC} ARC: {message.Derived_Data_COM_ARC} AIC: {message.Derived_Data_COM_AIC} B1A: {message.Derived_Data_COM_B1A} B1B: {message.Derived_Data_COM_B1B} " + nl;
+                                        }
+                                        if (message.Derived_Data_SAB == "1")
+                                        {
+                                            Value = Value + $"ADS-B status reported: AC: {message.Derived_Data_SAB_AC} MN: {message.Derived_Data_SAB_MN}  DC:{message.Derived_Data_SAB_DC} " + nl;
+                                            Value = Value + $"ADS-B status reported: GBS: {message.Derived_Data_SAB_GBS} STAT: {message.Derived_Data_SAB_STAT}" + nl;
+                                        }
+
+                                        if (message.Derived_Data_ACS == "1")
+                                        {
+                                            Value = Value + $"ACAS resolution: TYP: {message.Derived_Data_ACS_TYP} STYP: {message.Derived_Data_ACS_STYP} ARA: {message.Derived_Data_ACS_ARA}" + nl;
+                                            Value = Value + $"ACAS resolution: RAC: {message.Derived_Data_ACS_RAC} RAT: {message.Derived_Data_ACS_RAT} MTE: {message.Derived_Data_ACS_MTE}" + nl;
+                                            Value = Value + $"ACAS resolution: TTI: {message.Derived_Data_ACS_TTI} TID: {message.Derived_Data_ACS_TID}" + nl;
+                                        }
+                                        if (message.Derived_Data_BVR == "1")
+                                        {
+                                            Value = Value + $"Barometric Vert. Rate:  {message.Derived_Data_BVR_value}" + nl;
+                                        }
+                                        if (message.Derived_Data_GVR == "1")
+                                        {
+                                            Value = Value + $"Geometric Vert. Rate:  {message.Derived_Data_GVR_value}" + nl;
+                                        }
+                                        if (message.Derived_Data_RAN == "1")
+                                        {
+                                            Value = Value + $"Roll Angle:  {message.Derived_Data_RAN_value}" + nl;
+                                        }
+                                        if (message.Derived_Data_TAR == "1")
+                                        {
+                                            Value = Value + $"Track angle:  TI:{message.Derived_Data_TAR_TI} Rate of turn: {message.Derived_Data_TAR_value}" + nl;
+                                        }
+                                        if (message.Derived_Data_TAN == "1")
+                                        {
+                                            Value = Value + $"Track Angle:  {message.Derived_Data_TAN_value}" + nl;
+                                        }
+                                        if (message.Derived_Data_GSP == "1")
+                                        {
+                                            Value = Value + $"Ground Speed:  {message.Derived_Data_GSP_value}" + nl;
+                                        }
+                                        if (message.Derived_Data_VUN == "1")
+                                        {
+                                            Value = Value + $"Velocity uncertainty:  {message.Derived_Data_VUN_value}" + nl;
+                                        }
+                                        if (message.Derived_Data_MET == "1")
+                                        {
+                                            Value = Value + $"Met Data:  {message.Derived_Data_MET_WS}, {message.Derived_Data_MET_WD}, {message.Derived_Data_MET_TMP}, {message.Derived_Data_MET_TRB}" + nl;
+                                            Value = Value + $"Met Data:  Wind Speed: {message.Derived_Data_MET_WS_value} Wind Direction: {message.Derived_Data_MET_WD_value}" + nl;
+                                            Value = Value + $"Met Data:  Temperature : {message.Derived_Data_MET_TMP_value} Turbulence: {message.Derived_Data_MET_TRB_value}" + nl;
+                                        }
+                                        if (message.Derived_Data_EMC == "1")
+                                        {
+                                            Value = Value + $"ECAT:  {message.Derived_Data_EMC_ECAT}" + nl;
+                                        }
+                                        if (message.Derived_Data_POS == "1")
+                                        {
+                                            Value = Value + $"Position:  {message.Derived_Data_POS_Latitude}, {message.Derived_Data_POS_Longitude}" + nl;
+                                        }
+                                        if (message.Derived_Data_GAL == "1")
+                                        {
+                                            Value = Value + $"Geometric Altitude:  {message.Derived_Data_GAL_value}" + nl;
+                                        }
+                                        if (message.Derived_Data_PUN == "1")
+                                        {
+                                            Value = Value + $"Position Uncertainty:  {message.Derived_Data_PUN_value}" + nl;
+                                        }
+                                        if (message.Derived_Data_MB == "1")
+                                        {
+                                            Value = Value + "Mode S MB (" + message.Derived_Data_MB_modeS_rep + " Repetitions): " + nl;
+                                            for (int z = 0; z < message.Derived_Data_MB_modeS_rep; z++)
+                                            {
+                                                Value = Value + $"Rep. {z} of {+message.Derived_Data_MB_modeS_rep}: MB data: {message.Derived_Data_MB_Data[z]}" + nl;
+                                                Value = Value + $"Rep. {z} of {+message.Derived_Data_MB_modeS_rep}: BDS 1: {message.Derived_Data_MB_BDS1[z]} BDS 2: {message.Derived_Data_MB_BDS2[z]}" + nl;
+                                            }
+                                        }
+                                        if (message.Derived_Data_IAR == "1")
+                                        {
+                                            Value = Value + $"Indicated Airspeed:  {message.Derived_Data_IAR_value}" + nl;
+                                        }
+                                        if (message.Derived_Data_MAC == "1")
+                                        {
+                                            Value = Value + $"Mach Number:  {message.Derived_Data_MAC_value}" + nl;
+                                        }
+                                        if (message.Derived_Data_BPS == "1")
+                                        {
+                                            Value = Value + $"Bar. Press. Setting:  {message.Derived_Data_BPS_value}" + nl;
+                                        }
+                                        Value = Value.TrimEnd('\n');
+                                    }
+                                    if (column.ColumnName == "Track Status") //Track Status
+                                    {
+                                        if (message.MON != null)
+                                        {
+                                            Value = $"{message.MON}, {message.SPI}, {message.MRH}" + nl;
+                                            Value = Value + $"Source: {message.SRC}, {message.CNF}" + nl;
+                                            if (message.SIM != null)
+                                            {
+                                                Value = Value + $"{message.SIM}, {message.TSE}, {message.TSB} , {message.FPC}" + nl;
+                                                Value = Value + $"{message.AFF}, {message.STP}, {message.KOS}" + nl;
+                                                if (message.AMA != null)
+                                                {
+                                                    Value = Value + $"{message.AMA}, {message.MD4}" + nl;
+                                                    Value = Value + $"{message.ME}, {message.MI} MD5: {message.MD5}" + nl;
+                                                    if (message.CST != null)
+                                                    {
+                                                        Value = Value + $"{message.CST}, {message.PSR} , {message.SSR}" + nl;
+                                                        Value = Value + $"{message.MDS}, {message.ADS}" + nl;
+                                                        Value = Value + $"{message.SUC}, {message.AAC}" + nl;
+                                                        if (message.SDS != null)
+                                                        {
+                                                            Value = Value + $"SDS: {message.SDS}, EMS: {message.EMS}" + nl;
+                                                            Value = Value + $"PFT: {message.PFT}, FPLT: {message.FPLT}" + nl;
+
+                                                            if (message.DUPT != null)
+                                                            {
+                                                                Value = Value + $"{message.DUPT}, {message.DUPF}, {message.DUPM}" + nl;
+                                                                Value = Value + $"{message.SFC}, {message.IDD}, {message.IEC}" + nl;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                            }
+                                        }
+                                        Value = Value.TrimEnd('\n');
+                                    }
+                                    if (column.ColumnName == "System Track\nUpdate Ages") //System Track Update Ages
+                                    {
+                                        if (message.Update_Ages_TRK == "1")
+                                        {
+                                            Value = Value + $"Track Age {message.Update_Ages_TRK_value}" + nl;
+                                        }
+                                        if (message.Update_Ages_PSR == "1")
+                                        {
+                                            Value = Value + $"PSR Age {message.Update_Ages_PSR_value}" + nl;
+                                        }
+                                        if (message.Update_Ages_SSR == "1")
+                                        {
+                                            Value = Value + $"SSR Age {message.Update_Ages_SSR_value}" + nl;
+                                        }
+                                        if (message.Update_Ages_MDS == "1")
+                                        {
+                                            Value = Value + $"MDS Age {message.Update_Ages_MDS_value}" + nl;
+                                        }
+                                        if (message.Update_Ages_ADS == "1")
+                                        {
+                                            Value = Value + $"ADS Age {message.Update_Ages_ADS_value}" + nl;
+                                        }
+                                        if (message.Update_Ages_ES == "1")
+                                        {
+                                            Value = Value + $"ES Age {message.Update_Ages_ES_value}" + nl;
+                                        }
+                                        if (message.Update_Ages_VDL == "1")
+                                        {
+                                            Value = Value + $"VDL Age {message.Update_Ages_VDL_value}" + nl;
+                                        }
+                                        if (message.Update_Ages_UAT == "1")
+                                        {
+                                            Value = Value + $"UAT Age {message.Update_Ages_UAT_value}" + nl;
+                                        }
+                                        if (message.Update_Ages_LOP == "1")
+                                        {
+                                            Value = Value + $"LOP Age {message.Update_Ages_LOP_value}" + nl;
+                                        }
+                                        if (message.Update_Ages_MLT == "1")
+                                        {
+                                            Value = Value + $"MLT Age {message.Update_Ages_MLT_value}" + nl;
+                                        }
+                                        Value = Value.TrimEnd('\n');
+
+                                    }
+                                    if (column.ColumnName == "Mode of movement") //Mode of Movement
+                                    {
+                                        Value = $"Transversal Acceleration: {message.TRANS}, Longitudinal Acceleration: {message.LONG}" + nl;
+                                        Value = Value + $"Vertical Rate: {message.VERT}, Altitude discrepancy: {message.ADF}";
+                                    }
+                                    if (column.ColumnName == "System Track\nData Ages") //System Track Data Ages
+                                    {
+                                        if (message.Track_Ages_MFL == "1")
+                                        {
+                                            Value = Value + $"Measured Flight level:  {message.Track_Ages_MFL_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_MD1 == "1")
+                                        {
+                                            Value = Value + $"Mode 1:  {message.Track_Ages_MD1_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_MD2 == "1")
+                                        {
+                                            Value = Value + $"Mode 2:  {message.Track_Ages_MD2_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_MDA == "1")
+                                        {
+                                            Value = Value + $"Mode 3/A:  {message.Track_Ages_MDA_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_MD4 == "1")
+                                        {
+                                            Value = Value + $"Mode 4:  {message.Track_Ages_MD4_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_MD5 == "1")
+                                        {
+                                            Value = Value + $"Mode 5:  {message.Track_Ages_MD5_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_MHG == "1")
+                                        {
+                                            Value = Value + $"Magnetic Heading:  {message.Track_Ages_MHG_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_IAS == "1")
+                                        {
+                                            Value = Value + $"IAS:  {message.Track_Ages_IAS_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_TAS == "1")
+                                        {
+                                            Value = Value + $"TAS:  {message.Track_Ages_TAS_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_SAL == "1")
+                                        {
+                                            Value = Value + $"Selected Altitude:  {message.Track_Ages_SAL_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_FSS == "1")
+                                        {
+                                            Value = Value + $"Final State Selected Altitude:  {message.Track_Ages_FSS_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_TID == "1")
+                                        {
+                                            Value = Value + $"Trajectory intent:  {message.Track_Ages_TID_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_COM == "1")
+                                        {
+                                            Value = Value + $"Comunications/ACAS:  {message.Track_Ages_COM_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_SAB == "1")
+                                        {
+                                            Value = Value + $"Reported ADS-B:  {message.Track_Ages_SAB_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_ACS == "1")
+                                        {
+                                            Value = Value + $"ACAS resolution:  {message.Track_Ages_ACS_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_BVR == "1")
+                                        {
+                                            Value = Value + $"Barometric Vertical Rate:  {message.Track_Ages_BVR_value}" + nl;
+
+                                        }
+                                        if (message.Track_Ages_GVR == "1")
+                                        {
+                                            Value = Value + $"Geometric Vertical Rate: {message.Track_Ages_GVR_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_RAN == "1")
+                                        {
+                                            Value = Value + $"Roll Angle:  {message.Track_Ages_RAN_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_TAR == "1")
+                                        {
+                                            Value = Value + $"Track Angle Rate:  {message.Track_Ages_TAR_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_TAN == "1")
+                                        {
+                                            Value = Value + $"Track Angle:  {message.Track_Ages_TAN_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_GSP == "1")
+                                        {
+                                            Value = Value + $"Ground Speed:  {message.Track_Ages_GSP_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_VUN == "1")
+                                        {
+                                            Value = Value + $"Velocity uncertainty:  {message.Track_Ages_VUN_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_MET == "1")
+                                        {
+                                            Value = Value + $"Meteorological Data:  {message.Track_Ages_MET_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_EMC == "1")
+                                        {
+                                            Value = Value + $"Emitter category:  {message.Track_Ages_EMC_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_POS == "1")
+                                        {
+                                            Value = Value + $"Position Data:  {message.Track_Ages_POS_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_GAL == "1")
+                                        {
+                                            Value = Value + $"Geometric Altitude:  {message.Track_Ages_GAL_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_PUN == "1")
+                                        {
+                                            Value = Value + $"Position Uncertainty:  {message.Track_Ages_PUN_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_MB == "1")
+                                        {
+                                            Value = Value + $"Mode S MB:  {message.Track_Ages_MB_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_IAR == "1")
+                                        {
+                                            Value = Value + $"Indicated Airspeed:  {message.Track_Ages_IAR_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_MAC == "1")
+                                        {
+                                            Value = Value + $"Mach Number:  {message.Track_Ages_MAC_value}" + nl;
+                                        }
+                                        if (message.Track_Ages_BPS == "1")
+                                        {
+                                            Value = Value + $"Barometric Pressure Setting:  {message.Track_Ages_BPS_value}" + nl;
+                                        }
+                                        Value = Value.TrimEnd('\n');
+                                    }
+                                    if (column.ColumnName == "Flight Plan\nRelated Data") //Flight plan related data
+                                    {
+                                        if (message.Flight_Plan_Data_TAG == "1")
+                                        {
+                                            Value = Value + $"SIC: {message.Flight_Plan_Data_TAG_SIC}, SAC:{message.Flight_Plan_Data_TAG_SAC}" + nl;
+
+                                        }
+                                        if (message.Flight_Plan_Data_CSN == "1")
+                                        {
+                                            Value = Value + $"Target ID: {message.Flight_Plan_Data_CSN_value}" + nl;
+                                        }
+                                        if (message.Flight_Plan_Data_IFI == "1")
+                                        {
+                                            Value = Value + $"IFI: TYP:{message.Flight_Plan_Data_IFI_TYP}, Number: {message.Flight_Plan_Data_IFI_NBR}" + nl;
+                                        }
+
+                                        if (message.Flight_Plan_Data_FCT == "1")
+                                        {
+                                            Value = Value + $"Flight Category: GAT/OAT: {message.Flight_Plan_Data_FCT_GAT}, FR1/FR2: {message.Flight_Plan_Data_FCT_FR1}" + nl;
+                                            Value = Value + $"Flight Category: RVSM: {message.Flight_Plan_Data_FCT_RVSM},HPR: {message.Flight_Plan_Data_FCT_HPR}" + nl;
+                                        }
+                                        if (message.Flight_Plan_Data_TAC == "1")
+                                        {
+                                            Value = Value + $"Type of Aircraft: {message.Flight_Plan_Data_TAC_value}" + nl;
+                                        }
+                                        if (message.Flight_Plan_Data_WTC == "1")
+                                        {
+                                            Value = Value + $"Wake Turbulence Category: {message.Flight_Plan_Data_WTC_value}" + nl;
+                                        }
+                                        if (message.Flight_Plan_Data_DEP == "1")
+                                        {
+                                            Value = Value + $"Departure Airport: {message.Flight_Plan_Data_DEP_value}" + nl;
+                                        }
+                                        if (message.Flight_Plan_Data_DST == "1")
+                                        {
+                                            Value = Value + $"Destination Airport: {message.Flight_Plan_Data_DST_value}" + nl;
+                                        }
+                                        if (message.Flight_Plan_Data_RDS == "1")
+                                        {
+                                            Value = Value + $"Runway destination: {message.Flight_Plan_Data_RDS_value}" + nl;
+                                        }
+                                        if (message.Flight_Plan_Data_CFL == "1")
+                                        {
+                                            Value = Value + $"Current cleared FL: {message.Flight_Plan_Data_CFL_value}" + nl;
+                                        }
+                                        if (message.Flight_Plan_Data_CTL == "1")
+                                        {
+                                            Value = Value + $"CTL: Centre: {message.Flight_Plan_Data_CTL_Centre}, Position: {message.Flight_Plan_Data_CTL_Position}" + nl;
+                                        }
+                                        if (message.Flight_Plan_Data_TOD == "1")
+                                        {
+                                            Value = Value + "Time of Departure / Arrival (" + message.Flight_Plan_Data_TOD_REP + " Repetitions): " + nl;
+                                            for (int z = 0; z < message.Flight_Plan_Data_TOD_REP; z++)
+                                            {
+                                                Value = Value + $"Rep. {z} of {+message.Flight_Plan_Data_TOD_REP}: TYP: {message.Flight_Plan_Data_TOD_TYP[z]}, DAY: {message.Flight_Plan_Data_TOD_DAY[z]}" + nl;
+                                                Value = Value + $"Rep. {z} of {+message.Flight_Plan_Data_TOD_REP}: Time: {message.Flight_Plan_Data_TOD_HOR[z]}:{message.Flight_Plan_Data_TOD_MIN[z]}:{message.Flight_Plan_Data_TOD_SEC[z]}" + nl;
+
+                                            }
+                                        }
+                                        if (message.Flight_Plan_Data_AST == "1")
+                                        {
+                                            Value = Value + $"Aircraft Stand: {message.Flight_Plan_Data_AST_value}" + nl;
+                                        }
+                                        if (message.Flight_Plan_Data_STS == "1")
+                                        {
+                                            Value = Value + $"Stand Status: EMP:{message.Flight_Plan_Data_STS_EMP}, AVL:{message.Flight_Plan_Data_STS_AVL}" + nl;
+                                        }
+                                        if (message.Flight_Plan_Data_STD == "1")
+                                        {
+                                            Value = Value + $"Standard Instrument Departure: {message.Flight_Plan_Data_STD_value}" + nl;
+                                        }
+                                        if (message.Flight_Plan_Data_STA == "1")
+                                        {
+                                            Value = Value + $"Standard Instrument Arrival: {message.Flight_Plan_Data_STA_value}" + nl;
+                                        }
+                                        if (message.Flight_Plan_Data_PEM == "1")
+                                        {
+                                            Value = Value + $"Pre-Emergency: Validity:{message.Flight_Plan_Data_PEM_validity}, reply: {message.Flight_Plan_Data_PEM_reply}" + nl;
+                                        }
+                                        if (message.Flight_Plan_Data_PEC == "1")
+                                        {
+                                            Value = Value + $"Pre-Emergency Callsign: {message.Flight_Plan_Data_PEC_value}" + nl;
+                                        }
+                                        Value = Value.TrimEnd('\n');
+
+                                    }
+                                    if (column.ColumnName == "Mode 5 Data Reports\n& Extended Mode 1 Code") //Mode 5 data reports
+                                    {
+                                        if (message.SUM == "1")
+                                        {
+                                            Value = Value + $"Summary: {message.M5}, {message.ID}, {message.DA}" + nl;
+                                            Value = Value + $"Summary: {message.M1}, {message.M2}" + nl;
+                                            Value = Value + $"Summary: {message.M3}, {message.MC}" + nl;
+                                        }
+                                        if (message.PMN == "1")
+                                        {
+                                            Value = Value + $"PIN: {message.PIN}, NAT: {message.NAT}, MIS:{message.MIS}" + nl;
+                                        }
+                                        if (message.POS == "1")
+                                        {
+                                            Value = Value + $"Pos: Lat: {message.Mode5_pos_WGS86_Latitude}, Lon: {message.Mode5_pos_WGS86_Longitude}" + nl;
+
+                                        }
+                                        if (message.GA == "1")
+                                        {
+                                            Value = Value + $"GNSS alt.: Res: {message.Mode5_GNSS_RES}, GA: {message.Mode5_GNSS_GA}" + nl;
+                                        }
+                                        if (message.EM1 == "1")
+                                        {
+                                            Value = Value + $"Extended Mode 1 Code: {message.EM1_value}" + nl;
+                                        }
+                                        if (message.TOS == "1")
+                                        {
+                                            Value += $"Time offset: {message.TOS}" + nl;
+                                        }
+                                        if (message.XP == "1")
+                                        {
+                                            Value += $"X Pulse Presence: X5: {message.X5}, XC: {message.XC}\n X Pulse Presence: X3: {message.X3}, X2: {message.X2}\nX1: {message.X1}";
+                                        }
+                                        Value = Value.TrimEnd('\n');
+
+                                    }
+                                    if (column.ColumnName == "Composed Track Number") //Composed track number
+                                    {
+
+                                        Value += $"System Unit Identification: {message.system_unit_identification}, System Track number: {message.system_track_number}" + nl;
+                                        for (int z = 0; z < message.system_unit_identification_composed.Count(); z++)
+                                        {
+                                            Value += $"System Unit Identification {z + 2}: {message.system_unit_identification_composed[z]}, System Track number: {message.system_track_number_composed[z]}" + nl;
+                                        }
+                                        Value = Value.TrimEnd('\n');
+
+                                    }
+                                    if (column.ColumnName == "Estimated Accuracies") //Estimated Accuracies
+                                    {
+                                        if (message.Estimated_accuracies_APC == "1")
+                                        {
+                                            Value += $"Track Position accuracy: X:{message.Estimated_accuracies_APC_X}, Y:{message.Estimated_accuracies_APC_Y}" + nl;
+                                        }
+                                        if (message.Estimated_accuracies_COV == "1")
+                                        {
+                                            Value += $"XY Covariance: {message.Estimated_accuracies_COV_value}" + nl;
+                                        }
+                                        if (message.Estimated_accuracies_APW == "1")
+                                        {
+                                            Value += $"Accuracy of track position: Lat:{message.Estimated_accuracies_APW_Latitude}, Lon:{message.Estimated_accuracies_APW_Longitude}" + nl;
+                                        }
+                                        if (message.Estimated_accuracies_AGA == "1")
+                                        {
+                                            Value += $"Accuracy of geometric altitude: {message.Estimated_accuracies_AGA_value}" + nl;
+                                        }
+                                        if (message.Estimated_accuracies_ABA == "1")
+                                        {
+                                            Value += $"Accuracy of Barometric altitude: {message.Estimated_accuracies_ABA_value}" + nl;
+                                        }
+                                        if (message.Estimated_accuracies_ATV == "1")
+                                        {
+                                            Value += $"Accuracy of Track velocity: X:{message.Estimated_accuracies_ATV_X}, Y:{message.Estimated_accuracies_ATV_Y}" + nl;
+                                        }
+                                        if (message.Estimated_accuracies_AA == "1")
+                                        {
+                                            Value += $"Accuracy of acceleration: X:{message.Estimated_accuracies_AA_X}, Y: {message.Estimated_accuracies_AA_Y}" + nl;
+                                        }
+                                        if (message.Estimated_accuracies_ARC == "1")
+                                        {
+                                            Value += $"Accuracy of rate of climb: {message.Estimated_accuracies_ARC_value}" + nl;
+                                        }
+                                        Value = Value.TrimEnd('\n');
+
+                                    }
+                                    if (column.ColumnName == "Measured Information") //Measured Information
+                                    {
+                                        if (message.Measured_Information_SID == "1")
+                                        {
+                                            Value += $"SIC: {message.Measured_Information_SID}, SAC: {message.Measured_Information_SAC}" + nl;
+                                        }
+                                        if (message.Measured_Information_POS == "1")
+                                        {
+                                            Value += $"Measured position: {message.Measured_Information_Polar_Position}" + nl;
+                                        }
+                                        if (message.Measured_Information_HEI == "1")
+                                        {
+                                            Value += $"3-D Height: {message.Measured_Information_Height}" + nl;
+                                        }
+                                        if (message.Measured_Information_MDC == "1")
+                                        {
+                                            Value += $"Mode C Code: V: {message.Measured_Information_V}, G: {message.Measured_Information_G}, Code: {message.Measured_Information_Mode_C_Code}" + nl;
+                                        }
+                                        if (message.Measured_Information_MDA == "1")
+                                        {
+                                            Value += $"Mode 3/A Code: V: {message.Measured_Information_V_Mode_3A}, G: {message.Measured_Information_G_Mode_3A},\nL: {message.Measured_Information_L_Mode_3A} Code: {message.Measured_Information_Mode_3A}" + nl;
+                                        }
+                                        if (message.Measured_Information_TYP == "1")
+                                        {
+                                            Value += $"Report Type: TYP: {message.Measured_Information_TYP_Value}, SIM: {message.Measured_Information_SIM_Value}\nRAB: {message.Measured_Information_RAB_Value}, TST: {message.Measured_Information_TST_Value}" + nl;
+                                        }
+                                        Value = Value.TrimEnd('\n');
+
+                                    }
+                                  
+                                    data = Value;
+
+                                }
+                                data = data.Replace(",", ".");
+                                RowData.Append(data);
+                                RowData.Append(",");
+                            }
+                        }
+                        string RowDat = RowData.ToString();
+                        RowDat = RowDat.TrimEnd(',');
+                        sb.AppendLine(RowDat);
+                    }
+                }
+
                 if (type == 3) //all
                 {
                     {

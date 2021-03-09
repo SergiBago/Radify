@@ -51,11 +51,15 @@
         <CheckBox Content="All" x:Name="CheckAllTime" Grid.Column="2"  Grid.ColumnSpan="8" Grid.Row="4" BorderBrush="Black" Foreground="#FFE4BB97" Background="#FF464646" FontFamily="Microsoft Sans Serif" FontSize="16" Click="ExportAllTime_Click"/>
         <CheckBox Content="Until Simulation Time" x:Name="CheckSimulationTime" Grid.Column="2"  Grid.ColumnSpan="8" Grid.Row="6" BorderBrush="Black" Foreground="#FFE4BB97" Background="#FF464646" FontFamily="Microsoft Sans Serif" FontSize="16" Click="ExportUntilSimulationClick"/>
         <CheckBox Content="Custom Time" x:Name="CheckCustomTime" Grid.Column="2" Grid.ColumnSpan="8" Grid.Row="8" BorderBrush="Black" Foreground="#FFE4BB97" Background="#FF464646" FontFamily="Microsoft Sans Serif" FontSize="16" Click="ExportCustomTimeClick"/>
+        <StackPanel Orientation="Vertical" Grid.Column="10" Grid.Row="4" Grid.RowSpan="7">
         <CheckBox Content="Export All" x:Name="CheckBoxAll" Grid.Column="10"   Grid.Row="4" Margin="20,0,0,0" BorderBrush="Black" Foreground="#FFE4BB97" Background="#FF464646" FontFamily="Microsoft Sans Serif" FontSize="16" Click="ExportAllClick"/>
-        <CheckBox Content="Export SMR" x:Name="CheckBoxSMR" Grid.Column="10" Margin="20,0,0,0" Grid.Row="6" BorderBrush="Black" Foreground="#FFE4BB97" Background="#FF464646" FontFamily="Microsoft Sans Serif" FontSize="16" Click="ExportSMRClick"/>
-        <CheckBox Content="Export ADS-B" x:Name="CheckBoxADSB" Grid.Column="10" Margin="20,0,0,0"  Grid.Row="8" BorderBrush="Black" Foreground="#FFE4BB97" Background="#FF464646" FontFamily="Microsoft Sans Serif" FontSize="16" Click="ExportADSBClick"/>
-        <CheckBox Content="Export MLAT" x:Name="CheckBoxMLAT" Margin="20,0,0,0" Grid.Column="10"  Grid.ColumnSpan="8" Grid.Row="10" BorderBrush="Black" Foreground="#FFE4BB97" Background="#FF464646" FontFamily="Microsoft Sans Serif" FontSize="16" Click="ExportMLATClick"/>
-        <TextBox x:Name="Hours" Grid.Row="10" Grid.Column="3" Text="00" Background="#FF464646" BorderBrush="#FF464646" Foreground="#FFE4BB97" FontFamily="Microsoft Sans Serif" FontSize="20"/>
+        <CheckBox Content="Export SMR" x:Name="CheckBoxSMR" Grid.Column="10" Margin="20,3,0,0" Grid.Row="6" BorderBrush="Black" Foreground="#FFE4BB97" Background="#FF464646" FontFamily="Microsoft Sans Serif" FontSize="16" Click="ExportSMRClick"/>
+        <CheckBox Content="Export CAT 62" x:Name="CheckBoxCAT62" Grid.Column="10" Margin="20,3,0,0" Grid.Row="6" BorderBrush="Black" Foreground="#FFE4BB97" Background="#FF464646" FontFamily="Microsoft Sans Serif" FontSize="16" Click="ExportCAT62Click"/>
+
+        <CheckBox Content="Export ADS-B" x:Name="CheckBoxADSB" Grid.Column="10" Margin="20,3,0,0"  Grid.Row="8" BorderBrush="Black" Foreground="#FFE4BB97" Background="#FF464646" FontFamily="Microsoft Sans Serif" FontSize="16" Click="ExportADSBClick"/>
+        <CheckBox Content="Export MLAT" x:Name="CheckBoxMLAT" Margin="20,3,0,0" Grid.Column="10"  Grid.ColumnSpan="8" Grid.Row="10" BorderBrush="Black" Foreground="#FFE4BB97" Background="#FF464646" FontFamily="Microsoft Sans Serif" FontSize="16" Click="ExportMLATClick"/>
+        </StackPanel>
+            <TextBox x:Name="Hours" Grid.Row="10" Grid.Column="3" Text="00" Background="#FF464646" BorderBrush="#FF464646" Foreground="#FFE4BB97" FontFamily="Microsoft Sans Serif" FontSize="20"/>
         <TextBox x:Name="minutes" Grid.Row="10" Grid.Column="5" Text="00" Background="#FF464646" BorderBrush="#FF464646" Foreground="#FFE4BB97" FontFamily="Microsoft Sans Serif" FontSize="20"/>
         <TextBox x:Name="seconds" Grid.Row="10" Grid.Column="7" Text="00" Background="#FF464646" BorderBrush="#FF464646" Foreground="#FFE4BB97" FontFamily="Microsoft Sans Serif" FontSize="20"/>
         <TextBlock Text=":" x:Name="twodots1" Grid.Row="10" Margin="0,-1,0,0" Grid.Column="4" Foreground="#FFE4BB97" FontFamily="Microsoft Sans Serif" FontSize="20" FontWeight="Bold"/>
