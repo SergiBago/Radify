@@ -7,7 +7,7 @@ using GMap.NET;
 using System.Linq;
 using System.Windows.Forms;
 using System.Collections;
-
+using System.Threading.Tasks;
 
 namespace PGTAWPF
 {
@@ -180,136 +180,67 @@ namespace PGTAWPF
                     listahex.Add(arrayhex);
                 }
 
-                /*Having the file divided into a list of messages and each 
-                 * message divided into octets, we will decode the messages and save them*/
+            /*Having the file divided into a list of messages and each 
+             * message divided into octets, we will decode the messages and save them*/
 
-                for (int q = 0; q < listahex.Count; q++)
+            //   Parallel.ForEach(listahex, arraystring =>
+            // {
+            for (int q = 0; q < listahex.Count; q++)
+            {
+
+                process = "Loading message " + Convert.ToString(numero) + " of " + Convert.ToString(listahex.Count) + " messages...";
+                string[] arraystring = listahex[q];
+                int CAT = int.Parse(arraystring[0], System.Globalization.NumberStyles.HexNumber); //Get cat to know which decodification apply
+
+                if (CAT == 10 && listchecked[0] == true) //If listcheked[0]== true because list checked indicates which cat of messages load. ListCheked[0] is a bool indicating if CAT10 must be loaded or not
                 {
-                    process = "Loading message " + Convert.ToString(q) + " of " + Convert.ToString(listahex.Count) + " messages...";
-                    string[] arraystring = listahex[q];
-                    int CAT = int.Parse(arraystring[0], System.Globalization.NumberStyles.HexNumber); //Get cat to know which decodification apply
+                    CAT10 newcat10 = new CAT10(arraystring, lib); //Create the CAT10 message from the string[] values
+                    newcat10.num = numero; //Set number to message
+                    newcat10.cat10num = this.CAT10num; //set cat10 number to message
 
-                    if (CAT == 10 && listchecked[0] == true) //If listcheked[0]== true because list checked indicates which cat of messages load. ListCheked[0] is a bool indicating if CAT10 must be loaded or not
+                    numero++; //increase counter so numbers are unics
+                    CAT10num++;
+
+                    if (first == true)
                     {
-                        CAT10 newcat10 = new CAT10(arraystring,lib); //Create the CAT10 message from the string[] values
-                        newcat10.num = numero; //Set number to message
-                        newcat10.cat10num = this.CAT10num; //set cat10 number to message
-                       
-                        numero++; //increase counter so numbers are unics
-                        CAT10num++; 
-                      
-                        if (first == true) 
-                        {
-                            /*Set the time of this file first message.  
-                             * This is useful because a file will generally never last more than 24 hours, but it may take two days.
-                             * In this way, if we have a message with a time less than the time of the first message, it will surely
-                             * be the next day (file that goes from 23:00 to 01:00, the messages from 00:00 will be the next day,
-                             * and We will know because they will have an h before the first message */
-                            first_time_file = newcat10.Time_of_day_sec;
-                            first = false;
-                        }
-
-                        CATALL newcatall = new CATALL(newcat10, first_time, first_time_file); //Create a CAT all message, usefull for map and for See Cat All tab.
-
-                        /*We will add the messages to the lists and tables. It is interesting to add them to both, since the lists are very useful to search for
-                         * messages and work with them, while the tables are interesting because then when loading the tabs it 
-                         * loads faster than if all the information had to be passed from the list every time*/
-                        listaCAT10.Add(newcat10); 
-                        newCatAll.Add(newcatall);
-                        
-                        AddRowTable10(newcat10);
-                        AddRowTableAllCat10(newcat10);
-
-                        /*We will see if the airport of which the file is already in the list of used airports or not, 
-                         * and if it is not, we will add it. This list is useful to know which buttons to center on the map put*/
-                        bool exists = AirportCodesList.Contains(newcat10.airportCode);
-                        if (exists == false) { AirportCodesList.Add(newcat10.airportCode); }
+                        /*Set the time of this file first message.  
+                         * This is useful because a file will generally never last more than 24 hours, but it may take two days.
+                         * In this way, if we have a message with a time less than the time of the first message, it will surely
+                         * be the next day (file that goes from 23:00 to 01:00, the messages from 00:00 will be the next day,
+                         * and We will know because they will have an h before the first message */
+                        first_time_file = newcat10.Time_of_day_sec;
+                        first = false;
                     }
-                    else if (CAT == 21)
+
+                    CATALL newcatall = new CATALL(newcat10, first_time, first_time_file); //Create a CAT all message, usefull for map and for See Cat All tab.
+
+                    /*We will add the messages to the lists and tables. It is interesting to add them to both, since the lists are very useful to search for
+                     * messages and work with them, while the tables are interesting because then when loading the tabs it 
+                     * loads faster than if all the information had to be passed from the list every time*/
+                    listaCAT10.Add(newcat10);
+                    newCatAll.Add(newcatall);
+
+                    AddRowTable10(newcat10);
+                    AddRowTableAllCat10(newcat10);
+
+                    /*We will see if the airport of which the file is already in the list of used airports or not, 
+                     * and if it is not, we will add it. This list is useful to know which buttons to center on the map put*/
+                    bool exists = AirportCodesList.Contains(newcat10.airportCode);
+                    if (exists == false) { AirportCodesList.Add(newcat10.airportCode); }
+                }
+                else if (CAT == 21)
+                {
+
+                    if (lib.GetVersion(arraystring) == 0 && listchecked[1] == true)  //If listcheked[1]== true because list checked indicates which cat of messages load. ListCheked[1] is a bool indicating if CAT21v0.23 must be loaded or not
+                                                                                     //GetVersion indicates which version of cat 21 the message is. 0=version 0.23
                     {
+                        CAT21vs23 newcat21v23 = new CAT21vs23(arraystring, lib); //Create the CAT21 v0.23 message from the string[] values
 
-                        if (lib.GetVersion(arraystring) == 0 && listchecked[1] == true)  //If listcheked[1]== true because list checked indicates which cat of messages load. ListCheked[1] is a bool indicating if CAT21v0.23 must be loaded or not
-                                                                                        //GetVersion indicates which version of cat 21 the message is. 0=version 0.23
-                        {                                           
-                            CAT21vs23 newcat21v23 = new CAT21vs23(arraystring,lib); //Create the CAT21 v0.23 message from the string[] values
-
-                            newcat21v23.num = numero; //Set number to message
-                            newcat21v23.cat21v23num = CAT21v23num; //set cat10 number to message
-
-                            numero++; //increase counter so numbers are unics
-                            CAT21v23num++;
-
-                            if (first == true) 
-                            {
-                                /*Set the time of this file first message.  
-                                 * This is useful because a file will generally never last more than 24 hours, but it may take two days.
-                                 * In this way, if we have a message with a time less than the time of the first message, it will surely
-                                 * be the next day (file that goes from 23:00 to 01:00, the messages from 00:00 will be the next day,
-                                 * and We will know because they will have an h before the first message */
-                                first_time_file = newcat21v23.Time_of_day_sec;
-                                first = false;
-                            }
-
-                            CATALL newcatall = new CATALL(newcat21v23, first_time, first_time_file); //Create a CAT all message, usefull for map and for See Cat All tab.
-
-                            /*We will add the messages to the lists and tables. It is interesting to add them to both, since the lists are very useful to search for
-                             * messages and work with them, while the tables are interesting because then when loading the tabs it 
-                             * loads faster than if all the information had to be passed from the list every time*/
-                            listaCAT21v23.Add(newcat21v23);
-                            newCatAll.Add(newcatall);
-                            AddRowTable21v23(newcat21v23);
-                            AddRowTableAllCat21v23(newcat21v23);
-
-                            /*We will see if the airport of which the file is already in the list of used airports or not, 
-                             * and if it is not, we will add it. This list is useful to know which buttons to center on the map put*/
-                            bool exists = AirportCodesList.Contains(newcat21v23.airportCode);
-                            if (exists == false) { AirportCodesList.Add(newcat21v23.airportCode); }
-                        }
-                        else if (listchecked[2] == true) //If listcheked[2]== true because list checked indicates which cat of messages load. ListCheked[2] is a bool indicating if CAT21v2.1 must be loaded or not
-                        {
-                            CAT21vs21 newcat21 = new CAT21vs21(arraystring,lib); //Create the CAT21 v2.1 message from the string[] values
-
-                            newcat21.num = numero;//Set number to message
-                            newcat21.cat21v21num = CAT21v21num; //set cat10 number to message
-
-                            CAT21v21num++; //increase counter so numbers are unics
-                            numero++;
-
-                            if (first == true)
-                            {  
-                                /*Set the time of this file first message.  
-                                 * This is useful because a file will generally never last more than 24 hours, but it may take two days.
-                                 * In this way, if we have a message with a time less than the time of the first message, it will surely
-                                 * be the next day (file that goes from 23:00 to 01:00, the messages from 00:00 will be the next day,
-                                 * and We will know because they will have an h before the first message */
-                                first_time_file = newcat21.Time_of_day_sec;
-                                first = false;
-                            }
-                            CATALL newcatall = new CATALL(newcat21, first_time, first_time_file); //Create a CAT all message, usefull for map and for See Cat All tab.
-
-                            /*We will add the messages to the lists and tables. It is interesting to add them to both, since the lists are very useful to search for
-                             * messages and work with them, while the tables are interesting because then when loading the tabs it 
-                             * loads faster than if all the information had to be passed from the list every time*/
-                            listaCAT21v21.Add(newcat21);
-                            newCatAll.Add(newcatall);
-                            AddRowTable21v21(newcat21);
-                            AddRowTableAllCat21v21(newcat21);
-
-                            /*We will see if the airport of which the file is already in the list of used airports or not, 
-                            * and if it is not, we will add it. This list is useful to know which buttons to center on the map put*/
-                            bool exists = AirportCodesList.Contains(newcat21.airportCode);
-                            if (exists == false) { AirportCodesList.Add(newcat21.airportCode); }
-
-                        }
-                    }
-                    if (CAT == 62 && listchecked[3] == true) //If listcheked[0]== true because list checked indicates which cat of messages load. ListCheked[0] is a bool indicating if CAT10 must be loaded or not
-                    {
-                        CAT62 newcat62 = new CAT62(arraystring, lib); //Create the CAT10 message from the string[] values
-                        newcat62.num = numero; //Set number to message
-                        newcat62.cat62num = this.CAT62num; //set cat10 number to message
+                        newcat21v23.num = numero; //Set number to message
+                        newcat21v23.cat21v23num = CAT21v23num; //set cat10 number to message
 
                         numero++; //increase counter so numbers are unics
-                        CAT62num++;
+                        CAT21v23num++;
 
                         if (first == true)
                         {
@@ -318,28 +249,112 @@ namespace PGTAWPF
                              * In this way, if we have a message with a time less than the time of the first message, it will surely
                              * be the next day (file that goes from 23:00 to 01:00, the messages from 00:00 will be the next day,
                              * and We will know because they will have an h before the first message */
-                            first_time_file = newcat62.Time_of_day_sec;
+                            first_time_file = newcat21v23.Time_of_day_sec;
                             first = false;
                         }
 
-                        CATALL newcatall = new CATALL(newcat62, first_time, first_time_file); //Create a CAT all message, usefull for map and for See Cat All tab.
+                        CATALL newcatall = new CATALL(newcat21v23, first_time, first_time_file); //Create a CAT all message, usefull for map and for See Cat All tab.
 
                         /*We will add the messages to the lists and tables. It is interesting to add them to both, since the lists are very useful to search for
                          * messages and work with them, while the tables are interesting because then when loading the tabs it 
                          * loads faster than if all the information had to be passed from the list every time*/
-                        listaCAT62.Add(newcat62);
+                        listaCAT21v23.Add(newcat21v23);
                         newCatAll.Add(newcatall);
-
-                        AddRowTable62(newcat62);
-                        AddRowTableAllCat62(newcat62);
+                        AddRowTable21v23(newcat21v23);
+                        AddRowTableAllCat21v23(newcat21v23);
 
                         /*We will see if the airport of which the file is already in the list of used airports or not, 
                          * and if it is not, we will add it. This list is useful to know which buttons to center on the map put*/
-                        bool exists = AirportCodesList.Contains(newcat62.airportCode);
-                        if (exists == false) { AirportCodesList.Add(newcat62.airportCode); }
+                        bool exists = AirportCodesList.Contains(newcat21v23.airportCode);
+                        if (exists == false) { AirportCodesList.Add(newcat21v23.airportCode); }
+                    }
+                    else if (listchecked[2] == true) //If listcheked[2]== true because list checked indicates which cat of messages load. ListCheked[2] is a bool indicating if CAT21v2.1 must be loaded or not
+                    {
+                        CAT21vs21 newcat21 = new CAT21vs21(arraystring, lib); //Create the CAT21 v2.1 message from the string[] values
+
+                        newcat21.num = numero;//Set number to message
+                        newcat21.cat21v21num = CAT21v21num; //set cat10 number to message
+
+                        CAT21v21num++; //increase counter so numbers are unics
+                        numero++;
+
+                        if (first == true)
+                        {
+                            /*Set the time of this file first message.  
+                             * This is useful because a file will generally never last more than 24 hours, but it may take two days.
+                             * In this way, if we have a message with a time less than the time of the first message, it will surely
+                             * be the next day (file that goes from 23:00 to 01:00, the messages from 00:00 will be the next day,
+                             * and We will know because they will have an h before the first message */
+                            first_time_file = newcat21.Time_of_day_sec;
+                            first = false;
+                        }
+                        CATALL newcatall = new CATALL(newcat21, first_time, first_time_file); //Create a CAT all message, usefull for map and for See Cat All tab.
+
+                        /*We will add the messages to the lists and tables. It is interesting to add them to both, since the lists are very useful to search for
+                         * messages and work with them, while the tables are interesting because then when loading the tabs it 
+                         * loads faster than if all the information had to be passed from the list every time*/
+                        listaCAT21v21.Add(newcat21);
+                        newCatAll.Add(newcatall);
+                        //   AddRowTable21v21(newcat21);
+                        // AddRowTableAllCat21v21(newcat21);
+
+                        /*We will see if the airport of which the file is already in the list of used airports or not, 
+                        * and if it is not, we will add it. This list is useful to know which buttons to center on the map put*/
+                        bool exists = AirportCodesList.Contains(newcat21.airportCode);
+                        if (exists == false) { AirportCodesList.Add(newcat21.airportCode); }
+
                     }
                 }
+                if (CAT == 62 && listchecked[3] == true) //If listcheked[0]== true because list checked indicates which cat of messages load. ListCheked[0] is a bool indicating if CAT10 must be loaded or not
+                {
+                    CAT62 newcat62 = new CAT62(arraystring, lib); //Create the CAT10 message from the string[] values
+                    newcat62.num = numero; //Set number to message
+                    newcat62.cat62num = this.CAT62num; //set cat10 number to message
 
+                    numero++; //increase counter so numbers are unics
+                    CAT62num++;
+
+                    if (first == true)
+                    {
+                        /*Set the time of this file first message.  
+                         * This is useful because a file will generally never last more than 24 hours, but it may take two days.
+                         * In this way, if we have a message with a time less than the time of the first message, it will surely
+                         * be the next day (file that goes from 23:00 to 01:00, the messages from 00:00 will be the next day,
+                         * and We will know because they will have an h before the first message */
+                        first_time_file = newcat62.Time_of_day_sec;
+                        first = false;
+                    }
+
+                    CATALL newcatall = new CATALL(newcat62, first_time, first_time_file); //Create a CAT all message, usefull for map and for See Cat All tab.
+
+                    /*We will add the messages to the lists and tables. It is interesting to add them to both, since the lists are very useful to search for
+                     * messages and work with them, while the tables are interesting because then when loading the tabs it 
+                     * loads faster than if all the information had to be passed from the list every time*/
+                    //lock (listaCAT62)
+                    //{
+                    listaCAT62.Add(newcat62);
+                    //}
+                    //lock (listaCATAll)
+                    //{
+                    newCatAll.Add(newcatall);
+                    //}
+                    // lock(tablaCAT62)
+                    //{ 
+                    AddRowTable62(newcat62);
+                    //}
+                    // lock (tablaAll)
+                    //{
+                    AddRowTableAllCat62(newcat62);
+
+                    //}
+
+                    /*We will see if the airport of which the file is already in the list of used airports or not, 
+                     * and if it is not, we will add it. This list is useful to know which buttons to center on the map put*/
+                    bool exists = AirportCodesList.Contains(newcat62.airportCode);
+                    if (exists == false) { AirportCodesList.Add(newcat62.airportCode); }
+                }
+
+            }
 
                
 
