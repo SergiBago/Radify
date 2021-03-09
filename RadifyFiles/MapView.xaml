@@ -141,12 +141,28 @@
         <Image x:Name="Play" Visibility="Visible" Source="images/Play map.png" VerticalAlignment="Center" Grid.Row="0" Grid.RowSpan="8" Grid.Column="9" MouseLeftButtonUp="Play_click" Cursor="Hand"/>
         <Image x:Name="PauseBut" Source="images/Pause Map.png" Visibility="Hidden" VerticalAlignment="Center" Grid.Row="1" Grid.RowSpan="6" Grid.Column="9" Height="100" MouseLeftButtonUp="Pause_Click" Cursor="Hand"/>
         <Image x:Name="Restart" Source="images/Restart Map.png" VerticalAlignment="Center" Grid.Row="2" Grid.RowSpan="4" Grid.Column="11" MouseLeftButtonUp="Restart_click" Cursor="Hand" />
-        <CheckBox x:Name="CheckBoxshowsmr" VerticalAlignment="Center" TextBlock.TextAlignment="Left" Grid.RowSpan="2" Content="Show SMR" Grid.Row="1" Grid.Column="13" Background="#FF646464" Foreground="#FF46FF00" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="13" Cursor="Hand" Click="ShowSMR_Click" />
-        <CheckBox x:Name="CheckBoxshowmlat" VerticalAlignment="Center" TextBlock.TextAlignment="Left" Content="Show MLAT" Grid.Row="3" Grid.Column="13" Background="#FF646464" Foreground="#FF0097FF" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="13" Click="ShowMLAT_Click" Cursor="Hand" />
-        <CheckBox x:Name="CheckBoxshowadsb" VerticalAlignment="Center" TextBlock.TextAlignment="Left" Content="Show ADS-B" Grid.Row="4" Grid.Column="13" Background="#FF646464" Foreground="#FFFF9700" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="13" Click="ShowADSB_Click" Cursor="Hand" />
-        <CheckBox x:Name="CheckBoxshowcat62" VerticalAlignment="Center" TextBlock.TextAlignment="Left" Content="Show cat 62" Grid.Row="4" Grid.Column="13" Background="#FF646464" Foreground="#FFFF9700" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="13" Click="ShowADSB_Click" Cursor="Hand" />
+        <StackPanel x:Name="ShowPanel" Grid.Row="0" Grid.Column="13" Grid.RowSpan="8">
+            <StackPanel Orientation="Vertical" Background="#FF323232" Margin="0,3,0,0">
+                <StackPanel Orientation="Vertical" Background="#FF464646" Margin="4">
+                    <StackPanel Orientation="Horizontal" Margin="4,0">
+                    <StackPanel Orientation="Vertical">
+                        <CheckBox x:Name="CheckBoxshowsmr" VerticalAlignment="Center" TextBlock.TextAlignment="Left" Grid.RowSpan="2" Margin="0,3,5,0" Content="Show SMR" Background="#FF646464" Foreground="#FF46FF00" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="11" Cursor="Hand" Click="ShowSMR_Click" />
+                        <CheckBox x:Name="CheckBoxshowmlat" VerticalAlignment="Center" TextBlock.TextAlignment="Left" Content="Show MLAT" Margin="0,5,5,0" Background="#FF646464" Foreground="#FF0097FF" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="11" Click="ShowMLAT_Click" Cursor="Hand" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
 
-        <CheckBox x:Name="ShowOld" VerticalAlignment="Center" TextBlock.TextAlignment="Left" Grid.RowSpan="2"  Content="Show Old Positions" Grid.Row="5" Grid.Column="13" Background="#FF646464" Foreground="#FF938172" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="13" Click="ShowOldClick" Cursor="Hand" />
+                        <CheckBox x:Name="CheckBoxshowadsb" VerticalAlignment="Center" TextBlock.TextAlignment="Left" Content="Show ADS-B" Margin="0,3,0,0" Background="#FF646464" Foreground="#FFFF9700" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="11" Click="ShowADSB_Click" Cursor="Hand" />
+                        <CheckBox x:Name="CheckBoxshowcat62" VerticalAlignment="Center" TextBlock.TextAlignment="Left" Content="Show CAT 62" Margin="0,5,0,0" Background="#FF646464" Foreground="#FFFC046D" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="11" Click="ShowADSB_Click" Cursor="Hand" />
+
+                    </StackPanel>
+
+
+                </StackPanel>
+                <CheckBox x:Name="ShowOld" VerticalAlignment="Center" TextBlock.TextAlignment="Left" Grid.RowSpan="2" Margin="0,3,0,3" HorizontalAlignment="Center"  Content="Show Old Positions"  Background="#FF646464" Foreground="#FF938172" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="14" Click="ShowOldClick" Cursor="Hand" />
+                </StackPanel>
+
+            </StackPanel>
+        </StackPanel>
         <Image Source="images/Export KML map.png" Grid.Column="15" Grid.Row="1" Grid.RowSpan="4" Height="45" VerticalAlignment="Bottom" MouseLeftButtonUp="ExportKML_Click" Cursor="Hand" />
         <TextBlock Text="Export KML" Grid.Column="15" Grid.Row="5" Grid.RowSpan="2" FontFamily="Microsoft Sans Serif" FontSize="13" Foreground="#FFE4BB97" FontWeight="Bold" MouseLeftButtonUp="ExportKML_Click" Cursor="Hand"/>
         <Border Grid.Column="20" Grid.ColumnSpan="13" Grid.Row="2" Grid.RowSpan="4" Margin="-5,0,-5,-5"  Background="#FF323232"/>

@@ -78,7 +78,10 @@ namespace PGTAWPF
                 }
                 if (FSPEC.Count() > 16)
                 {
-                    if (FSPEC[14] == '1') { pos = this.Compute_Mode_S_MB_Data(mensaje, pos); } //
+                    if (FSPEC[14] == '1')
+                    {
+                        pos = this.Compute_Mode_S_MB_Data(mensaje, pos);
+                    } //
                     if (FSPEC[15] == '1') { pos = this.Compute_Vehicle_Fleet_Identificatior(mensaje, pos); } //
                     if (FSPEC[16] == '1') { pos = this.Compute_Flight_Level_in_Binary_Representaion(mensaje, pos); } //
                     if (FSPEC[17] == '1') { pos = this.Compute_Measured_Height(mensaje, pos); } //
@@ -695,6 +698,7 @@ namespace PGTAWPF
             string octets = string.Concat(message[pos+ 1], message[pos + 2], message[pos + 3], message[pos + 4], message[pos + 5], message[pos + 6]);
             for (int i = 0; i < 8; i++) { Identification.Append(lib.Compute_Char(octets.Substring(i * 6, 6))); }
             TAR = Identification.ToString().Trim();
+            Target_Identification = TAR;
             pos += 7;
             return pos;
         }
@@ -716,16 +720,22 @@ namespace PGTAWPF
         public int modeS_rep;
         private int Compute_Mode_S_MB_Data(string[] message, int pos)
         {
-            int modeS_rep = Convert.ToInt32(message[pos], 2);
-            if (modeS_rep < 0) { MB_Data = new string[modeS_rep];BDS1 = new string[modeS_rep]; BDS2 = new string[modeS_rep]; }
-            pos++;
+            modeS_rep = Convert.ToInt32(message[pos], 2);
+            if (modeS_rep > 0)
+            {
+                MB_Data = new string[modeS_rep];
+                BDS1 = new string[modeS_rep];
+                BDS2 = new string[modeS_rep]; 
+            }
+
             for (int i = 0; i < modeS_rep; i++)
             {
                 MB_Data[i] = String.Concat(message[pos], message[pos + 1], message[pos + 2], message[pos + 3], message[pos + 4], message[pos + 5], message[pos + 6]);
-                BDS1[1] = message[pos + 7].Substring(0, 4);
-                BDS2[1] = message[pos + 7].Substring(4, 4);
+                BDS1[i] = message[pos + 7].Substring(0, 4);
+                BDS2[i] = message[pos + 7].Substring(4, 4);
                 pos +=8;
             }
+            pos++;
             return pos;
         }
 
