@@ -64,6 +64,7 @@ namespace PGTAWPF
 
         readonly private Dictionary<int, string> Decimal_a_ASCII = new Dictionary<int, string>
         {
+            { 32," "},
             { 48, "0" },
             { 49, "1" },
             { 50, "2" },
@@ -107,15 +108,15 @@ namespace PGTAWPF
         {
             int num = Convert.ToInt32(octeto, 2);
             string Character;
-            try
-            {
+            //try
+            //{
 
                 Character = Decimal_a_ASCII[num];
-            }
-            catch
-            {
-                Character = "_";
-            }
+            //}
+            //catch
+            //{
+            //    Character = "_";
+            //}
             return Character;
 
         }

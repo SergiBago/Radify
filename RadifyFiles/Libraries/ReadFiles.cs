@@ -167,6 +167,7 @@ namespace PGTAWPF
                         contador = fileBytes[i + 2] + (fileBytes[i + 1] * 256);
                     }
                 }
+            fileBytes = null;
 
                 List<string[]> listahex = new List<string[]>();
                 for (int x = 0; x < listabyte.Count; x++)
@@ -179,6 +180,7 @@ namespace PGTAWPF
                     }
                     listahex.Add(arrayhex);
                 }
+            listabyte = null;
 
             /*Having the file divided into a list of messages and each 
              * message divided into octets, we will decode the messages and save them*/

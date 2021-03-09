@@ -2916,7 +2916,7 @@ namespace PGTAWPF
 
                 StringBuilder Identification = new StringBuilder();
                 //string octets = string.Concat(message[pos], message[pos + 1], message[pos + 2], message[pos + 3], message[pos + 4], message[pos + 5], message[pos + 6]);
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 7; i++)
                 {
                     Identification.Append(lib.OctetoBinarioASCII(message[pos+i])); 
                 }
