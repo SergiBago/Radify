@@ -3453,20 +3453,21 @@ namespace PGTAWPF
         public string system_unit_identification;
         public string system_track_number;
 
-        public string system_unit_identification_composed;
-        public string system_track_number_composed;
+        public List<string> system_unit_identification_composed = new List<string>();;
+        public List<string> system_track_number_composed= new List<string>();
 
         private int Compute_Composed_Track_Number(string[] message, int pos)
         {
             system_unit_identification = message[pos];
             system_track_number=Convert.ToString(Convert.ToInt32(string.Concat(message[pos+1],message[pos+2]).Substring(0, 15)));
-            if(message[pos+2].Substring(7,1)=="1")
+            pos+=3;
+            while(message[pos-1].Substring(7,1)=="1")
             {
+                
+                system_unit_identification_composed.Add(message[pos]);
+                system_track_number_composed.Add(Convert.ToString(Convert.ToInt32(string.Concat(message[pos + 1], message[pos + 2]).Substring(0, 15))));
                 pos += 3;
-                system_unit_identification_composed = message[pos];
-                system_track_number_composed = Convert.ToString(Convert.ToInt32(string.Concat(message[pos + 1], message[pos + 2]).Substring(0, 15)));
             }
-            pos += 3;
             return pos;
         }
 

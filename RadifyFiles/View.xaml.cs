@@ -1333,19 +1333,120 @@ namespace PGTAWPF
                 }
                 if (i == 25) //Mode 5 data reports
                 {
-                    Value = "Mode 5 data reports";
+                    if (message.SUM == "1")
+                    {
+                        Value = Value + $"Summary: {message.M5}, {message.ID}, {message.DA}" + nl;
+                        Value = Value + $"Summary: {message.M1}, {message.M2}" + nl;
+                        Value = Value + $"Summary: {message.M3}, {message.MC}" + nl;
+                    }
+                    if (message.PMN=="1")
+                    {
+                        Value = Value + $"PIN: {message.PIN}, NAT: {message.NAT}, MIS:{message.MIS}" + nl;
+                    }
+                    if(message.POS=="1")
+                    {
+                        Value = Value + $"Pos: Lat: {message.Mode5_pos_WGS86_Latitude}, Lon: {message.Mode5_pos_WGS86_Longitude}"+nl;
+
+                    }
+                    if(message.GA=="1")
+                    {
+                        Value = Value + $"GNSS alt.: Res: {message.Mode5_GNSS_RES}, GA: {message.Mode5_GNSS_GA}" + nl;
+                    }
+                    if(message.EM1=="1")
+                    {
+                        Value = Value + $"Extended Mode 1 Code: {message.EM1_value}"+nl;
+                    }
+                    if(message.TOS=="1")
+                    {
+                        Value += $"Time offset: {message.TOS}" + nl;
+                    }
+                    if(message.XP=="1")
+                    {
+                        Value += $"X Pulse Presence: X5: {message.X5}, XC: {message.XC}\n X Pulse Presence: X3: {message.X3}, X2: {message.X2}\nX1: {message.X1}";
+                    }
+                    Value = Value.TrimEnd('\n');
+
                 }
                 if (i == 27) //Composed track number
                 {
-                    Value = "Composed track number";
+
+                    Value += $"System Unit Identification: {message.system_unit_identification}, System Track number: {message.system_track_number}"+nl;
+                    for( int z=0; z<message.system_unit_identification_composed.Count();z++)
+                    {
+                        Value += $"System Unit Identification {z+2}: {message.system_unit_identification_composed[z]}, System Track number: {message.system_track_number_composed[z]}" + nl;
+                    }
+                    Value = Value.TrimEnd('\n');
+
                 }
                 if (i == 28) //Estimated Accuracies
                 {
-                    Value = "Estimated Accuracies";
+                    if(message.Estimated_accuracies_APC=="1")
+                    {
+                        Value += $"Track Position accuracy: X:{message.Estimated_accuracies_APC_X}, Y:{message.Estimated_accuracies_APC_Y}"+nl;
+                    }
+                    if (message.Estimated_accuracies_COV == "1")
+                    {
+                        Value += $"XY Covariance: {message.Estimated_accuracies_COV_value}"+nl;
+                    }
+                    if (message.Estimated_accuracies_APW == "1")
+                    {
+                        Value += $"Accuracy of track position: Lat:{message.Estimated_accuracies_APW_Latitude}, Lon:{message.Estimated_accuracies_APW_Longitude}" + nl;
+                    }
+                    if (message.Estimated_accuracies_AGA == "1")
+                    {
+                        Value += $"Accuracy of geometric altitude: {message.Estimated_accuracies_AGA_value}" + nl;
+                    }
+                    if (message.Estimated_accuracies_ABA == "1")
+                    {
+                        Value += $"Accuracy of Barometric altitude: {message.Estimated_accuracies_ABA_value}" + nl;
+                    }
+                    if (message.Estimated_accuracies_ATV == "1")
+                    {
+                        Value += $"Accuracy of Track velocity: X:{message.Estimated_accuracies_ATV_X}, Y:{message.Estimated_accuracies_ATV_Y}" + nl;
+                    }
+                    if (message.Estimated_accuracies_AA == "1")
+                    {
+                        Value += $"Accuracy of acceleration: X:{message.Estimated_accuracies_AA_X}, Y: {message.Estimated_accuracies_AA_Y}" + nl;
+                    }
+                    if (message.Estimated_accuracies_ARC == "1")
+                    {
+                        Value += $"Accuracy of rate of climb: {message.Estimated_accuracies_ARC_value}" + nl;
+                    }
+                    Value = Value.TrimEnd('\n');
+
                 }
                 if (i == 29) //Measured Information
                 {
-                    Value = "Measured Information";
+                    if(message.Measured_Information_SID=="1")
+                    {
+                        Value += $"" + nl;
+                    }
+                    if (message.Measured_Information_SID == "1")
+                    {
+                        Value += $"" + nl;
+                    }
+                    if (message.Measured_Information_SID == "1")
+                    {
+                        Value += $"" + nl;
+                    }
+                    if (message.Measured_Information_SID == "1")
+                    {
+                        Value += $"" + nl;
+                    }
+                    if (message.Measured_Information_SID == "1")
+                    {
+                        Value += $"" + nl;
+                    }
+                    if (message.Measured_Information_SID == "1")
+                    {
+                        Value += $"" + nl;
+                    }
+                    if (message.Measured_Information_SID == "1")
+                    {
+                        Value += $"" + nl;
+                    }
+                    Value = Value.TrimEnd('\n');
+
                 }
                 return Value;
             }
