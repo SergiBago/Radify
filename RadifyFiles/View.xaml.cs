@@ -1883,8 +1883,14 @@ namespace PGTAWPF
                     string ColNames = ColumnsNames.ToString();
                     ColNames = ColNames.TrimEnd(',');
                     sb.AppendLine(ColNames);
-                    foreach (DataRow row in TableCat62.Rows) //cat10
+                    for (int x =0; x<TableCat62.Rows.Count;x++) //cat10
                     {
+                        if(x%100000==0)
+                        {
+                            File.AppendAllText(path, sb.ToString());
+                            sb = new StringBuilder();
+                        }
+                        DataRow row = TableCat62.Rows[x];
                         string nl = "; ";
                         StringBuilder RowData = new StringBuilder();
                         int number = Convert.ToInt32(row[1].ToString());
@@ -2533,7 +2539,9 @@ namespace PGTAWPF
                         }
                     }
                 }
-                File.WriteAllText(path, sb.ToString());
+                File.AppendAllText(path, sb.ToString());
+
+                //File.WriteAllText(path, sb.ToString());
                 Mouse.OverrideCursor = null;
             }
         }
